@@ -79,6 +79,7 @@ function websiteLd() {
       <slot />
     </main>
     <Footer locale={locale} />
+    <button class="back-to-top" id="back-to-top" aria-label="回到頂部">↑</button>
     <script>
       // 輕量滾動淡入：為帶 .reveal 的元素加入進場動畫
       const els = document.querySelectorAll('.reveal');
@@ -94,6 +95,24 @@ function websiteLd() {
         els.forEach((el) => io.observe(el));
       } else {
         els.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // 返回頂部按鈕
+      const btn = document.getElementById('back-to-top');
+      if (btn) {
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              btn.classList.toggle('is-visible', window.scrollY > 300);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+        btn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       }
     </script>
   </body>

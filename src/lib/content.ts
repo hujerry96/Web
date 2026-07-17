@@ -4,6 +4,16 @@ import { withBase } from '../consts';
 
 export type Post = CollectionEntry<'post'>;
 
+// ponytail: 中英文混排粗略估算，精確計算需要分段邏輯
+export function readingTime(body: string, locale: Locale): string {
+  const words = locale === 'zh'
+    ? body.replace(/\s/g, '').length
+    : body.split(/\s+/).filter(Boolean).length;
+  const speed = locale === 'zh' ? 400 : 200;
+  const min = Math.max(1, Math.ceil(words / speed));
+  return `${min} 分鐘閱讀`;
+}
+
 // 從 entry.id（如 "zh/ai/foo"）解析出 locale + category + slug
 export function parseId(id: string): { locale: Locale; category: string; slug: string } {
   const [locale, category, ...rest] = id.split('/');
