@@ -25,23 +25,24 @@ const t = useTranslations(locale);
 const cats = SITE.categories[locale];
 const path = `/${locale}`;
 ---
-<BaseLayout title={SITE.title} description={SITE.description} path={path} breadcrumb={[]}>
-  <section class="hero">
+<BaseLayout title={SITE.title} description={SITE.description} path={path} breadcrumb={[]} wide>
+  <section class="hero reveal">
     <h1>{SITE.name}</h1>
     <p class="muted">{t('home.tagline')}</p>
+    <a class="hero-cta" href="#latest">{t('home.latest')} →</a>
   </section>
 
-  <h2 class="section-title">{t('home.categories')}</h2>
+  <h2 class="section-title reveal">{t('home.categories')}</h2>
   <div class="cat-grid">
     {Object.entries(cats).map(([key, name]) => (
-      <a class="cat-card" href={withBase(`/${locale}/${key}`)}>
+      <a class="cat-card reveal" href={withBase(`/${locale}/${key}`)}>
         <h3>{name}</h3>
         <span>{counts[key] ?? 0} 篇</span>
       </a>
     ))}
   </div>
 
-  <h2 class="section-title">{t('home.latest')}</h2>
+  <h2 class="section-title reveal" id="latest">{t('home.latest')}</h2>
   <div class="grid">
     {posts.slice(0, 9).map((post) => (
       <ArticleCard post={post} locale={locale} />
@@ -50,6 +51,30 @@ const path = `/${locale}`;
 </BaseLayout>
 
 <style>
-  .hero { padding: 3rem 0 1rem; }
-  .hero h1 { font-size: 2.4rem; margin: 0 0 0.5rem; }
+  .hero {
+    margin: 2rem 0 1rem;
+    padding: 3.5rem 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    background: linear-gradient(160deg, var(--accent-soft) 0%, var(--bg) 70%);
+    border: 1px solid var(--border);
+  }
+  .hero h1 { font-size: 3rem; margin: 0 0 0.75rem; letter-spacing: -0.02em; }
+  .hero .muted { font-size: 1.1rem; max-width: 36rem; margin: 0 auto 1.5rem; }
+  .hero-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    transition: background 0.18s var(--ease), transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
+  }
+  .hero-cta:hover {
+    background: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
 </style>

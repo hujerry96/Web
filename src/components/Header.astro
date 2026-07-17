@@ -47,7 +47,7 @@ const staticLinks: NavItem[] = [
 <style>
   .site-header {
     border-bottom: 1px solid var(--border);
-    background: var(--bg);
+    background: rgba(250, 246, 240, 0.8);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -67,6 +67,16 @@ const staticLinks: NavItem[] = [
     color: var(--text);
     text-decoration: none;
   }
+  .brand::after {
+    content: '';
+    display: inline-block;
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-left: 0.3rem;
+    border-radius: 999px;
+    background: var(--accent);
+    vertical-align: middle;
+  }
   .nav {
     display: flex;
     gap: 1rem;
@@ -79,5 +89,5 @@ const staticLinks: NavItem[] = [
     font-size: 0.9rem;
     transition: color 0.15s ease;
   }
-  .nav a:hover { color: var(--text); }
+  .nav a:hover { color: var(--accent); }
 </style>

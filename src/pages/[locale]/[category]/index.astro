@@ -26,7 +26,7 @@ const catName =
   (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 const path = `/${locale}/${category}`;
 ---
-<BaseLayout title={`${catName} | ${SITE.name}`} description={`${catName} 相關文章 — ${SITE.name}`} path={path}>
+<BaseLayout title={`${catName} | ${SITE.name}`} description={`${catName} 相關文章 — ${SITE.name}`} path={path} wide>
   <Breadcrumb locale={locale} items={[{ name: catName, url: path }]} />
   <h1>{catName}</h1>
   <p class="muted">{posts.length} 篇文章</p>

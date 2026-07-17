@@ -18,9 +18,10 @@ interface Props {
   post?: Post | null;        // 文章頁傳入，用於 JSON-LD / OG 細節
   type?: 'website' | 'article';
   breadcrumb?: { name: string; url: string }[];
+  wide?: boolean;
 }
 
-const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb } = Astro.props;
+const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, wide = false } = Astro.props;
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
 const url = `${SITE.url}${path}`;
 const canonical = buildCanonical(post, path);
@@ -74,9 +75,26 @@ function websiteLd() {
   </head>
   <body>
     <Header path={path} locale={locale} />
-    <main class="container">
+    <main class={`container${wide ? ' wide' : ''}`}>
       <slot />
     </main>
     <Footer locale={locale} />
+    <script>
+      // 輕量滾動淡入：為帶 .reveal 的元素加入進場動畫
+      const els = document.querySelectorAll('.reveal');
+      if (els.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>
