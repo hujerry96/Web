@@ -12,8 +12,10 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
 ---
 <article class="card">
   <a href={href} class="card-link">
-    {coverSrc && (
+    {coverSrc ? (
       <img src={coverSrc} alt={post.data.title} width={640} height={360} class="thumb" loading="lazy" />
+    ) : (
+      <div class="thumb thumb-empty"><span>{catName}</span></div>
     )}
     <div class="card-body">
       <span class="cat">{catName}</span>
@@ -46,6 +48,16 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
     aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
+  }
+  .thumb-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-soft), var(--surface));
+    color: var(--accent-deep);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
   }
   .card-body { padding: 1rem; }
   .cat {

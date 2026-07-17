@@ -131,6 +131,10 @@ img { max-width: 100%; height: auto; }
 /* 分類卡片 */
 .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
 .cat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem;
