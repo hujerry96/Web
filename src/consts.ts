@@ -1,23 +1,25 @@
-// ?��?常數：改?�裡?�可?�新?��?/作�?社群資�?（DRY ?��?來�?�?export const SITE = {
+// 全站常數：改這裡即可更新品牌/作者/社群資訊（DRY 單一來源）
+export const SITE = {
   name: 'Jerry Hu',
-  title: 'Jerry Hu ??AI 工具?�Python ?�學?��??�評測',
+  title: 'Jerry Hu — AI 工具・Python 教學・科技評測',
   description:
-    'AI 工具實測?�Python ?�學?��??�?��?評測??KDP ?�出?��?源。中?��??��??��??�容站�?,
-  // 注�?：�???astro.config.mjs ??site 一?��???base�?  url: 'https://hujerry96.github.io',
+    'AI 工具實測、Python 教學、科技產品評測與 KDP 自出版資源。中文與英文雙語內容站。',
+  // 注意：需與 astro.config.mjs 的 site 一致（含 base）
+  url: 'https://hujerry96.github.io',
   author: 'Jerry Hu',
-  authorZh: '?�杰??,
+  authorZh: '胡杰瑞',
   locale: 'zh-TW',
   ogLocale: 'zh_TW',
   twitter: '@jerryhu',
   email: 'hello@example.com',
-  // ?��?結�?（locale -> ?��? key -> 顯示?��?
+  // 分類結構（locale -> 分類 key -> 顯示名）
   categories: {
     zh: {
       ai: 'AI 工具',
-      shopee: 'Shopee ?�潤',
-      python: 'Python ?�學',
-      reviews: '?��?評測',
-      blog: '?�落??,
+      shopee: 'Shopee 分潤',
+      python: 'Python 教學',
+      reviews: '產品評測',
+      blog: '部落格',
     },
     en: {
       books: 'Books',
