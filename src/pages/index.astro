@@ -1,20 +1,28 @@
 ---
-// root / → 導向 /zh 或 /en
-// static 模式無法讀 request header，改用 client 端依 navigator.language 判斷（含 noscript 備援）
+// root / → 導向 /zh 或 /en（專案頁需含 base 前綴，來自 consts.BASE）
+import { BASE } from '../consts';
+
+const accept = Astro.request?.headers?.get('accept-language') ?? '';
+const prefersEn = /^en/i.test(accept.split(',')[0] ?? '');
+const target = (BASE.replace(/\/$/, '') + '/' + (prefersEn ? 'en' : 'zh') + '/').replace(/\/{2,}/g, '/');
 ---
 <!doctype html>
 <html lang="zh-TW">
   <head>
     <meta charset="utf-8" />
-    <link rel="canonical" href="/zh/" />
-    <meta http-equiv="refresh" content="0; url=/zh/" />
+    <link rel="canonical" href={target} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
     <title>載入中…</title>
   </head>
   <body>
-    <p>正在前往 <a href="/zh/">首頁</a>…</p>
+    <p>正在前往 <a href={target}>首頁</a>…</p>
     <script is:inline>
-      const target = (navigator.language || 'zh').toLowerCase().startsWith('en') ? '/en/' : '/zh/';
-      if (location.pathname === '/') location.replace(target);
+      const base = '{BASE}';
+      const nav = (navigator.language || 'zh').toLowerCase().startsWith('en') ? 'en/' : 'zh/';
+      const t = (base.replace(/\/$/, '') + '/' + nav).replace(/\/{2,}/g, '/');
+      if (location.pathname === base || location.pathname === base.replace(/\/$/, '') || location.pathname === '/') {
+        location.replace(t);
+      }
     </script>
   </body>
 </html>

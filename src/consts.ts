@@ -1,4 +1,8 @@
 // 全站常數：改這裡即可更新品牌/作者/社群資訊（DRY 單一來源）
+// 網站 base 路徑（GitHub Pages project page 為 "/<repo>"，user page 為 "/"）
+// 與 astro.config.mjs 的 base 保持一致
+export const BASE = '/Web';
+
 export const SITE = {
   name: 'Jerry Hu',
   title: 'Jerry Hu — AI 工具・Python 教學・科技評測',
