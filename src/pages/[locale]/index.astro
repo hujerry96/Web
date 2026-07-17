@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getPosts } from '../../lib/content';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+
+export async function getStaticPaths() {
+  const all = await getPosts();
+  const locales = ['zh', 'en'] as Locale[];
+  return locales.map((locale) => {
+    const posts = all.filter((p) => p.id.startsWith(`${locale}/`));
+    const counts: Record<string, number> = {};
+    for (const p of posts) {
+      const cat = p.id.split('/')[1];
+      counts[cat] = (counts[cat] ?? 0) + 1;
+    }
+    return { params: { locale }, props: { posts, counts } };
+  });
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const { posts, counts } = Astro.props as { posts: any[]; counts: Record<string, number> };
+const t = useTranslations(locale);
+const cats = SITE.categories[locale];
+const path = `/${locale}`;
+---
+<BaseLayout title={SITE.title} description={SITE.description} path={path} breadcrumb={[]}>
+  <section class="hero">
+    <h1>{SITE.name}</h1>
+    <p class="muted">{t('home.tagline')}</p>
+  </section>
+
+  <h2 class="section-title">{t('home.categories')}</h2>
+  <div class="cat-grid">
+    {Object.entries(cats).map(([key, name]) => (
+      <a class="cat-card" href={`/${locale}/${key}`}>
+        <h3>{name}</h3>
+        <span>{counts[key] ?? 0} 篇</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="section-title">{t('home.latest')}</h2>
+  <div class="grid">
+    {posts.slice(0, 9).map((post) => (
+      <ArticleCard post={post} locale={locale} />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .hero { padding: 3rem 0 1rem; }
+  .hero h1 { font-size: 2.4rem; margin: 0 0 0.5rem; }
+</style>

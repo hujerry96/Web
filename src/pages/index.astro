@@ -1,0 +1,20 @@
+---
+// root / → 導向 /zh 或 /en
+// static 模式無法讀 request header，改用 client 端依 navigator.language 判斷（含 noscript 備援）
+---
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="canonical" href="/zh/" />
+    <meta http-equiv="refresh" content="0; url=/zh/" />
+    <title>載入中…</title>
+  </head>
+  <body>
+    <p>正在前往 <a href="/zh/">首頁</a>…</p>
+    <script is:inline>
+      const target = (navigator.language || 'zh').toLowerCase().startsWith('en') ? '/en/' : '/zh/';
+      if (location.pathname === '/') location.replace(target);
+    </script>
+  </body>
+</html>

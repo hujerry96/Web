@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { getPosts, getRelated, parseId, postSlug } from '../../../lib/content';
+import { render } from 'astro:content';
+import { useTranslations } from '../../../i18n/ui';
+import { SITE, type Locale } from '../../../consts';
+import ArticleCard from '../../../components/ArticleCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => {
+    const { locale, category } = parseId(post.id);
+    return { params: { locale, category, slug: postSlug(post) }, props: { post } };
+  });
+}
+
+const { locale, category } = Astro.params as { locale: Locale; category: string };
+const { post } = Astro.props as { post: any };
+const t = useTranslations(locale);
+const { Content } = await render(post);
+const catName =
+  (SITE.categories[locale] as Record<string, string>)[category] ?? category;
+const slug = postSlug(post);
+const path = `/${locale}/${category}/${slug}`;
+const related = await getRelated(post);
+const breadcrumb = [
+  { name: catName, url: `/${locale}/${category}` },
+  { name: post.data.title, url: path },
+];
+---
+<BaseLayout title={`${post.data.title} | ${SITE.name}`} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb}>
+  <Breadcrumb locale={locale} items={breadcrumb} />
+  <h1>{post.data.title}</h1>
+  <div class="post-meta">
+    <span>{t('article.by')} {post.data.author}</span>
+    <time datetime={post.data.date.toISOString()}>{t('article.published')} {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
+    {post.data.updated && <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>}
+  </div>
+
+  <article class="prose">
+    <Content />
+  </article>
+
+  {post.data.tags.length > 0 && (
+    <div class="tags">
+      {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
+    </div>
+  )}
+
+  {post.data.affiliate?.shopee && (
+    <p class="aff"><a href={post.data.affiliate.shopee}>在 Shopee 購買 →</a></p>
+  )}
+  {post.data.affiliate?.amazon && (
+    <p class="aff"><a href={post.data.affiliate.amazon}>在 Amazon 購買 →</a></p>
+  )}
+
+  {related.length > 0 && (
+    <>
+      <h2 class="section-title">{t('article.related')}</h2>
+      <div class="grid">
+        {related.map((r) => <ArticleCard post={r} locale={locale} />)}
+      </div>
+    </>
+  )}
+</BaseLayout>
+
+<style>
+  .aff { margin: 1rem 0; }
+  .aff a { font-weight: 600; }
+</style>

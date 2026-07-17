@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const path = `/${locale}/free-resources`;
+---
+<BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={`免費資源 — ${SITE.name}`} path={path}>
+  <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
+  <h1>{t('nav.free')}</h1>
+  <article class="prose">
+    <p>這裡匯集免費的 Python 工具、PDF 與可列印資源（陸續新增）。</p>
+  </article>
+</BaseLayout>

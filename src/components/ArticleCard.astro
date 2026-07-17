@@ -1,0 +1,67 @@
+---
+import type { Post } from '../lib/content';
+import { parseId, postPath } from '../lib/content';
+import { SITE } from '../consts';
+
+interface Props { post: Post; locale: 'zh' | 'en'; }
+const { post, locale } = Astro.props;
+const { category } = parseId(post.id);
+const href = postPath(post);
+const coverSrc = post.data.cover;
+const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
+---
+<article class="card">
+  <a href={href} class="card-link">
+    {coverSrc && (
+      <img src={coverSrc} alt={post.data.title} width={640} height={360} class="thumb" loading="lazy" />
+    )}
+    <div class="card-body">
+      <span class="cat">{catName}</span>
+      <h3 class="title">{post.data.title}</h3>
+      <p class="desc">{post.data.description}</p>
+      <time datetime={post.data.date.toISOString()}>
+        {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}
+      </time>
+    </div>
+  </a>
+</article>
+
+<style>
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  }
+  .card-link { color: inherit; text-decoration: none; display: block; }
+  .thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+  }
+  .card-body { padding: 1rem; }
+  .cat {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .title { font-size: 1.05rem; margin: 0.35rem 0; line-height: 1.35; }
+  .desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin: 0 0 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  time { font-size: 0.78rem; color: var(--text-faint); }
+</style>

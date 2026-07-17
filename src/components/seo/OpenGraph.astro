@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  locale?: string; // 如 zh_TW
+  siteName: string;
+  type?: 'website' | 'article';
+}
+const { title, description, url, image, locale = 'zh_TW', siteName, type = 'website' } = Astro.props;
+---
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:locale" content={locale} />
+{image && <meta property="og:image" content={image} />}
+{image && <meta property="og:image:alt" content={title} />}

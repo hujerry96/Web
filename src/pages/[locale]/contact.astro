@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const path = `/${locale}/contact`;
+---
+<BaseLayout title={`${t('nav.contact')} | ${SITE.name}`} description={`聯絡 ${SITE.name}`} path={path}>
+  <Breadcrumb locale={locale} items={[{ name: t('nav.contact'), url: path }]} />
+  <h1>{t('nav.contact')}</h1>
+  <article class="prose">
+    <p>{t('nav.contact')}：<a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+  </article>
+</BaseLayout>

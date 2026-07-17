@@ -1,0 +1,83 @@
+---
+import { SITE } from '../consts';
+import { useTranslations } from '../i18n/ui';
+import type { Locale } from '../i18n/config';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props { path: string; locale: Locale; }
+const { path, locale } = Astro.props;
+const t = useTranslations(locale);
+
+type NavItem = { href: string; key: Parameters<typeof t>[0] };
+
+// 依語系產生導覽項目
+const nav: NavItem[] = locale === 'zh'
+  ? [
+      { href: '/zh/ai', key: 'nav.ai' },
+      { href: '/zh/shopee', key: 'nav.shopee' },
+      { href: '/zh/python', key: 'nav.python' },
+      { href: '/zh/reviews', key: 'nav.reviews' },
+      { href: '/zh/blog', key: 'nav.blog' },
+    ]
+  : [
+      { href: '/en/books', key: 'nav.books' },
+      { href: '/en/study', key: 'nav.study' },
+      { href: '/en/blog', key: 'nav.blog' },
+      { href: '/en/lab', key: 'nav.lab' },
+      { href: '/en/printable', key: 'nav.printable' },
+      { href: '/en/engineering', key: 'nav.engineering' },
+    ];
+const staticLinks: NavItem[] = [
+  { href: `/${locale}/free-resources`, key: 'nav.free' },
+  { href: `/${locale}/about`, key: 'nav.about' },
+  { href: `/${locale}/contact`, key: 'nav.contact' },
+];
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href={`/${locale}`} class="brand">{SITE.name}</a>
+    <nav class="nav" aria-label="primary">
+      {nav.map((item) => <a href={item.href}>{t(item.key)}</a>)}
+      {staticLinks.map((item) => <a href={item.href}>{t(item.key)}</a>)}
+    </nav>
+    <LangSwitch path={path} locale={locale} />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: saturate(180%) blur(8px);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 56px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  .nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.15s ease;
+  }
+  .nav a:hover { color: var(--text); }
+</style>

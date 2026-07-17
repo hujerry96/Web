@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const path = `/${locale}/about`;
+---
+<BaseLayout title={`${t('nav.about')} | ${SITE.name}`} description={`關於 ${SITE.name} — ${SITE.description}`} path={path}>
+  <Breadcrumb locale={locale} items={[{ name: t('nav.about'), url: path }]} />
+  <h1>{t('nav.about')}</h1>
+  <article class="prose">
+    <p>{SITE.name}（{SITE.authorZh}）致力於分享 AI 工具實測、Python 教學、科技產品評測，以及 Amazon KDP 自出版資源。</p>
+    <p>本站內容以繁體中文與英文雙語呈現，目標是長期累積有價值的知識，並導流至 Shopee 與 Amazon KDP。</p>
+  </article>
+</BaseLayout>
