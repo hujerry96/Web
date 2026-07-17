@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// GitHub Pages 設�?�?// - User page (https://<user>.github.io)：base ??'/'
-// - Project page (https://<user>.github.io/<repo>)：base ??'/<repo>'
-const GITHUB_PAGES_BASE = '/';
+// GitHub Pages 設定：
+// - User page (https://<user>.github.io)：base 留 '/'
+// - Project page (https://<user>.github.io/<repo>)：base 改 '/<repo>'
+// 本專案為 project page：repo 名 Web
+const GITHUB_PAGES_BASE = '/Web';
 
 export default defineConfig({
-  site: 'https://hujerry96.github.io',
+  site: 'https://hujerry96.github.io/Web',
   base: GITHUB_PAGES_BASE,
   output: 'static',
   trailingSlash: 'ignore',

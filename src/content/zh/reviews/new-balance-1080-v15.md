@@ -8,7 +8,7 @@ date: 2026-07-18
 cover: "/images/zh/reviews/nb1080v15-cover.png"
 category: "reviews"
 tags: ["跑步", "鞋款評測", "運動"]
-canonical: "https://hujerry96.github.io/zh/reviews/new-balance-1080-v15-review"
+canonical: "https://hujerry96.github.io/Web/zh/reviews/new-balance-1080-v15-review"
 locale: "zh"
 draft: false
 affiliate:

@@ -8,7 +8,7 @@ date: 2026-07-18
 cover: '/images/en/books/materials-science-study-guide-cover.png'
 category: 'books'
 tags: ['KDP', 'Study Guide', 'Materials Science', 'Engineering']
-canonical: 'https://hujerry96.github.io/en/books/materials-science-study-guide'
+canonical: 'https://hujerry96.github.io/Web/en/books/materials-science-study-guide'
 locale: 'en'
 draft: false
 affiliate:
