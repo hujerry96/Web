@@ -1,10 +1,10 @@
 ---
 // root / → 導向 /zh 或 /en（專案頁需含 base 前綴，來自 consts.BASE）
+// 靜態頁無法讀請求標頭，語系由 client 端 navigator.language 決定；
+// 此處 meta refresh 預設 zh，client script 再即時改導 en。
 import { BASE } from '../consts';
 
-const accept = Astro.request?.headers?.get('accept-language') ?? '';
-const prefersEn = /^en/i.test(accept.split(',')[0] ?? '');
-const target = (BASE.replace(/\/$/, '') + '/' + (prefersEn ? 'en' : 'zh') + '/').replace(/\/{2,}/g, '/');
+const target = (BASE.replace(/\/$/, '') + '/zh/').replace(/\/{2,}/g, '/');
 ---
 <!doctype html>
 <html lang="zh-TW">

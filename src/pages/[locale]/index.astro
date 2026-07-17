@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import { getPosts } from '../../lib/content';
 import { useTranslations } from '../../i18n/ui';
-import { SITE, type Locale } from '../../consts';
+import { SITE, withBase, type Locale } from '../../consts';
 
 export async function getStaticPaths() {
   const all = await getPosts();
@@ -34,7 +34,7 @@ const path = `/${locale}`;
   <h2 class="section-title">{t('home.categories')}</h2>
   <div class="cat-grid">
     {Object.entries(cats).map(([key, name]) => (
-      <a class="cat-card" href={`/${locale}/${key}`}>
+      <a class="cat-card" href={withBase(`/${locale}/${key}`)}>
         <h3>{name}</h3>
         <span>{counts[key] ?? 0} 篇</span>
       </a>

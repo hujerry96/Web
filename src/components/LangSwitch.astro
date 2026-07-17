@@ -1,6 +1,7 @@
 ---
 import type { Locale } from '../i18n/config';
 import { LOCALE_NAMES, LOCALES } from '../i18n/config';
+import { withBase } from '../consts';
 
 interface Props { path: string; locale: Locale; }
 const { path, locale } = Astro.props;
@@ -10,7 +11,8 @@ function switchPath(target: Locale): string {
   const parts = path.split('/');
   if (parts[1] === 'zh' || parts[1] === 'en') parts[1] = target;
   else parts.splice(1, 0, target);
-  return parts.join('/') || `/${target}`;
+  const raw = parts.join('/') || `/${target}`;
+  return withBase(raw);
 }
 const others = LOCALES.filter((l) => l !== locale);
 ---

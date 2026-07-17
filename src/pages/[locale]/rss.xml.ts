@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({ params, site }) => {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.date,
-      link: postPath(post),
+      link: new URL(postPath(post), SITE.url).href,
       categories: post.data.tags,
     })),
     customData: `<language>${locale === 'zh' ? 'zh-TW' : 'en-US'}</language>`,

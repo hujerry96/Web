@@ -1,11 +1,12 @@
 ---
 import type { Locale } from '../i18n/config';
 import { useTranslations } from '../i18n/ui';
+import { withBase } from '../consts';
 
 interface Props { items: { name: string; url: string }[]; locale: Locale; }
 const { items, locale } = Astro.props;
 const t = useTranslations(locale);
-const trail = [{ name: t('breadcrumb.home'), url: `/${locale}` }, ...items];
+const trail = [{ name: t('breadcrumb.home'), url: withBase(`/${locale}`) }, ...items];
 ---
 <nav class="breadcrumb" aria-label="breadcrumb">
   {trail.map((item, i) => (

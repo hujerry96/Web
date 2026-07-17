@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../consts';
+import { SITE, withBase } from '../consts';
 import { useTranslations } from '../i18n/ui';
 import type { Locale } from '../i18n/config';
 import LangSwitch from './LangSwitch.astro';
@@ -35,10 +35,10 @@ const staticLinks: NavItem[] = [
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a href={`/${locale}`} class="brand">{SITE.name}</a>
-    <nav class="nav" aria-label="primary">
-      {nav.map((item) => <a href={item.href}>{t(item.key)}</a>)}
-      {staticLinks.map((item) => <a href={item.href}>{t(item.key)}</a>)}
+      <a href={withBase(`/${locale}`)} class="brand">{SITE.name}</a>
+      <nav class="nav" aria-label="primary">
+        {nav.map((item) => <a href={withBase(item.href)}>{t(item.key)}</a>)}
+        {staticLinks.map((item) => <a href={withBase(item.href)}>{t(item.key)}</a>)}
     </nav>
     <LangSwitch path={path} locale={locale} />
   </div>

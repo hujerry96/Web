@@ -1,5 +1,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { Locale } from '../i18n/config';
+import { withBase } from '../consts';
 
 export type Post = CollectionEntry<'post'>;
 
@@ -18,10 +19,10 @@ export function postSlug(post: Post): string {
   return post.data.slug ?? parseId(post.id).slug;
 }
 
-// 文章的完整網址路徑（不含 site/base，由 Astro 處理）
+// 文章的完整網址路徑（含 base 前綴）
 export function postPath(post: Post): string {
   const { locale, category } = parseId(post.id);
-  return `/${locale}/${category}/${postSlug(post)}`;
+  return withBase(`/${locale}/${category}/${postSlug(post)}`);
 }
 
 // 取得已發布文章（過濾 draft），依日期降冪

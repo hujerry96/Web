@@ -3,6 +3,12 @@
 // 與 astro.config.mjs 的 base 保持一致
 export const BASE = '/Web';
 
+// 給內部路徑補上 base 前綴（project page = /Web）
+export function withBase(path: string): string {
+  if (/^https?:\/\//.test(path)) return path;
+  return (BASE + path).replace(/\/{2,}/g, '/');
+}
+
 export const SITE = {
   name: 'Jerry Hu',
   title: 'Jerry Hu — AI 工具・Python 教學・科技評測',

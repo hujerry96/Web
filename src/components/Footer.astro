@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../consts';
+import { SITE, withBase } from '../consts';
 import { useTranslations } from '../i18n/ui';
 import type { Locale } from '../i18n/config';
 
@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container footer-inner">
     <span>© {year} {SITE.name}. {t('footer.rights')}.</span>
-    <a href={`/${locale}/rss.xml`} class="rss">{t('rss.subscribe')}</a>
+    <a href={withBase(`/${locale}/rss.xml`)} class="rss">{t('rss.subscribe')}</a>
     <span class="built">{t('footer.built')}</span>
   </div>
 </footer>
