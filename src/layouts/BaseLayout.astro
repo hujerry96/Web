@@ -72,6 +72,13 @@ function websiteLd() {
     <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale]} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}
+    <script>
+      (function() {
+        const saved = localStorage.getItem('theme');
+        const prefers = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', saved || prefers);
+      })();
+    </script>
   </head>
   <body>
     <Header path={path} locale={locale} />
@@ -112,6 +119,22 @@ function websiteLd() {
         });
         btn.addEventListener('click', () => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // 主題切換
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      if (toggle) {
+        const updateIcon = () => {
+          toggle.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        };
+        updateIcon();
+        toggle.addEventListener('click', () => {
+          const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          updateIcon();
         });
       }
     </script>

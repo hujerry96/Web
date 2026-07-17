@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme='light'] {
   /* ── 色板：大地色系 ── */
   --color-bg: #faf6f0;
   --color-surface: #fffdf9;
@@ -10,7 +11,6 @@
   --color-accent-deep: #8c4a28;
   --color-accent-soft: #f4e7dc;
 
-  /* 色票 scale（50→900） */
   --accent-50: #fdf6f0;
   --accent-100: #f4e7dc;
   --accent-200: #e8cebc;
@@ -33,18 +33,67 @@
   --neutral-800: #292524;
   --neutral-900: #1c1917;
 
-  /* 語意色 */
   --color-success: #16a34a;
   --color-warning: #d97706;
   --color-error: #dc2626;
   --color-info: #2563eb;
 
-  /* ── 字體 ── */
+  --shadow-sm: 0 1px 2px rgba(46, 39, 34, 0.04);
+  --shadow-md: 0 1px 3px rgba(46, 39, 34, 0.06), 0 8px 24px rgba(46, 39, 34, 0.06);
+  --shadow-lg: 0 4px 12px rgba(140, 74, 40, 0.12), 0 16px 40px rgba(140, 74, 40, 0.12);
+  --shadow-xl: 0 8px 30px rgba(140, 74, 40, 0.16);
+}
+
+[data-theme='dark'] {
+  --color-bg: #1a1410;
+  --color-surface: #241e18;
+  --color-text: #e8dcd0;
+  --color-text-muted: #a09080;
+  --color-text-faint: #7a6b5c;
+  --color-border: #3d3028;
+  --color-accent: #d4a88a;
+  --color-accent-deep: #c78962;
+  --color-accent-soft: #2d1a0e;
+
+  --accent-50: #2d1a0e;
+  --accent-100: #3b1d0e;
+  --accent-200: #5a2e19;
+  --accent-300: #8c4a28;
+  --accent-400: #b5673a;
+  --accent-500: #c78962;
+  --accent-600: #d4a88a;
+  --accent-700: #e8cebc;
+  --accent-800: #f4e7dc;
+  --accent-900: #fdf6f0;
+
+  --neutral-50: #1c1917;
+  --neutral-100: #292524;
+  --neutral-200: #44403c;
+  --neutral-300: #57534e;
+  --neutral-400: #78716c;
+  --neutral-500: #a8a29e;
+  --neutral-600: #d6d3d1;
+  --neutral-700: #e7e5e4;
+  --neutral-800: #f5f5f4;
+  --neutral-900: #fafaf9;
+
+  --color-success: #4ade80;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.5), 0 16px 40px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ── 字體、間距、圓角（不分主題） ── */
+:root {
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC',
     'Noto Sans TC', 'Microsoft JhengHei', Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
 
-  /* 流體字級（clamp） */
   --text-xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.75rem);
   --text-sm: clamp(0.8rem, 0.78rem + 0.1vw, 0.875rem);
   --text-base: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
@@ -62,7 +111,6 @@
   --line-height-normal: 1.65;
   --line-height-relaxed: 1.75;
 
-  /* ── 間距 8pt 網格 ── */
   --space-0: 0;
   --space-1: 4px;
   --space-2: 8px;
@@ -77,7 +125,6 @@
   --space-11: 80px;
   --space-12: 96px;
 
-  /* 語意間距 */
   --space-xs: var(--space-1);
   --space-sm: var(--space-2);
   --space-md: var(--space-4);
@@ -86,65 +133,25 @@
   --space-2xl: var(--space-10);
   --space-section: clamp(var(--space-9), 5vw, var(--space-12));
 
-  /* ── 圓角 ── */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* ── 陰影 ── */
-  --shadow-sm: 0 1px 2px rgba(46, 39, 34, 0.04);
-  --shadow-md: 0 1px 3px rgba(46, 39, 34, 0.06), 0 8px 24px rgba(46, 39, 34, 0.06);
-  --shadow-lg: 0 4px 12px rgba(140, 74, 40, 0.12), 0 16px 40px rgba(140, 74, 40, 0.12);
-  --shadow-xl: 0 8px 30px rgba(140, 74, 40, 0.16);
-
-  /* ── 動畫 ── */
   --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
 
-  /* ── z-index ── */
   --z-base: 0;
   --z-sticky: 100;
   --z-overlay: 200;
   --z-modal: 300;
   --z-notification: 400;
 
-  /* ── 容器 ── */
   --maxw: 760px;
   --maxw-wide: 1080px;
-}
-
-/* ── 深色模式 ── */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1c1917;
-    --color-surface: #292524;
-    --color-text: #e7e5e4;
-    --color-text-muted: #a8a29e;
-    --color-text-faint: #78716c;
-    --color-border: #44403c;
-    --color-accent: #d4a88a;
-    --color-accent-deep: #c78962;
-    --color-accent-soft: #3b1d0e;
-
-    --accent-50: #2d1a0e;
-    --accent-100: #3b1d0e;
-    --accent-200: #5a2e19;
-    --accent-300: #8c4a28;
-    --accent-400: #b5673a;
-    --accent-500: #c78962;
-    --accent-600: #d4a88a;
-    --accent-700: #e8cebc;
-    --accent-800: #f4e7dc;
-    --accent-900: #fdf6f0;
-
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.5), 0 16px 40px rgba(0, 0, 0, 0.4);
-  }
 }
 
 /* ── Reset ── */
@@ -166,7 +173,6 @@ img { max-width: 100%; height: auto; display: block; }
 
 a { color: var(--color-accent); transition: color var(--duration-fast) var(--ease); }
 
-/* ── 排版 ── */
 h1, h2, h3, h4 {
   line-height: var(--line-height-tight);
   font-weight: var(--font-weight-bold);
@@ -178,7 +184,6 @@ h2 { font-size: var(--text-2xl); margin: var(--space-9) 0 var(--space-4); }
 h3 { font-size: var(--text-xl); margin: var(--space-7) 0 var(--space-3); }
 h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 
-/* ── 容器 ── */
 .container {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -186,7 +191,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 }
 .container.wide { max-width: var(--maxw-wide); }
 
-/* ── 文章閱讀排版 ── */
 .prose { font-size: var(--text-base); line-height: var(--line-height-relaxed); }
 .prose p { margin: var(--space-4) 0; }
 .prose h2 { margin: var(--space-9) 0 var(--space-4); }
@@ -220,7 +224,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 .prose pre code { background: none; padding: 0; color: inherit; }
 .prose a { text-underline-offset: 2px; }
 
-/* ── 文章頁元資訊 ── */
 .post-meta {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
@@ -241,7 +244,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   text-decoration: none;
 }
 
-/* ── 文章封面圖 ── */
 .cover {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -251,7 +253,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   margin: var(--space-4) 0 var(--space-6);
 }
 
-/* ── 網格 ── */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
@@ -265,7 +266,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 }
 .muted { color: var(--color-text-muted); }
 
-/* ── 分類卡片 ── */
 .cat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
@@ -295,7 +295,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 .cat-card h3 { margin: 0 0 var(--space-1); font-size: var(--text-base); }
 .cat-card span { font-size: var(--text-xs); color: var(--color-accent); font-weight: var(--font-weight-semibold); }
 
-/* ── 滾動淡入 ── */
 .reveal {
   opacity: 0;
   transform: translateY(var(--space-4));
@@ -309,7 +308,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; }
 }
 
-/* ── 返回頂部 ── */
 .back-to-top {
   position: fixed;
   bottom: var(--space-6);
@@ -346,7 +344,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   color: var(--color-accent);
 }
 
-/* ── 漢堡選單（mobile first） ── */
 .hamburger {
   display: none;
   width: 44px;
@@ -373,6 +370,24 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 .nav-open .hamburger-line:nth-child(2) { opacity: 0; }
 .nav-open .hamburger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
+/* ── 主題切換按鈕 ── */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  padding: 0;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast) var(--ease);
+  color: var(--color-text-muted);
+}
+.theme-toggle:hover { background: var(--color-accent-soft); color: var(--color-accent); }
+
 /* ── 響應式 ── */
 @media (max-width: 640px) {
   .hamburger { display: block; }
@@ -396,7 +411,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   .grid { grid-template-columns: 1fr; }
 }
 
-/* ── 無障礙 ── */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;

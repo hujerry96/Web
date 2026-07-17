@@ -40,7 +40,10 @@ const staticLinks: NavItem[] = [
       <span class="hamburger-line"></span>
     </button>
     <a href={withBase(`/${locale}`)} class="brand">{SITE.name}</a>
-    <LangSwitch path={path} locale={locale} />
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="切換深色模式">🌙</button>
+      <LangSwitch path={path} locale={locale} />
+    </div>
   </div>
   <nav class="container nav" aria-label="primary">
     {nav.map((item) => <a href={withBase(item.href)}>{t(item.key)}</a>)}
@@ -74,9 +77,7 @@ const staticLinks: NavItem[] = [
     z-index: var(--z-sticky);
     backdrop-filter: saturate(180%) blur(8px);
   }
-  @media (prefers-color-scheme: dark) {
-    .site-header { background: rgba(28, 25, 23, 0.85); }
-  }
+  [data-theme='dark'] .site-header { background: rgba(26, 20, 16, 0.85); }
   .header-top {
     display: flex;
     align-items: center;
@@ -122,5 +123,10 @@ const staticLinks: NavItem[] = [
   .nav-sep {
     flex: 1 1 auto;
     min-width: var(--space-4);
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
   }
 </style>
