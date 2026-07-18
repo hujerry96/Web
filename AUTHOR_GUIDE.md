@@ -66,16 +66,111 @@ npm run ai -- "New Balance 1080 v15" --locale zh --category reviews
 # 等同：node scripts/ai-generate.mjs "New Balance 1080 v15" --locale zh --category reviews
 ```
 
-腳本會自動建立（若尚無）`drafts/<slug>/` 資料夾並產出：
-
-- `prompt-article.md` — 交給 AI 寫文章的 prompt
-- `prompt-meta.md` — 交給 AI 產 title / description / keywords / FAQ 的 prompt
-- `prompt-social.md` — 交給 AI 產 Threads / Twitter / OG 文字稿的 prompt
-- `meta.json` — frontmatter 骨架（含 slug、date 等）
-
-把 AI 回傳的內容貼回、確認無誤後，將最終 `.md` 移入 `src/content/<語系>/<分類>/` 即可發布。
-
 > ⚠️ `--category` **必須是合法分類 key**（`reviews` / `guides` / `journal`）。腳本預設回落到 `blog`，但 `blog` 不存在，會導致文章進不了任何分類頁，請務必顯式帶入正確分類。
+
+#### 腳本實際在做什麼
+
+`npm run ai` **不會呼叫任何 AI API、也不會自動寫好文章**。它只是用 Node 的模板字串，把幾個參數塞進預寫好的引導詞裡，再寫成 4 個檔案。也就是說，它產生的是「**餵給 AI 的 prompt + frontmatter 骨架**」，真正寫文章的是你拿這些 prompt 去丟的 AI 工具（ChatGPT / Claude / Gemini…）。
+
+腳本讀取的參數（`scripts/ai-generate.mjs`）：
+
+| 參數 | 來源 | 預設 | 說明 |
+|------|------|------|------|
+| 主題（第 1 個引號參數） | 必填 | — | 不給會報錯退出 |
+| `--locale` | 選用 | `zh` | `zh` 或 `en` |
+| `--category` | 選用 | `blog`（⚠️ 不存在，要顯式帶） | 合法 key 之一 |
+| slug | 由主題 `slugify` 轉出 | — | 如 `New Balance 1080 v15` → `new-balance-1080-v15` |
+
+執行後建立 `drafts/<slug>/` 並寫入：
+
+| 檔案 | 內容 | 你拿它做什麼 |
+|------|------|------|
+| `prompt-article.md` | 寫作 prompt（H1/H2 結構、字數 1200–1800、CTA、內鏈建議） | 貼給 AI → 產出**文章正文** |
+| `prompt-meta.md` | SEO meta prompt（title/description/keywords/slug/tags/faq 的 JSON） | 貼給 AI → 產出**中繼資料** |
+| `prompt-social.md` | 社群 prompt（Threads / Twitter / OG 文字稿 / 圖檔名 / alt text） | 貼給 AI → 產出**宣傳素材** |
+| `meta.json` | 預填 frontmatter 骨架（slug、date、cover 路徑、locale、`draft:true` 已填，title/description/keywords/tags/faq 留空待補） | AI 補完後你貼回這裡 |
+
+> prompt 本質是**通用 SEO 寫作框架**，腳本對主題內容一無所知，只做變數替換（主題 / 分類 / 語言 / slug 插值）。指定任何主題都能跑，但 prompt 不會針對該主題做客製（例如不會自動要求「比較 v14/v15」這種專屬指令，那是手動加的）。
+
+#### 完整操作步驟
+
+**步驟 1 — 產生草稿包**
+
+```bash
+npm run ai -- "New Balance 1080 v15" --locale zh --category reviews
+# 終端會印出：✅ 草稿包已產生： drafts/new-balance-1080-v15/
+```
+
+**步驟 2 — 把三個 prompt 分別交給 AI**
+
+1. 打開 `drafts/<slug>/prompt-article.md` → 複製貼進 AI → 取得**文章正文**。
+2. 打開 `prompt-meta.md` → 貼進 AI → 取得 meta **JSON**（title/description/keywords/tags/faq）。
+3. 打開 `prompt-social.md` → 貼進 AI → 取得**社群稿 / OG 文字稿**（自行拿去發或製圖）。
+
+**步驟 3 — 組裝成正式文章**
+
+在 `drafts/<slug>/` 新建最終 `.md`，frontmatter 用 `meta.json` 的值（或直接用 `tools/ai-content/TEMPLATE.md` 當底），正文貼上步驟 2.1 的 AI 文章：
+
+```markdown
+---
+title: 'AI 給的 title（≤60 字）'
+slug: "new-balance-1080-v15"
+description: 'AI 給的 description（≤160 字）'
+keywords: ["AI 給的 8-12 個"]
+author: "Jerry Hu"
+date: 2026-07-18
+cover: "/images/zh/reviews/new-balance-1080-v15-cover.png"
+category: "reviews"
+tags: ["AI 給的 3-6 個"]
+locale: "zh"
+draft: false
+---
+
+# AI 給的文章正文（Markdown）
+```
+
+> ⚠️ 發布前兩個必改點：`meta.json` 預設 `draft: true`（要改 `false`）；`canonical` 網址是占位的 `https://<user>.github.io/...`（少了 `/Web`），建議**留空**讓系統自動產，或改成正式 `https://hujerry96.github.io/Web/...`。
+
+**步驟 4 — 移到正式目錄並發布**
+
+```bash
+# 把組好的 .md 移進內容目錄
+git mv drafts/new-balance-1080-v15/new-balance-1080-v15.md src/content/zh/reviews/
+
+# 封面圖（若有）放對位置
+cp drafts/new-balance-1080-v15/cover.png public/images/zh/reviews/new-balance-1080-v15-cover.png
+
+npm run build    # 驗證 frontmatter 欄位
+git add -A && git commit -m "post: ..." && git push origin main   # 自動部署
+```
+
+#### 流程總覽
+
+```
+npm run ai → drafts/<slug>/{prompt-article, prompt-meta, prompt-social, meta.json}
+                              │
+            ┌─────────────────┼─────────────────┐
+            ▼                 ▼                 ▼
+       AI 寫文章         AI 補 meta JSON     AI 產社群稿
+            │                 │
+            └──── 組成 .md ────┘  (draft:false, canonical 修正)
+                              │
+                   移入 src/content/<語系>/<分類>/
+                              │
+                       git push → 自動部署
+```
+
+> `drafts/` 不在 `src/content` 下，不會被網站打包，所以草稿階段 push 也不會上線；只有移進 `src/content/` 且 `draft: false` 才會發布。
+
+#### 指定「其他主題」會怎樣？
+
+例如 `npm run ai -- "Python 自動化訓練紀錄" --locale zh --category guides`：
+
+- `topic = "Python 自動化訓練紀錄"`，`slug` 由 `slugify` 轉出（英文轉小寫加連字號，中文通常原樣保留，影響 URL 與圖檔名）。
+- 三個 prompt 的主題 / 分類 / 語言自動換成你給的值，**模板結構完全不變**——即請 AI「寫一篇關於 Python 自動化訓練紀錄的 guides 類文章」。
+- `meta.json` 的 `cover` 變成 `/images/zh/guides/<slug>-cover.jpg`、`category` 變 `guides`、`locale` 變 `zh`。
+
+注意：中文 slug 會直接進 URL，建議主題用英文或手動在 frontmatter 指定 `slug` 以保持網址乾淨。
 
 ### 自動產生的內容（不用手寫）
 
