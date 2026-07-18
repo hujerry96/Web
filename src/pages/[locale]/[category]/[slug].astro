@@ -86,7 +86,7 @@ const breadcrumb = [
     display: grid;
     grid-template-columns: minmax(0, 1fr) 260px;
     gap: var(--space-10);
-    align-items: start;
+    align-items: stretch;
   }
   .article-main { min-width: 0; }
   .article-main > h1 {
@@ -96,7 +96,7 @@ const breadcrumb = [
     word-break: break-word;
     margin-top: 0;
   }
-  .article-side { display: block; }
+  .article-side { display: block; position: relative; }
   @media (max-width: 980px) {
     .article-layout { grid-template-columns: 1fr; gap: var(--space-6); }
     .article-side { display: none; }
