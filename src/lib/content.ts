@@ -44,6 +44,12 @@ export async function getPosts(opts?: { locale?: Locale; category?: string }): P
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
+// 該語系實際有文章的分類 key（避免連到不存在的空分類頁）
+export async function categoriesWithPosts(locale: Locale): Promise<string[]> {
+  const posts = await getPosts({ locale });
+  return [...new Set(posts.map((p) => parseId(p.id).category))];
+}
+
 // 從 markdown 正文解析 H2/H3 標題，供側邊 TOC 使用
 // id 必須與 Astro 渲染出的 <h2 id="..."> 一致（github-slugger），才能作錨點
 import GithubSlugger from 'github-slugger';

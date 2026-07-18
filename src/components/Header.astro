@@ -1,6 +1,7 @@
 ---
 import { SITE, withBase } from '../consts';
 import { useTranslations } from '../i18n/ui';
+import { categoriesWithPosts } from '../lib/content';
 import type { Locale } from '../i18n/config';
 import LangSwitch from './LangSwitch.astro';
 
@@ -8,20 +9,11 @@ interface Props { path: string; locale: Locale; }
 const { path, locale } = Astro.props;
 const t = useTranslations(locale);
 
-type NavItem = { href: string; key: Parameters<typeof t>[0] };
-
-const nav: NavItem[] = locale === 'zh'
-  ? [
-      { href: '/zh/reviews', key: 'nav.reviews' },
-      { href: '/zh/guides', key: 'nav.guides' },
-      { href: '/zh/journal', key: 'nav.journal' },
-    ]
-  : [
-      { href: '/en/reviews', key: 'nav.reviews' },
-      { href: '/en/guides', key: 'nav.guides' },
-      { href: '/en/journal', key: 'nav.journal' },
-    ];
-const staticLinks: NavItem[] = [
+const allCats = SITE.categories[locale] as Record<string, string>;
+// 只顯示該語系有文章的分類，避免連到不存在的空分類頁（會跳回預設語系）
+const activeCats = await categoriesWithPosts(locale);
+const nav = activeCats.map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
+const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   { href: `/${locale}/free-resources`, key: 'nav.free' },
   { href: `/${locale}/about`, key: 'nav.about' },
   { href: `/${locale}/contact`, key: 'nav.contact' },

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { useTranslations } from '../../i18n/ui';
 import { SITE, type Locale } from '../../consts';
+import { categoriesWithPosts } from '../../lib/content';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -11,6 +12,8 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/free-resources`;
 const cats = SITE.categories[locale] as Record<string, string>;
+// 只顯示該語系有文章的分類
+const activeCats = await categoriesWithPosts(locale);
 ---
 <BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={t('page.freeDescTitle', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
@@ -20,9 +23,9 @@ const cats = SITE.categories[locale] as Record<string, string>;
   </article>
 
   <div class="res-grid">
-    {Object.entries(cats).map(([key, name]) => (
+    {activeCats.map((key) => (
       <a class="res-card" href={`/${locale}/${key}`}>
-        <span class="res-cat">{name}</span>
+        <span class="res-cat">{cats[key]}</span>
         <span class="res-arrow" aria-hidden="true">→</span>
       </a>
     ))}

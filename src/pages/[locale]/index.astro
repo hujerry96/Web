@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getPosts, readingTime } from '../../lib/content';
+import { getPosts, readingTime, categoriesWithPosts } from '../../lib/content';
 import { useTranslations } from '../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../consts';
 
@@ -22,7 +22,9 @@ export async function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const { posts, counts } = Astro.props as { posts: any[]; counts: Record<string, number> };
 const t = useTranslations(locale);
-const cats = SITE.categories[locale];
+const cats = SITE.categories[locale] as Record<string, string>;
+// 只顯示該語系有文章的分類，避免連到不存在的空分類頁
+const activeCats = await categoriesWithPosts(locale);
 const path = `/${locale}`;
 
 const featured = posts[0];
@@ -61,9 +63,9 @@ const featuredCatName = featured ? ((SITE.categories[locale] as Record<string, s
 
   <!-- 分類入口（收斂為細導覽，不再重複大卡） -->
   <nav class="cat-strip reveal" aria-label="categories">
-    {Object.entries(cats).map(([key, name]) => (
+    {activeCats.map((key) => (
       <a class="cat-pill" href={withBase(`/${locale}/${key}`)}>
-        {name}<span class="cat-count">{counts[key] ?? 0}</span>
+        {cats[key]}<span class="cat-count">{counts[key] ?? 0}</span>
       </a>
     ))}
   </nav>
