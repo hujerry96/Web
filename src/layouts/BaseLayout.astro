@@ -72,6 +72,10 @@ function websiteLd() {
     <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale]} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}
+    <!-- 復古印刷風字體：中文襯線 + 英文襯線 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script>
       (function() {
         const saved = localStorage.getItem('theme');
@@ -87,56 +91,108 @@ function websiteLd() {
     </main>
     <Footer locale={locale} />
     <button class="back-to-top" id="back-to-top" aria-label="回到頂部">↑</button>
-    <script>
-      // 輕量滾動淡入：為帶 .reveal 的元素加入進場動畫
-      const els = document.querySelectorAll('.reveal');
-      if (els.length && 'IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) {
-              e.target.classList.add('is-visible');
-              io.unobserve(e.target);
-            }
-          }
-        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-        els.forEach((el) => io.observe(el));
-      } else {
-        els.forEach((el) => el.classList.add('is-visible'));
-      }
+  <script>
+    // 返回頂部按鈕
+    const btn = document.getElementById('back-to-top');
+    if (btn) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            btn.classList.toggle('is-visible', window.scrollY > 300);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 
-      // 返回頂部按鈕
-      const btn = document.getElementById('back-to-top');
-      if (btn) {
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(() => {
-              btn.classList.toggle('is-visible', window.scrollY > 300);
-              ticking = false;
-            });
-            ticking = true;
-          }
-        });
-        btn.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-
-      // 主題切換
-      const toggle = document.getElementById('theme-toggle');
-      const html = document.documentElement;
-      if (toggle) {
-        const updateIcon = () => {
-          toggle.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
-        };
+    // 主題切換
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    if (toggle) {
+      const updateIcon = () => {
+        toggle.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+      };
+      updateIcon();
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
         updateIcon();
-        toggle.addEventListener('click', () => {
-          const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-          html.setAttribute('data-theme', next);
-          localStorage.setItem('theme', next);
-          updateIcon();
+      });
+    }
+  </script>
+
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script is:inline>
+    // 復古印刷風進階動畫（GSAP）。無障礙：尊重 prefers-reduced-motion。
+    (function () {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 輕量 CSS 淡入（.reveal）：未載入 GSAP 或減動時直接顯示
+      const reveals = document.querySelectorAll('.reveal');
+      if (reduce || typeof gsap === 'undefined') {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        gsap.registerPlugin(ScrollTrigger);
+        reveals.forEach((el) => gsap.set(el, { opacity: 0, y: 28 }));
+        ScrollTrigger.batch('.reveal', {
+          start: 'top 88%',
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.09,
+              ease: 'power2.out',
+              onComplete: () => batch.forEach((el) => el.classList.add('is-visible')),
+            }),
         });
       }
-    </script>
+
+      if (reduce || typeof gsap === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero 進場時間軸
+      const heroBits = document.querySelectorAll('[data-hero]');
+      if (heroBits.length) {
+        gsap.set(heroBits, { opacity: 0, y: 34 });
+        gsap
+          .timeline({ defaults: { ease: 'power3.out' } })
+          .to(heroBits, { opacity: 1, y: 0, duration: 0.9, stagger: 0.14 });
+      }
+
+      // Hero 滑鼠視差（深度層）
+      const hero = document.querySelector('[data-parallax-root]');
+      if (hero) {
+        const back = hero.querySelector('[data-parallax="back"]');
+        const mid = hero.querySelector('[data-parallax="mid"]');
+        const fore = hero.querySelector('[data-parallax="fore"]');
+        hero.addEventListener('mousemove', (e) => {
+          const x = (e.clientX / window.innerWidth - 0.5) * 2;
+          const y = (e.clientY / window.innerHeight - 0.5) * 2;
+          if (back) gsap.to(back, { x: x * 40, y: y * 20, duration: 0.9, ease: 'power2.out' });
+          if (mid) gsap.to(mid, { x: x * 22, y: y * 11, duration: 0.9, ease: 'power2.out' });
+          if (fore) gsap.to(fore, { x: x * 9, y: y * 5, duration: 0.9, ease: 'power2.out' });
+        });
+      }
+
+      // 文章卡滾動浮起（stagger）
+      ScrollTrigger.batch('.stagger-card', {
+        start: 'top 90%',
+        onEnter: (batch) =>
+          gsap.fromTo(
+            batch,
+            { opacity: 0, y: 40, rotateX: 8 },
+            { opacity: 1, y: 0, rotateX: 0, duration: 0.7, stagger: 0.08, ease: 'power2.out' }
+          ),
+      });
+    })();
+  </script>
   </body>
 </html>

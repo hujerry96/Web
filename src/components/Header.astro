@@ -84,18 +84,19 @@ const staticLinks: NavItem[] = [
     height: 56px;
   }
   .brand {
-    font-weight: var(--font-weight-bold);
-    font-size: var(--text-lg);
-    letter-spacing: -0.01em;
+    font-family: var(--font-serif-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: 0.01em;
     color: var(--color-text);
     text-decoration: none;
   }
   .brand::after {
     content: '';
     display: inline-block;
-    width: 0.42rem;
-    height: 0.42rem;
-    margin-left: 0.3rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-left: 0.32rem;
     border-radius: var(--radius-full);
     background: var(--color-accent);
     vertical-align: middle;
@@ -110,15 +111,19 @@ const staticLinks: NavItem[] = [
     margin-top: -1px;
   }
   .nav a {
+    font-family: var(--font-serif-body);
     color: var(--color-text);
     text-decoration: none;
     font-size: var(--text-sm);
     font-weight: var(--font-weight-medium);
-    transition: color var(--duration-fast) ease;
+    letter-spacing: 0.02em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: color var(--duration-fast) ease, border-color var(--duration-fast) ease;
   }
-  .nav a:hover { color: var(--color-accent); }
+  .nav a:hover { color: var(--color-accent); border-bottom-color: var(--color-accent); }
   .nav .muted-link { color: var(--color-text-muted); font-weight: var(--font-weight-normal); }
-  .nav .muted-link:hover { color: var(--color-accent); }
+  .nav .muted-link:hover { color: var(--color-accent); border-bottom-color: var(--color-accent); }
   .nav-sep {
     flex: 1 1 auto;
     min-width: var(--space-4);

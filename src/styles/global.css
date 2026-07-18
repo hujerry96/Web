@@ -1,26 +1,26 @@
 :root,
 [data-theme='light'] {
-  /* ── 色板：大地色系 ── */
-  --color-bg: #faf6f0;
-  --color-surface: #fffdf9;
-  --color-text: #2e2722;
-  --color-text-muted: #6b5f55;
-  --color-text-faint: #9b8c7e;
-  --color-border: #ece3d8;
-  --color-accent: #b5673a;
-  --color-accent-deep: #8c4a28;
-  --color-accent-soft: #f4e7dc;
+  /* ── 色板：復古印刷風（奶白紙感 + 墨黑 + 印泥赭紅） ── */
+  --color-bg: #f4efe6;
+  --color-surface: #fbf8f1;
+  --color-text: #211c17;
+  --color-text-muted: #6a5f53;
+  --color-text-faint: #9c8f7e;
+  --color-border: #ddd2c2;
+  --color-accent: #9c3b2e;
+  --color-accent-deep: #7a2c22;
+  --color-accent-soft: #f0e2d8;
 
-  --accent-50: #fdf6f0;
-  --accent-100: #f4e7dc;
-  --accent-200: #e8cebc;
-  --accent-300: #d4a88a;
-  --accent-400: #c78962;
-  --accent-500: #b5673a;
-  --accent-600: #9c532a;
-  --accent-700: #8c4a28;
-  --accent-800: #5a2e19;
-  --accent-900: #3b1d0e;
+  --accent-50: #f7efe8;
+  --accent-100: #f0e2d8;
+  --accent-200: #e3cab9;
+  --accent-300: #cf9f88;
+  --accent-400: #b9705a;
+  --accent-500: #9c3b2e;
+  --accent-600: #823226;
+  --accent-700: #7a2c22;
+  --accent-800: #5a2019;
+  --accent-900: #3f1611;
 
   --neutral-50: #fafaf9;
   --neutral-100: #f5f5f4;
@@ -56,26 +56,26 @@
 }
 
 [data-theme='dark'] {
-  --color-bg: #1a1410;
-  --color-surface: #241e18;
-  --color-text: #e8dcd0;
-  --color-text-muted: #a09080;
-  --color-text-faint: #7a6b5c;
-  --color-border: #3d3028;
-  --color-accent: #d4a88a;
-  --color-accent-deep: #c78962;
-  --color-accent-soft: #2d1a0e;
+  --color-bg: #17120e;
+  --color-surface: #201a14;
+  --color-text: #ece2d4;
+  --color-text-muted: #a8998a;
+  --color-text-faint: #7d6f60;
+  --color-border: #3a3026;
+  --color-accent: #c87a66;
+  --color-accent-deep: #d99a86;
+  --color-accent-soft: #2c1d15;
 
-  --accent-50: #2d1a0e;
-  --accent-100: #3b1d0e;
-  --accent-200: #5a2e19;
-  --accent-300: #8c4a28;
-  --accent-400: #b5673a;
-  --accent-500: #c78962;
-  --accent-600: #d4a88a;
-  --accent-700: #e8cebc;
-  --accent-800: #f4e7dc;
-  --accent-900: #fdf6f0;
+  --accent-50: #2c1d15;
+  --accent-100: #3f1611;
+  --accent-200: #5a2019;
+  --accent-300: #7a2c22;
+  --accent-400: #9c3b2e;
+  --accent-500: #c87a66;
+  --accent-600: #d99a86;
+  --accent-700: #e8cabd;
+  --accent-800: #f0e2d8;
+  --accent-900: #f7efe8;
 
   --neutral-50: #1c1917;
   --neutral-100: #292524;
@@ -114,6 +114,10 @@
 :root {
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC',
     'Noto Sans TC', 'Microsoft JhengHei', Roboto, Helvetica, Arial, sans-serif;
+  /* 復古印刷風：中文襯線 + 英文襯線 */
+  --font-serif: 'Noto Serif TC', 'Songti TC', 'SimSun', Georgia, 'Times New Roman', serif;
+  --font-serif-display: 'Playfair Display', 'Noto Serif TC', Georgia, serif;
+  --font-serif-body: 'Lora', 'Noto Serif TC', Georgia, serif;
   --font-mono: 'SF Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
 
   --text-xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.75rem);
@@ -199,6 +203,7 @@ h1, h2, h3, h4 {
   line-height: var(--line-height-tight);
   font-weight: var(--font-weight-bold);
   letter-spacing: -0.015em;
+  font-family: var(--font-serif);
 }
 
 h1 { font-size: var(--text-4xl); margin: 0 0 var(--space-4); }
@@ -394,13 +399,13 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 
 /* ── 深色模式 header ── */
 [data-theme='dark'] .site-header {
-  background: #241e18 !important;
-  border-bottom-color: #5a4a3a !important;
+  background: rgba(23, 18, 14, 0.85) !important;
+  border-bottom-color: #3a3026 !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
 [data-theme='dark'] .site-header .nav {
-  border-top-color: #5a4a3a !important;
+  border-top-color: #3a3026 !important;
 }
 
 /* ── 主題切換按鈕 ── */
@@ -448,3 +453,57 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* ── 復古印刷風工具類 ── */
+.serif { font-family: var(--font-serif); }
+.serif-display { font-family: var(--font-serif-display); }
+.serif-body { font-family: var(--font-serif-body); }
+
+/* 刊頭小標：字母大寫 + 寬字距 */
+.kicker {
+  display: inline-block;
+  font-family: var(--font-serif-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* 裝飾分隔線：中間一枚印刷花飾 */
+.rule-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-7) 0;
+  color: var(--color-accent);
+}
+.rule-line::before,
+.rule-line::after {
+  content: '';
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border), transparent);
+}
+.rule-line span { font-size: 1rem; line-height: 1; opacity: 0.85; }
+
+/* 首字下沉（文章/引言用） */
+.drop-cap::first-letter {
+  font-family: var(--font-serif-display);
+  font-size: 3.1em;
+  line-height: 0.8;
+  float: left;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* 雙線印刷邊框容器 */
+.print-frame {
+  border: 1px solid var(--color-border);
+  box-shadow: inset 0 0 0 4px var(--color-surface), inset 0 0 0 5px var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* GSAP 進場前的初始隱藏（避免 FOUC，JS 未載入則顯示） */
+.gsap-hide { opacity: 0; }
