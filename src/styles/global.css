@@ -29,15 +29,15 @@
 }
 
 [data-theme='dark'] {
-  --color-bg: #141413;
-  --color-surface: #1f1e1c;
-  --color-bg-deep: #0d0d0c;
+  --color-bg: #1a1613;
+  --color-surface: #241f1a;
+  --color-bg-deep: #120f0d;
   --color-text: #ece2d4;
   --color-text-secondary: #a8998a;
   --color-text-muted: #8a7d6e;
   --color-text-faint: #7d6f60;
-  --color-border: #3a3026;
-  --color-border-soft: #2c241c;
+  --color-border: #3d3228;
+  --color-border-soft: #2e261f;
 
   --color-accent: #c87a66;
   --color-accent-deep: #d99a86;
@@ -366,9 +366,10 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
 
 /* 深色模式 header 微調 */
 [data-theme='dark'] .site-header {
-  background: color-mix(in srgb, var(--color-bg) 85%, transparent) !important;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--color-bg-deep) 82%, transparent) !important;
+  border-bottom-color: var(--color-border-soft);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
 }
 
 /* 響應式 */
