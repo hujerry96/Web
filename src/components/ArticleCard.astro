@@ -1,13 +1,13 @@
 ---
 import type { Post } from '../lib/content';
 import { parseId, postPath } from '../lib/content';
-import { SITE } from '../consts';
+import { SITE, withBase } from '../consts';
 
 interface Props { post: Post; locale: 'zh' | 'en'; }
 const { post, locale } = Astro.props;
 const { category } = parseId(post.id);
 const href = postPath(post);
-const coverSrc = post.data.cover;
+const coverSrc = post.data.cover ? withBase(post.data.cover) : undefined;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 ---
 <article class="card">
