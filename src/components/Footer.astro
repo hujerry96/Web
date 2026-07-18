@@ -14,7 +14,7 @@ const cats = SITE.categories[locale];
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-logo">{SITE.name}</span>
-        <p class="footer-desc">{SITE.description}</p>
+        <p class="footer-desc">{SITE.meta[locale].description}</p>
       </div>
       <div class="footer-links">
         <span class="footer-label">{t('home.categories')}</span>
@@ -60,7 +60,8 @@ const cats = SITE.categories[locale];
     font-family: var(--font-serif-display);
     font-weight: 700;
     font-size: 1.4rem;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--color-text);
   }
   .footer-desc { font-family: var(--font-serif-body); }

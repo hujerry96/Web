@@ -339,27 +339,6 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
   position: fixed;
   bottom: var(--space-6);
   right: var(--space-6);
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  background: var(--color-surface);
-  color: var(--color-text-muted);
-  font-size: var(--text-lg);
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(var(--space-4));
-  pointer-events: none;
-  transition: opacity var(--duration-normal) var(--ease),
-    transform var(--duration-normal) var(--ease),
-    background var(--duration-fast) var(--ease),
-    box-shadow var(--duration-fast) var(--ease);
-  z-index: var(--z-sticky);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm);
-}
 .back-to-top.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -507,3 +486,17 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 
 /* GSAP 進場前的初始隱藏（避免 FOUC，JS 未載入則顯示） */
 .gsap-hide { opacity: 0; }
+
+/* ── 閱讀進度條（固定於頂部） ── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-deep));
+  z-index: calc(var(--z-sticky) + 1);
+  pointer-events: none;
+}

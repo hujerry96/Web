@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import { getPosts, getRelated, parseId, postSlug, readingTime } from '../../../lib/content';
+import { getPosts, getRelated, parseId, postSlug, readingTime, extractHeadings } from '../../../lib/content';
 import { render } from 'astro:content';
 import { useTranslations } from '../../../i18n/ui';
 import { SITE, type Locale } from '../../../consts';
 import ArticleCard from '../../../components/ArticleCard.astro';
+import Toc from '../../../components/Toc.astro';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -24,6 +25,7 @@ const catName =
 const slug = postSlug(post);
 const path = `/${locale}/${category}/${slug}`;
 const related = await getRelated(post);
+const headings = extractHeadings(post.body);
 const breadcrumb = [
   { name: catName, url: `/${locale}/${category}` },
   { name: post.data.title, url: path },
@@ -39,26 +41,34 @@ const breadcrumb = [
     {post.data.updated && <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>}
   </div>
 
-  {post.data.cover && (
-    <img src={post.data.cover} alt={post.data.title} width={1280} height={720} class="cover" />
-  )}
+  <div class="article-layout">
+    <div class="article-main">
+      {post.data.cover && (
+        <img src={post.data.cover} alt={post.data.title} width={1280} height={720} class="cover" />
+      )}
 
-  <article class="prose">
-    <Content />
-  </article>
+      <article class="prose">
+        <Content />
+      </article>
 
-  {post.data.tags.length > 0 && (
-    <div class="tags">
-      {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
+      {post.data.tags.length > 0 && (
+        <div class="tags">
+          {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
+        </div>
+      )}
+
+      {post.data.affiliate?.shopee && (
+        <p class="aff"><a href={post.data.affiliate.shopee}>{t('page.buyShopee')}</a></p>
+      )}
+      {post.data.affiliate?.amazon && (
+        <p class="aff"><a href={post.data.affiliate.amazon}>{t('page.buyAmazon')}</a></p>
+      )}
     </div>
-  )}
 
-  {post.data.affiliate?.shopee && (
-    <p class="aff"><a href={post.data.affiliate.shopee}>{t('page.buyShopee')}</a></p>
-  )}
-  {post.data.affiliate?.amazon && (
-    <p class="aff"><a href={post.data.affiliate.amazon}>{t('page.buyAmazon')}</a></p>
-  )}
+    <aside class="article-side">
+      <Toc headings={headings} locale={locale} />
+    </aside>
+  </div>
 
   {related.length > 0 && (
     <>
@@ -71,6 +81,17 @@ const breadcrumb = [
 </BaseLayout>
 
 <style>
+  .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: var(--space-8);
+    align-items: start;
+  }
+  .article-side { display: block; }
+  @media (max-width: 900px) {
+    .article-layout { grid-template-columns: 1fr; }
+    .article-side { display: none; }
+  }
   .aff { margin: 1rem 0; }
   .aff a { font-weight: 600; }
 </style>

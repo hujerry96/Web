@@ -88,6 +88,7 @@ function websiteLd() {
   </head>
   <body>
     <Header path={path} locale={locale} />
+    <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
     <main class={`container${wide ? ' wide' : ''}`}>
       <slot />
     </main>
@@ -129,8 +130,24 @@ function websiteLd() {
         updateIcon();
       });
     }
-  </script>
 
+    // 閱讀進度條
+    const bar = document.getElementById('reading-progress');
+    if (bar) {
+      let ticking = false;
+      const update = () => {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const p = max > 0 ? Math.min(1, h.scrollTop / max) : 0;
+        bar.style.transform = `scaleX(${p})`;
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
+    }
+  </script>
   <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script is:inline>

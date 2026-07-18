@@ -25,7 +25,7 @@ const t = useTranslations(locale);
 const cats = SITE.categories[locale];
 const path = `/${locale}`;
 ---
-<BaseLayout title={SITE.title} description={SITE.description} path={path} breadcrumb={[]} wide>
+<BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} breadcrumb={[]} wide>
   <section class="hero" data-parallax-root>
     <div class="hero-shapes" data-parallax="back" aria-hidden="true">
       <span class="shape s1"></span>
@@ -38,7 +38,9 @@ const path = `/${locale}`;
       <span class="kicker" data-hero>{t('home.categories')}</span>
       <span class="rule-line hero-rule" data-hero><span>❧</span></span>
       <h1 class="hero-title" data-hero>{SITE.name}</h1>
-      <p class="hero-sub muted serif-body" data-hero>{t('home.tagline')}</p>
+      <p class="hero-sub muted serif-body" data-hero>
+        <span class="rotate" data-rotate={t('home.rotate')}>{t('home.tagline')}</span>
+      </p>
       <div class="hero-meta" data-hero>
         <span>AI TOOLS</span><i>·</i><span>PYTHON</span><i>·</i><span>REVIEWS</span>
       </div>
@@ -126,6 +128,13 @@ const path = `/${locale}`;
     line-height: 1.02;
   }
   .hero-sub { font-size: 1.15rem; max-width: 34rem; margin: 1.4rem auto 0; }
+  .rotate { display: inline-block; }
+  .rotate .word {
+    display: inline-block;
+    color: var(--color-accent);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 1px;
+  }
   .hero-meta {
     display: flex;
     gap: 0.7rem;
@@ -213,6 +222,37 @@ const path = `/${locale}`;
   }
   .cat-card:hover .cat-arrow { opacity: 1; transform: translateX(0); color: var(--color-accent); }
 
-  /* 文章卡外層包覆：保留原有 .grid 间距 */
+  /* 文章卡外層包覆：保留原有 .grid 間距 */
   .stagger-card { height: 100%; }
 </style>
+
+<script>
+  // 首頁 Hero 標語逐詞輪播（無障礙：reduced-motion 時停用，保留靜態標語）
+  (function () {
+    const el = document.querySelector('.rotate');
+    if (!el) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const words = (el.getAttribute('data-rotate') || '').split('|').filter(Boolean);
+    if (reduce || words.length < 2) return;
+
+    let i = 0;
+    const span = document.createElement('span');
+    span.className = 'word';
+    el.textContent = '';
+    el.appendChild(span);
+
+    const swap = () => {
+      span.style.opacity = '0';
+      span.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        span.textContent = words[i];
+        span.style.opacity = '1';
+        span.style.transform = 'translateY(0)';
+      }, 280);
+    };
+    span.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+    span.textContent = words[0];
+    setInterval(swap, 2400);
+  })();
+</script>

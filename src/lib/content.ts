@@ -51,7 +51,29 @@ export async function getTranslation(post: Post): Promise<Post | undefined> {
   return all.find((p) => p.id !== post.id && postSlug(p) === slug);
 }
 
-// 相關文章：同 category 或共享 tag，排除自己，取前 n 篇
+// 從 markdown 正文解析 H2/H3 標題，供側邊 TOC 使用
+// id 與 Astro 渲染出的 <h2 id="..."> 一致（github-slugger），可直接作錨點
+export function extractHeadings(body: string): { text: string; id: string; level: number }[] {
+  const out: { text: string; id: string; level: number }[] = [];
+  const lines = body.split('\n');
+  let inFence = false;
+  for (const line of lines) {
+    if (/^\s*```/.test(line)) { inFence = !inFence; continue; }
+    if (inFence) continue;
+    const m = /^(#{2,3})\s+(.*)$/.exec(line);
+    if (!m) continue;
+    const level = m[1].length;
+    const text = m[2].replace(/[#*_`]/g, '').trim();
+    if (!text) continue;
+    const id = text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w一-龥]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+    out.push({ text, id, level });
+  }
+  return out;
+}
 export async function getRelated(post: Post, limit = 3): Promise<Post[]> {
   const { category } = parseId(post.id);
   const all = await getCollection('post', ({ data }) => !data.draft);

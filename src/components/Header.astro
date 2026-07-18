@@ -87,21 +87,26 @@ const staticLinks: NavItem[] = [
   }
   .brand {
     font-family: var(--font-serif-display);
-    font-weight: 700;
-    font-size: 1.35rem;
-    letter-spacing: 0.01em;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--color-text);
     text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.05em;
   }
   .brand::after {
     content: '';
     display: inline-block;
-    width: 0.4rem;
-    height: 0.4rem;
-    margin-left: 0.32rem;
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-left: 0.34rem;
     border-radius: var(--radius-full);
     background: var(--color-accent);
     vertical-align: middle;
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
   }
   .nav {
     display: flex;

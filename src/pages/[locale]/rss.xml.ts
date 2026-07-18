@@ -12,7 +12,7 @@ export const GET: APIRoute = async ({ params, site }) => {
   const posts = await getPosts({ locale });
   return rss({
     title: `${SITE.name} — ${locale === 'zh' ? '繁體中文' : 'English'}`,
-    description: SITE.description,
+    description: SITE.meta[locale].description,
     site: site ?? SITE.url,
     items: posts.map((post) => ({
       title: post.data.title,
