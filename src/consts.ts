@@ -34,12 +34,12 @@ export const SITE = {
   // 分類結構（locale -> 分類 key -> 顯示名）；中英文各自獨立、中性命名
   categories: {
     zh: {
-      reviews: '工具',
+      reviews: '實測',
       guides: '指南',
       journal: '手記',
     },
     en: {
-      reviews: 'Tools',
+      reviews: 'Reviews',
       guides: 'Guides',
       journal: 'Journal',
     },

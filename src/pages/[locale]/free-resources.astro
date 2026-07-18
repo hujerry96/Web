@@ -11,8 +11,16 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/free-resources`;
 const cats = SITE.categories[locale] as Record<string, string>;
+const freeOverrides: Record<string, string> = {
+  zh: { reviews: '工具', guides: '指南' },
+  en: { reviews: 'Tools', guides: 'Guides' },
+}[locale];
 const freeKeys = ['reviews', 'guides'];
-const freeCats = Object.fromEntries(Object.entries(cats).filter(([k]) => freeKeys.includes(k)));
+const freeCats = Object.fromEntries(
+  Object.entries(cats)
+    .filter(([k]) => freeKeys.includes(k))
+    .map(([k, v]) => [k, freeOverrides[k] ?? v])
+);
 ---
 <BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={t('page.freeDescTitle', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
