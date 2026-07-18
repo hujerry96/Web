@@ -63,6 +63,7 @@ const freeCats = Object.fromEntries(
     transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
   }
   .res-card:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  h1 { font-size: clamp(1.8rem, 1rem + 3vw, 2.6rem); margin: 0 0 var(--space-4); }
   .res-cat { color: var(--color-text); }
   .res-arrow { color: var(--color-accent); opacity: 0; transform: translateX(-4px); transition: opacity var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease); }
   .res-card:hover .res-arrow { opacity: 1; transform: translateX(0); }
