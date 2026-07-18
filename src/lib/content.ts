@@ -11,7 +11,7 @@ export function readingTime(body: string, locale: Locale): string {
     : body.split(/\s+/).filter(Boolean).length;
   const speed = locale === 'zh' ? 400 : 200;
   const min = Math.max(1, Math.ceil(words / speed));
-  return `${min} 分鐘閱讀`;
+  return locale === 'zh' ? `${min} 分鐘閱讀` : `${min} min read`;
 }
 
 // 從 entry.id（如 "zh/ai/foo"）解析出 locale + category + slug
