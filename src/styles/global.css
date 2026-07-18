@@ -392,6 +392,17 @@ h4 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-2); }
 .nav-open .hamburger-line:nth-child(2) { opacity: 0; }
 .nav-open .hamburger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
+/* ── 深色模式 header ── */
+[data-theme='dark'] .site-header {
+  background: #241e18 !important;
+  border-bottom-color: #5a4a3a !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+[data-theme='dark'] .site-header .nav {
+  border-top-color: #5a4a3a !important;
+}
+
 /* ── 主題切換按鈕 ── */
 .theme-toggle {
   width: 44px;
