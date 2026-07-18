@@ -50,6 +50,22 @@ export const SITE = {
       engineering: 'Engineering Notes',
     },
   },
+  // 雙語分類對齊（保留現狀結構，確保每個 zh 分類在 en 有對應入口）
+  categoryPairs: {
+    ai: 'books',
+    shopee: 'printable',
+    python: 'study',
+    reviews: 'engineering',
+    blog: 'lab',
+  } as Record<string, string>,
+  // 作者/社群資料（最後由站長自行填入；空值時元件隱藏對應入口）
+  avatar: '',
+  social: {
+    github: '',
+    x: '',
+    shopee: '',
+    amazon: '',
+  },
 } as const;
 
 export type Locale = keyof typeof SITE.categories;

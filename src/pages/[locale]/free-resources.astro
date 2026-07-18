@@ -10,11 +10,50 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/free-resources`;
+const cats = SITE.categories[locale] as Record<string, string>;
 ---
 <BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={t('page.freeDescTitle', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
   <h1>{t('nav.free')}</h1>
   <article class="prose">
-    <p>{t('page.freeDesc')}</p>
+    <p class="serif-body">{t('page.freeDesc')}</p>
   </article>
+
+  <div class="res-grid">
+    {Object.entries(cats).map(([key, name]) => (
+      <a class="res-card" href={`/${locale}/${key}`}>
+        <span class="res-cat">{name}</span>
+        <span class="res-arrow" aria-hidden="true">→</span>
+      </a>
+    ))}
+  </div>
 </BaseLayout>
+
+<style>
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .res-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 1.4rem 1.3rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-serif-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+  }
+  .res-card:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+  .res-cat { color: var(--color-text); }
+  .res-arrow { color: var(--color-accent); opacity: 0; transform: translateX(-4px); transition: opacity var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease); }
+  .res-card:hover .res-arrow { opacity: 1; transform: translateX(0); }
+</style>

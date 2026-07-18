@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
-import { getPosts } from '../../lib/content';
+import { getPosts, readingTime } from '../../lib/content';
 import { useTranslations } from '../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../consts';
 
@@ -24,47 +24,54 @@ const { posts, counts } = Astro.props as { posts: any[]; counts: Record<string, 
 const t = useTranslations(locale);
 const cats = SITE.categories[locale];
 const path = `/${locale}`;
+
+const featured = posts[0];
+const rest = posts.slice(1, 10);
+const featuredCat = featured ? (featured.id.split('/')[1] as string) : '';
+const featuredCatName = featured ? ((SITE.categories[locale] as Record<string, string>)[featuredCat] ?? featuredCat) : '';
 ---
-<BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} breadcrumb={[]} wide>
-  <section class="hero" data-parallax-root>
-    <div class="hero-shapes" data-parallax="back" aria-hidden="true">
-      <span class="shape s1"></span>
-      <span class="shape s2"></span>
-    </div>
-    <div class="hero-shapes-mid" data-parallax="mid" aria-hidden="true">
-      <span class="shape s3"></span>
-    </div>
-    <div class="hero-inner" data-parallax="fore">
-      <span class="kicker" data-hero>{t('home.categories')}</span>
-      <span class="rule-line hero-rule" data-hero><span>❧</span></span>
-      <h1 class="hero-title" data-hero>{SITE.name}</h1>
-      <p class="hero-sub muted serif-body" data-hero>
-        <span class="rotate" data-rotate={t('home.rotate')}>{t('home.tagline')}</span>
-      </p>
-      <div class="hero-meta" data-hero>
-        <span>AI TOOLS</span><i>·</i><span>PYTHON</span><i>·</i><span>REVIEWS</span>
-      </div>
-      <a class="hero-cta" href="#latest" data-hero>{t('home.latest')} →</a>
-    </div>
+<BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} post={featured} breadcrumb={[]} wide>
+  <!-- 雜誌刊頭 -->
+  <section class="masthead">
+    <span class="kicker" data-hero>{t('home.tagline')}</span>
+    <h1 class="masthead-title" data-hero>{SITE.name}</h1>
+    <p class="masthead-sub muted serif-body" data-hero>{t('home.intro')}</p>
   </section>
 
-  <div class="rule-line section-rule reveal"><span>✦</span></div>
-  <h2 class="section-title serif-display reveal">{t('home.categories')}</h2>
-  <div class="cat-grid">
-    {Object.entries(cats).map(([key, name], i) => (
-      <a class="cat-card print-frame reveal" href={withBase(`/${locale}/${key}`)}>
-        <span class="cat-no">{String(i + 1).padStart(2, '0')}</span>
-        <h3 class="serif-display">{name}</h3>
-        <span class="cat-count">{t('home.postsCount', { n: counts[key] ?? 0 })}</span>
-        <span class="cat-arrow" aria-hidden="true">→</span>
+  <!-- 精選大卡 -->
+  {featured && (
+    <a class="featured print-frame reveal" href={withBase(`/${locale}/${featuredCat}/${featured.data.slug ?? featured.id.split('/').slice(2).join('/')}`)}>
+      <div class="featured-media">
+        {featured.data.cover
+          ? <img src={featured.data.cover} alt={featured.data.title} width={800} height={500} class="featured-cover" loading="eager" />
+          : <div class="featured-cover featured-cover--empty"><span>{featuredCatName}</span></div>}
+      </div>
+      <div class="featured-body">
+        <span class="cat">{featuredCatName}</span>
+        <h2 class="serif-display">{featured.data.title}</h2>
+        <p class="serif-body muted">{featured.data.description}</p>
+        <div class="featured-meta">
+          <span>{featured.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</span>
+          <i>·</i>
+          <span>{readingTime(featured.body, locale)}</span>
+        </div>
+      </div>
+    </a>
+  )}
+
+  <!-- 分類入口（收斂為細導覽，不再重複大卡） -->
+  <nav class="cat-strip reveal" aria-label="categories">
+    {Object.entries(cats).map(([key, name]) => (
+      <a class="cat-pill" href={withBase(`/${locale}/${key}`)}>
+        {name}<span class="cat-count">{counts[key] ?? 0}</span>
       </a>
     ))}
-  </div>
+  </nav>
 
-  <div class="rule-line section-rule reveal"><span>❦</span></div>
-  <h2 class="section-title serif-display reveal" id="latest">{t('home.latest')}</h2>
+  <div class="rule-line section-rule reveal"><span>✦</span></div>
+  <h2 class="section-title serif-display reveal">{t('home.latest')}</h2>
   <div class="grid">
-    {posts.slice(0, 9).map((post) => (
+    {rest.map((post) => (
       <div class="stagger-card">
         <ArticleCard post={post} locale={locale} />
       </div>
@@ -73,186 +80,120 @@ const path = `/${locale}`;
 </BaseLayout>
 
 <style>
-  /* ── Hero：復古刊頭式滿版 ── */
-  .hero {
-    position: relative;
-    margin: 1.5rem 0 1rem;
-    padding: 5.5rem 2rem 5rem;
-    border-radius: var(--radius-lg);
+  /* ── 刊頭 ── */
+  .masthead {
+    padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(1.5rem, 4vw, 2.5rem);
     text-align: center;
-    overflow: hidden;
-    background:
-      radial-gradient(120% 130% at 78% -15%, var(--accent-soft) 0%, transparent 52%),
-      linear-gradient(165deg, #f7f1e7 0%, var(--bg) 72%);
-    border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-md);
   }
-  .hero-shapes,
-  .hero-shapes-mid {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  .hero-shapes .shape,
-  .hero-shapes-mid .shape {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(8px);
-  }
-  .s1 {
-    width: 280px; height: 280px;
-    top: -90px; left: -60px;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-    opacity: 0.8;
-  }
-  .s2 {
-    width: 220px; height: 220px;
-    bottom: -80px; right: -40px;
-    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-    opacity: 0.7;
-  }
-  .s3 {
-    width: 120px; height: 120px;
-    top: 30%; right: 14%;
-    border: 1px solid var(--color-accent);
-    opacity: 0.25;
-  }
-  .hero-inner { position: relative; z-index: 2; max-width: 46rem; margin: 0 auto; }
-  .hero-rule { margin: 1rem auto 1.4rem; max-width: 18rem; }
-  .hero-title {
+  .masthead-title {
     font-family: var(--font-serif-display);
-    font-size: clamp(3rem, 1rem + 9vw, 6rem);
-    font-weight: 800;
-    margin: 0;
+    font-size: var(--text-5xl);
+    font-weight: 500;
+    margin: 0.6rem 0 0;
     letter-spacing: -0.02em;
     line-height: 1.02;
   }
-  .hero-sub { font-size: 1.15rem; max-width: 34rem; margin: 1.4rem auto 0; }
-  .rotate { display: inline-block; }
-  .rotate .word {
-    display: inline-block;
-    color: var(--color-accent);
-    border-bottom: 2px solid var(--color-accent);
-    padding-bottom: 1px;
-  }
-  .hero-meta {
-    display: flex;
-    gap: 0.7rem;
-    justify-content: center;
-    align-items: center;
-    margin: 1.5rem 0 2rem;
-    font-family: var(--font-serif-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.24em;
-    color: var(--color-text-faint);
-    text-transform: uppercase;
-  }
-  .hero-meta i { color: var(--color-accent); font-style: normal; }
-  .hero-cta {
-    display: inline-block;
-    background: var(--color-accent);
-    color: #fbf8f1;
-    text-decoration: none;
-    font-family: var(--font-serif-body);
-    font-weight: 600;
-    font-size: 0.98rem;
-    letter-spacing: 0.04em;
-    padding: 0.7rem 1.8rem;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--color-accent-deep);
-    transition: background 0.18s var(--ease), transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
-  }
-  .hero-cta:hover {
-    background: var(--color-accent-deep);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+  .masthead-sub {
+    font-size: clamp(1rem, 0.9rem + 0.6vw, 1.2rem);
+    max-width: 36rem;
+    margin: 1.4rem auto 0;
   }
 
-  /* ── 章節標題 ── */
+  /* ── 精選大卡 ── */
+  .featured {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    margin: 1.5rem 0 2.5rem;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-md);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+  }
+  .featured:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+  }
+  .featured-media { position: relative; min-height: 320px; }
+  .featured-cover { width: 100%; height: 100%; object-fit: cover; }
+  .featured-cover--empty {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(156,59,46,0.05) 12px, rgba(156,59,46,0.05) 13px),
+      linear-gradient(135deg, var(--color-accent-soft), var(--color-surface));
+    color: var(--color-accent-deep);
+    font-family: var(--font-serif-display);
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+  }
+  .featured-body { padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-direction: column; justify-content: center; }
+  .featured .cat {
+    font-family: var(--font-serif-body);
+    font-size: 0.72rem;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    border-bottom: 1px solid var(--color-accent);
+    padding-bottom: 3px;
+    align-self: flex-start;
+  }
+  .featured h2 {
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.3rem);
+    font-weight: 500;
+    margin: 1rem 0 0.8rem;
+    line-height: 1.18;
+  }
+  .featured .muted { margin: 0 0 1.2rem; }
+  .featured-meta {
+    display: flex; gap: 0.6rem; align-items: center;
+    font-family: var(--font-serif-body);
+    font-size: 0.78rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.03em;
+  }
+  .featured-meta i { color: var(--color-accent); font-style: normal; }
+
+  /* ── 分類細導覽 ── */
+  .cat-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    margin: 0.5rem 0 1rem;
+  }
+  .cat-pill {
+    font-family: var(--font-serif-body);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 0.4rem 1rem;
+    transition: border-color var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease), background var(--duration-fast) var(--ease);
+  }
+  .cat-pill:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-soft); }
+  .cat-count {
+    font-size: 0.7rem;
+    color: var(--color-text-faint);
+    margin-left: 0.4rem;
+  }
+
   .section-rule { max-width: 22rem; margin-left: auto; margin-right: auto; }
   .section-title {
     text-align: center;
     font-family: var(--font-serif-display);
-    font-size: clamp(1.8rem, 1rem + 3vw, 2.6rem);
-    font-weight: 700;
+    font-size: clamp(1.8rem, 1rem + 3vw, 2.4rem);
+    font-weight: 500;
     margin: var(--space-4) 0 var(--space-6);
   }
 
-  /* ── 分類卡：復古編號卡 ── */
-  .cat-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    background: var(--color-surface);
-    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), border-color 0.2s var(--ease);
+  @media (max-width: 760px) {
+    .featured { grid-template-columns: 1fr; }
+    .featured-media { min-height: 200px; }
   }
-  .cat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--color-accent);
-  }
-  .cat-no {
-    font-family: var(--font-serif-display);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    letter-spacing: 0.05em;
-  }
-  .cat-card h3 {
-    margin: 0 0 var(--space-1);
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-  .cat-count {
-    font-family: var(--font-serif-body);
-    font-size: 0.82rem;
-    color: var(--color-accent);
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-  .cat-arrow {
-    position: absolute;
-    top: 1.1rem;
-    right: 1.1rem;
-    color: var(--color-text-faint);
-    opacity: 0;
-    transform: translateX(-4px);
-    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), color 0.2s var(--ease);
-  }
-  .cat-card:hover .cat-arrow { opacity: 1; transform: translateX(0); color: var(--color-accent); }
-
-  /* 文章卡外層包覆：保留原有 .grid 間距 */
-  .stagger-card { height: 100%; }
 </style>
-
-<script>
-  // 首頁 Hero 標語逐詞輪播（無障礙：reduced-motion 時停用，保留靜態標語）
-  (function () {
-    const el = document.querySelector('.rotate');
-    if (!el) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const words = (el.getAttribute('data-rotate') || '').split('|').filter(Boolean);
-    if (reduce || words.length < 2) return;
-
-    let i = 0;
-    const span = document.createElement('span');
-    span.className = 'word';
-    el.textContent = '';
-    el.appendChild(span);
-
-    const swap = () => {
-      span.style.opacity = '0';
-      span.style.transform = 'translateY(6px)';
-      setTimeout(() => {
-        i = (i + 1) % words.length;
-        span.textContent = words[i];
-        span.style.opacity = '1';
-        span.style.transform = 'translateY(0)';
-      }, 280);
-    };
-    span.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
-    span.textContent = words[0];
-    setInterval(swap, 2400);
-  })();
-</script>

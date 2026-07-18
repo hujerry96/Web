@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const path = `/${locale}/search`;
+---
+<BaseLayout title={`${t('nav.search')} | ${SITE.name}`} description={t('page.searchDesc', { name: SITE.name })} path={path}>
+  <Breadcrumb locale={locale} items={[{ name: t('nav.search'), url: path }]} />
+  <h1>{t('nav.search')}</h1>
+
+  <div class="search-box">
+    <input
+      type="search"
+      id="q"
+      class="search-input"
+      placeholder={t('search.placeholder')}
+      autocomplete="off"
+      aria-label={t('nav.search')}
+    />
+    <p class="search-count muted" id="count"></p>
+    <ul class="search-results" id="results"></ul>
+    <p class="search-empty muted" id="empty" hidden>沒有找到結果。</p>
+  </div>
+</BaseLayout>
+
+<script>
+  const input = document.getElementById('q') as HTMLInputElement;
+  const results = document.getElementById('results') as HTMLUListElement;
+  const count = document.getElementById('count') as HTMLParagraphElement;
+  const empty = document.getElementById('empty') as HTMLParagraphElement;
+
+  let index: { locale: string; category: string; title: string; description: string; tags: string[]; url: string }[] = [];
+  const currentLocale = document.documentElement.lang?.startsWith('en') ? 'en' : 'zh';
+
+  fetch('/Web/search-index.json')
+    .then((r) => r.json())
+    .then((data) => { index = data; })
+    .catch(() => {});
+
+  function render(q: string) {
+    const term = q.trim().toLowerCase();
+    if (!term) { results.innerHTML = ''; count.textContent = ''; empty.hidden = true; return; }
+    const hits = index
+      .filter((p) => p.locale === currentLocale)
+      .filter((p) =>
+        p.title.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term) ||
+        p.tags.some((t) => t.toLowerCase().includes(term))
+      )
+      .slice(0, 20);
+    count.textContent = `${hits.length} 筆結果`;
+    empty.hidden = hits.length > 0;
+    results.innerHTML = hits
+      .map(
+        (p) =>
+          `<li class="search-item"><a href="${p.url}"><span class="search-cat">${p.category}</span><span class="search-title">${p.title}</span><span class="search-desc">${p.description}</span></a></li>`
+      )
+      .join('');
+  }
+
+  input?.addEventListener('input', (e) => render((e.target as HTMLInputElement).value));
+</script>
+
+<style>
+  .search-box { margin: 1rem 0 3rem; }
+  .search-input {
+    width: 100%;
+    font-family: var(--font-serif-body);
+    font-size: 1.1rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
+  }
+  .search-count { font-size: 0.85rem; margin: 0.8rem 0; }
+  .search-results { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+  .search-item a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-decoration: none;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
+  }
+  .search-item a:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
+  .search-cat { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent); }
+  .search-title { font-family: var(--font-serif-display); font-size: 1.1rem; color: var(--color-text); font-weight: 500; }
+  .search-desc { font-size: 0.88rem; color: var(--color-text-muted); }
+</style>

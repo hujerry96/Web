@@ -39,8 +39,12 @@ const staticLinks: NavItem[] = [
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
     </button>
-    <a href={withBase(`/${locale}`)} class="brand">{SITE.name}</a>
+    <a href={withBase(`/${locale}`)} class="brand">
+      <span class="brand-name">{SITE.name}</span>
+      <span class="brand-sub">{SITE.authorZh} · {SITE.author}</span>
+    </a>
     <div class="header-actions">
+      <a class="header-search" href={withBase(`/${locale}/search`)} aria-label={t('nav.search')} title={t('nav.search')}>🔍</a>
       <button class="theme-toggle" id="theme-toggle" aria-label={t('a11y.theme')} title={t('a11y.theme')}>
         <span class="tt-icon" aria-hidden="true">🌙</span>
       </button>
@@ -48,11 +52,10 @@ const staticLinks: NavItem[] = [
     </div>
   </div>
   <nav class="container header-nav" aria-label="primary">
-    <span class="nav-flourish" aria-hidden="true">❦</span>
     {nav.map((item) => (
       <a href={withBase(item.href)}>{t(item.key)}</a>
     ))}
-    <span class="nav-slash" aria-hidden="true">//</span>
+    <span class="nav-slash" aria-hidden="true">·</span>
     {staticLinks.map((item) => (
       <a href={withBase(item.href)} class="muted-link">{t(item.key)}</a>
     ))}
@@ -91,31 +94,44 @@ const staticLinks: NavItem[] = [
   }
   .brand {
     font-family: var(--font-serif-display);
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: 0.18em;
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-text);
     text-decoration: none;
-    display: inline-flex;
-    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
   }
-  .brand::after {
-    content: '';
-    display: inline-block;
-    width: 0.38rem;
-    height: 0.38rem;
-    margin-left: 0.35rem;
-    border-radius: var(--radius-full);
-    background: var(--color-accent);
-    vertical-align: middle;
-    box-shadow: 0 0 0 2px var(--color-accent-soft);
+  .brand-name { white-space: nowrap; }
+  .brand-sub {
+    font-family: var(--font-serif-body);
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: none;
+    color: var(--color-text-faint);
+    margin-top: 3px;
+    font-weight: 400;
   }
   .header-actions {
     display: flex;
     align-items: center;
     gap: var(--space-2);
   }
+  .header-search {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+  }
+  .header-search:hover { background: var(--color-accent-soft); color: var(--color-accent); }
   .theme-toggle {
     width: 36px;
     height: 36px;
@@ -138,28 +154,21 @@ const staticLinks: NavItem[] = [
   }
   .tt-icon { display: inline-block; line-height: 1; }
 
-  /* ── 下層 nav：花飾 + 連結 ── */
+  /* ── 下層 nav：連結 ── */
   .header-nav {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    padding: 4px 0 8px;
+    gap: 1.1rem;
+    padding: 4px 0 10px;
     flex-wrap: wrap;
-  }
-  .nav-flourish {
-    font-size: 0.65rem;
-    line-height: 1;
-    color: var(--color-accent);
-    margin-right: 0.15rem;
-    opacity: 0.7;
   }
   .header-nav a {
     font-family: var(--font-serif-body);
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     text-decoration: none;
-    font-size: 0.82rem;
+    font-size: 0.84rem;
     font-weight: 500;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     padding: 2px 0;
     border-bottom: 1px solid transparent;
     transition: color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);

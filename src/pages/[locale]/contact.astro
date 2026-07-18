@@ -10,11 +10,60 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/contact`;
+const social = SITE.social as Record<string, string>;
 ---
 <BaseLayout title={`${t('nav.contact')} | ${SITE.name}`} description={t('page.contactDesc', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.contact'), url: path }]} />
   <h1>{t('nav.contact')}</h1>
-  <article class="prose">
-    <p>{t('nav.contact')}：<a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+  <article class="prose contact">
+    <p class="serif-body">{t('page.contactLead')}</p>
+
+    <div class="contact-grid">
+      <a class="contact-card" href={`mailto:${SITE.email}`}>
+        <span class="contact-label">{t('contact.email')}</span>
+        <span class="contact-value">{SITE.email}</span>
+      </a>
+      {social.github && (
+        <a class="contact-card" href={social.github} rel="me">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">{social.github}</span>
+        </a>
+      )}
+      {social.x && (
+        <a class="contact-card" href={social.x} rel="me">
+          <span class="contact-label">X</span>
+          <span class="contact-value">{social.x}</span>
+        </a>
+      )}
+    </div>
   </article>
 </BaseLayout>
+
+<style>
+  .contact-lead { font-size: 1.05rem; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-decoration: none;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+  }
+  .contact-card:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .contact-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .contact-value { font-family: var(--font-serif-body); color: var(--color-text); font-size: 0.95rem; word-break: break-all; }
+</style>

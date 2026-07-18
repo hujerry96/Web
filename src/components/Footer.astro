@@ -15,6 +15,8 @@ const cats = SITE.categories[locale];
       <div class="footer-brand">
         <span class="footer-logo">{SITE.name}</span>
         <p class="footer-desc">{SITE.meta[locale].description}</p>
+        {SITE.social.github && <a class="footer-social" href={SITE.social.github} rel="me">GitHub</a>}
+        {SITE.social.x && <a class="footer-social" href={SITE.social.x} rel="me">X</a>}
       </div>
       <div class="footer-links">
         <span class="footer-label">{t('home.categories')}</span>
@@ -39,7 +41,7 @@ const cats = SITE.categories[locale];
 
 <style>
   .site-footer {
-    border-top: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
     margin-top: var(--space-2xl);
     padding: var(--space-10) 0 var(--space-6);
     color: var(--color-text-muted);
@@ -56,6 +58,15 @@ const cats = SITE.categories[locale];
     .footer-grid { grid-template-columns: 1fr; gap: var(--space-6); }
   }
   .footer-brand { display: flex; flex-direction: column; gap: var(--space-2); }
+  .footer-social {
+    font-family: var(--font-serif-body);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    margin-right: var(--space-3);
+    transition: color var(--duration-fast) var(--ease);
+  }
+  .footer-social:hover { color: var(--color-accent); }
   .footer-logo {
     font-family: var(--font-serif-display);
     font-weight: 700;

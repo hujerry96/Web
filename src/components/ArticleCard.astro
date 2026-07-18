@@ -60,7 +60,7 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
       linear-gradient(135deg, var(--color-accent-soft), var(--color-surface));
     color: var(--color-accent-deep);
     font-family: var(--font-serif-display);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.15rem;
     letter-spacing: 0.04em;
   }
@@ -78,7 +78,7 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
     padding-bottom: 4px;
     border-bottom: 1px solid var(--color-accent);
   }
-  .title { font-size: 1.15rem; margin: 0.6rem 0 0.45rem; line-height: 1.35; font-weight: 700; }
+  .title { font-size: 1.15rem; margin: 0.6rem 0 0.45rem; line-height: 1.35; font-weight: 500; }
   .desc {
     font-size: 0.9rem;
     color: var(--color-text-muted);
@@ -95,31 +95,3 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
     letter-spacing: 0.03em;
   }
 </style>
-
-<script>
-  // 文章卡 3D 傾斜（依游標位置）。尊重 reduced-motion；無 GSAP 時跳過。
-  (function () {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const cards = document.querySelectorAll('.card');
-    const supportsGsap = typeof gsap !== 'undefined';
-    cards.forEach((card) => {
-      card.style.transformStyle = 'preserve-3d';
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        const rx = (-py * 6).toFixed(2);
-        const ry = (px * 8).toFixed(2);
-        if (supportsGsap) {
-          gsap.to(card, { rotateX: rx, rotateY: ry, duration: 0.3, ease: 'power2.out', transformPerspective: 800 });
-        } else {
-          card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        }
-      });
-      card.addEventListener('mouseleave', () => {
-        if (supportsGsap) gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.5, ease: 'power2.out' });
-        else card.style.transform = '';
-      });
-    });
-  })();
-</script>
