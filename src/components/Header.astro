@@ -77,7 +77,7 @@ const staticLinks: NavItem[] = [
     z-index: var(--z-sticky);
     backdrop-filter: saturate(180%) blur(8px);
   }
-  [data-theme='dark'] .site-header { background: rgba(26, 20, 16, 0.85); }
+  [data-theme='dark'] .site-header { background: rgba(26, 20, 16, 0.92); border-bottom-color: #5a4a3a; }
   .header-top {
     display: flex;
     align-items: center;
@@ -118,6 +118,7 @@ const staticLinks: NavItem[] = [
     transition: color var(--duration-fast) ease;
   }
   .nav a:hover { color: var(--color-accent); }
+  [data-theme='dark'] .nav { border-top-color: #5a4a3a; }
   .nav .muted-link { color: var(--color-text-muted); font-weight: var(--font-weight-normal); }
   .nav .muted-link:hover { color: var(--color-accent); }
   .nav-sep {
