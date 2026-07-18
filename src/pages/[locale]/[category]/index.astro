@@ -12,10 +12,9 @@ export async function getStaticPaths() {
   for (const locale of ['zh', 'en'] as Locale[]) {
     const cats = Object.keys(SITE.categories[locale]);
     for (const category of cats) {
+      // ponytail: 即使該語系無文章也產出分類頁，避免連到不存在的路由跳回預設語系
       const inCat = posts.filter((p: any) => p.id.startsWith(`${locale}/${category}/`));
-      if (inCat.length > 0) {
-        paths.push({ params: { locale, category }, props: { posts: inCat } });
-      }
+      paths.push({ params: { locale, category }, props: { posts: inCat } });
     }
   }
   return paths;
@@ -32,7 +31,15 @@ const path = `/${locale}/${category}`;
   <Breadcrumb locale={locale} items={[{ name: catName, url: path }]} />
   <h1>{catName}</h1>
   <p class="muted">{t('home.postsCount', { n: posts.length })}</p>
-  <div class="grid">
-    {posts.map((post) => <ArticleCard post={post} locale={locale} />)}
-  </div>
+  {posts.length > 0 ? (
+    <div class="grid">
+      {posts.map((post) => <ArticleCard post={post} locale={locale} />)}
+    </div>
+  ) : (
+    <p class="muted empty-note">{t('category.empty')}</p>
+  )}
 </BaseLayout>
+
+<style>
+  .empty-note { font-size: 1.05rem; padding: 2rem 0; }
+</style>

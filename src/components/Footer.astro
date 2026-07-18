@@ -1,7 +1,6 @@
 ---
 import { SITE, withBase } from '../consts';
 import { useTranslations } from '../i18n/ui';
-import { categoriesWithPosts } from '../lib/content';
 import type { Locale } from '../i18n/config';
 
 interface Props { locale: Locale; }
@@ -9,8 +8,6 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 const year = new Date().getFullYear();
 const cats = SITE.categories[locale] as Record<string, string>;
-// 只顯示該語系有文章的分類
-const activeCats = await categoriesWithPosts(locale);
 ---
 <footer class="site-footer">
   <div class="container">
@@ -23,8 +20,8 @@ const activeCats = await categoriesWithPosts(locale);
       </div>
       <div class="footer-links">
         <span class="footer-label">{t('home.categories')}</span>
-        {activeCats.map((key) => (
-          <a href={withBase(`/${locale}/${key}`)}>{cats[key]}</a>
+        {Object.entries(cats).map(([key, name]) => (
+          <a href={withBase(`/${locale}/${key}`)}>{name}</a>
         ))}
       </div>
       <div class="footer-links">
