@@ -11,7 +11,7 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/about`;
 ---
-<BaseLayout title={`${t('nav.about')} | ${SITE.name}`} description={t('page.aboutDesc', { name: SITE.name, author: SITE.authorZh })} path={path}>
+<BaseLayout title={`${t('nav.about')} | ${SITE.name}`} description={t('page.aboutDesc', { name: SITE.name, author: SITE.author })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.about'), url: path }]} />
   <article class="prose about">
     <div class="about-head">
@@ -19,7 +19,7 @@ const path = `/${locale}/about`;
         ? <img class="avatar" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
         : <div class="avatar avatar--empty" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>}
       <div>
-        <h1>{SITE.authorZh} · {SITE.author}</h1>
+        <h1>{SITE.author}</h1>
         <p class="muted serif-body role">{t('page.aboutRole')}</p>
       </div>
     </div>
@@ -32,10 +32,10 @@ const path = `/${locale}/about`;
 
     <h2>{t('page.aboutTopicsTitle')}</h2>
     <ul>
-      <li><strong>AI 工具</strong>：實測市面 AI 工具，只留下真正能長期使用的。</li>
-      <li><strong>Python 教學</strong>：用最小可執行範例把概念講清楚。</li>
-      <li><strong>科技評測</strong>：鞋款、設備與書籍的實用評測。</li>
-      <li><strong>KDP 資源</strong>：自出版筆記本與學習指南。</li>
+      <li set:html={t('page.aboutTopic1')} />
+      <li set:html={t('page.aboutTopic2')} />
+      <li set:html={t('page.aboutTopic3')} />
+      <li set:html={t('page.aboutTopic4')} />
     </ul>
 
     <h2>{t('page.aboutContactTitle')}</h2>

@@ -27,7 +27,6 @@ export const SITE = {
   // 注意：需與 astro.config.mjs 的 site 一致（含 base）
   url: 'https://hujerry96.github.io/Web',
   author: 'Jerry Hu',
-  authorZh: '胡杰瑞',
   locale: 'zh-TW',
   ogLocale: 'zh_TW',
   twitter: '@jerryhu',

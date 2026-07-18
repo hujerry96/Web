@@ -3,13 +3,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE, withBase } from '../consts';
 
 const path = '/404';
+const locale = Astro.url.pathname.startsWith('/en') ? 'en' : 'zh';
+const home = withBase(`/${locale}`);
+const title = locale === 'zh' ? '這一頁走失了' : 'This page is lost';
+const desc = locale === 'zh' ? '你找的頁面可能已經移動或不存在。' : 'The page you are looking for may have moved or no longer exists.';
+const btn = locale === 'zh' ? '回到首頁 →' : 'Back to home →';
 ---
-<BaseLayout title={`404 — ${SITE.name}`} description="找不到頁面" path={path}>
+<BaseLayout title={`404 — ${SITE.name}`} description={desc} path={path}>
   <section class="notfound">
     <span class="kicker">404</span>
-    <h1 class="serif-display">這一頁走失了</h1>
-    <p class="muted serif-body">你找的頁面可能已經移動或不存在。</p>
-    <a class="btn" href={withBase('/zh')}>回到首頁 →</a>
+    <h1 class="serif-display">{title}</h1>
+    <p class="muted serif-body">{desc}</p>
+    <a class="btn" href={home}>{btn}</a>
   </section>
 </BaseLayout>
 
