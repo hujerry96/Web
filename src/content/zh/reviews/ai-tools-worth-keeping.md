@@ -5,9 +5,8 @@ description: 'AI 工具來來去去，真正能留下來的很少。這篇從實
 keywords: ['AI 工具', 'AI 實測', '生產力', '工具推薦']
 author: 'Jerry Hu'
 date: 2026-07-10
-category: 'ai'
+category: 'reviews'
 tags: ['AI', '工具', '生產力']
-canonical: 'https://hujerry96.github.io/Web/zh/ai/ai-tools-worth-keeping'
 locale: 'zh'
 draft: false
 ---

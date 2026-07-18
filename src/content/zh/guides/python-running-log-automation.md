@@ -5,9 +5,8 @@ description: '用不到 30 行的 Python 腳本，把零散的跑步紀錄 CSV �
 keywords: ['Python 教學', '資料視覺化', '跑步紀錄', 'pandas', 'matplotlib']
 author: 'Jerry Hu'
 date: 2026-07-15
-category: 'python'
+category: 'guides'
 tags: ['Python', '數據', '自動化']
-canonical: 'https://hujerry96.github.io/Web/zh/python/python-running-log-automation'
 locale: 'zh'
 draft: false
 ---

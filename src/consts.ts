@@ -32,32 +32,19 @@ export const SITE = {
   ogLocale: 'zh_TW',
   twitter: '@jerryhu',
   email: 'hello@example.com',
-  // 分類結構（locale -> 分類 key -> 顯示名）
+  // 分類結構（locale -> 分類 key -> 顯示名）；中英文各自獨立、中性命名
   categories: {
     zh: {
-      ai: 'AI 工具',
-      shopee: 'Shopee 分潤',
-      python: 'Python 教學',
-      reviews: '產品評測',
-      blog: '部落格',
+      reviews: '實測',
+      guides: '指南',
+      journal: '手記',
     },
     en: {
-      books: 'Books',
-      study: 'Study Guides',
-      blog: 'Blog',
-      lab: 'Lab Notebook',
-      printable: 'Printables',
-      engineering: 'Engineering Notes',
+      reviews: 'Reviews',
+      guides: 'Guides',
+      journal: 'Journal',
     },
   },
-  // 雙語分類對齊（保留現狀結構，確保每個 zh 分類在 en 有對應入口）
-  categoryPairs: {
-    ai: 'books',
-    shopee: 'printable',
-    python: 'study',
-    reviews: 'engineering',
-    blog: 'lab',
-  } as Record<string, string>,
   // 作者/社群資料（最後由站長自行填入；空值時元件隱藏對應入口）
   avatar: '',
   social: {

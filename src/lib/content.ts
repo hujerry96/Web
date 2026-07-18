@@ -44,13 +44,6 @@ export async function getPosts(opts?: { locale?: Locale; category?: string }): P
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-// 同 slug 的跨語系文章（供 LangSwitch 互鏈）
-export async function getTranslation(post: Post): Promise<Post | undefined> {
-  const slug = postSlug(post);
-  const all = await getCollection('post', ({ data }) => !data.draft);
-  return all.find((p) => p.id !== post.id && postSlug(p) === slug);
-}
-
 // 從 markdown 正文解析 H2/H3 標題，供側邊 TOC 使用
 // id 與 Astro 渲染出的 <h2 id="..."> 一致（github-slugger），可直接作錨點
 export function extractHeadings(body: string): { text: string; id: string; level: number }[] {

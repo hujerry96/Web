@@ -6,9 +6,8 @@ keywords: ['Materials Science study guide', 'materials science workbook', 'cryst
 author: 'Jerry Hu'
 date: 2026-07-18
 cover: '/images/en/books/materials-science-study-guide-cover.png'
-category: 'books'
+category: 'journal'
 tags: ['KDP', 'Study Guide', 'Materials Science', 'Engineering']
-canonical: 'https://hujerry96.github.io/Web/en/books/materials-science-study-guide'
 locale: 'en'
 draft: false
 affiliate:
@@ -41,4 +40,4 @@ The full guide is available on Amazon Kindle and paperback. Grab a copy and turn
 
 > [Get Materials Science Study Guide on Amazon →](https://www.amazon.com/dp/B0H8TL68YS)
 
-Internal link suggestion: pair this with our [Engineering Notes](/en/engineering/) for worked problem sets.
+Internal link suggestion: pair this with our [Journal](/en/journal/) for worked problem sets.

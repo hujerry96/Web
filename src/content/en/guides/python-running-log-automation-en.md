@@ -5,9 +5,8 @@ description: 'A minimal Python script that turns a scattered running-log CSV int
 keywords: ['Python tutorial', 'data visualization', 'running log', 'pandas', 'matplotlib']
 author: 'Jerry Hu'
 date: 2026-07-14
-category: 'study'
+category: 'guides'
 tags: ['Python', 'Data', 'Automation']
-canonical: 'https://hujerry96.github.io/Web/en/study/python-running-log-automation-en'
 locale: 'en'
 draft: false
 ---

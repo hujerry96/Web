@@ -12,19 +12,14 @@ type NavItem = { href: string; key: Parameters<typeof t>[0] };
 
 const nav: NavItem[] = locale === 'zh'
   ? [
-      { href: '/zh/ai', key: 'nav.ai' },
-      { href: '/zh/shopee', key: 'nav.shopee' },
-      { href: '/zh/python', key: 'nav.python' },
       { href: '/zh/reviews', key: 'nav.reviews' },
-      { href: '/zh/blog', key: 'nav.blog' },
+      { href: '/zh/guides', key: 'nav.guides' },
+      { href: '/zh/journal', key: 'nav.journal' },
     ]
   : [
-      { href: '/en/books', key: 'nav.books' },
-      { href: '/en/study', key: 'nav.study' },
-      { href: '/en/blog', key: 'nav.blog' },
-      { href: '/en/lab', key: 'nav.lab' },
-      { href: '/en/printable', key: 'nav.printable' },
-      { href: '/en/engineering', key: 'nav.engineering' },
+      { href: '/en/reviews', key: 'nav.reviews' },
+      { href: '/en/guides', key: 'nav.guides' },
+      { href: '/en/journal', key: 'nav.journal' },
     ];
 const staticLinks: NavItem[] = [
   { href: `/${locale}/free-resources`, key: 'nav.free' },

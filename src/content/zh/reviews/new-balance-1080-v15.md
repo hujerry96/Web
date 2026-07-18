@@ -8,7 +8,6 @@ date: 2026-07-18
 cover: "/images/zh/reviews/nb1080v15-cover.png"
 category: "reviews"
 tags: ["跑步", "鞋款評測", "運動"]
-canonical: "https://hujerry96.github.io/Web/zh/reviews/new-balance-1080-v15-review"
 locale: "zh"
 draft: false
 affiliate:
@@ -41,4 +40,4 @@ Fresh Foam X 厚度略增，回彈更線性、不會過軟塌陷。對膝蓋與�
 
 若你追求「每天都能舒服跑完」的鞋，1080 v15 仍是首選級緩震鞋。需要速度與推進感時，再搭配一雙碳板鞋即可。
 
-> 內部連結建議：參見 [跑步鞋選購指南](/zh/reviews/) 與 [Python 自動化訓練紀錄](/zh/python/)。
+> 內部連結建議：參見 [跑步鞋選購指南](/zh/reviews/) 與 [Python 自動化訓練紀錄](/zh/guides/)。

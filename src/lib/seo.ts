@@ -4,17 +4,16 @@ import type { Post } from './content';
 import { parseId, postPath, postSlug } from './content';
 
 // 組出該頁的 hreflang 連結陣列（含 x-default）
-// 文章頁：依 translation 互鏈；其他頁：同路徑跨語系
+// 中英內容各自獨立：文章頁只標自己語系，x-default 指向自己語系首頁；
+// 靜態頁（about/contact 等雙語皆有）才做同路徑跨語系。
 export function buildHreflang(current: Post | null, currentPath: string): { lang: string; href: string }[] {
   const site = SITE.url;
   if (current) {
-    // 文章：用 slug 找對應語系路徑
-    const { slug } = parseId(current.id);
     const links = LOCALES.map((loc) => ({
       lang: HREFLANG[loc],
-      href: `${site}/${loc}/${parseId(current.id).category}/${slug}`,
+      href: `${site}/${loc}`,
     }));
-    return [...links, { lang: 'x-default', href: `${site}/${LOCALES[0]}/${parseId(current.id).category}/${slug}` }];
+    return [...links, { lang: 'x-default', href: `${site}/${LOCALES[0]}` }];
   }
   const links = LOCALES.map((loc) => ({
     lang: HREFLANG[loc],
