@@ -114,7 +114,7 @@ export type UiKey = keyof (typeof ui)['zh'];
 
 export function useTranslations(locale: Locale) {
   return function t(key: UiKey, vars?: Record<string, string | number>): string {
-    let str = ui[locale][key] ?? ui[DEFAULT_FALLBACK][key] ?? key;
+    let str: string = ui[locale][key] ?? ui[DEFAULT_FALLBACK][key] ?? key;
     if (vars) {
       for (const [k, v] of Object.entries(vars)) {
         str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));

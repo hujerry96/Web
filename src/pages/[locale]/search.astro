@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { useTranslations } from '../../i18n/ui';
-import { SITE, type Locale } from '../../consts';
+import { SITE, withBase, type Locale } from '../../consts';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -10,6 +10,7 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/search`;
+const searchIndexUrl = withBase('/search-index.json');
 ---
 <BaseLayout title={`${t('nav.search')} | ${SITE.name}`} description={t('page.searchDesc', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.search'), url: path }]} />
@@ -23,6 +24,7 @@ const path = `/${locale}/search`;
       placeholder={t('search.placeholder')}
       autocomplete="off"
       aria-label={t('nav.search')}
+      data-index={searchIndexUrl}
     />
     <p class="search-count muted" id="count"></p>
     <ul class="search-results" id="results"></ul>
@@ -39,7 +41,8 @@ const path = `/${locale}/search`;
   let index: { locale: string; category: string; title: string; description: string; tags: string[]; url: string }[] = [];
   const currentLocale = document.documentElement.lang?.startsWith('en') ? 'en' : 'zh';
 
-  fetch('/Web/search-index.json')
+  const indexUrl = (input as HTMLInputElement).dataset.index ?? '/search-index.json';
+  fetch(indexUrl)
     .then((r) => r.json())
     .then((data) => { index = data; })
     .catch(() => {});

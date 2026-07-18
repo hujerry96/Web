@@ -8,7 +8,6 @@
     "build": "astro build",
     "check": "astro check",
     "preview": "astro preview",
-    "check": "astro check",
     "astro": "astro",
     "ai": "node scripts/ai-generate.mjs"
   },

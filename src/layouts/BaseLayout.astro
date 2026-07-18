@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { SITE } from '../consts';
 import { HREFLANG } from '../i18n/config';
 import type { Post } from '../lib/content';
-import { buildCanonical, buildHreflang } from '../lib/seo';
+import { buildCanonical, buildHreflang, articleLd, breadcrumbLd, websiteLd } from '../lib/seo';
 import Meta from '../components/seo/Meta.astro';
 import OpenGraph from '../components/seo/OpenGraph.astro';
 import TwitterCard from '../components/seo/TwitterCard.astro';
@@ -31,40 +31,9 @@ const hreflang = buildHreflang(post, path);
 const image = post?.data.cover ? new URL(post.data.cover, SITE.url).href : `${SITE.url}/images/og-default.png`;
 
 const jsonLd: Record<string, unknown>[] = [];
-if (post) jsonLd.push(buildArticleLd());
-if (breadcrumb) jsonLd.push(buildBreadcrumbLd());
+if (post) jsonLd.push(articleLd(post, url));
+if (breadcrumb) jsonLd.push(breadcrumbLd(breadcrumb, SITE.url));
 if (type === 'website' && !post) jsonLd.push(websiteLd());
-
-function buildArticleLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post!.data.title,
-    description: post!.data.description,
-    image,
-    datePublished: post!.data.date.toISOString(),
-    dateModified: (post!.data.updated ?? post!.data.date).toISOString(),
-    author: { '@type': 'Person', name: post!.data.author },
-    publisher: { '@type': 'Organization', name: SITE.name },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    keywords: post!.data.keywords.join(', '),
-  };
-}
-function buildBreadcrumbLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumb!.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: `${SITE.url}${item.url}`,
-    })),
-  };
-}
-function websiteLd() {
-  return { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url, inLanguage: SITE.locale };
-}
 ---
 <!doctype html>
 <html lang={HREFLANG[locale]}>

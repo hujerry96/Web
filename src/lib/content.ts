@@ -45,9 +45,11 @@ export async function getPosts(opts?: { locale?: Locale; category?: string }): P
 }
 
 // 從 markdown 正文解析 H2/H3 標題，供側邊 TOC 使用
-// id 與 Astro 渲染出的 <h2 id="..."> 一致（github-slugger），可直接作錨點
+// id 必須與 Astro 渲染出的 <h2 id="..."> 一致（github-slugger），才能作錨點
+import GithubSlugger from 'github-slugger';
 export function extractHeadings(body: string): { text: string; id: string; level: number }[] {
   const out: { text: string; id: string; level: number }[] = [];
+  const slugger = new GithubSlugger();
   const lines = body.split('\n');
   let inFence = false;
   for (const line of lines) {
@@ -58,11 +60,7 @@ export function extractHeadings(body: string): { text: string; id: string; level
     const level = m[1].length;
     const text = m[2].replace(/[#*_`]/g, '').trim();
     if (!text) continue;
-    const id = text
-      .toLowerCase()
-      .trim()
-      .replace(/[^\w一-龥]+/g, '-')
-      .replace(/^-+|-+$/g, '');
+    const id = slugger.slug(text);
     out.push({ text, id, level });
   }
   return out;

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../consts';
 interface Props {
   title: string;
   description: string;
@@ -9,6 +10,9 @@ interface Props {
   modified?: string;
 }
 const { title, description, canonical, hreflang, published, modified, path } = Astro.props;
+// RSS 位於 /[locale]/rss.xml，需補 base 前綴
+const locale = path.split('/')[1];
+const rssHref = withBase(locale ? `/${locale}/rss.xml` : '/rss.xml');
 ---
 <title>{title}</title>
 <meta name="description" content={description} />
@@ -23,5 +27,5 @@ const { title, description, canonical, hreflang, published, modified, path } = A
 <meta name="theme-color" content="#faf6f0" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#1a1410" media="(prefers-color-scheme: dark)" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="alternate" type="application/rss+xml" title={title} href={`${path.split('/')[1] ? `/${path.split('/')[1]}` : ''}/rss.xml`} />
+<link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+<link rel="alternate" type="application/rss+xml" title={title} href={rssHref} />
