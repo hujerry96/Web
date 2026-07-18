@@ -1,12 +1,11 @@
 ---
 import type { Locale } from '../i18n/config';
-import { LOCALE_NAMES, LOCALES } from '../i18n/config';
+import { LOCALES } from '../i18n/config';
 import { withBase } from '../consts';
 
 interface Props { path: string; locale: Locale; }
 const { path, locale } = Astro.props;
 
-// 把當前路徑的語系段替換為目標語系，產生跨語系同頁連結
 function switchPath(target: Locale): string {
   const parts = path.split('/');
   if (parts[1] === 'zh' || parts[1] === 'en') parts[1] = target;
@@ -15,11 +14,13 @@ function switchPath(target: Locale): string {
   return withBase(raw);
 }
 const others = LOCALES.filter((l) => l !== locale);
+const flag: Record<Locale, string> = { zh: '🇹🇼', en: '🇺🇸' };
 ---
-<div class="lang-switch" role="group" aria-label="language">
-  <span class="current" aria-current="true">{LOCALE_NAMES[locale]}</span>
+<div class="lang-switch">
+  <span class="current" aria-current="true">{flag[locale]}</span>
+  <span class="sep" aria-hidden="true">·</span>
   {others.map((l) => (
-    <a class="opt" href={switchPath(l)} hreflang={l === 'en' ? 'en-US' : 'zh-TW'}>{LOCALE_NAMES[l]}</a>
+    <a href={switchPath(l)} hreflang={l === 'en' ? 'en-US' : 'zh-TW'}>{flag[l]}</a>
   ))}
 </div>
 
@@ -27,30 +28,23 @@ const others = LOCALES.filter((l) => l !== locale);
   .lang-switch {
     display: inline-flex;
     align-items: center;
-    gap: 0.15rem;
-    padding: 0.2rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-full);
-    background: var(--color-surface);
+    gap: 0.2rem;
+    font-size: 0.85rem;
+    line-height: 1;
     font-family: var(--font-serif-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
   }
   .current {
-    color: var(--color-surface);
-    background: var(--color-accent);
-    font-weight: 600;
-    padding: 0.22rem 0.7rem;
-    border-radius: var(--radius-full);
-    line-height: 1.2;
+    cursor: default;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.1));
   }
-  .opt {
-    color: var(--color-text-muted);
+  .sep {
+    color: var(--color-text-faint);
+    font-size: 0.7rem;
+  }
+  .lang-switch a {
     text-decoration: none;
-    padding: 0.22rem 0.7rem;
-    border-radius: var(--radius-full);
-    line-height: 1.2;
-    transition: color var(--duration-fast) var(--ease), background var(--duration-fast) var(--ease);
+    opacity: 0.55;
+    transition: opacity var(--duration-fast) var(--ease);
   }
-  .opt:hover { color: var(--color-text); background: var(--color-accent-soft); }
+  .lang-switch a:hover { opacity: 1; }
 </style>

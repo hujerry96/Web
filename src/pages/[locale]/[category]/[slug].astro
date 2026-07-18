@@ -33,16 +33,17 @@ const breadcrumb = [
 ---
 <BaseLayout title={`${post.data.title} | ${SITE.name}`} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb}>
   <Breadcrumb locale={locale} items={breadcrumb} />
-  <h1>{post.data.title}</h1>
-  <div class="post-meta">
-    <span>{t('article.by')} {post.data.author}</span>
-    <span>{readingTime(post.body, locale)}</span>
-    <time datetime={post.data.date.toISOString()}>{t('article.published')} {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
-    {post.data.updated && <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>}
-  </div>
 
   <div class="article-layout">
     <div class="article-main">
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">
+        <span>{t('article.by')} {post.data.author}</span>
+        <span>{readingTime(post.body, locale)}</span>
+        <time datetime={post.data.date.toISOString()}>{t('article.published')} {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
+        {post.data.updated && <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>}
+      </div>
+
       {post.data.cover && (
         <img src={post.data.cover} alt={post.data.title} width={1280} height={720} class="cover" />
       )}
@@ -83,8 +84,8 @@ const breadcrumb = [
 <style>
   .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 240px;
-    gap: var(--space-8);
+    grid-template-columns: minmax(0, 1fr) 210px;
+    gap: var(--space-6);
     align-items: start;
   }
   .article-side { display: block; }
