@@ -11,10 +11,10 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/free-resources`;
 ---
-<BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={`免費資源 — ${SITE.name}`} path={path}>
+<BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={t('page.freeDescTitle', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
   <h1>{t('nav.free')}</h1>
   <article class="prose">
-    <p>這裡匯集免費的 Python 工具、PDF 與可列印資源（陸續新增）。</p>
+    <p>{t('page.freeDesc')}</p>
   </article>
 </BaseLayout>

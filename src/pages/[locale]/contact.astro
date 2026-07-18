@@ -11,7 +11,7 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/contact`;
 ---
-<BaseLayout title={`${t('nav.contact')} | ${SITE.name}`} description={`聯絡 ${SITE.name}`} path={path}>
+<BaseLayout title={`${t('nav.contact')} | ${SITE.name}`} description={t('page.contactDesc', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.contact'), url: path }]} />
   <h1>{t('nav.contact')}</h1>
   <article class="prose">

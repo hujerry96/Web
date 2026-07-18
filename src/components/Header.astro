@@ -41,7 +41,9 @@ const staticLinks: NavItem[] = [
     </button>
     <a href={withBase(`/${locale}`)} class="brand">{SITE.name}</a>
     <div class="header-actions">
-      <button class="theme-toggle" id="theme-toggle" aria-label="切換深色模式">🌙</button>
+      <button class="theme-toggle" id="theme-toggle" aria-label={t('a11y.theme')} title={t('a11y.theme')}>
+        <span class="tt-icon" aria-hidden="true">🌙</span>
+      </button>
       <LangSwitch path={path} locale={locale} />
     </div>
   </div>
@@ -131,6 +133,28 @@ const staticLinks: NavItem[] = [
   .header-actions {
     display: flex;
     align-items: center;
-    gap: var(--space-1);
+    gap: var(--space-2);
   }
+  .theme-toggle {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    font-size: 1.05rem;
+    padding: 0;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+    color: var(--color-text-muted);
+  }
+  .theme-toggle:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: rotate(-12deg);
+  }
+  .tt-icon { display: inline-block; line-height: 1; transition: transform var(--duration-normal) var(--ease); }
 </style>

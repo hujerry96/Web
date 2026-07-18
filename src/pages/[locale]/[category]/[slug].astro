@@ -54,10 +54,10 @@ const breadcrumb = [
   )}
 
   {post.data.affiliate?.shopee && (
-    <p class="aff"><a href={post.data.affiliate.shopee}>在 Shopee 購買 →</a></p>
+    <p class="aff"><a href={post.data.affiliate.shopee}>{t('page.buyShopee')}</a></p>
   )}
   {post.data.affiliate?.amazon && (
-    <p class="aff"><a href={post.data.affiliate.amazon}>在 Amazon 購買 →</a></p>
+    <p class="aff"><a href={post.data.affiliate.amazon}>{t('page.buyAmazon')}</a></p>
   )}
 
   {related.length > 0 && (

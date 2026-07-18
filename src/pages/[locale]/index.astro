@@ -53,7 +53,7 @@ const path = `/${locale}`;
       <a class="cat-card print-frame reveal" href={withBase(`/${locale}/${key}`)}>
         <span class="cat-no">{String(i + 1).padStart(2, '0')}</span>
         <h3 class="serif-display">{name}</h3>
-        <span class="cat-count">{counts[key] ?? 0} 篇</span>
+        <span class="cat-count">{t('home.postsCount', { n: counts[key] ?? 0 })}</span>
         <span class="cat-arrow" aria-hidden="true">→</span>
       </a>
     ))}

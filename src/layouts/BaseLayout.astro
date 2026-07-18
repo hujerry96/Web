@@ -10,6 +10,7 @@ import TwitterCard from '../components/seo/TwitterCard.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { useTranslations } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -23,6 +24,7 @@ interface Props {
 
 const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, wide = false } = Astro.props;
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
+const t = useTranslations(locale);
 const url = `${SITE.url}${path}`;
 const canonical = buildCanonical(post, path);
 const hreflang = buildHreflang(post, path);
@@ -90,7 +92,7 @@ function websiteLd() {
       <slot />
     </main>
     <Footer locale={locale} />
-    <button class="back-to-top" id="back-to-top" aria-label="回到頂部">↑</button>
+    <button class="back-to-top" id="back-to-top" aria-label={t('a11y.top')}>↑</button>
   <script>
     // 返回頂部按鈕
     const btn = document.getElementById('back-to-top');
@@ -114,8 +116,10 @@ function websiteLd() {
     const toggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     if (toggle) {
+      const icon = toggle.querySelector('.tt-icon');
       const updateIcon = () => {
-        toggle.textContent = html.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        if (icon) icon.textContent = isDark ? '☀️' : '🌙';
       };
       updateIcon();
       toggle.addEventListener('click', () => {
