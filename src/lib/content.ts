@@ -75,10 +75,11 @@ export function extractHeadings(body: string): { text: string; id: string; level
   return out;
 }
 export async function getRelated(post: Post, limit = 3): Promise<Post[]> {
-  const { category } = parseId(post.id);
+  const { locale, category } = parseId(post.id);
   const all = await getCollection('post', ({ data }) => !data.draft);
   return all
     .filter((p) => p.id !== post.id)
+    .filter((p) => parseId(p.id).locale === locale)
     .map((p) => {
       const sameCat = parseId(p.id).category === category;
       const sharedTags = p.data.tags.filter((t) => post.data.tags.includes(t)).length;
