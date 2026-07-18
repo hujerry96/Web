@@ -31,7 +31,7 @@ const breadcrumb = [
   { name: post.data.title, url: path },
 ];
 ---
-<BaseLayout title={`${post.data.title} | ${SITE.name}`} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb}>
+<BaseLayout title={`${post.data.title} | ${SITE.name}`} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb} wide>
   <Breadcrumb locale={locale} items={breadcrumb} />
 
   <div class="article-layout">
@@ -84,13 +84,21 @@ const breadcrumb = [
 <style>
   .article-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 210px;
-    gap: var(--space-6);
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: var(--space-9);
     align-items: start;
   }
+  .article-main { min-width: 0; }
+  .article-main > h1 {
+    font-size: var(--text-3xl);
+    line-height: 1.15;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin-top: 0;
+  }
   .article-side { display: block; }
-  @media (max-width: 900px) {
-    .article-layout { grid-template-columns: 1fr; }
+  @media (max-width: 980px) {
+    .article-layout { grid-template-columns: 1fr; gap: var(--space-6); }
     .article-side { display: none; }
   }
   .aff { margin: 1rem 0; }

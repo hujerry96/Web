@@ -12,8 +12,6 @@ locale: 'en'
 draft: false
 ---
 
-# Python Automation for Your Running Log: From CSV to Weekly Charts
-
 Logging runs is easy; looking back is hard. This minimal script aggregates dates, distances, and paces from a CSV into a weekly chart.
 
 ## Prepare the data

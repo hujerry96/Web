@@ -15,8 +15,6 @@ affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8TL68YS'
 ---
 
-# Materials Science Study Guide: The Notebook That Actually Helps You Pass
-
 Most materials science textbooks drown you in derivations. This study guide does the opposite — it gives you the **core concepts, the formulas you actually need, and space to practice** until they stick.
 
 ## Who It's For

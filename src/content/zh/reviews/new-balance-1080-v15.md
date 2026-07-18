@@ -15,8 +15,6 @@ affiliate:
   shopee: "https://shopee.tw/"
 ---
 
-# New Balance 1080 v15 實測：緩震王者依舊適合長距離？
-
 New Balance 1080 系列一直是「舒適緩震」的代名詞。第 15 代（v15）在 2026 年帶來了全新 Fresh Foam X 中底調校，本文從實跑經驗出發，分析它是否仍值得納入你的訓練鞋陣容。
 
 ## 外觀與鞋面
