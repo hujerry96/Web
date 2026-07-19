@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { useTranslations } from '../../i18n/ui';
-import { SITE, type Locale } from '../../consts';
+import { SITE, withBase, type Locale } from '../../consts';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -16,7 +16,7 @@ const freeOverrides: Record<string, string> = {
   en: { reviews: 'Tools', guides: 'Guides' },
 };
 const freeKeys = ['guides'];
-const toolsPath = `/${locale}/tools`;
+const toolsPath = withBase(`/${locale}/tools`);
 const freeCats = Object.fromEntries(
   Object.entries(cats)
     .filter(([k]) => freeKeys.includes(k))
