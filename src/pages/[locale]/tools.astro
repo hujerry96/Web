@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { useTranslations } from '../../i18n/ui';
-import { SITE, type Locale } from '../../consts';
+import { SITE, withBase, type Locale } from '../../consts';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -25,6 +25,7 @@ const tools = [
         : ['Watershed for overlapping particles', 'Hough Circle for round particles', 'Interactive SEM scale-bar calibration', 'Export CSV / stats / distribution plot'],
     repo: 'https://github.com/hujerry96/particle-analyzer',
     lang: locale === 'zh' ? '中文 / English' : '中文 / English',
+    guide: locale === 'zh' ? '/zh/guides/particle-analyzer-guide' : '/en/guides/particle-analyzer-guide-en',
   },
   {
     name: locale === 'zh' ? '論文格式修正工具' : 'Thesis Format Fixer',
@@ -39,6 +40,7 @@ const tools = [
         : ['Auto Roman/Arabic page numbers', 'Unified figure & table numbering', 'Heading levels and indents', 'Reference cross-references'],
     repo: 'https://github.com/hujerry96/thesis-formatter',
     lang: locale === 'zh' ? '中文 / English' : '中文 / English',
+    guide: locale === 'zh' ? '/zh/guides/thesis-formatter-guide' : '/en/guides/thesis-formatter-guide-en',
   },
 ];
 ---
@@ -61,7 +63,10 @@ const tools = [
           </ul>
           <div class="tool-meta">
             <span class="tool-lang">{tool.lang}</span>
-            <a class="tool-link" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub 儲存庫 →' : 'GitHub repo →'}</a>
+            <span class="tool-links">
+              <a class="tool-link" href={withBase(tool.guide)}>{locale === 'zh' ? '使用指南 →' : 'Guide →'}</a>
+              <a class="tool-link" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub →' : 'GitHub →'}</a>
+            </span>
           </div>
         </div>
       </section>
@@ -135,6 +140,11 @@ const tools = [
     justify-content: space-between;
     border-top: 1px solid var(--color-border);
     padding-top: 1rem;
+  }
+  .tool-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
   .tool-lang {
     font-family: var(--font-serif-body);
