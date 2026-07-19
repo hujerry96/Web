@@ -3,7 +3,7 @@ title: 'Why Coloring Might Be the Most Underrated Way to Learn Sports Anatomy'
 slug: 'sport-anatomy-coloring-book-learning-guide'
 description: 'How an illustrated coloring-and-labeling workbook turns passive reading into active recall for sports anatomy, athletic injuries, and rehabilitation. Built for physiotherapy students, athletic trainers, coaches, and athletes.'
 keywords: ['sports anatomy', 'anatomy coloring book', 'injury rehabilitation', 'physiotherapy students', 'athletic training', 'active recall learning', 'ACL injury prevention', 'piriformis syndrome']
-author: 'Alex Chen'
+author: 'Jerry Hu'
 date: 2026-07-19
 cover: ./sport-anatomy-coloring-book-cover.png
 category: 'journal'
