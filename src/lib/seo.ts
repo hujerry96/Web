@@ -35,7 +35,7 @@ export function articleLd(post: Post, url: string) {
     '@type': 'Article',
     headline: post.data.title,
     description: post.data.description,
-    image: post.data.cover ? new URL(post.data.cover, SITE.url).href : undefined,
+    image: post.data.cover ? post.data.cover.src : undefined,
     datePublished: post.data.date.toISOString(),
     dateModified: (post.data.updated ?? post.data.date).toISOString(),
     author: { '@type': 'Person', name: post.data.author },

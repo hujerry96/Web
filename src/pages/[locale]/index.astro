@@ -4,6 +4,7 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import { getPosts, readingTime } from '../../lib/content';
 import { useTranslations } from '../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../consts';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const all = await getPosts();
@@ -43,7 +44,7 @@ const featuredCatName = featured ? ((SITE.categories[locale] as Record<string, s
     <a class="featured print-frame reveal" href={withBase(`/${locale}/${featuredCat}/${featured.data.slug ?? featured.id.split('/').slice(2).join('/')}`)}>
       <div class="featured-media">
         {featured.data.cover
-          ? <img src={withBase(featured.data.cover)} alt={featured.data.title} width={800} height={500} class="featured-cover" loading="eager" />
+          ? <Image src={featured.data.cover} alt={featured.data.title} width={800} height={500} class="featured-cover" loading="eager" />
           : <div class="featured-cover featured-cover--empty"><span>{featuredCatName}</span></div>}
       </div>
       <div class="featured-body">

@@ -11,7 +11,7 @@ const post = defineCollection({
     // 保留資料夾路徑作為 id（如 "zh/reviews/foo"），供 lib/content.parseId 解析
     generateId: ({ entry }) => entry.replace(/\.(md|mdx)$/, ''),
   }),
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
       title: z.string(),
       // 省略 slug 時，build 期由檔名自動產生（見 lib/content.ts）
@@ -21,8 +21,8 @@ const post = defineCollection({
       author: z.string().default('Jerry Hu'),
       date: z.coerce.date(),
       updated: z.coerce.date().optional(),
-      // 封面圖路徑：放 public/images/<locale>/<category>/，用字串即可（AI 工作流最省力）
-      cover: z.string().optional(),
+      // 封面圖：與文章同目錄，frontmatter 寫 ./cover.png（astro:assets 自動處理 base/最佳化）
+      cover: image().optional(),
       category: z.string(),
       tags: z.array(z.string()).default([]),
       canonical: z.string().url().optional(),

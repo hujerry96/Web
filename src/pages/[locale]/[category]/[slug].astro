@@ -4,7 +4,8 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { getPosts, getRelated, parseId, postSlug, readingTime, extractHeadings } from '../../../lib/content';
 import { render } from 'astro:content';
 import { useTranslations } from '../../../i18n/ui';
-import { SITE, withBase, type Locale } from '../../../consts';
+import { SITE, type Locale } from '../../../consts';
+import { Image } from 'astro:assets';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Toc from '../../../components/Toc.astro';
 
@@ -45,7 +46,7 @@ const breadcrumb = [
       </div>
 
       {post.data.cover && (
-        <img src={withBase(post.data.cover)} alt={post.data.title} width={1280} height={720} class="cover" />
+        <Image src={post.data.cover} alt={post.data.title} width={1280} height={720} class="cover" />
       )}
 
       <article class="prose">

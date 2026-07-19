@@ -1,19 +1,20 @@
 ---
 import type { Post } from '../lib/content';
 import { parseId, postPath } from '../lib/content';
-import { SITE, withBase } from '../consts';
+import { SITE } from '../consts';
+import { Image } from 'astro:assets';
 
 interface Props { post: Post; locale: 'zh' | 'en'; }
 const { post, locale } = Astro.props;
 const { category } = parseId(post.id);
 const href = postPath(post);
-const coverSrc = post.data.cover ? withBase(post.data.cover) : undefined;
+const cover = post.data.cover;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 ---
 <article class="card">
   <a href={href} class="card-link">
-    {coverSrc ? (
-      <img src={coverSrc} alt={post.data.title} width={640} height={360} class="thumb" loading="lazy" />
+    {cover ? (
+      <Image src={cover} alt={post.data.title} width={640} height={360} class="thumb" loading="lazy" />
     ) : (
       <div class="thumb thumb-empty"><span>{catName}</span></div>
     )}

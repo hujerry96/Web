@@ -5,7 +5,7 @@ description: "2026 最新一代 Fresh Foam X 1080 v15 實跑評測，針對寬�
 keywords: ["New Balance 1080 v15", "跑步鞋推薦", "緩震跑鞋", "長距離訓練鞋", "Shopee 分潤"]
 author: "Jerry Hu"
 date: 2026-07-18
-cover: "/images/zh/reviews/nb1080v15-cover.png"
+cover: ./nb1080v15-cover.png
 category: "reviews"
 tags: ["跑步", "鞋款評測", "運動"]
 locale: "zh"

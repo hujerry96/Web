@@ -5,7 +5,7 @@ description: 'A practical Materials Science study guide and workbook — crystal
 keywords: ['Materials Science study guide', 'materials science workbook', 'crystal structures', 'phase diagrams', 'KDP notebook', 'engineering student']
 author: 'Jerry Hu'
 date: 2026-07-18
-cover: '/images/en/books/materials-science-study-guide-cover.png'
+cover: ./materials-science-study-guide-cover.png
 category: 'journal'
 tags: ['KDP', 'Study Guide', 'Materials Science', 'Engineering']
 locale: 'en'

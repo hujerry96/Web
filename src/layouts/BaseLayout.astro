@@ -28,7 +28,7 @@ const t = useTranslations(locale);
 const url = `${SITE.url}${path}`;
 const canonical = buildCanonical(post, path);
 const hreflang = buildHreflang(post, path);
-const image = post?.data.cover ? new URL(post.data.cover, SITE.url).href : `${SITE.url}/images/og-default.png`;
+const image = post?.data.cover ? post.data.cover.src : `${SITE.url}/images/og-default.png`;
 
 const jsonLd: Record<string, unknown>[] = [];
 if (post) jsonLd.push(articleLd(post, url));
