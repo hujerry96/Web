@@ -32,8 +32,9 @@ const image = post?.data.cover ? post.data.cover.src : `${SITE.url}/images/og-de
 
 const jsonLd: Record<string, unknown>[] = [];
 if (post) jsonLd.push(articleLd(post, url));
-if (breadcrumb) jsonLd.push(breadcrumbLd(breadcrumb, SITE.url));
-if (type === 'website' && !post) jsonLd.push(websiteLd());
+if (breadcrumb && breadcrumb.length > 0) jsonLd.push(breadcrumbLd(breadcrumb, SITE.url));
+// 首頁（語系根，如 /、/en、/zh）補 WebSite LD；不受 featured post 影響
+if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
 ---
 <!doctype html>
 <html lang={HREFLANG[locale]}>
