@@ -238,6 +238,9 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   margin: var(--space-4) 0 var(--space-6);
+  /* 上下邊緣羽化：避免硬切感，讓裁切邊柔和 */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
 
 .grid {
