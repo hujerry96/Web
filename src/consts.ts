@@ -14,12 +14,12 @@ export const SITE = {
   // 依語系提供 SEO 標題/描述，避免英文頁出現中文
   meta: {
     zh: {
-      title: 'Hu Lab — AI 工具・Python 教學・科技評測',
+      title: 'Hu Lab',
       description:
         'Hu Lab — Jerry Hu 的角落：生活雜感、Python 實用小工具，以及親自篩選的好物與自出版書籍。',
     },
     en: {
-      title: 'Hu Lab — AI Tools, Python Tutorials & Tech Reviews',
+      title: 'Hu Lab',
       description:
         'Hu Lab — Jerry Hu’s corner: casual notes, handy Python tools, and personally picked products and self-published books.',
     },
