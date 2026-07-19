@@ -13,8 +13,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'ignore',
   i18n: {
-    defaultLocale: 'zh',
-    locales: ['zh', 'en'],
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
     routing: {
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
@@ -23,7 +23,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       i18n: {
-        defaultLocale: 'zh',
+        defaultLocale: 'en',
         locales: { zh: 'zh-TW', en: 'en-US' },
       },
       filter: (page) => !page.includes('/404'),

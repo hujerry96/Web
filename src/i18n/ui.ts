@@ -122,4 +122,4 @@ export function useTranslations(locale: Locale) {
   };
 }
 
-const DEFAULT_FALLBACK: Locale = 'zh';
+const DEFAULT_FALLBACK: Locale = 'en';

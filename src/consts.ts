@@ -16,19 +16,19 @@ export const SITE = {
     zh: {
       title: 'Hu Lab — AI 工具・Python 教學・科技評測',
       description:
-        'AI 工具實測、Python 教學、科技產品評測與 KDP 自出版資源。中文與英文雙語內容站。',
+        'Hu Lab — AI 工具實測、Python 教學、科技產品評測與 KDP 自出版資源。中文與英文雙語內容站。',
     },
     en: {
       title: 'Hu Lab — AI Tools, Python Tutorials & Tech Reviews',
       description:
-        'Hands-on AI tool reviews, Python tutorials, tech product reviews, and KDP self-publishing resources. A bilingual content site in Traditional Chinese and English.',
+        'Hu Lab — Hands-on AI tool reviews, Python tutorials, tech product reviews, and KDP self-publishing resources. A bilingual content site in Traditional Chinese and English.',
     },
   } as Record<'zh' | 'en', { title: string; description: string }>,
   // 注意：需與 astro.config.mjs 的 site 一致（含 base）
   url: 'https://hujerry96.github.io/Web',
   author: 'Jerry Hu',
-  locale: 'zh-TW',
-  ogLocale: 'zh_TW',
+  locale: 'en-US',
+  ogLocale: 'en_US',
   twitter: '@jerryhu',
   email: 'hello@example.com',
   // 分類結構（locale -> 分類 key -> 顯示名）；中英文各自獨立、中性命名
