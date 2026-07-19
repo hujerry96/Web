@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const path = `/${locale}/tools`;
+
+const tools = [
+  {
+    name: locale === 'zh' ? 'SEM 粒徑分析工具' : 'SEM Particle Analyzer',
+    tag: 'Particle Analyzer',
+    desc:
+      locale === 'zh'
+        ? '從 SEM 影像自動量測顆粒與孔洞的粒徑分布，支援 Watershed 與 Hough 圓形偵測雙演算法，可直接校正比例尺並匯出統計報表。'
+        : 'Measure particle and pore size distributions from SEM images automatically. Two algorithms (Watershed and Hough Circle), interactive scale calibration, and exportable statistics.',
+    points:
+      locale === 'zh'
+        ? ['Watershed 分割重疊顆粒', 'Hough 圓形偵測圓形顆粒', '互動校正 SEM 比例尺', '匯出 CSV / 統計 / 分布圖']
+        : ['Watershed for overlapping particles', 'Hough Circle for round particles', 'Interactive SEM scale-bar calibration', 'Export CSV / stats / distribution plot'],
+    repo: 'https://github.com/hujerry96/particle-analyzer',
+    lang: locale === 'zh' ? '中文 / English' : '中文 / English',
+  },
+  {
+    name: locale === 'zh' ? '論文格式修正工具' : 'Thesis Format Fixer',
+    tag: 'Thesis Formatter',
+    desc:
+      locale === 'zh'
+        ? '一鍵修正 Word 碩博士論文格式：頁碼、圖表編號、標題階層、參考文獻與封面，規則以 YAML 設定，GUI 拖檔即用。'
+        : 'One-click fix for Word thesis formatting: page numbers, figure/table numbering, heading levels, references, and cover. Rules live in YAML, and the GUI takes a drag-and-drop file.',
+    points:
+      locale === 'zh'
+        ? ['頁碼羅馬/阿拉伯自動切換', '圖表編號與標題統一', '標題階層與縮排修正', '參考文獻交叉參照']
+        : ['Auto Roman/Arabic page numbers', 'Unified figure & table numbering', 'Heading levels and indents', 'Reference cross-references'],
+    repo: 'https://github.com/hujerry96/thesis-formatter',
+    lang: locale === 'zh' ? '中文 / English' : '中文 / English',
+  },
+];
+---
+<BaseLayout title={`${t('nav.tools')} | ${SITE.name}`} description={t('page.toolsDesc', { name: SITE.name })} path={path}>
+  <Breadcrumb locale={locale} items={[{ name: t('nav.tools'), url: path }]} />
+  <h1>{t('nav.tools')}</h1>
+  <article class="prose">
+    <p class="serif-body">{t('page.toolsDesc')}</p>
+  </article>
+
+  <div class="tool-grid">
+    {tools.map((tool) => (
+      <section class="tool-card">
+        <div class="tool-thumb"><span>{tool.tag}</span></div>
+        <div class="tool-body">
+          <h2>{tool.name}</h2>
+          <p class="tool-desc serif-body">{tool.desc}</p>
+          <ul class="tool-points">
+            {tool.points.map((p) => <li>{p}</li>)}
+          </ul>
+          <div class="tool-meta">
+            <span class="tool-lang">{tool.lang}</span>
+            <a class="tool-link" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub 儲存庫 →' : 'GitHub repo →'}</a>
+          </div>
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .tool-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+  }
+  .tool-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+  .tool-thumb {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(156,59,46,0.05) 12px, rgba(156,59,46,0.05) 13px),
+      linear-gradient(135deg, var(--color-accent-soft), var(--color-surface));
+    color: var(--color-accent-deep);
+    font-family: var(--font-serif-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+  }
+  .tool-body { padding: 1.2rem 1.3rem 1.4rem; }
+  .tool-body h2 { font-size: 1.35rem; margin: 0 0 0.6rem; }
+  .tool-desc { color: var(--color-text-muted); margin: 0 0 0.9rem; }
+  .tool-points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.1rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .tool-points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+  }
+  .tool-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+  .tool-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+  }
+  .tool-lang {
+    font-family: var(--font-serif-body);
+    font-size: 0.78rem;
+    color: var(--color-text-faint);
+    letter-spacing: 0.03em;
+  }
+  .tool-link {
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .tool-link:hover { text-decoration: underline; }
+  h1 { font-size: clamp(1.8rem, 1rem + 3vw, 2.6rem); margin: 0 0 var(--space-4); }
+</style>

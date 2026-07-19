@@ -14,8 +14,9 @@ const cats = SITE.categories[locale] as Record<string, string>;
 const freeOverrides: Record<string, string> = {
   zh: { reviews: '工具', guides: '指南' },
   en: { reviews: 'Tools', guides: 'Guides' },
-}[locale];
+};
 const freeKeys = ['reviews', 'guides'];
+const toolsPath = `/${locale}/tools`;
 const freeCats = Object.fromEntries(
   Object.entries(cats)
     .filter(([k]) => freeKeys.includes(k))
@@ -36,6 +37,10 @@ const freeCats = Object.fromEntries(
         <span class="res-arrow" aria-hidden="true">→</span>
       </a>
     ))}
+    <a class="res-card" href={toolsPath}>
+      <span class="res-cat">{t('nav.tools')}</span>
+      <span class="res-arrow" aria-hidden="true">→</span>
+    </a>
   </div>
 </BaseLayout>
 
