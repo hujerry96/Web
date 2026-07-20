@@ -25,8 +25,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Copy flat sitemap (Google can't fetch sitemap-index.xml on GitHub Pages)
-        run: cp dist/sitemap-0.xml dist/sitemap.xml
+      - name: Generate sitemap.xml
+        run: node scripts/generate-sitemap.mjs
       - name: Show dist contents
         run: ls -R dist | head -40
       - run: npm run check
