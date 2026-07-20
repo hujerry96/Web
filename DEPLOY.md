@@ -1,49 +1,62 @@
-# ?�署步�? (Deploy to GitHub Pages)
+# 部署步驟 (Deploy to GitHub Pages)
 
-網�?使用 GitHub Actions ?��??�署??GitHub Pages?�以下以 **user page**（`https://hujerry96.github.io`）為例�?
+網站使用 GitHub Actions 自動部署到 GitHub Pages，以下以 **project page**（`https://hujerry96.github.io/Web`）為例。
+
 ---
 
-## 1. 建�? GitHub Repo
-1. ?�入 GitHub，新�?repo，�?稱�??�是 `hujerry96.github.io`（user page�?2. 不�??��???README（本專�?已�?檔�?�?
-> ?�用 project page（任??repo ?��?：�???`astro.config.mjs` ??`base` ?�為 `'/<repo>'`，�?網�???`https://hujerry96.github.io/<repo>`??
+## 1. 建立 GitHub Repo
+1. 登入 GitHub，新增 repo，名稱設定為 `Web`（或其它名稱）
+2. 若為 project page：需設定 `astro.config.mjs` 中 `base` 改為 `'/<repo>'`，網站網址為 `https://<user>.github.io/<repo>`
+
 ---
 
-## 2. ?�送�?式碼
+## 2. 推送程式碼
 ```bash
 git init
 git add .
 git commit -m "init: Astro bilingual AI-first content site"
 git branch -M main
-git remote add origin https://github.com/hujerry96/hujerry96.github.io.git
+git remote add origin https://github.com/hujerry96/Web.git
 git push -u origin main
 ```
 
 ---
 
-## 3. ?��? GitHub Pages
-1. Repo ??**Settings** ??**Pages**
-2. Source ??**GitHub Actions**
-3. 等�? Actions 跑�?（�?次�? 1?? ?��?）�?網�??��?線於 `https://hujerry96.github.io`
+## 3. 啟動 GitHub Pages
+1. Repo 進入 **Settings** → **Pages**
+2. Source 選 **GitHub Actions**
+3. 等待 Actions 跑完（每次約 1 分鐘），網站即可上線於 `https://hujerry96.github.io/Web`
 
-> 之�?每次 `git push` ??`main` ?��??��??�新?�署??
----
-
-## 4. Google Search Console（SEO ?�尾�?1. ?��? [Google Search Console](https://search.google.com/search-console)
-2. ?��?資�?：`https://hujerry96.github.io`
-3. 驗�??��?：�?�?HTML 驗�?檔�??�到 `public/google-site-verification.html`，push 後�??��?證�?4. **?�交 Sitemap**：左??Sitemaps ??輸入 `sitemap-index.xml` ???�交
-5. 定�?檢查?�網?�索引」�??�核心網?��?標」報??
----
-
-## 5. ?��?網�?（可?��?
-1. 購買網�?（�? Namecheap / Google Domains�?2. DNS 設�?�?   - A 紀?��???GitHub Pages IP：`185.199.108.153`?�`185.199.109.153`?�`185.199.110.153`?�`185.199.111.153`
-   - ??CNAME 紀?��???`hujerry96.github.io`
-3. Repo ??Settings ??Pages ??Custom domain 填入你�?網�?
-4. ?�選 **Enforce HTTPS**（�??��??��??��?
-5. 記�???`astro.config.mjs` ??`site` ??`src/consts.ts` ??`SITE.url` ?��??��?網�?
+> 之後每次 `git push` 到 `main` 都會自動重新部署
 
 ---
 
-## 6. ?�難?�解
-- **�??/資�? 404**：project page 忘�?�?`base: '/<repo>'`
-- **Actions 失�?**：�? Actions ?��?，通常??`npm run build` �?frontmatter 欄�?缺�?
-- **Sitemap 不含?��?�?*：該?��? `draft: true` ??`category` 不符
+## 4. Google Search Console（SEO 最後一哩路）
+1. 前往 [Google Search Console](https://search.google.com/search-console)
+2. 新增資源（選一種）：
+   - **URL 前置字元**：`https://hujerry96.github.io/Web`
+   - **網域**：`hujerry96.github.io`（涵蓋所有子路徑）
+3. 驗證方式：下載 HTML 驗證檔放到 `public/google-site-verification.html`，push 後按驗證
+4. **提交 Sitemap**（統一用 `sitemap.xml`，GitHub Pages 對 sitemap-index 支援度不佳）：
+   - 若用 URL 前置字元 `https://hujerry96.github.io/Web`：輸入 `sitemap.xml`
+   - 若用 URL 前置字元 `https://hujerry96.github.io`：輸入 `Web/sitemap.xml`
+   - 若用網域 `hujerry96.github.io`：輸入 `sitemap.xml`
+5. 定期檢查「網頁索引」與「核心網頁指標」報表
+
+---
+
+## 5. 自訂網域（可選）
+1. 購買網域（如 Namecheap / Google Domains）
+2. DNS 設定：
+   - A 紀錄指向 GitHub Pages IP：`185.199.108.153`、`185.199.109.153`、`185.199.110.153`、`185.199.111.153`
+   - 或 CNAME 紀錄指向 `hujerry96.github.io`
+3. Repo → Settings → Pages → Custom domain 填入你的網域
+4. 勾選 **Enforce HTTPS**（建議一定要開）
+5. 記得更新 `astro.config.mjs` 的 `site` 與 `src/consts.ts` 的 `SITE.url`
+
+---
+
+## 6. 疑難排解
+- **圖片/資源 404**：project page 忘記設 `base: '/<repo>'`
+- **Actions 失敗**：看 Actions 日誌，通常是 `npm run build` 時 frontmatter 欄位缺失
+- **Sitemap 不含某頁**：該頁設了 `draft: true` 或 `category` 不符
