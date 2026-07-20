@@ -5,6 +5,7 @@ description: '一篇論文格式修正工具的實用教學：它解決什麼痛
 keywords: ['論文格式', 'Word', 'Python 工具', '碩博士', '自動化', 'python-docx']
 author: 'Jerry Hu'
 date: 2026-07-20
+cover: ./thesis-formatter-gui.png
 category: 'guides'
 tags: ['Python', 'Word', '論文', '自動化']
 locale: 'zh'

@@ -5,6 +5,7 @@ description: 'A practical guide to the Thesis Format Fixer: what pain it removes
 keywords: ['thesis format', 'Word', 'Python tool', 'master thesis', 'automation', 'python-docx']
 author: 'Jerry Hu'
 date: 2026-07-20
+cover: ./thesis-formatter-gui.png
 category: 'guides'
 tags: ['Python', 'Word', 'Thesis', 'Automation']
 locale: 'en'

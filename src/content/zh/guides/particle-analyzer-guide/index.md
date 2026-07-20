@@ -5,6 +5,7 @@ description: '一篇實用的 SEM 粒徑分析工具教學：它解決什麼問�
 keywords: ['SEM', '粒徑分析', 'Python 工具', '影像處理', '材料科學', 'Watershed', 'Hough']
 author: 'Jerry Hu'
 date: 2026-07-20
+cover: ./particle-analyzer-gui.png
 category: 'guides'
 tags: ['Python', 'SEM', '影像處理', '材料科學']
 locale: 'zh'

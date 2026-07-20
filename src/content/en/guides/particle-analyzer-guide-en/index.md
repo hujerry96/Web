@@ -5,6 +5,7 @@ description: 'A practical guide to the SEM Particle Analyzer: what problem it so
 keywords: ['SEM', 'particle size analysis', 'Python tool', 'image processing', 'materials science', 'Watershed', 'Hough']
 author: 'Jerry Hu'
 date: 2026-07-20
+cover: ./particle-analyzer-gui.png
 category: 'guides'
 tags: ['Python', 'SEM', 'Image Processing', 'Materials']
 locale: 'en'
