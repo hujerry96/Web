@@ -1,0 +1,48 @@
+{
+  "schedule": [
+    {
+      "id": "guides/ai-productivity-knowledge-workers",
+      "publishDate": "2026-07-23"
+    },
+    {
+      "id": "guides/personal-finance-solopreneurs",
+      "publishDate": "2026-07-25"
+    },
+    {
+      "id": "guides/side-hustle-income-parents",
+      "publishDate": "2026-07-28"
+    },
+    {
+      "id": "guides/mediterranean-meal-planning-families",
+      "publishDate": "2026-07-30"
+    },
+    {
+      "id": "guides/kyoto-travel-guide",
+      "publishDate": "2026-08-01"
+    },
+    {
+      "id": "reviews/mid-career-pivot",
+      "publishDate": "2026-08-04"
+    },
+    {
+      "id": "guides/materials-science-guide",
+      "publishDate": "2026-08-06"
+    },
+    {
+      "id": "guides/materials-thermodynamics-notes",
+      "publishDate": "2026-08-08"
+    },
+    {
+      "id": "reviews/semiconductor-lab-notebook",
+      "publishDate": "2026-08-11"
+    },
+    {
+      "id": "reviews/materials-characterization-notebook",
+      "publishDate": "2026-08-13"
+    },
+    {
+      "id": "reviews/organs-adventure-brain-games",
+      "publishDate": "2026-08-15"
+    }
+  ]
+}
