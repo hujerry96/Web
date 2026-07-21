@@ -32,6 +32,8 @@ A purpose-designed semiconductor lab notebook solves this by providing a structu
 
 The Semiconductor Process Lab Notebook I published follows exactly this structure. Each page is laid out with the fields a process engineer actually needs. There is a section for recording equipment calibration status, which is easy to forget and crucial for interpreting results. There is a dedicated area for recording defects or anomalies. And crucially, there is a process summary section at the end of each experiment that asks you to record the key takeaway while it is still fresh, rather than hoping you remember it next week.
 
+![Sample filled-in process record showing the notebook format in use.](./p3.png)
+
 ## The Hidden Benefit
 
 There is a secondary benefit to a structured notebook that you do not appreciate until you have been using one for a while. It makes your experimental reports faster to write. When every parameter is recorded in a consistent location, compiling the data for a report is just transcription. You do not have to reconstruct the conditions from memory or dig through scattered notes.
@@ -39,5 +41,7 @@ There is a secondary benefit to a structured notebook that you do not appreciate
 This matters more than it sounds. Process engineers spend a surprising fraction of their time writing reports and documenting results for manufacturing transfer. A notebook that feeds directly into that documentation process reduces one of the least rewarding parts of the job.
 
 The notebook I designed is specifically built for semiconductor processing applications, with formats that cover deposition, lithography, etching, metrology, and packaging steps. If you work in a fab, a cleanroom, or a process development lab, it will save you time and protect you from the kind of mistakes that happen when your records are incomplete.
+
+![Blank semiconductor process record form with structured field layout.](./p4.png)
 
 > For the full format and structure designed for semiconductor process engineers, see [Semiconductor Process Lab Notebook on Amazon](https://www.amazon.com/dp/B0H8M1CGC4).

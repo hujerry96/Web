@@ -20,7 +20,9 @@ This is not an argument against visiting Kyoto. It is an argument against visiti
 
 ## The Timing Lever
 
-The single most effective strategy for enjoying Kyoto is not finding hidden spots. It is showing up at the right time. Kinkaku-ji (the Golden Pavilion) at 9 AM is a crowd. Kinkaku-ji at 7:30 AM is a different experience entirely. The temple opens at 7:00 during peak season. The visitors who arrive in the first thirty minutes get the reflective pond mostly to themselves. The same principle applies to the Arashiyama Bamboo Grove, which is genuinely peaceful at dawn and genuinely packed by 9:30.
+The single most effective strategy for enjoying Kyoto is not finding hidden spots. It is showing up at the right time. Kinkaku-ji (the Golden Pavilion) at 9 AM is a crowd. Kinkaku-ji at 7:30 AM is a different experience entirely.
+
+![Kinkaku-ji (Golden Pavilion) reflected in the surrounding pond at opening hour.](./p8.png) The temple opens at 7:00 during peak season. The visitors who arrive in the first thirty minutes get the reflective pond mostly to themselves. The same principle applies to the Arashiyama Bamboo Grove, which is genuinely peaceful at dawn and genuinely packed by 9:30.
 
 Reverse timing works for evening destinations. Yasaka Shrine and Maruyama Park are lovely during the day but transform at night when the lanterns come on and the crowds thin. Walking through Gion after 8 PM, when the day-trippers have left and the district returns to something closer to its real character, reveals a version of Kyoto most visitors never see.
 
@@ -30,7 +32,9 @@ The practical takeaway: plan each day around one major destination at opening ti
 
 The common mistake is building a Kyoto itinerary around a list of temples and shrines. Temples are wonderful, but traveling between them eats time and energy. A better approach is to pick a neighborhood for each day and explore what is there, letting the discoveries happen organically rather than ticking boxes.
 
-Higashiyama, the district between Kiyomizu-dera and Yasaka Shrine, is dense with smaller temples, pottery studios, and tea houses that do not appear in the top ten lists but offer a more intimate experience. Northern Kyoto, around Daitoku-ji and the Kamogawa River, has a quieter character with excellent temple gardens and fewer crowds. The area around the Imperial Palace is a grid of small galleries, craft shops, and restaurants that cater to locals rather than tourists.
+Higashiyama, the district between Kiyomizu-dera and Yasaka Shrine, is dense with smaller temples, pottery studios, and tea houses that do not appear in the top ten lists but offer a more intimate experience.
+
+![Kiyomizu-dera temple complex on the hillside in the Higashiyama district.](./p11.png) Northern Kyoto, around Daitoku-ji and the Kamogawa River, has a quieter character with excellent temple gardens and fewer crowds. The area around the Imperial Palace is a grid of small galleries, craft shops, and restaurants that cater to locals rather than tourists.
 
 Each neighborhood has its own rhythm. Spending a full afternoon in one area, with a loose plan and room to wander, produces more memorable experiences than rushing between five famous sites. This is especially true for the smaller temples, many of which have gardens that rival the famous ones but charge a fraction of the entrance fee and attract a fraction of the visitors.
 

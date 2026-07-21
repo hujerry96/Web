@@ -24,6 +24,8 @@ The second is that systems tend toward higher entropy. Entropy is often describe
 
 The third is that the balance between energy and entropy determines equilibrium. This is the Gibbs free energy, G = H minus TS. When free energy is minimized, the system is stable. A phase transformation happens when the free energy of the new phase becomes lower than that of the old phase. A reaction stops when the free energy of the mixture is at its minimum. Almost every problem in materials thermodynamics is, at its core, a question about which state has the lowest free energy under given conditions.
 
+![PV diagram of the Carnot cycle showing isothermal and adiabatic processes.](./p23.png)
+
 Everything else, the partial derivatives, the Maxwell relations, the activity coefficients, is a tool for calculating or measuring that free energy. The tools matter, but they make much more sense once the core idea is clear.
 
 ## Where Students Get Stuck
@@ -34,7 +36,9 @@ The first is phase diagrams and the lever rule. The lever rule is a simple geome
 
 The second is chemical potential and activity. Chemical potential is the partial molar Gibbs free energy. It tells you how the free energy of a system changes when you add a small amount of a component. Activity is a way of expressing chemical potential relative to a standard state. These concepts feel abstract until you recognize them as the thermodynamic driving force for diffusion and reaction. A component moves from where its chemical potential is high to where it is low. That is the entire mechanism.
 
-The third is the phase rule. The phase rule, F = C minus P plus 2, tells you how many variables you can independently control in a system at equilibrium. Students memorize it but do not internalize it. The phase rule is a powerful sanity check. If you are analyzing a binary phase diagram and your calculation claims you can vary both temperature and composition while keeping three phases in equilibrium, the phase rule tells you that is impossible. It catches mistakes before you commit to them.
+The third is the phase rule. The phase rule, F = C minus P plus 2, tells you how many variables you can independently control in a system at equilibrium.
+
+![One-component phase diagram showing solid-liquid-vapor equilibrium boundaries.](./p56.png) Students memorize it but do not internalize it. The phase rule is a powerful sanity check. If you are analyzing a binary phase diagram and your calculation claims you can vary both temperature and composition while keeping three phases in equilibrium, the phase rule tells you that is impossible. It catches mistakes before you commit to them.
 
 ## A Different Approach to Studying
 

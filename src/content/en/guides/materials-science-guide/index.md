@@ -28,7 +28,11 @@ This is the philosophy behind the study guide I wrote on this topic. Each chapte
 
 A standard materials science course covers five major areas. Crystal structures, including BCC, FCC, and HCP lattices, atomic packing factor, and Miller indices. Defects and diffusion, including vacancies, dislocations, grain boundaries, and Fick's first and second laws. Phase diagrams, including binary phase diagrams, the lever rule, and eutectic systems. Mechanical properties, including stress-strain behavior, hardness, fatigue, and fracture. And phase transformations, including nucleation, growth, and heat treatment.
 
-Within each area, a small number of concepts carry most of the exam weight. In crystal structures, if you understand how to calculate atomic packing factor and how to determine Miller indices, you cover most of what gets tested. In phase diagrams, the lever rule and eutectic reactions appear repeatedly. The trick is knowing which topics to prioritize and which to treat as secondary, which is exactly what a well-structured study guide provides.
+Within each area, a small number of concepts carry most of the exam weight. In crystal structures, if you understand how to calculate atomic packing factor and how to determine Miller indices, you cover most of what gets tested.
+
+![BCC, FCC, and HCP unit cell diagrams illustrating lattice parameter relationships.](./p26.png)
+
+In phase diagrams, the lever rule and eutectic reactions appear repeatedly. The trick is knowing which topics to prioritize and which to treat as secondary, which is exactly what a well-structured study guide provides.
 
 ## Active Recall as the Default
 
@@ -40,7 +44,9 @@ This feels harder than reading, which is why most students avoid it. The effort 
 
 The materials science study guide I put together follows this structure. Each chapter has a concept summary, a worked example, a set of practice problems with spaces to write solutions, and a self-check list. The goal is not to replace your textbook. It is to give you a focused, portable resource that you can work through in study sessions of any length.
 
-The guide emphasizes the topics that undergraduates consistently find most challenging. Phase diagram interpretation is a common stumbling block, and the guide includes multiple practice diagrams with step-by-step walkthroughs. Miller indices confuse many students, and the guide provides a systematic method for determining them that works every time. Diffusion calculations trip up students who are not comfortable with exponential functions, and the guide includes a math review section specifically for the equations that appear in materials science.
+The guide emphasizes the topics that undergraduates consistently find most challenging. Phase diagram interpretation is a common stumbling block, and the guide includes multiple practice diagrams with step-by-step walkthroughs.
+
+![Binary isomorphous phase diagram (Cu-Ni) with liquidus and solidus lines.](./p89.png) Miller indices confuse many students, and the guide provides a systematic method for determining them that works every time. Diffusion calculations trip up students who are not comfortable with exponential functions, and the guide includes a math review section specifically for the equations that appear in materials science.
 
 If you are taking a materials science course and finding that the textbook is too dense to learn from directly, the guide offers a parallel path. It covers the same material at the same depth, but the presentation is designed for retention rather than reference.
 

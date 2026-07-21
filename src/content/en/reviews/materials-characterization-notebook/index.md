@@ -36,8 +36,14 @@ Thermal analysis techniques like DSC and TGA produce curves with features that n
 
 The Materials Characterization Lab Notebook I published is built around the specific workflow of characterization work. Each entry starts with sample identification and preparation history, because those are the details most likely to be forgotten and most critical to interpretation. A dedicated instrument settings section covers the parameters for the most common characterization techniques: XRD, SEM, EDS, DSC, TGA, FTIR, and mechanical testing. There is a results summary section for recording key findings immediately, while the instrument is still running and the observations are fresh.
 
+![Sample filled-in characterization record showing XRD analysis entry.](./p3.png)
+
 There is also a section for cross-referencing. Characterization data is often used to explain processing outcomes, and the notebook provides space to link each characterization entry to the corresponding process notebook entry. This cross-link is what turns a collection of instrument files into a coherent experimental record.
 
-The book is not a guide to characterization techniques. It is a tool for organizing the data those techniques produce. If you have ever spent an afternoon hunting for the settings behind a measurement you took last month, you already know why this structure matters.
+The book is not a guide to characterization techniques. It is a tool for organizing the data those techniques produce.
+
+![Blank characterization record form with structured fields for sample info and instrument settings.](./p4.png)
+
+If you have ever spent an afternoon hunting for the settings behind a measurement you took last month, you already know why this structure matters.
 
 > For a full characterization notebook with structured pages for XRD, SEM, DSC, and more, see [Materials Characterization Lab Notebook on Amazon](https://www.amazon.com/dp/B0H8M556H3).
