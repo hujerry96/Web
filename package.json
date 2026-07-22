@@ -9,7 +9,8 @@
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
-    "ai": "node scripts/ai-generate.mjs"
+    "ai": "node scripts/ai-generate.mjs",
+    "publish": "node tools/publish.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.11",
