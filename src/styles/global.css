@@ -426,7 +426,7 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
 [data-zone="select"][data-theme='dark'] h2,
 [data-zone="select"][data-theme='dark'] h3,
 [data-zone="select"][data-theme='dark'] h4 {
-  color: #e8c87a;
+  color: #f2cf8b;
 }
 
 /* 閱讀進度條（固定於頂部） */
