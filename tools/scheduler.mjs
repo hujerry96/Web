@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const SCHEDULE_FILE = join(__dirname, 'publish-schedule.json');
-const CONTENT_DIR = join(ROOT, 'src', 'content', 'en');
+const CONTENT_DIR = join(ROOT, 'src', 'content', 'zh');
 
 function loadSchedule() {
   const raw = readFileSync(SCHEDULE_FILE, 'utf-8');
