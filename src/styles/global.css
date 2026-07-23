@@ -413,11 +413,17 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
   --color-border: #3d3424;
 }
 
-/* ── Select 品牌色（覆寫 Lab 的標題字重，稍粗更顯商品感） ── */
+/* ── Select 品牌色（覆寫 Lab 的標題） ── */
 [data-zone="select"] h1,
 [data-zone="select"] h2,
 [data-zone="select"] h3 {
   font-weight: 600;
+}
+[data-zone="select"][data-theme='dark'] h1,
+[data-zone="select"][data-theme='dark'] h2,
+[data-zone="select"][data-theme='dark'] h3,
+[data-zone="select"][data-theme='dark'] h4 {
+  color: #e8c87a;
 }
 
 /* 閱讀進度條（固定於頂部） */
