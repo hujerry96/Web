@@ -9,6 +9,7 @@ cover: ./materials-science-guide-cover.png
 category: 'guides'
 tags: ['KDP', 'Materials Science', 'Study Guide', 'Engineering']
 locale: 'en'
+brand: lab
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8TMBJ4T'

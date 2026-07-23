@@ -9,6 +9,8 @@ cover: ./ai-productivity-cover.png
 category: 'guides'
 tags: ['KDP', 'Productivity', 'AI', 'Knowledge Work']
 locale: 'en'
+brand: select
+selectCategory: finance-career
 draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6N4YY8K'

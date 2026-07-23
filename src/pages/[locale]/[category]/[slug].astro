@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 
 const { locale, category } = Astro.params as { locale: Locale; category: string };
 const { post } = Astro.props as { post: any };
-const zone = getContentZone(category);
+const zone = getContentZone(category, post.data.brand);
 const isSelect = zone === 'select';
 const t = useTranslations(locale);
 const { Content } = await render(post);
@@ -39,7 +39,7 @@ const breadcrumb = [
 
   <div class="article-layout">
     <div class="article-main">
-      {isSelect && <div class="zone-banner">{t('nav.select')}</div>}
+      {isSelect && <div class="zone-banner">{t('nav.select')}{post.data.selectCategory && <span class="zone-sub"> · {post.data.selectCategory}</span>}</div>}
       <h1>{post.data.title}</h1>
       <div class="post-meta">
         <span>{t('article.by')} {post.data.author}</span>
@@ -120,4 +120,5 @@ const breadcrumb = [
     color: var(--color-accent-deep, #8b3a20);
     margin-bottom: 0.75rem;
   }
+  .zone-sub { font-weight: 400; opacity: 0.8; }
 </style>

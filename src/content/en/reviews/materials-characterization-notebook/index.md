@@ -9,6 +9,7 @@ cover: ./materials-characterization-notebook-cover.png
 category: 'reviews'
 tags: ['KDP', 'Lab Notebook', 'Materials Characterization', 'Engineering']
 locale: 'en'
+brand: lab
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8M556H3'

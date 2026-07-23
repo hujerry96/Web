@@ -386,6 +386,20 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
   outline-offset: 2px;
 }
 
+/* ── Select 品牌色（覆寫 Lab 的暖羊皮紙為暖橘調） ── */
+[data-zone="select"] {
+  --color-accent: #c2712e;
+  --color-accent-deep: #9a5622;
+  --color-accent-soft: #f5e0c8;
+  --color-accent-bright: #d9894a;
+}
+[data-zone="select"][data-theme='dark'] {
+  --color-accent: #d99a66;
+  --color-accent-deep: #e8b88a;
+  --color-accent-soft: #2c1d12;
+  --color-accent-bright: #e0a878;
+}
+
 /* 閱讀進度條（固定於頂部） */
 .reading-progress {
   position: fixed;

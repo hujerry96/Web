@@ -27,7 +27,7 @@ const { title, description, path, post = null, type = post ? 'article' : 'websit
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
 const pathParts = path.split('/').filter(Boolean);
 const category = pathParts.length >= 2 ? pathParts[1] : '';
-const zone = getContentZone(category);
+const zone = getContentZone(category, post?.data?.brand);
 const t = useTranslations(locale);
 const url = `${SITE.url}${path}`;
 const canonical = buildCanonical(post, path);
@@ -130,14 +130,6 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       update();
     }
   </script>
-  <style>
-  /* ponytail: select zone 覆寫 accent 色，與 lab 視覺區隔 */
-  [data-zone="select"] {
-    --color-accent: #b8632e;
-    --color-accent-deep: #8b4513;
-    --color-accent-soft: #f5d6b8;
-  }
-</style>
 <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script is:inline>

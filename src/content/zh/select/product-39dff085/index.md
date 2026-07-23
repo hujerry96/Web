@@ -11,6 +11,8 @@ cover_alt: "手工皂"
 category: "select"
 tags: ["開箱推薦", "精選推薦"]
 locale: "zh"
+brand: select
+selectCategory: lifestyle
 draft: false
 affiliate:
   shopee: "https://s.shopee.tw/W5HmnyTF3"

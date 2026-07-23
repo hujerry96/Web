@@ -11,7 +11,7 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/free-resources`;
 const cats = SITE.categories[locale] as Record<string, string>;
-const freeOverrides: Record<string, string> = {
+const freeOverrides: Record<string, Record<string, string>> = {
   zh: { reviews: '工具', guides: '指南' },
   en: { reviews: 'Tools', guides: 'Guides' },
 };

@@ -9,6 +9,8 @@ cover: ./personal-finance-solopreneurs-cover.png
 category: 'guides'
 tags: ['KDP', 'Personal Finance', 'Solopreneur', 'Freelance']
 locale: 'en'
+brand: select
+selectCategory: finance-career
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6M6KVGL'

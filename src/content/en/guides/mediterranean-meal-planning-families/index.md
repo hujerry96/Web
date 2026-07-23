@@ -9,6 +9,8 @@ cover: ./mediterranean-meal-planning-cover.png
 category: 'guides'
 tags: ['KDP', 'Mediterranean Diet', 'Meal Planning', 'Family', 'Nutrition']
 locale: 'en'
+brand: select
+selectCategory: travel-food
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6NC92BH'

@@ -9,6 +9,8 @@ cover: ./sport-anatomy-coloring-book-cover.png
 category: 'journal'
 tags: ['KDP', 'Coloring Book', 'Sports Anatomy', 'Physiotherapy', 'Athletic Training']
 locale: 'en'
+brand: select
+selectCategory: lifestyle
 draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0GYWP33WH'

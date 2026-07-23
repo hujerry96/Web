@@ -9,6 +9,7 @@ cover: ./particle-analyzer-gui.png
 category: 'guides'
 tags: ['Python', 'SEM', '影像處理', '材料科學']
 locale: 'zh'
+brand: lab
 draft: false
 ---
 

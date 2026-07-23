@@ -10,6 +10,8 @@ cover: ./apple-airpods-pro-3.webp
 category: "select"
 tags: ["開箱推薦", "自訂"]
 locale: "zh"
+brand: select
+selectCategory: lifestyle
 draft: false
 affiliate:
   shopee: "https://s.shopee.tw/18z08CH2n"

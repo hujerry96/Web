@@ -9,6 +9,7 @@ cover: ./semiconductor-lab-notebook-cover.png
 category: 'reviews'
 tags: ['KDP', 'Lab Notebook', 'Semiconductor', 'Engineering']
 locale: 'en'
+brand: lab
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8M1CGC4'

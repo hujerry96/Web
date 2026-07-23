@@ -25,6 +25,8 @@ const post = defineCollection({
       cover: image().optional(),
       category: z.string(),
       tags: z.array(z.string()).default([]),
+      brand: z.enum(['lab', 'select']).default('lab'),
+      selectCategory: z.string().optional(),
       canonical: z.string().url().optional(),
       locale: z.enum(['zh', 'en']),
       draft: z.boolean().default(false),

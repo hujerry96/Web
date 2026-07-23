@@ -9,6 +9,7 @@ cover: ./materials-thermodynamics-notes-cover.png
 category: 'guides'
 tags: ['KDP', 'Thermodynamics', 'Materials Science', 'Engineering']
 locale: 'en'
+brand: lab
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H93B39Q8'

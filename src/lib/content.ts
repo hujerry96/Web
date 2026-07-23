@@ -15,7 +15,8 @@ export function readingTime(body: string, locale: Locale): string {
 }
 
 // 判斷內容所屬品牌區域
-export function getContentZone(category: string): 'lab' | 'select' {
+export function getContentZone(category: string, brand?: string): 'lab' | 'select' {
+  if (brand === 'select' || brand === 'lab') return brand;
   return category === 'select' ? 'select' : 'lab';
 }
 

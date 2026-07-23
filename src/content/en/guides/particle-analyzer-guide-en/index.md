@@ -9,6 +9,7 @@ cover: ./particle-analyzer-gui.png
 category: 'guides'
 tags: ['Python', 'SEM', 'Image Processing', 'Materials']
 locale: 'en'
+brand: lab
 draft: false
 ---
 

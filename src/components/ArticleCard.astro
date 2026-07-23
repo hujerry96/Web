@@ -9,7 +9,7 @@ interface Props { post: Post; locale: 'zh' | 'en'; }
 const { post, locale } = Astro.props;
 const t = useTranslations(locale);
 const { category } = parseId(post.id);
-const zone = getContentZone(category);
+const zone = getContentZone(category, post.data.brand);
 const href = postPath(post);
 const cover = post.data.cover;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;

@@ -9,6 +9,7 @@ cover: ./thesis-formatter-gui.png
 category: 'guides'
 tags: ['Python', 'Word', '論文', '自動化']
 locale: 'zh'
+brand: lab
 draft: false
 ---
 

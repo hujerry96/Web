@@ -9,6 +9,8 @@ cover: ./kyoto-travel-guide-cover.png
 category: 'guides'
 tags: ['KDP', 'Travel', 'Kyoto', 'Japan']
 locale: 'en'
+brand: select
+selectCategory: travel-food
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0GX2YCSN4'

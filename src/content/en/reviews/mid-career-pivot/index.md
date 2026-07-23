@@ -9,6 +9,8 @@ cover: ./mid-career-pivot-cover.png
 category: 'reviews'
 tags: ['KDP', 'Career', 'Tech', 'Pivot']
 locale: 'en'
+brand: select
+selectCategory: finance-career
 draft: true
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6NF1513'
