@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   const all = await getPosts();
   const locales = ['zh', 'en'] as Locale[];
   return locales.map((locale) => {
-    const posts = all.filter((p) => p.id.startsWith(`${locale}/`));
+    const posts = all.filter((p) => p.id.startsWith(`${locale}/`) && !p.id.startsWith(`${locale}/select/`));
     const counts: Record<string, number> = {};
     for (const p of posts) {
       const cat = p.id.split('/')[1];
