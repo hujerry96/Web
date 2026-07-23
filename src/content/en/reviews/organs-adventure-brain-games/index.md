@@ -9,7 +9,7 @@ cover: ./organs-adventure-cover.png
 category: 'reviews'
 tags: ['KDP', 'Puzzles', 'Brain Games', 'Cognitive Training']
 locale: 'en'
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8Q8H9LR'
 ---
