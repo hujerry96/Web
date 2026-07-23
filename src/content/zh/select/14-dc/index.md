@@ -7,7 +7,7 @@ author: "Jerry Hu"
 date: 2026-07-22
 updated: 2026-07-22
 cover: ./14-dc.webp
-category: "自訂"
+category: "select"
 tags: ["開箱推薦", "自訂"]
 locale: "zh"
 draft: false
