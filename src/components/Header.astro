@@ -4,8 +4,8 @@ import { useTranslations } from '../i18n/ui';
 import type { Locale } from '../i18n/config';
 import LangSwitch from './LangSwitch.astro';
 
-interface Props { path: string; locale: Locale; }
-const { path, locale } = Astro.props;
+interface Props { path: string; locale: Locale; zone?: 'lab' | 'select'; }
+const { path, locale, zone = 'lab' } = Astro.props;
 const t = useTranslations(locale);
 
 const allCats = SITE.categories[locale] as Record<string, string>;
@@ -25,9 +25,9 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>
     </button>
-    <a href={withBase(`/${locale}`)} class="brand">
-      <span class="brand-name">{SITE.name}</span>
-      <span class="brand-sub">{SITE.author}</span>
+    <a href={withBase(zone === 'select' ? `/${locale}/select` : `/${locale}`)} class="brand">
+      <span class="brand-name">{zone === 'select' ? 'Hu · Select' : SITE.name}</span>
+      <span class="brand-sub">{zone === 'select' ? t('nav.select') : SITE.author}</span>
     </a>
     <div class="header-actions">
       <a class="header-search" href={withBase(`/${locale}/search`)} aria-label={t('nav.search')} title={t('nav.search')}>🔍</a>
