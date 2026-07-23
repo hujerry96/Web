@@ -37,11 +37,13 @@ export const SITE = {
       reviews: '實測',
       guides: '指南',
       journal: '手記',
+      select: '精選推薦',
     },
     en: {
       reviews: 'Reviews',
       guides: 'Guides',
       journal: 'Journal',
+      select: 'Select',
     },
   },
   // 作者/社群資料（最後由站長自行填入；空值時元件隱藏對應入口）

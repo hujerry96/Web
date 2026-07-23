@@ -1,17 +1,21 @@
 ---
 import type { Post } from '../lib/content';
-import { parseId, postPath } from '../lib/content';
+import { parseId, postPath, getContentZone } from '../lib/content';
 import { SITE } from '../consts';
+import { useTranslations } from '../i18n/ui';
 import { Image } from 'astro:assets';
 
 interface Props { post: Post; locale: 'zh' | 'en'; }
 const { post, locale } = Astro.props;
+const t = useTranslations(locale);
 const { category } = parseId(post.id);
+const zone = getContentZone(category);
 const href = postPath(post);
 const cover = post.data.cover;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
+const isSelect = zone === 'select';
 ---
-<article class="card">
+<article class:list={['card', isSelect && 'card-select']}>
   <a href={href} class="card-link">
     {cover ? (
       <Image src={cover} alt={post.data.title} width={640} height={360} class="thumb" loading="lazy" />
@@ -19,7 +23,7 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
       <div class="thumb thumb-empty"><span>{catName}</span></div>
     )}
   <div class="card-body">
-    <span class="cat">{catName}</span>
+    <span class="cat">{catName}{isSelect && <span class="badge">{t('nav.select')}</span>}</span>
     <h3 class="title serif-display">{post.data.title}</h3>
     <p class="desc serif-body">{post.data.description}</p>
     <time datetime={post.data.date.toISOString()}>
@@ -95,4 +99,19 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
     color: var(--color-text-faint);
     letter-spacing: 0.03em;
   }
+  .badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 6px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent-soft, #f0b8a0);
+    color: var(--color-accent-deep, #8b3a20);
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+  .card-select { border-color: var(--color-accent-soft, #f0b8a0); }
+  .card-select .cat { color: var(--color-accent-deep, #8b3a20); border-bottom-color: var(--color-accent-soft); }
 </style>

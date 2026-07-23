@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import { getPosts, getRelated, parseId, postSlug, readingTime, extractHeadings } from '../../../lib/content';
+import { getPosts, getRelated, parseId, postSlug, readingTime, extractHeadings, getContentZone } from '../../../lib/content';
 import { render } from 'astro:content';
 import { useTranslations } from '../../../i18n/ui';
 import { SITE, type Locale } from '../../../consts';
@@ -19,6 +19,8 @@ export async function getStaticPaths() {
 
 const { locale, category } = Astro.params as { locale: Locale; category: string };
 const { post } = Astro.props as { post: any };
+const zone = getContentZone(category);
+const isSelect = zone === 'select';
 const t = useTranslations(locale);
 const { Content } = await render(post);
 const catName =
@@ -37,6 +39,7 @@ const breadcrumb = [
 
   <div class="article-layout">
     <div class="article-main">
+      {isSelect && <div class="zone-banner">{t('nav.select')}</div>}
       <h1>{post.data.title}</h1>
       <div class="post-meta">
         <span>{t('article.by')} {post.data.author}</span>
@@ -104,4 +107,17 @@ const breadcrumb = [
   }
   .aff { margin: 1rem 0; }
   .aff a { font-weight: 600; }
+  .zone-banner {
+    display: inline-block;
+    font-family: var(--font-serif-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: var(--radius-sm);
+    background: var(--color-accent-soft, #f0b8a0);
+    color: var(--color-accent-deep, #8b3a20);
+    margin-bottom: 0.75rem;
+  }
 </style>

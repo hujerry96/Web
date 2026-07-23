@@ -9,7 +9,9 @@ const { path, locale } = Astro.props;
 const t = useTranslations(locale);
 
 const allCats = SITE.categories[locale] as Record<string, string>;
-const nav = Object.keys(allCats).map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
+// ponytail: select 從 categories 拆出顯示為獨立區塊，用 key 名篩選
+const labNav = Object.keys(allCats).filter((k) => k !== 'select').map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
+const selectNav = allCats.select ? { href: `/${locale}/select`, key: 'nav.select' as Parameters<typeof t>[0] } : null;
 const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   { href: `/${locale}/free-resources`, key: 'nav.free' },
   { href: `/${locale}/about`, key: 'nav.about' },
@@ -36,9 +38,10 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
     </div>
   </div>
   <nav class="container header-nav" aria-label="primary">
-    {nav.map((item) => (
+    {labNav.map((item) => (
       <a href={withBase(item.href)}>{t(item.key)}</a>
     ))}
+    {selectNav && <><span class="nav-slash" aria-hidden="true">·</span><a href={withBase(selectNav.href)} class="select-link">{t(selectNav.key)}</a></>}
     <span class="nav-slash" aria-hidden="true">·</span>
     {staticLinks.map((item) => (
       <a href={withBase(item.href)} class="muted-link">{t(item.key)}</a>
@@ -160,6 +163,12 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   .header-nav a:hover { color: var(--color-accent); border-bottom-color: var(--color-accent); }
   .header-nav .muted-link { color: var(--color-text-muted); font-weight: 400; }
   .header-nav .muted-link:hover { color: var(--color-accent); }
+  .header-nav .select-link {
+    font-weight: 600;
+    color: var(--color-accent-deep, #8b3a20);
+    letter-spacing: 0.06em;
+  }
+  .header-nav .select-link:hover { color: var(--color-accent); }
   .nav-slash {
     font-family: var(--font-serif-body);
     font-size: 0.7rem;
