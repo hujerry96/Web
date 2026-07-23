@@ -386,18 +386,33 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
   outline-offset: 2px;
 }
 
-/* ── Select 品牌色（覆寫 Lab 的暖羊皮紙為暖橘調） ── */
+/* ── Select 品牌色（覆寫 Lab 的暖羊皮紙為冷墨綠－赭橘區隔） ── */
 [data-zone="select"] {
-  --color-accent: #c2712e;
-  --color-accent-deep: #9a5622;
-  --color-accent-soft: #f5e0c8;
-  --color-accent-bright: #d9894a;
+  --color-accent: #b8860b;
+  --color-accent-deep: #8b6508;
+  --color-accent-soft: #f5edc8;
+  --color-accent-bright: #d4a017;
+  --color-bg: #f7f6f0;
+  --color-surface: #fcfbf7;
+  --color-bg-deep: #f2efe6;
+  --color-border: #d9ceb8;
 }
 [data-zone="select"][data-theme='dark'] {
-  --color-accent: #d99a66;
-  --color-accent-deep: #e8b88a;
-  --color-accent-soft: #2c1d12;
-  --color-accent-bright: #e0a878;
+  --color-accent: #d4a017;
+  --color-accent-deep: #e0b84c;
+  --color-accent-soft: #2c2210;
+  --color-accent-bright: #c8981a;
+  --color-bg: #1c1a16;
+  --color-surface: #26231c;
+  --color-bg-deep: #14120f;
+  --color-border: #3d3424;
+}
+
+/* ── Select 品牌色（覆寫 Lab 的標題字重，稍粗更顯商品感） ── */
+[data-zone="select"] h1,
+[data-zone="select"] h2,
+[data-zone="select"] h3 {
+  font-weight: 600;
 }
 
 /* 閱讀進度條（固定於頂部） */
