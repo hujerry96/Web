@@ -402,6 +402,9 @@ h4 { font-size: var(--text-lg); margin: var(--space-5) 0 var(--space-2); }
   --color-bg-deep: #f2efe6;
   --color-border: #d9ceb8;
 }
+[data-zone="select"] h1,
+[data-zone="select"] h2,
+[data-zone="select"] h3 { color: #6b4e08; }
 [data-zone="select"][data-theme='dark'] {
   --color-accent: #d4a017;
   --color-accent-deep: #e0b84c;
