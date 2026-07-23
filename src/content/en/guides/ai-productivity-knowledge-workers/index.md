@@ -9,7 +9,7 @@ cover: ./ai-productivity-cover.png
 category: 'guides'
 tags: ['KDP', 'Productivity', 'AI', 'Knowledge Work']
 locale: 'en'
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6N4YY8K'
 ---
