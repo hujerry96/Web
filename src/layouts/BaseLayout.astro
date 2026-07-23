@@ -27,7 +27,7 @@ const { title, description, path, post = null, type = post ? 'article' : 'websit
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
 const pathParts = path.split('/').filter(Boolean);
 const category = pathParts.length >= 2 ? pathParts[1] : '';
-const zone = getContentZone(category, post?.data?.brand);
+const zone = category ? getContentZone(category, post?.data?.brand) : 'lab';
 const t = useTranslations(locale);
 const url = `${SITE.url}${path}`;
 const canonical = buildCanonical(post, path);
