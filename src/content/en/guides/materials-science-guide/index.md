@@ -1,4 +1,4 @@
----
+﻿---
 title: 'How to Study Materials Science Without Drowning in Derivations'
 slug: 'materials-science-guide'
 description: 'Materials science textbooks bury you in math before you grasp the concepts. Here is a different approach, using active recall and structured notes to learn crystal structures, phase diagrams, and mechanical properties.'
@@ -10,7 +10,7 @@ category: 'guides'
 tags: ['KDP', 'Materials Science', 'Study Guide', 'Engineering']
 locale: 'en'
 brand: lab
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8TMBJ4T'
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Why Your Solo Business Needs Different Money Rules'
 slug: 'personal-finance-solopreneurs'
 description: 'Personal finance advice for employees does not work for solopreneurs. Here is why the rules are different, and how to build a financial system that matches irregular income.'

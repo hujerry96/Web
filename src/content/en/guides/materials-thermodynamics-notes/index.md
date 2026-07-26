@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Why Thermodynamics Feels Harder Than It Is'
 slug: 'materials-thermodynamics-notes'
 description: 'Materials thermodynamics intimidates engineering students more than it should. The key is separating the conceptual core (free energy, equilibrium, phase stability) from the mathematical machinery used to calculate them.'
@@ -10,7 +10,7 @@ category: 'guides'
 tags: ['KDP', 'Thermodynamics', 'Materials Science', 'Engineering']
 locale: 'en'
 brand: lab
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H93B39Q8'
 ---

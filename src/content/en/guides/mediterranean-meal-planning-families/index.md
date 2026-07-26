@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Why Mediterranean Cooking Actually Works for Busy Families'
 slug: 'mediterranean-meal-planning-families'
 description: 'The Mediterranean diet is consistently rated the worlds best diet. But can a family with picky eaters and tight schedules actually follow it? Yes, and here is how the planning works.'
@@ -11,7 +11,7 @@ tags: ['KDP', 'Mediterranean Diet', 'Meal Planning', 'Family', 'Nutrition']
 locale: 'en'
 brand: select
 selectCategory: travel-food
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6NC92BH'
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Keeping a Lab Notebook That Actually Helps in Semiconductor Processing'
 slug: 'semiconductor-lab-notebook'
 description: 'A review of why a structured lab notebook matters more in semiconductor processing than in most other engineering disciplines, and how the right notebook format saves time and prevents costly mistakes.'
@@ -10,7 +10,7 @@ category: 'reviews'
 tags: ['KDP', 'Lab Notebook', 'Semiconductor', 'Engineering']
 locale: 'en'
 brand: lab
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8M1CGC4'
 ---

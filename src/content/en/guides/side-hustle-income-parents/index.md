@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Extra Income When Parenting Leaves No Free Time'
 slug: 'side-hustle-income-parents'
 description: 'Side hustles for parents face a constraint most guides ignore: you have limited time and it is not predictable. Here is a framework for income streams that work around parenting, not against it.'
@@ -11,7 +11,7 @@ tags: ['KDP', 'Side Hustle', 'Parenting', 'Income']
 locale: 'en'
 brand: select
 selectCategory: finance-career
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6NGXD4Z'
 ---

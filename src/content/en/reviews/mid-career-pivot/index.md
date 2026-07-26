@@ -1,4 +1,4 @@
----
+﻿---
 title: 'The Tech Career Pivot That Actually Works'
 slug: 'mid-career-pivot'
 description: 'A review of the transition many tech workers face in their 30s and 40s. Not a crisis, but a real question about what comes next, and how to answer it without starting over.'
@@ -11,7 +11,7 @@ tags: ['KDP', 'Career', 'Tech', 'Pivot']
 locale: 'en'
 brand: select
 selectCategory: finance-career
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H6NF1513'
 ---

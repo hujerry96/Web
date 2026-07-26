@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Kyoto Without the Tourist Script'
 slug: 'kyoto-travel-guide'
 description: 'Most Kyoto guides send you to the same crowded spots. Here is a different approach to visiting Kyoto that focuses on timing, neighborhoods, and the experiences that reward the independent traveler.'
@@ -11,7 +11,7 @@ tags: ['KDP', 'Travel', 'Kyoto', 'Japan']
 locale: 'en'
 brand: select
 selectCategory: travel-food
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0GX2YCSN4'
 ---

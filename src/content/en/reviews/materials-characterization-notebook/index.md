@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Why Your Characterization Data Needs a Better Home Than Scattered Files'
 slug: 'materials-characterization-notebook'
 description: 'XRD patterns, SEM images, DSC curves, and TGA data are only useful if you can find them later. A structured characterization lab notebook bridges the gap between instrument output and meaningful analysis.'
@@ -10,7 +10,7 @@ category: 'reviews'
 tags: ['KDP', 'Lab Notebook', 'Materials Characterization', 'Engineering']
 locale: 'en'
 brand: lab
-draft: true
+draft: false
 affiliate:
   amazon: 'https://www.amazon.com/dp/B0H8M556H3'
 ---
