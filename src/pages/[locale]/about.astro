@@ -13,18 +13,18 @@ const path = `/${locale}/about`;
 ---
 <BaseLayout title={`${t('nav.about')} | ${SITE.name}`} description={t('page.aboutDesc', { name: SITE.name, author: SITE.author })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.about'), url: path }]} />
-  <article class="prose about">
-    <div class="about-head">
+  <article class="prose">
+    <div class="flex items-center gap-6 mb-8">
       {SITE.avatar
-        ? <img class="avatar" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
-        : <div class="avatar avatar--empty" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>}
+        ? <img class="w-24 h-24 rounded-full object-cover border-2 border-lab-accent shrink-0" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
+        : <div class="w-24 h-24 rounded-full flex items-center justify-center bg-lab-accent-soft text-lab-accent-deep font-serif text-3xl font-medium shrink-0" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>}
       <div>
-        <h1>{SITE.author}</h1>
-        <p class="muted serif-body role">{t('page.aboutRole')}</p>
+        <h1 class="m-0 text-[clamp(1.6rem,1rem+2vw,2.2rem)]">{SITE.author}</h1>
+        <p class="text-lab-text-muted mt-1 mb-0 text-[0.95rem]">{t('page.aboutRole')}</p>
       </div>
     </div>
 
-    <p class="lead serif-body">{t('page.aboutLead', { name: SITE.name })}</p>
+    <p class="text-[1.1rem] text-lab-text-secondary">{t('page.aboutLead', { name: SITE.name })}</p>
 
     <h2>{t('page.aboutWhyTitle')}</h2>
     <p>{t('page.aboutWhy1')}</p>
@@ -41,42 +41,3 @@ const path = `/${locale}/about`;
     <p set:html={t('page.aboutContact', { email: SITE.email })} />
   </article>
 </BaseLayout>
-
-<style>
-  .about-head {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .avatar {
-    width: 96px;
-    height: 96px;
-    border-radius: var(--radius-full);
-    object-fit: cover;
-    border: 2px solid var(--color-accent);
-    flex-shrink: 0;
-  }
-  .avatar--empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-accent-soft);
-    color: var(--color-accent-deep);
-    font-family: var(--font-serif-display);
-    font-size: 2rem;
-    font-weight: 500;
-  }
-  .about-head h1 { margin: 0; font-size: clamp(1.6rem, 1rem + 2vw, 2.2rem); }
-  .role { margin: 0.3rem 0 0; font-size: 0.95rem; }
-  .lead { font-size: 1.1rem; color: var(--color-text-secondary); }
-  .about .lead::first-letter {
-    font-family: var(--font-serif-display);
-    font-size: 2.6em;
-    line-height: 0.8;
-    float: left;
-    padding: 0.05em 0.12em 0 0;
-    color: var(--color-accent);
-    font-weight: 500;
-  }
-</style>

@@ -10,44 +10,10 @@ const desc = locale === 'zh' ? '你找的頁面可能已經移動或不存在。
 const btn = locale === 'zh' ? '回到首頁 →' : 'Back to home →';
 ---
 <BaseLayout title={`404 — ${SITE.name}`} description={desc} path={path}>
-  <section class="notfound">
-    <span class="kicker">404</span>
-    <h1 class="serif-display">{title}</h1>
-    <p class="muted serif-body">{desc}</p>
-    <a class="btn" href={home}>{btn}</a>
+  <section class="text-center py-[clamp(4rem,10vw,8rem)] max-w-[36rem] mx-auto">
+    <span class="inline-block font-serif text-[0.74rem] font-medium tracking-[0.28em] uppercase text-lab-accent">404</span>
+    <h1 class="font-serif text-[clamp(2rem,1rem+4vw,3.5rem)] font-medium mt-4 mb-4">{title}</h1>
+    <p class="text-lab-text-muted">{desc}</p>
+    <a class="inline-block mt-6 bg-lab-accent text-[#fbf8f1] no-underline font-serif font-medium text-[0.98rem] tracking-wide py-2.5 px-7 rounded-full border border-lab-accent-deep transition-all duration-[180ms] hover:bg-lab-accent-deep hover:-translate-y-0.5 hover:shadow-lg" href={home}>{btn}</a>
   </section>
 </BaseLayout>
-
-<style>
-  .notfound {
-    text-align: center;
-    padding: clamp(4rem, 10vw, 8rem) 0;
-    max-width: 36rem;
-    margin: 0 auto;
-  }
-  .notfound h1 {
-    font-size: clamp(2rem, 1rem + 4vw, 3.5rem);
-    font-weight: 500;
-    margin: 1rem 0 1rem;
-  }
-  .btn {
-    display: inline-block;
-    margin-top: 1.5rem;
-    background: var(--color-accent);
-    color: #fbf8f1;
-    text-decoration: none;
-    font-family: var(--font-serif-body);
-    font-weight: 500;
-    font-size: 0.98rem;
-    letter-spacing: 0.04em;
-    padding: 0.7rem 1.8rem;
-    border-radius: var(--radius-full);
-    border: 1px solid var(--color-accent-deep);
-    transition: background 0.18s var(--ease), transform 0.18s var(--ease), box-shadow 0.18s var(--ease);
-  }
-  .btn:hover {
-    background: var(--color-accent-deep);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-</style>

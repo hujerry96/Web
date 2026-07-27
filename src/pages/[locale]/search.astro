@@ -14,21 +14,21 @@ const searchIndexUrl = withBase('/search-index.json');
 ---
 <BaseLayout title={`${t('nav.search')} | ${SITE.name}`} description={t('page.searchDesc', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.search'), url: path }]} />
-  <h1>{t('nav.search')}</h1>
+  <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)]">{t('nav.search')}</h1>
 
-  <div class="search-box">
+  <div class="my-4 mb-12">
     <input
       type="search"
       id="q"
-      class="search-input"
+      class="w-full font-serif text-[1.1rem] py-3 px-4 border border-border rounded-[10px] bg-lab-surface text-lab-text transition-all duration-150 focus:outline-none focus:border-lab-accent focus:shadow-[0_0_0_3px_var(--color-lab-accent-soft)]"
       placeholder={t('search.placeholder')}
       autocomplete="off"
       aria-label={t('nav.search')}
       data-index={searchIndexUrl}
     />
-    <p class="search-count muted" id="count"></p>
-    <ul class="search-results" id="results"></ul>
-    <p class="search-empty muted" id="empty" hidden>沒有找到結果。</p>
+    <p class="text-[0.85rem] text-lab-text-muted mt-3 mb-0" id="count"></p>
+    <ul class="list-none p-0 m-0 flex flex-col gap-3 mt-4" id="results"></ul>
+    <p class="text-lab-text-muted" id="empty" hidden>沒有找到結果。</p>
   </div>
 </BaseLayout>
 
@@ -63,47 +63,10 @@ const searchIndexUrl = withBase('/search-index.json');
     results.innerHTML = hits
       .map(
         (p) =>
-          `<li class="search-item"><a href="${p.url}"><span class="search-cat">${p.category}</span><span class="search-title">${p.title}</span><span class="search-desc">${p.description}</span></a></li>`
+          `<li><a href="${p.url}" class="flex flex-col gap-0.5 no-underline p-4 border border-border rounded-[10px] bg-lab-surface transition-all duration-150 hover:border-lab-accent hover:shadow-md"><span class="text-[0.7rem] tracking-[0.16em] uppercase text-lab-accent">${p.category}</span><span class="font-serif text-[1.1rem] text-lab-text font-medium">${p.title}</span><span class="text-[0.88rem] text-lab-text-muted">${p.description}</span></a></li>`
       )
       .join('');
   }
 
   input?.addEventListener('input', (e) => render((e.target as HTMLInputElement).value));
 </script>
-
-<style>
-  .search-box { margin: 1rem 0 3rem; }
-  .search-input {
-    width: 100%;
-    font-family: var(--font-serif-body);
-    font-size: 1.1rem;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text);
-    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
-  }
-  .search-input:focus {
-    outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px var(--color-accent-soft);
-  }
-  .search-count { font-size: 0.85rem; margin: 0.8rem 0; }
-  .search-results { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
-  .search-item a {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    text-decoration: none;
-    padding: 1rem 1.1rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
-  }
-  .search-item a:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); }
-  .search-cat { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-accent); }
-  .search-title { font-family: var(--font-serif-display); font-size: 1.1rem; color: var(--color-text); font-weight: 500; }
-  .search-desc { font-size: 0.88rem; color: var(--color-text-muted); }
-</style>

@@ -25,51 +25,21 @@ const freeCats = Object.fromEntries(
 ---
 <BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={t('page.freeDescTitle', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
-  <h1>{t('nav.free')}</h1>
+  <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)] m-0 mb-4">{t('nav.free')}</h1>
   <article class="prose">
-    <p class="serif-body">{t('page.freeDesc')}</p>
+    <p>{t('page.freeDesc')}</p>
   </article>
 
-  <div class="res-grid">
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-4 my-8">
     {Object.entries(freeCats).map(([key, name]) => (
-      <a class="res-card" href={`/${locale}/${key}`}>
-        <span class="res-cat">{name}</span>
-        <span class="res-arrow" aria-hidden="true">→</span>
+      <a class="relative flex items-center justify-between no-underline p-5 border border-border rounded-[10px] bg-lab-surface font-serif text-[1.2rem] font-medium text-lab-text transition-all duration-150 hover:border-lab-accent hover:shadow-md hover:-translate-y-0.5 group" href={`/${locale}/${key}`}>
+        <span>{name}</span>
+        <span class="text-lab-accent opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0" aria-hidden="true">→</span>
       </a>
     ))}
-    <a class="res-card" href={toolsPath}>
-      <span class="res-cat">{t('nav.tools')}</span>
-      <span class="res-arrow" aria-hidden="true">→</span>
+    <a class="relative flex items-center justify-between no-underline p-5 border border-border rounded-[10px] bg-lab-surface font-serif text-[1.2rem] font-medium text-lab-text transition-all duration-150 hover:border-lab-accent hover:shadow-md hover:-translate-y-0.5 group" href={toolsPath}>
+      <span>{t('nav.tools')}</span>
+      <span class="text-lab-accent opacity-0 -translate-x-1 transition-all duration-150 group-hover:opacity-100 group-hover:translate-x-0" aria-hidden="true">→</span>
     </a>
   </div>
 </BaseLayout>
-
-<style>
-  .res-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-  .res-card {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-    padding: 1.4rem 1.3rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    color: var(--color-text);
-    font-family: var(--font-serif-display);
-    font-size: 1.2rem;
-    font-weight: 500;
-    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
-  }
-  .res-card:hover { border-color: var(--color-accent); box-shadow: var(--shadow-md); transform: translateY(-3px); }
-  h1 { font-size: clamp(1.8rem, 1rem + 3vw, 2.6rem); margin: 0 0 var(--space-4); }
-  .res-cat { color: var(--color-text); }
-  .res-arrow { color: var(--color-accent); opacity: 0; transform: translateX(-4px); transition: opacity var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease); }
-  .res-card:hover .res-arrow { opacity: 1; transform: translateX(0); }
-</style>

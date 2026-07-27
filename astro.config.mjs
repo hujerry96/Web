@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // GitHub Pages 設定：
 // - User page (https://<user>.github.io)：base 留 '/'
 // - Project page (https://<user>.github.io/<repo>)：base 改 '/<repo>'
@@ -11,6 +13,7 @@ export default defineConfig({
   base: GITHUB_PAGES_BASE,
   output: 'static',
   trailingSlash: 'ignore',
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],
@@ -18,5 +21,9 @@ export default defineConfig({
       prefixDefaultLocale: true,
       redirectToDefaultLocale: false,
     },
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

@@ -46,26 +46,30 @@ const tools = [
 ---
 <BaseLayout title={`${t('nav.tools')} | ${SITE.name}`} description={t('page.toolsDesc', { name: SITE.name })} path={path}>
   <Breadcrumb locale={locale} items={[{ name: t('nav.tools'), url: path }]} />
-  <h1>{t('nav.tools')}</h1>
+  <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)] m-0 mb-4">{t('nav.tools')}</h1>
   <article class="prose">
-    <p class="serif-body">{t('page.toolsDesc')}</p>
+    <p>{t('page.toolsDesc')}</p>
   </article>
 
-  <div class="tool-grid">
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,340px),1fr))] gap-6 my-8">
     {tools.map((tool) => (
-      <section class="tool-card">
-        <div class="tool-thumb"><span>{tool.tag}</span></div>
-        <div class="tool-body">
-          <h2>{tool.name}</h2>
-          <p class="tool-desc serif-body">{tool.desc}</p>
-          <ul class="tool-points">
-            {tool.points.map((p) => <li>{p}</li>)}
+      <section class="border border-border rounded-[10px] bg-lab-surface overflow-hidden shadow-sm transition-all duration-150 hover:border-lab-accent hover:shadow-md hover:-translate-y-0.5">
+        <div class="h-[150px] flex items-center justify-center bg-gradient-to-br from-lab-accent-soft to-lab-surface text-lab-accent-deep font-serif font-medium text-lg tracking-wide">
+          <span>{tool.tag}</span>
+        </div>
+        <div class="p-5">
+          <h2 class="text-[1.35rem] m-0 mb-2.5">{tool.name}</h2>
+          <p class="text-lab-text-muted m-0 mb-3.5">{tool.desc}</p>
+          <ul class="list-none p-0 m-0 mb-4 grid gap-1.5">
+            {tool.points.map((p) => (
+              <li class="relative pl-[1.1rem] text-[0.92rem] text-lab-text-secondary before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-lab-accent">{p}</li>
+            ))}
           </ul>
-          <div class="tool-meta">
-            <span class="tool-lang">{tool.lang}</span>
-            <span class="tool-links">
-              <a class="tool-link" href={withBase(tool.guide)}>{locale === 'zh' ? '使用指南 →' : 'Guide →'}</a>
-              <a class="tool-link" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub →' : 'GitHub →'}</a>
+          <div class="flex items-center justify-between border-t border-border pt-4">
+            <span class="font-serif text-[0.78rem] text-lab-text-muted tracking-wide">{tool.lang}</span>
+            <span class="flex gap-4 flex-wrap">
+              <a class="font-semibold text-lab-accent no-underline hover:underline" href={withBase(tool.guide)}>{locale === 'zh' ? '使用指南 →' : 'Guide →'}</a>
+              <a class="font-semibold text-lab-accent no-underline hover:underline" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub →' : 'GitHub →'}</a>
             </span>
           </div>
         </div>
@@ -73,90 +77,3 @@ const tools = [
     ))}
   </div>
 </BaseLayout>
-
-<style>
-  .tool-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-  }
-  .tool-card {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
-  }
-  .tool-card:hover {
-    border-color: var(--color-accent);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-3px);
-  }
-  .tool-thumb {
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background:
-      repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(156,59,46,0.05) 12px, rgba(156,59,46,0.05) 13px),
-      linear-gradient(135deg, var(--color-accent-soft), var(--color-surface));
-    color: var(--color-accent-deep);
-    font-family: var(--font-serif-display);
-    font-weight: 500;
-    font-size: 1.15rem;
-    letter-spacing: 0.04em;
-  }
-  .tool-body { padding: 1.2rem 1.3rem 1.4rem; }
-  .tool-body h2 { font-size: 1.35rem; margin: 0 0 0.6rem; }
-  .tool-desc { color: var(--color-text-muted); margin: 0 0 0.9rem; }
-  .tool-points {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.1rem;
-    display: grid;
-    gap: 0.4rem;
-  }
-  .tool-points li {
-    position: relative;
-    padding-left: 1.1rem;
-    font-size: 0.92rem;
-    color: var(--color-text-secondary);
-  }
-  .tool-points li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-accent);
-  }
-  .tool-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
-  }
-  .tool-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .tool-lang {
-    font-family: var(--font-serif-body);
-    font-size: 0.78rem;
-    color: var(--color-text-faint);
-    letter-spacing: 0.03em;
-  }
-  .tool-link {
-    font-weight: 600;
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-  .tool-link:hover { text-decoration: underline; }
-  h1 { font-size: clamp(1.8rem, 1rem + 3vw, 2.6rem); margin: 0 0 var(--space-4); }
-</style>

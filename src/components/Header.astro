@@ -9,7 +9,6 @@ const { path, locale, zone = 'lab' } = Astro.props;
 const t = useTranslations(locale);
 
 const allCats = SITE.categories[locale] as Record<string, string>;
-// ponytail: select 從 categories 拆出顯示為獨立區塊，用 key 名篩選
 const labNav = Object.keys(allCats).filter((k) => k !== 'select').map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
 const selectNav = allCats.select ? { href: `/${locale}/select`, key: 'nav.select' as Parameters<typeof t>[0] } : null;
 const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
@@ -18,33 +17,39 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   { href: `/${locale}/contact`, key: 'nav.contact' },
 ];
 ---
-<header class="site-header" id="site-header">
-  <div class="container header-top">
-    <button class="hamburger" id="hamburger" aria-label={t('nav.home')}>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
+<header class="sticky top-0 z-50 border-b border-border bg-lab-bg/80 backdrop-blur-md backdrop-saturate-150" id="site-header">
+  <div class="mx-auto flex max-w-4xl items-center justify-between px-5 h-13">
+    <button class="hamburger flex h-10 w-10 items-center justify-center border-none bg-transparent cursor-pointer text-lab-text" id="hamburger" aria-label={t('nav.home')}>
+      <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250"></span>
+      <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250 mt-[5px]"></span>
+      <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250 mt-[5px]"></span>
     </button>
-    <a href={withBase(zone === 'select' ? `/${locale}/select` : `/${locale}`)} class="brand">
-      <span class="brand-name">{zone === 'select' ? 'Hu · Select' : SITE.name}</span>
-      <span class="brand-sub">{zone === 'select' ? t('nav.select') : SITE.author}</span>
+    <a href={withBase(zone === 'select' ? `/${locale}/select` : `/${locale}`)} class="flex flex-col leading-none no-underline text-lab-text">
+      <span class="font-serif whitespace-nowrap font-medium text-xl tracking-[0.14em] uppercase">{zone === 'select' ? 'Hu · Select' : SITE.name}</span>
+      <span class="font-serif text-[0.6rem] tracking-[0.22em] text-lab-text-muted mt-[3px] font-normal">{zone === 'select' ? t('nav.select') : SITE.author}</span>
     </a>
-    <div class="header-actions">
-      <a class="header-search" href={withBase(`/${locale}/search`)} aria-label={t('nav.search')} title={t('nav.search')}>🔍</a>
-      <button class="theme-toggle" id="theme-toggle" aria-label={t('a11y.theme')} title={t('a11y.theme')}>
-        <span class="tt-icon" aria-hidden="true">🌙</span>
+    <div class="flex items-center gap-2">
+      <a class="flex h-9 w-9 items-center justify-center rounded-full text-lab-text-muted no-underline transition-colors duration-150 hover:bg-lab-accent-soft hover:text-lab-accent" href={withBase(`/${locale}/search`)} aria-label={t('nav.search')} title={t('nav.search')}>🔍</a>
+
+      <button class="theme-toggle flex h-9 w-9 border-none bg-transparent cursor-pointer p-0 rounded-full items-center justify-center text-lab-text-muted transition-all duration-150 hover:bg-lab-accent-soft hover:text-lab-accent hover:-rotate-15" id="theme-toggle" aria-label={t('a11y.theme')} title={t('a11y.theme')}>
+        <span class="tt-icon inline-block leading-none" aria-hidden="true">🌙</span>
       </button>
       <LangSwitch path={path} locale={locale} />
     </div>
   </div>
-  <nav class="container header-nav" aria-label="primary">
+  <nav class="mx-auto flex max-w-4xl items-center gap-4 px-5 pb-2.5 pt-1 flex-wrap" aria-label="primary">
     {labNav.map((item) => (
-      <a href={withBase(item.href)}>{t(item.key)}</a>
+      <a href={withBase(item.href)} class="font-serif text-lab-text-secondary no-underline text-sm font-medium tracking-wide pb-0.5 border-b border-transparent transition-colors duration-150 hover:text-lab-accent hover:border-lab-accent">{t(item.key)}</a>
     ))}
-    {selectNav && <><span class="nav-slash" aria-hidden="true">·</span><a href={withBase(selectNav.href)} class="select-link">{t(selectNav.key)}</a></>}
-    <span class="nav-slash" aria-hidden="true">·</span>
+    {selectNav ? (
+      <>
+        <span class="text-[0.7rem] text-lab-text-muted tracking-wide font-serif" aria-hidden="true">·</span>
+        <a href={withBase(selectNav.href)} class="font-serif font-semibold text-lab-accent-deep tracking-wider">{t(selectNav.key)}</a>
+      </>
+    ) : null}
+    <span class="text-[0.7rem] text-lab-text-muted tracking-wide font-serif" aria-hidden="true">·</span>
     {staticLinks.map((item) => (
-      <a href={withBase(item.href)} class="muted-link">{t(item.key)}</a>
+      <a href={withBase(item.href)} class="font-serif text-lab-text-muted no-underline text-sm font-normal transition-colors duration-150 hover:text-lab-accent">{t(item.key)}</a>
     ))}
   </nav>
 </header>
@@ -56,7 +61,7 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
     hamburger.addEventListener('click', () => {
       header.classList.toggle('nav-open');
     });
-    header.querySelectorAll('.header-nav a').forEach((link) => {
+    header.querySelectorAll('nav a').forEach((link) => {
       link.addEventListener('click', () => {
         header.classList.remove('nav-open');
       });
@@ -65,159 +70,24 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
 </script>
 
 <style>
-  .site-header {
-    border-bottom: 1px solid var(--color-border);
-    background: rgba(244, 239, 230, 0.85);
-    position: sticky;
-    top: 0;
-    z-index: var(--z-sticky);
-    backdrop-filter: saturate(180%) blur(8px);
-  }
-  .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 52px;
-  }
-  .brand {
-    font-family: var(--font-serif-display);
-    font-weight: 500;
-    font-size: 1.2rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-text);
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.05;
-  }
-  .brand-name { white-space: nowrap; }
-  .brand-sub {
-    font-family: var(--font-serif-body);
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    text-transform: none;
-    color: var(--color-text-faint);
-    margin-top: 3px;
-    font-weight: 400;
-  }
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-  }
-  .header-search {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
-    transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
-  }
-  .header-search:hover { background: var(--color-accent-soft); color: var(--color-accent); }
-  .theme-toggle {
-    width: 36px;
-    height: 36px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0;
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
-    color: var(--color-text-muted);
-  }
-  .theme-toggle:hover {
-    background: var(--color-accent-soft);
-    color: var(--color-accent);
-    transform: rotate(-15deg);
-  }
-  .tt-icon { display: inline-block; line-height: 1; }
-
-  /* ── 下層 nav：連結 ── */
-  .header-nav {
-    display: flex;
-    align-items: center;
-    gap: 1.1rem;
-    padding: 4px 0 10px;
-    flex-wrap: wrap;
-  }
-  .header-nav a {
-    font-family: var(--font-serif-body);
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    font-size: 0.84rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    padding: 2px 0;
-    border-bottom: 1px solid transparent;
-    transition: color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
-  }
-  .header-nav a:hover { color: var(--color-accent); border-bottom-color: var(--color-accent); }
-  .header-nav .muted-link { color: var(--color-text-muted); font-weight: 400; }
-  .header-nav .muted-link:hover { color: var(--color-accent); }
-  .header-nav .select-link {
-    font-weight: 600;
-    color: var(--color-accent-deep, #8b3a20);
-    letter-spacing: 0.06em;
-  }
-  .header-nav .select-link:hover { color: var(--color-accent); }
-  .nav-slash {
-    font-family: var(--font-serif-body);
-    font-size: 0.7rem;
-    color: var(--color-text-faint);
-    margin: 0 0.1rem;
-    letter-spacing: 0.04em;
-  }
-
-  /* ── 行動版 ── */
-  .hamburger { display: none; }
-
+  .hamburger-line + .hamburger-line { margin-top: 5px; }
+  .nav-open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-open .hamburger-line:nth-child(2) { opacity: 0; }
+  .nav-open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   @media (max-width: 640px) {
-    .hamburger {
-      display: block;
-      width: 40px;
-      height: 40px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      padding: var(--space-3);
-      position: relative;
-      z-index: var(--z-sticky);
-      color: var(--color-text);
-      margin-left: -8px;
-    }
-    .hamburger-line {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: currentColor;
-      border-radius: 2px;
-      transition: transform var(--duration-normal) var(--ease),
-        opacity var(--duration-fast) var(--ease);
-    }
-    .hamburger-line + .hamburger-line { margin-top: 5px; }
-    .nav-open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-open .hamburger-line:nth-child(2) { opacity: 0; }
-    .nav-open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .header-nav {
+    .hamburger { display: flex !important; margin-left: -8px; }
+    header nav {
       display: none;
       flex-direction: column;
       align-items: flex-start;
-      gap: var(--space-2);
-      padding: var(--space-4) 0 var(--space-5);
+      gap: 0.5rem;
+      padding: 1rem 0 1.25rem;
       border-top: 1px solid var(--color-border);
     }
-    .nav-open .header-nav { display: flex; }
-    .nav-flourish, .nav-slash { display: none; }
-    .header-nav a { font-size: var(--text-base); }
+    .nav-open nav { display: flex; }
+    header nav a { font-size: 1rem; }
+  }
+  @media (min-width: 641px) {
+    .hamburger { display: none !important; }
   }
 </style>

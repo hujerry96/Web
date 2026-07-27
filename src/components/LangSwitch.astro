@@ -7,41 +7,15 @@ interface Props { path: string; locale: Locale; }
 const { path, locale } = Astro.props;
 
 function switchPath(target: Locale): string {
-  // 中英內容各自獨立，切換語言直接跳該語系首頁
   return withBase(`/${target}`);
 }
 const others = LOCALES.filter((l) => l !== locale);
 const flag: Record<Locale, string> = { zh: '🇹🇼', en: '🇺🇸' };
 ---
-<div class="lang-switch">
-  <span class="current" aria-current="true">{flag[locale]}</span>
-  <span class="sep" aria-hidden="true">·</span>
+<div class="inline-flex items-center gap-[0.2rem] text-[0.85rem] leading-none font-serif">
+  <span aria-current="true" class="cursor-default drop-shadow-[0_0_1px_rgba(0,0,0,0.1)]">{flag[locale]}</span>
+  <span class="text-lab-text-muted text-[0.7rem]" aria-hidden="true">·</span>
   {others.map((l) => (
-    <a href={switchPath(l)} hreflang={l === 'en' ? 'en-US' : 'zh-TW'}>{flag[l]}</a>
+    <a href={switchPath(l)} hreflang={l === 'en' ? 'en-US' : 'zh-TW'} class="no-underline opacity-55 transition-opacity duration-150 hover:opacity-100">{flag[l]}</a>
   ))}
 </div>
-
-<style>
-  .lang-switch {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.2rem;
-    font-size: 0.85rem;
-    line-height: 1;
-    font-family: var(--font-serif-body);
-  }
-  .current {
-    cursor: default;
-    filter: drop-shadow(0 0 1px rgba(0,0,0,0.1));
-  }
-  .sep {
-    color: var(--color-text-faint);
-    font-size: 0.7rem;
-  }
-  .lang-switch a {
-    text-decoration: none;
-    opacity: 0.55;
-    transition: opacity var(--duration-fast) var(--ease);
-  }
-  .lang-switch a:hover { opacity: 1; }
-</style>
