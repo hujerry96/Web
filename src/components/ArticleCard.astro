@@ -15,7 +15,7 @@ const cover = post.data.cover;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 const isSelect = zone === 'select';
 ---
-<article class:list={['group border border-border rounded-[10px] overflow-hidden bg-lab-surface h-full shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-lab-accent hover:shadow-lg', isSelect && 'border-lab-accent-soft']}>
+<article class:list={['group border border-border bg-lab-surface h-full transition-all duration-200 hover:border-lab-accent', isSelect && 'border-lab-accent-soft']}>
   <a href={href} class="block text-inherit no-underline">
     {cover ? (
       <Image src={cover} alt={post.data.title} width={640} height={360} class="w-full h-auto aspect-video object-cover block" loading="lazy" />
