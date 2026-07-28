@@ -8,13 +8,13 @@ const { items, locale } = Astro.props;
 const t = useTranslations(locale);
 const trail = [{ name: t('breadcrumb.home'), url: withBase(`/${locale}`) }, ...items];
 ---
-<nav class="text-[0.82rem] text-[var(--color-term-text-muted)] mb-5 flex flex-wrap gap-1.5" aria-label="breadcrumb">
+<nav class="text-[0.82rem] text-[var(--color-text-secondary)] mb-6 flex flex-wrap gap-1.5" aria-label="breadcrumb">
   {trail.map((item, i) => (
-    <span>
-      {i > 0 && <span class="mx-1.5 opacity-50">/</span>}
+    <span class="flex items-center gap-1.5">
+      {i > 0 && <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="opacity-30"><path d="M4.5 2.5l3.5 3.5-3.5 3.5"/></svg>}
       {i === trail.length - 1
-        ? <span class="text-[var(--color-term-text)]">{item.name}</span>
-        : <a href={item.url} class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-text)]">{item.name}</a>}
+        ? <span class="text-[var(--color-text)] font-medium">{item.name}</span>
+        : <a href={item.url} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200">{item.name}</a>}
     </span>
   ))}
 </nav>

@@ -13,24 +13,48 @@ const path = `/${locale}/search`;
 const searchIndexUrl = withBase('/search-index.json');
 ---
 <BaseLayout title={`${t('nav.search')} | ${SITE.name}`} description={t('page.searchDesc', { name: SITE.name })} path={path}>
-  <Breadcrumb locale={locale} items={[{ name: t('nav.search'), url: path }]} />
-  <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)]">{t('nav.search')}</h1>
+  <section class="py-8 max-w-3xl mx-auto">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.search'), url: path }]} />
+    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-6 reveal">{t('nav.search')}</h1>
 
-  <div class="my-4 mb-12">
-    <input
-      type="search"
-      id="q"
-      class="w-full text-[1.1rem] py-3 px-4 border border-[var(--color-border)] bg-[var(--color-term-surface)] text-[var(--color-term-text)] transition-all duration-150 focus:outline-none focus:border-[var(--color-term-accent)]"
-      placeholder={t('search.placeholder')}
-      autocomplete="off"
-      aria-label={t('nav.search')}
-      data-index={searchIndexUrl}
-    />
-    <p class="text-[0.85rem] text-[var(--color-term-text-muted)] mt-3 mb-0" id="count"></p>
-    <ul class="list-none p-0 m-0 flex flex-col gap-3 mt-4" id="results"></ul>
-    <p class="text-[var(--color-term-text-muted)]" id="empty" hidden>沒有找到結果。</p>
-  </div>
+    <div class="mb-12 reveal reveal-delay-1">
+      <input
+        type="search"
+        id="q"
+        class="search-input"
+        placeholder={t('search.placeholder')}
+        autocomplete="off"
+        aria-label={t('nav.search')}
+        data-index={searchIndexUrl}
+      />
+      <p class="text-[0.85rem] text-[var(--color-text-secondary)] mt-3 mb-0" id="count"></p>
+      <ul class="list-none p-0 m-0 flex flex-col gap-3 mt-5" id="results"></ul>
+      <p class="text-[var(--color-text-secondary)]" id="empty" hidden>沒有找到結果。</p>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .search-input {
+    width: 100%;
+    font-size: 1.05rem;
+    font-family: var(--font-body);
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-muted);
+  }
+  .search-input::placeholder {
+    color: var(--color-text-tertiary);
+  }
+</style>
 
 <script>
   const input = document.getElementById('q') as HTMLInputElement;
@@ -63,10 +87,29 @@ const searchIndexUrl = withBase('/search-index.json');
     results.innerHTML = hits
       .map(
         (p) =>
-          `<li><a href="${p.url}" class="flex flex-col gap-0.5 no-underline p-4 border border-[var(--color-border)] bg-[var(--color-term-surface)] transition-all duration-150 hover:border-[var(--color-term-accent)]"><span class="text-[0.7rem] tracking-[0.16em] uppercase text-[var(--color-term-accent)]">${p.category}</span><span class="text-[1.1rem] text-[var(--color-term-text)] font-medium">${p.title}</span><span class="text-[0.88rem] text-[var(--color-term-text-muted)]">${p.description}</span></a></li>`
+          `<li><a href="${p.url}" class="search-result"><span class="text-[0.7rem] font-medium tracking-[0.08em] uppercase text-[var(--color-accent)]">${p.category}</span><span class="text-[1.05rem] text-[var(--color-text)] font-medium">${p.title}</span><span class="text-[0.88rem] text-[var(--color-text-secondary)]">${p.description}</span></a></li>`
       )
       .join('');
   }
 
   input?.addEventListener('input', (e) => render((e.target as HTMLInputElement).value));
 </script>
+
+<style is:global>
+  .search-result {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    text-decoration: none;
+    transition: border-color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  .search-result:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px -4px var(--color-accent-glow);
+  }
+</style>

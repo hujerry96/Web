@@ -12,32 +12,35 @@ const t = useTranslations(locale);
 const path = `/${locale}/about`;
 ---
 <BaseLayout title={`${t('nav.about')} | ${SITE.name}`} description={t('page.aboutDesc', { name: SITE.name, author: SITE.author })} path={path}>
-  <Breadcrumb locale={locale} items={[{ name: t('nav.about'), url: path }]} />
-  <article class="prose">
-    <div class="flex items-center gap-6 mb-8">
-      {SITE.avatar
-        ? <img class="w-24 h-24 object-cover border-2 border-[var(--color-term-accent)] shrink-0" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
-        : <div class="w-24 h-24 flex items-center justify-center bg-[var(--color-term-accent-bg)] text-[var(--color-term-accent)] text-3xl font-medium shrink-0" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>}
-      <div>
-        <h1 class="m-0 text-[clamp(1.6rem,1rem+2vw,2.2rem)]">{SITE.author}</h1>
-        <p class="text-[var(--color-term-text-muted)] mt-1 mb-0 text-[0.95rem]">{t('page.aboutRole')}</p>
+  <section class="py-8 max-w-3xl mx-auto">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.about'), url: path }]} />
+    <article class="prose">
+      <div class="flex items-center gap-6 mb-10 reveal">
+        {SITE.avatar
+          ? <img class="w-20 h-20 object-cover rounded-2xl border-2 border-[var(--color-accent)] shrink-0" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
+          : <div class="w-20 h-20 flex items-center justify-center rounded-2xl bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-2xl font-display font-semibold shrink-0" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>
+        }
+        <div>
+          <h1 class="m-0 text-[clamp(1.6rem,1rem+2vw,2.2rem)]">{SITE.author}</h1>
+          <p class="text-[var(--color-text-secondary)] mt-1 mb-0 text-[0.95rem]">{t('page.aboutRole')}</p>
+        </div>
       </div>
-    </div>
 
-    <p class="text-[1.1rem] text-[var(--color-term-text)]">{t('page.aboutLead', { name: SITE.name })}</p>
+      <p class="text-[1.1rem] text-[var(--color-text)] reveal reveal-delay-1">{t('page.aboutLead', { name: SITE.name })}</p>
 
-    <h2>{t('page.aboutWhyTitle')}</h2>
-    <p>{t('page.aboutWhy1')}</p>
-    <p>{t('page.aboutWhy2')}</p>
+      <h2 class="reveal reveal-delay-2">{t('page.aboutWhyTitle')}</h2>
+      <p class="reveal reveal-delay-2">{t('page.aboutWhy1')}</p>
+      <p class="reveal reveal-delay-3">{t('page.aboutWhy2')}</p>
 
-    <h2>{t('page.aboutTopicsTitle')}</h2>
-    <ul>
-      <li set:html={t('page.aboutTopic1')} />
-      <li set:html={t('page.aboutTopic2')} />
-      <li set:html={t('page.aboutTopic3')} />
-    </ul>
+      <h2 class="reveal">{t('page.aboutTopicsTitle')}</h2>
+      <ul class="reveal reveal-delay-1">
+        <li set:html={t('page.aboutTopic1')} />
+        <li set:html={t('page.aboutTopic2')} />
+        <li set:html={t('page.aboutTopic3')} />
+      </ul>
 
-    <h2>{t('page.aboutContactTitle')}</h2>
-    <p set:html={t('page.aboutContact', { email: SITE.email })} />
-  </article>
+      <h2 class="reveal">{t('page.aboutContactTitle')}</h2>
+      <p class="reveal reveal-delay-1" set:html={t('page.aboutContact', { email: SITE.email })} />
+    </article>
+  </section>
 </BaseLayout>

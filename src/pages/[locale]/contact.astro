@@ -13,28 +13,49 @@ const path = `/${locale}/contact`;
 const social = SITE.social as Record<string, string>;
 ---
 <BaseLayout title={`${t('nav.contact')} | ${SITE.name}`} description={t('page.contactDesc', { name: SITE.name })} path={path}>
-  <Breadcrumb locale={locale} items={[{ name: t('nav.contact'), url: path }]} />
-  <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)] m-0 mb-4">{t('nav.contact')}</h1>
-  <article class="prose">
-    <p>{t('page.contactLead')}</p>
+  <section class="py-8 max-w-3xl mx-auto">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.contact'), url: path }]} />
+    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-4 reveal">{t('nav.contact')}</h1>
+    <article class="prose reveal reveal-delay-1">
+      <p>{t('page.contactLead')}</p>
+    </article>
 
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,240px),1fr))] gap-4 my-8">
-      <a class="flex flex-col gap-1.5 no-underline p-[1.1rem_1.2rem] border border-border bg-[var(--color-term-surface)] transition-all duration-150 hover:border-[var(--color-term-accent)]" href={`mailto:${SITE.email}`}>
-        <span class="text-[0.72rem] tracking-[0.16em] uppercase text-[var(--color-term-accent)]">{t('contact.email')}</span>
-        <span class="text-[var(--color-term-text)] text-[0.95rem] break-all">{SITE.email}</span>
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,260px),1fr))] gap-4 my-8 reveal reveal-delay-2">
+      <a class="contact-card" href={`mailto:${SITE.email}`}>
+        <span class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-[var(--color-accent)]">{t('contact.email')}</span>
+        <span class="text-[var(--color-text)] text-[0.95rem] break-all">{SITE.email}</span>
       </a>
       {social.github && (
-        <a class="flex flex-col gap-1.5 no-underline p-[1.1rem_1.2rem] border border-border bg-[var(--color-term-surface)] transition-all duration-150 hover:border-[var(--color-term-accent)]" href={social.github} rel="me">
-          <span class="text-[0.72rem] tracking-[0.16em] uppercase text-[var(--color-term-accent)]">GitHub</span>
-          <span class="text-[var(--color-term-text)] text-[0.95rem] break-all">{social.github}</span>
+        <a class="contact-card" href={social.github} rel="me">
+          <span class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-[var(--color-accent)]">GitHub</span>
+          <span class="text-[var(--color-text)] text-[0.95rem] break-all">{social.github}</span>
         </a>
       )}
       {social.x && (
-        <a class="flex flex-col gap-1.5 no-underline p-[1.1rem_1.2rem] border border-border bg-[var(--color-term-surface)] transition-all duration-150 hover:border-[var(--color-term-accent)]" href={social.x} rel="me">
-          <span class="text-[0.72rem] tracking-[0.16em] uppercase text-[var(--color-term-accent)]">X</span>
-          <span class="text-[var(--color-term-text)] text-[0.95rem] break-all">{social.x}</span>
+        <a class="contact-card" href={social.x} rel="me">
+          <span class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-[var(--color-accent)]">X</span>
+          <span class="text-[var(--color-text)] text-[0.95rem] break-all">{social.x}</span>
         </a>
       )}
     </div>
-  </article>
+  </section>
 </BaseLayout>
+
+<style>
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    text-decoration: none;
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease), transform 200ms var(--ease);
+  }
+  .contact-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px -4px var(--color-accent-glow);
+  }
+</style>

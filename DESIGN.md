@@ -4,55 +4,62 @@
 
 ## Direction Contract
 
-**THESIS:** Hu Lab and Hu Select share one terminal. The category default makes a personal tech site a template blog or generic storefront. This design refuses both: the site is a phosphor terminal in a midnight machine room. Lab is P1 green — reading is typing at the terminal. Select is amber — shopping is the warm glow of another machine in the same dark room. Light mode is the same room by day: the teletype paper output tray, the fanfold roll, softer and cleaner.
+**THESIS:** Hu Lab and Hu Select are two shelves in one refined personal library. The old terminal theme made reading feel like decoding machine output. This redesign replaces it with a modern editorial dark — generous whitespace, clear hierarchy, subtle depth, and purposeful motion. The site should feel like opening a beautifully typeset book in a quiet room, not sitting at a glowing terminal.
 
-**OWN-WORLD:** Near-black ground (#0f0e0c), P1 green (#00ff41) for Lab accent, amber (#ff9500) for Select accent. One monospaced face carries the entire interface (JetBrains Mono). Content reads on a fixed-width column. The cursor blinks at the bottom of every page. No rounded corners, no shadows, no images that pretend to be UI. Every element is output from a machine that has been running the whole time.
+**OWN-WORLD:** Cool near-black ground (#0c0c0e), deep indigo-blue accent (#6c8cff) for Lab, warm copper (#e8a87c) for Select. Display type in Space Grotesk, body in Inter. Rounded corners (10-12px), soft layered shadows, frosted glass header on scroll. Every surface has subtle depth through elevation layers, not hard borders. Light mode is warm paper (#f6f4f0) with the same accent system.
 
-**STORY:** The visitor walks into a dim machine room. One terminal glows green — the library. Another glows amber — the shop. They sit, type, read. Content arrives as output in the scrolling transcript. The machine has been writing things worth reading; the visitor is just catching up on the session.
+**STORY:** The visitor enters a well-lit personal library. The Lab section is a cool-toned reading room with deep blue accents. The Select section is a warm-toned display shelf with copper highlights. Both share the same refined architecture — clean lines, generous spacing, smooth transitions. The content is the artifact; the interface recedes.
 
-**FIRST VIEWPORT (Lab):** Near-black ground. At the top, a file header: "HU LAB / Ideas & Tools" — small, tracked, uppercase, monospace. A prompt line: the site subtitle as a `cat` output. Then the article listing as a `ls` directory. Below the fold, the featured article renders as the first content block. A blinking cursor at the bottom of the viewport, always ready.
+**FIRST VIEWPORT (Lab):** Cool near-black ground. At top, a frosted glass sticky header with the site name in Space Grotesk and clean navigation. Below, a generous hero: "Hu Lab" in large display type, a one-line description in muted text, and rounded-pill category filters. The featured article is a large two-column card with image zoom on hover. Below, a responsive grid of article cards with elevation and soft glow on hover.
 
-**SIGNATURE INTERACTION:** The cursor blinks. On the homepage, type to filter articles — a terminal filter over the transcript. Every page is a session that starts with a prompt and ends with the cursor waiting for the next command.
+**SIGNATURE INTERACTION:** Scroll-triggered reveal animations — elements fade up as they enter the viewport. Cards lift with a subtle glow on hover. The header transitions from transparent to frosted glass as the user scrolls. Every interaction is smooth and purposeful, never distracting.
 
-**FORM:** Assigned index 5 (grounded) fused with challenger 4 (phosphor terminal). Roll key a6c52c38. Read mode for Lab, Persuade mode for Select.
+**FORM:** Refined dark editorial. Read mode for Lab, Persuade mode for Select. The form was chosen to maximize reading comfort and visual hierarchy while maintaining the personal, non-corporate feel of a one-person site.
 
 ## Global System
 
 ### Lab (dark — primary)
-- bg: #0f0e0c | surface: #1a1916 | text: #e8e4dc | text-muted: #6b6860
-- accent: #00ff41 | accent-dim: #00aa2a | accent-bg: #003a11
-- selection: #00ff4120
+- bg: #0c0c0e | surface: #141418 | surface-raised: #1c1c22
+- text: #eae8e4 | text-secondary: #7a7880 | text-tertiary: #504e56
+- accent: #6c8cff | accent-dim: #4a6adf | accent-muted: rgba(108,140,255,0.08) | accent-glow: rgba(108,140,255,0.15)
+- border: #26262e | border-subtle: #1e1e24 | border-hover: #363640
+- selection: rgba(108,140,255,0.2)
 
-### Lab (light — teletype paper)
-- bg: #f5f0e8 | surface: #fcfaf5 | text: #1a1815 | text-muted: #7a756a
-- accent: #007a1a | accent-dim: #005512 | accent-bg: #dff0df
+### Lab (light — warm paper)
+- bg: #f6f4f0 | surface: #ffffff | surface-raised: #faf9f7
+- text: #1a1a1f | text-secondary: #6b6870 | text-tertiary: #9a979e
+- accent: #3d5ccc | accent-dim: #2d4ab8 | accent-muted: rgba(61,92,204,0.06) | accent-glow: rgba(61,92,204,0.1)
+- border: #e2e0dc | border-subtle: #ece9e4 | border-hover: #ccc8c0
+- selection: rgba(61,92,204,0.15)
 
-### Select (dark — amber machine)
-- bg: #0f0e0c | surface: #1a1916 | text: #e8e4dc | text-muted: #6b6860
-- accent: #ff9500 | accent-dim: #cc7700 | accent-bg: #3a2500
+### Select (dark — copper machine)
+- accent: #e8a87c | accent-dim: #d4946a | accent-muted: rgba(232,168,124,0.08) | accent-glow: rgba(232,168,124,0.15)
+- Inherits all other colors from Lab dark.
 
 ### Select (light — paper)
-- bg: #f5f0e8 | surface: #fcfaf5 | text: #1a1815 | text-muted: #7a756a
-- accent: #aa6600 | accent-dim: #884d00 | accent-bg: #f0e4d0
+- accent: #b87530 | accent-dim: #9a5f20 | accent-muted: rgba(184,117,48,0.06) | accent-glow: rgba(184,117,48,0.1)
+- Inherits all other colors from Lab light.
 
 ### Typography
-- interface: 'JetBrains Mono', 'Noto Sans TC', ui-monospace, monospace
-- body (Lab article): 'JetBrains Mono', 'Noto Sans TC', ui-monospace, monospace
-- body (Select article): 'Inter', 'Noto Sans TC', sans-serif
-- code: 'JetBrains Mono', ui-monospace, monospace
-- body measure: 72ch | heading letter-spacing: -0.02em
-- scale: 0.75rem / 0.875rem / 1rem / 1.25rem / 1.5rem / 2rem / 2.5rem
-- labels: 0.72rem, letter-spacing 0.08em, uppercase
+- display: 'Space Grotesk', 'Noto Sans TC', system-ui, sans-serif
+- body: 'Inter', 'Noto Sans TC', system-ui, sans-serif
+- code: 'JetBrains Mono', 'Noto Sans TC', ui-monospace, monospace
+- body measure: 72ch | heading letter-spacing: -0.025em
+- headings: font-weight 600 | line-height 1.2
+- labels: 0.72rem, font-medium, letter-spacing 0.08-0.12em, uppercase
 
 ### Components
-- Header: terminal prompt line. No logo, no brand mark — just text: `$ cd ~/hu-lab` style path. Thin bottom border (1px solid accent).
-- Featured card: terminal output block with a thin left border (1px accent). No image chrome — flat image or no image.
-- Cards: single border line, no border-radius. Hover turns cursor to text-select.
-- Article content: monospace body for Lab, sans-serif body for Select. Code blocks in terminal green-on-black.
-- Buttons: terminal-style command labels. Flat, no bg fill — just a `$ command` prompt.
-- Footer: terminal session end marker: `^D  │  session closed` with timestamp.
+- Header: sticky, frosted glass on scroll (backdrop-filter: blur(16px) saturate(1.2)). Site name in Space Grotesk. Clean nav links with rounded hover states. Icon buttons for search/theme. Mobile hamburger menu with slide-down panel.
+- Featured card: large two-column grid (1.2fr 1fr), 14px border-radius, image zoom on hover, soft glow shadow on hover state.
+- Cards: 12px border-radius, subtle border, elevation via surface color. Hover: translateY(-4px), accent border, glow shadow, image scale(1.04).
+- Article content: Inter body, 1rem/1.75, max-width 72ch. Prose h2 has subtle bottom border. Code blocks in dark bg with rounded corners. Blockquotes with accent left border and muted bg.
+- Buttons: rounded-full pills for category filters. Icon buttons with 8px border-radius. CTA buttons with rounded-lg and hover glow.
+- Footer: clean three-column grid, subtle social icon buttons, minimal border-top.
 
 ### Motion
-- Cursor: CSS blink at 1s interval, always visible at bottom of content area.
-- Articles fade in with a CRT scan-line glow effect (mask-image gradient).
-- Reduce motion: cursor stops blinking, transitions become instant.
+- Scroll reveal: elements start at opacity 0, translateY(24px), transition to visible on IntersectionObserver. Staggered delays for grouped elements (80ms increments).
+- Card hover: 280ms ease transform + shadow + border. Image zoom 500-600ms ease.
+- Header: 300ms transition from transparent to frosted glass.
+- Back to top: 44px rounded button, appears after 400px scroll, smooth fade-in.
+- Reading progress: 2px gradient bar at top, scales with scroll position.
+- Reduce motion: all reveals snap to visible, transitions disabled, scroll-behavior auto.

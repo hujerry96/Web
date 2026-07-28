@@ -15,24 +15,62 @@ const cover = post.data.cover;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 const isSelect = zone === 'select';
 ---
-<article class="border border-[var(--color-border)] bg-[var(--color-term-surface)] h-full hover:border-[var(--color-term-accent)] transition-colors duration-150 grid grid-rows-[auto_1fr]">
+<article class="article-card group">
   <a href={href} class="block text-inherit no-underline">
-    {cover ? (
-      <Image src={cover} alt={post.data.title} width={640} height={360} class="w-full h-auto aspect-video object-cover block" loading="lazy" />
-    ) : (
-      <div class="w-full aspect-video flex items-center justify-center bg-[var(--color-term-accent-bg)] text-[var(--color-term-accent-dim)] text-sm tracking-wide">
-        <span>{catName}</span>
+    <div class="article-card__image">
+      {cover ? (
+        <Image src={cover} alt={post.data.title} width={640} height={360} class="w-full h-full object-cover" loading="lazy" />
+      ) : (
+        <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm tracking-wide">
+          <span>{catName}</span>
+        </div>
+      )}
+    </div>
+    <div class="article-card__body">
+      <div class="flex items-center gap-2 mb-2">
+        <span class:list={[
+          'text-[0.7rem] font-medium uppercase tracking-[0.08em]',
+          isSelect ? 'text-[var(--color-select-accent)]' : 'text-[var(--color-accent)]'
+        ]}>{catName}</span>
+        {isSelect && <span class="text-[0.6rem] px-1.5 py-0.5 rounded-full bg-[var(--color-select-muted)] text-[var(--color-select-accent)]">{t('nav.select')}</span>}
       </div>
-    )}
-    <div class="p-[1rem_1rem_1.15rem] border-t border-[var(--color-border)]">
-      <span class="text-[0.7rem] text-[var(--color-term-accent)] uppercase tracking-[0.12em]">
-        {catName}{isSelect && <span class="ml-1.5 px-1 text-[0.6rem] border border-[var(--color-sel-accent-bg)] text-[var(--color-sel-accent-dim)] align-middle">{t('nav.select')}</span>}
-      </span>
-      <h3 class="text-[1rem] mt-2 mb-1.5 leading-snug font-medium">{post.data.title}</h3>
-      <p class="text-[0.82rem] text-[var(--color-term-text-muted)] m-0 mb-2 line-clamp-2">{post.data.description}</p>
-      <time datetime={post.data.date.toISOString()} class="text-[0.75rem] text-[var(--color-term-text-muted)] tracking-wide">
+      <h3 class="text-[1rem] font-display font-semibold leading-snug mb-1.5 group-hover:text-[var(--color-accent)] transition-colors duration-200">{post.data.title}</h3>
+      <p class="text-[0.85rem] text-[var(--color-text-secondary)] m-0 mb-3 line-clamp-2 leading-relaxed">{post.data.description}</p>
+      <time datetime={post.data.date.toISOString()} class="text-[0.75rem] text-[var(--color-text-tertiary)]">
         {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}
       </time>
     </div>
   </a>
 </article>
+
+<style>
+  .article-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 280ms var(--ease), border-color 280ms var(--ease), box-shadow 280ms var(--ease);
+  }
+  .article-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 30px -8px var(--color-accent-glow), 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .article-card__image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--color-surface-raised);
+  }
+  .article-card__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms var(--ease);
+  }
+  .article-card:hover .article-card__image :global(img) {
+    transform: scale(1.04);
+  }
+  .article-card__body {
+    padding: 1rem 1.15rem 1.25rem;
+  }
+</style>

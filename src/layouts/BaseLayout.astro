@@ -47,11 +47,10 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
     <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale]} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}
-    <!-- Terminal direction: JetBrains Mono + Noto Sans TC + Inter (Select body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
     <script>
       (function() {
         const saved = localStorage.getItem('theme');
@@ -63,19 +62,22 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
   <body data-zone={zone}>
     <Header path={path} locale={locale} zone={zone} />
     <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
-    <main class={`container${wide ? ' wide' : ''}`}>
+    <main class={`mx-auto px-5 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}>
       <slot />
     </main>
     <Footer locale={locale} />
-    <span class="back-to-top" id="back-to-top">↑ <span class="max-sm:hidden">back</span></span>
+    <button class="back-to-top" id="back-to-top" aria-label={t('a11y.top')}>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V4M4 7l4-4 4 4"/></svg>
+    </button>
   <script>
+    // ── Back to top ──
     const btn = document.getElementById('back-to-top');
     if (btn) {
       let ticking = false;
       window.addEventListener('scroll', () => {
         if (!ticking) {
           requestAnimationFrame(() => {
-            btn.classList.toggle('is-visible', window.scrollY > 300);
+            btn.classList.toggle('is-visible', window.scrollY > 400);
             ticking = false;
           });
           ticking = true;
@@ -86,6 +88,7 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       });
     }
 
+    // ── Theme toggle ──
     const toggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     if (toggle) {
@@ -103,6 +106,7 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       });
     }
 
+    // ── Reading progress ──
     const bar = document.getElementById('reading-progress');
     if (bar) {
       let ticking = false;
@@ -117,6 +121,35 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
         if (!ticking) { requestAnimationFrame(update); ticking = true; }
       }, { passive: true });
       update();
+    }
+
+    // ── Scroll reveal ──
+    if ('IntersectionObserver' in window) {
+      const reveals = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach((el) => io.observe(el));
+    }
+
+    // ── Frosted glass header ──
+    const header = document.getElementById('site-header');
+    if (header) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            header.classList.toggle('is-scrolled', window.scrollY > 20);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
     }
   </script>
   </body>

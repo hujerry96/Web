@@ -23,8 +23,7 @@ const zone = getContentZone(category, post.data.brand);
 const isSelect = zone === 'select';
 const t = useTranslations(locale);
 const { Content } = await render(post);
-const catName =
-  (SITE.categories[locale] as Record<string, string>)[category] ?? category;
+const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 const slug = postSlug(post);
 const path = `/${locale}/${category}/${slug}`;
 const related = await getRelated(post);
@@ -35,52 +34,75 @@ const breadcrumb = [
 ];
 ---
 <BaseLayout title={`${post.data.title} | ${SITE.name}`} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb} wide>
-  <Breadcrumb locale={locale} items={breadcrumb} />
+  <article class="py-8 max-w-4xl mx-auto">
+    <div class="reveal">
+      <Breadcrumb locale={locale} items={breadcrumb} />
 
-  <div class="grid grid-cols-[minmax(0,1fr)_260px] gap-16 items-stretch max-[980px]:!grid-cols-1 max-[980px]:!gap-6 max-[980px]:[&_aside]:hidden">
-    <div class="min-w-0">
-      {isSelect && <div class="inline-block font-serif text-[0.72rem] font-semibold tracking-[0.12em] uppercase py-[3px] px-2.5 rounded bg-lab-accent-soft text-lab-accent-deep mb-3">{t('nav.select')}{post.data.selectCategory && <span class="font-normal opacity-80"> · {post.data.selectCategory}</span>}</div>}
-      <h1 class="text-[clamp(1.9rem,1rem+2.4vw,2.8rem)] leading-tight break-words mt-0 mb-4">{post.data.title}</h1>
-      <div class="text-lab-text-muted text-[0.82rem] flex gap-4 flex-wrap my-3 mb-6">
-        <span>{t('article.by')} {post.data.author}</span>
-        <span>{readingTime(post.body, locale)}</span>
-        <time datetime={post.data.date.toISOString()}>{t('article.published')} {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
-        {post.data.updated && <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>}
-      </div>
+      <header class="mb-8">
+        {isSelect && (
+          <span class="inline-block text-[0.7rem] font-medium tracking-[0.08em] uppercase px-2.5 py-1 rounded-full bg-[var(--color-select-muted)] text-[var(--color-select-accent)] mb-3">
+            {t('nav.select')}{post.data.selectCategory && <span class="font-normal opacity-80"> · {post.data.selectCategory}</span>}
+          </span>
+        )}
+        <h1 class="text-[clamp(1.8rem,1rem+3vw,2.8rem)] leading-tight break-words mt-0 mb-5">{post.data.title}</h1>
+        <div class="flex gap-4 flex-wrap text-[0.85rem] text-[var(--color-text-secondary)] mb-2">
+          <span>{t('article.by')} {post.data.author}</span>
+          <span class="opacity-30">·</span>
+          <span>{readingTime(post.body, locale)}</span>
+          <span class="opacity-30">·</span>
+          <time datetime={post.data.date.toISOString()}>{t('article.published')} {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
+          {post.data.updated && (
+            <>
+              <span class="opacity-30">·</span>
+              <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
+            </>
+          )}
+        </div>
+      </header>
 
       {post.data.cover && (
-        <Image src={post.data.cover} alt={post.data.title} width={1280} height={720} class="w-full aspect-video object-cover rounded-[14px] shadow-md my-4 mb-6" />
-      )}
-
-      <article class="prose">
-        <Content />
-      </article>
-
-      {post.data.tags.length > 0 && (
-        <div class="tags">
-          {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
+        <div class="mb-8 rounded-xl overflow-hidden border border-[var(--color-border-subtle)]">
+          <Image src={post.data.cover} alt={post.data.title} width={1280} height={720} class="w-full aspect-video object-cover" />
         </div>
-      )}
-
-      {post.data.affiliate?.shopee && (
-        <p class="my-4"><a href={post.data.affiliate.shopee} class="font-semibold">{t('page.buyShopee')}</a></p>
-      )}
-      {post.data.affiliate?.amazon && (
-        <p class="my-4"><a href={post.data.affiliate.amazon} class="font-semibold">{t('page.buyAmazon')}</a></p>
       )}
     </div>
 
-    <aside class="block relative">
-      <Toc headings={headings} locale={locale} />
-    </aside>
-  </div>
+    <div class="grid grid-cols-[minmax(0,1fr)_240px] gap-12 items-stretch max-[980px]:!grid-cols-1 max-[980px]:!gap-6 max-[980px]:[&_aside]:hidden">
+      <div class="min-w-0 reveal reveal-delay-1">
+        <article class="prose">
+          <Content />
+        </article>
 
-  {related.length > 0 && (
-    <>
-      <h2 class="text-center font-serif text-[clamp(1.8rem,1rem+3vw,2.4rem)] font-medium mt-12 mb-6">{t('article.related')}</h2>
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-5 my-6">
-        {related.map((r) => <ArticleCard post={r} locale={locale} />)}
+        {post.data.tags.length > 0 && (
+          <div class="tags">
+            {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
+          </div>
+        )}
+
+        {post.data.affiliate?.shopee && (
+          <div class="mt-6 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]">
+            <a href={post.data.affiliate.shopee} class="font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-dim)]">{t('page.buyShopee')}</a>
+          </div>
+        )}
+        {post.data.affiliate?.amazon && (
+          <div class="mt-4 p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]">
+            <a href={post.data.affiliate.amazon} class="font-medium text-[var(--color-accent)] hover:text-[var(--color-accent-dim)]">{t('page.buyAmazon')}</a>
+          </div>
+        )}
       </div>
-    </>
-  )}
+
+      <aside class="block relative">
+        <Toc headings={headings} locale={locale} />
+      </aside>
+    </div>
+
+    {related.length > 0 && (
+      <section class="mt-16 pt-10 border-t border-[var(--color-border-subtle)] reveal">
+        <h2 class="text-center text-[clamp(1.3rem,0.9rem+1.5vw,1.75rem)] font-display font-semibold mb-8">{t('article.related')}</h2>
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-5">
+          {related.map((r) => <ArticleCard post={r} locale={locale} />)}
+        </div>
+      </section>
+    )}
+  </article>
 </BaseLayout>

@@ -7,13 +7,13 @@ const locale = Astro.url.pathname.startsWith('/en') ? 'en' : 'zh';
 const home = withBase(`/${locale}`);
 const title = locale === 'zh' ? '這一頁走失了' : 'This page is lost';
 const desc = locale === 'zh' ? '你找的頁面可能已經移動或不存在。' : 'The page you are looking for may have moved or no longer exists.';
-const btn = locale === 'zh' ? '回到首頁 →' : 'Back to home →';
+const btn = locale === 'zh' ? '回到首頁' : 'Back to home';
 ---
 <BaseLayout title={`404 — ${SITE.name}`} description={desc} path={path}>
-  <section class="text-center py-[clamp(4rem,10vw,8rem)] max-w-[36rem] mx-auto">
-    <span class="inline-block text-[0.75rem] tracking-[0.15em] uppercase text-[var(--color-term-accent)]">404</span>
-    <h1 class="text-[clamp(2rem,1rem+4vw,3.5rem)] font-medium mt-4 mb-4">{title}</h1>
-    <p class="text-[var(--color-term-text-muted)]">{desc}</p>
-    <a class="inline-block mt-6 bg-[var(--color-term-accent)] text-[var(--color-term-bg)] no-underline text-sm font-medium tracking-wide py-2 px-5 border border-[var(--color-term-accent-dim)] transition-colors duration-150 hover:bg-[var(--color-term-accent-dim)]" href={home}>{btn}</a>
+  <section class="text-center py-[clamp(5rem,12vw,10rem)] max-w-[36rem] mx-auto">
+    <span class="inline-block text-[0.75rem] font-medium tracking-[0.15em] uppercase text-[var(--color-accent)] mb-4">404</span>
+    <h1 class="text-[clamp(2.2rem,1rem+5vw,3.75rem)] font-display font-semibold mt-0 mb-4">{title}</h1>
+    <p class="text-[var(--color-text-secondary)] text-[1.05rem] mb-8">{desc}</p>
+    <a class="inline-flex items-center gap-2 bg-[var(--color-accent)] text-white no-underline text-sm font-medium py-2.5 px-6 rounded-lg transition-all duration-200 hover:bg-[var(--color-accent-dim)] hover:shadow-lg hover:shadow-[var(--color-accent-glow)]" href={home}>{btn} →</a>
   </section>
 </BaseLayout>

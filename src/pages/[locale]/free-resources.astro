@@ -24,22 +24,48 @@ const freeCats = Object.fromEntries(
 );
 ---
 <BaseLayout title={`${t('nav.free')} | ${SITE.name}`} description={t('page.freeDescTitle', { name: SITE.name })} path={path}>
-  <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
-  <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)] m-0 mb-4">{t('nav.free')}</h1>
-  <article class="prose">
-    <p>{t('page.freeDesc')}</p>
-  </article>
+  <section class="py-8 max-w-3xl mx-auto">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.free'), url: path }]} />
+    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-4 reveal">{t('nav.free')}</h1>
+    <article class="prose mb-8 reveal reveal-delay-1">
+      <p>{t('page.freeDesc')}</p>
+    </article>
 
-  <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,220px),1fr))] gap-4 my-8">
-    {Object.entries(freeCats).map(([key, name]) => (
-      <a class="flex items-center justify-between no-underline p-5 border border-[var(--color-border)] bg-[var(--color-term-surface)] text-[1.05rem] text-[var(--color-term-text)] transition-colors duration-150 hover:border-[var(--color-term-accent)] group" href={`/${locale}/${key}`}>
-        <span>{name}</span>
-        <span class="text-[var(--color-term-accent)] opacity-0 transition-opacity duration-150 group-hover:opacity-100" aria-hidden="true">→</span>
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,240px),1fr))] gap-4 reveal reveal-delay-2">
+      {Object.entries(freeCats).map(([key, name]) => (
+        <a class="resource-card" href={`/${locale}/${key}`}>
+          <span>{name}</span>
+          <span class="text-[var(--color-accent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true">→</span>
+        </a>
+      ))}
+      <a class="resource-card" href={toolsPath}>
+        <span>{t('nav.tools')}</span>
+        <span class="text-[var(--color-accent)] opacity-0 transition-opacity duration-200 group-hover:opacity-100" aria-hidden="true">→</span>
       </a>
-    ))}
-    <a class="flex items-center justify-between no-underline p-5 border border-[var(--color-border)] bg-[var(--color-term-surface)] text-[1.05rem] text-[var(--color-term-text)] transition-colors duration-150 hover:border-[var(--color-term-accent)] group" href={toolsPath}>
-      <span>{t('nav.tools')}</span>
-      <span class="text-[var(--color-term-accent)] opacity-0 transition-opacity duration-150 group-hover:opacity-100" aria-hidden="true">→</span>
-    </a>
-  </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .resource-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    background: var(--color-surface);
+    font-size: 1.05rem;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  .resource-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px -4px var(--color-accent-glow);
+  }
+  .resource-card:hover span:last-child {
+    opacity: 1;
+  }
+</style>

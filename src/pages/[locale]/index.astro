@@ -29,40 +29,57 @@ const catCounts: Record<string, number> = {};
 for (const p of posts) { const c = p.id.split('/')[1]; catCounts[c] = (catCounts[c] ?? 0) + 1; }
 ---
 <BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} post={featured} breadcrumb={[]} wide>
-  <section class="py-[clamp(2rem,4vw,4rem)]">
-    <header class="mb-6">
-      <span class="text-[0.75rem] tracking-[0.15em] uppercase text-[var(--color-term-accent)] opacity-70">{t('home.tagline')}</span>
-      <h1 class="text-[clamp(1.8rem,1rem+4vw,2.8rem)] tracking-tight leading-[1.1] mt-1 mb-0 text-[var(--color-term-text)]">{SITE.name}</h1>
-      <p class="term-prompt text-sm mt-3 mb-0 max-w-[42rem]">{t('home.intro')}</p>
-    </header>
 
-    <nav class="flex flex-wrap gap-1.5 mt-8 mb-6 text-sm" aria-label="categories">
-      <span class="text-[var(--color-term-text-muted)] opacity-60">$ ls /</span>
-      {Object.entries(cats).map(([key, name]) => {
-        const isSel = key === 'select';
-        return (<a class={`no-underline px-2 py-0.5 border border-[var(--color-border)] text-sm ${isSel ? 'text-[var(--color-sel-accent)] border-[var(--color-sel-accent-bg)]' : 'text-[var(--color-term-text-muted)] hover:text-[var(--color-term-accent)] hover:border-[var(--color-term-accent)]'}`} href={withBase(`/${locale}/${key}`)}>
-          {name} <span class="opacity-50">{catCounts[key] ?? 0}</span>
-        </a>);
-      })}
-    </nav>
+  {/* ── Hero ── */}
+  <section class="pt-[clamp(3rem,8vw,7rem)] pb-[clamp(2rem,4vw,4rem)] reveal">
+    <div class="max-w-3xl">
+      <span class="inline-block text-[0.72rem] font-medium tracking-[0.15em] uppercase text-[var(--color-accent)] mb-4">{t('home.tagline')}</span>
+      <h1 class="text-[clamp(2.2rem,1rem+5vw,3.75rem)] tracking-tight leading-[1.08] mb-5">{SITE.name}</h1>
+      <p class="text-[var(--color-text-secondary)] text-[clamp(1rem,0.9rem+0.5vw,1.15rem)] leading-relaxed max-w-[38rem]">{t('home.intro')}</p>
+    </div>
   </section>
 
+  {/* ── Category filters ── */}
+  <nav class="flex flex-wrap gap-2 mb-10 reveal reveal-delay-1" aria-label="categories">
+    {Object.entries(cats).map(([key, name]) => {
+      const isSel = key === 'select';
+      return (
+        <a
+          href={withBase(`/${locale}/${key}`)}
+          class:list={[
+            'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium border transition-all duration-200',
+            isSel
+              ? 'border-[var(--color-select-accent)] bg-[var(--color-select-muted)] text-[var(--color-select-accent)] hover:bg-[var(--color-select-glow)]'
+              : 'border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-muted)]'
+          ]}
+        >
+          {name}
+          <span class="text-[0.7rem] opacity-60">{catCounts[key] ?? 0}</span>
+        </a>
+      );
+    })}
+  </nav>
+
+  {/* ── Featured ── */}
   {featured && (
-    <section class="mb-8">
-      <span class="text-[0.75rem] tracking-[0.1em] uppercase text-[var(--color-term-text-muted)] mb-2 block border-t border-[var(--color-border)] pt-4">featured</span>
-      <a class="grid grid-cols-[1.25fr_1fr] border border-[var(--color-border)] text-inherit no-underline hover:border-[var(--color-term-accent)] transition-colors duration-150 max-sm:!grid-cols-1" href={withBase(`/${locale}/${featuredCat}/${featured.data.slug ?? featured.id.split('/').slice(2).join('/')}`)}>
-        <div class="relative min-h-[260px] max-sm:min-h-[180px]">
+    <section class="mb-14 reveal reveal-delay-2">
+      <a
+        class="featured-card group"
+        href={withBase(`/${locale}/${featuredCat}/${featured.data.slug ?? featured.id.split('/').slice(2).join('/')}`)}
+      >
+        <div class="featured-card__image">
           {featured.data.cover
-            ? <Image src={featured.data.cover} alt={featured.data.title} width={800} height={500} class="w-full h-full object-cover" loading="eager" />
-            : <div class="w-full h-full flex items-center justify-center bg-[var(--color-term-accent-bg)] text-[var(--color-term-accent-dim)] text-sm tracking-wide"><span>{featuredCatName}</span></div>}
+            ? <Image src={featured.data.cover} alt={featured.data.title} width={900} height={560} class="w-full h-full object-cover" loading="eager" />
+            : <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm"><span>{featuredCatName}</span></div>
+          }
         </div>
-        <div class="p-[clamp(1.25rem,2.5vw,2rem)] flex flex-col justify-center border-l border-[var(--color-border)] max-sm:border-l-0">
-          <span class="text-[0.72rem] text-[var(--color-term-accent)] uppercase tracking-[0.12em]">{featuredCatName}</span>
-          <h2 class="text-[clamp(1rem,0.8rem+0.8vw,1.2rem)] font-medium mt-3 mb-2 leading-snug">{featured.data.title}</h2>
-          <p class="text-[var(--color-term-text-muted)] text-[0.82rem] mb-2">{featured.data.description}</p>
-          <div class="flex gap-2.5 items-center text-[0.78rem] text-[var(--color-term-text-muted)]">
+        <div class="featured-card__body">
+          <span class="text-[0.72rem] font-medium uppercase tracking-[0.1em] text-[var(--color-accent)]">{featuredCatName}</span>
+          <h2 class="text-[clamp(1.15rem,0.9rem+1vw,1.5rem)] font-display font-semibold mt-3 mb-2 leading-snug group-hover:text-[var(--color-accent)] transition-colors duration-200">{featured.data.title}</h2>
+          <p class="text-[var(--color-text-secondary)] text-[0.9rem] mb-3 leading-relaxed">{featured.data.description}</p>
+          <div class="flex gap-3 items-center text-[0.8rem] text-[var(--color-text-tertiary)]">
             <span>{featured.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</span>
-            <span>·</span>
+            <span class="opacity-40">·</span>
             <span>{readingTime(featured.body, locale)}</span>
           </div>
         </div>
@@ -70,14 +87,60 @@ for (const p of posts) { const c = p.id.split('/')[1]; catCounts[c] = (catCounts
     </section>
   )}
 
-  <section class="my-8">
-    <span class="text-[0.75rem] tracking-[0.1em] uppercase text-[var(--color-term-text-muted)] mb-3 block border-t border-[var(--color-border)] pt-4">latest</span>
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-px bg-[var(--color-border)]">
+  {/* ── Latest posts ── */}
+  <section class="mb-16 reveal reveal-delay-3">
+    <h2 class="text-[0.72rem] font-medium tracking-[0.1em] uppercase text-[var(--color-text-tertiary)] mb-5 font-body">{t('home.latest')}</h2>
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-5">
       {rest.map((post) => (
         <ArticleCard post={post} locale={locale} />
       ))}
     </div>
   </section>
-
-  <div class="term-cursor text-[var(--color-term-accent)] text-sm mt-8 mb-12"> </div>
 </BaseLayout>
+
+<style>
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease);
+  }
+  .featured-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 12px 40px -10px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .featured-card__image {
+    min-height: 280px;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  .featured-card__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease);
+  }
+  .featured-card:hover .featured-card__image :global(img) {
+    transform: scale(1.03);
+  }
+  .featured-card__body {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-surface);
+  }
+
+  @media (max-width: 640px) {
+    .featured-card {
+      grid-template-columns: 1fr;
+    }
+    .featured-card__image {
+      min-height: 180px;
+    }
+  }
+</style>

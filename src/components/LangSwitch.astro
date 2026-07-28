@@ -12,10 +12,10 @@ function switchPath(target: Locale): string {
 const others = LOCALES.filter((l) => l !== locale);
 const label: Record<Locale, string> = { zh: '中', en: 'EN' };
 ---
-<div class="inline-flex items-center gap-1 text-xs font-mono">
-  <span aria-current="true" class="cursor-default text-[var(--color-term-accent)]">{label[locale]}</span>
-  <span class="text-[var(--color-term-text-muted)] opacity-40">/</span>
+<div class="inline-flex items-center gap-1.5 text-xs">
+  <span aria-current="true" class="cursor-default text-[var(--color-accent)] font-medium">{label[locale]}</span>
+  <span class="text-[var(--color-text-tertiary)] opacity-40">/</span>
   {others.map((l) => (
-    <a href={switchPath(l)} hreflang={l === 'en' ? 'en-US' : 'zh-TW'} class="no-underline text-[var(--color-term-text-muted)] hover:text-[var(--color-term-accent)] transition-colors duration-150">{label[l]}</a>
+    <a href={switchPath(l)} hreflang={l === 'en' ? 'en-US' : 'zh-TW'} class="no-underline text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors duration-200">{label[l]}</a>
   ))}
 </div>
