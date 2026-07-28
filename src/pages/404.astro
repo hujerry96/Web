@@ -11,9 +11,9 @@ const btn = locale === 'zh' ? '回到首頁 →' : 'Back to home →';
 ---
 <BaseLayout title={`404 — ${SITE.name}`} description={desc} path={path}>
   <section class="text-center py-[clamp(4rem,10vw,8rem)] max-w-[36rem] mx-auto">
-    <span class="inline-block font-serif text-[0.74rem] font-medium tracking-[0.28em] uppercase text-lab-accent">404</span>
-    <h1 class="font-serif text-[clamp(2rem,1rem+4vw,3.5rem)] font-medium mt-4 mb-4">{title}</h1>
-    <p class="text-lab-text-muted">{desc}</p>
-    <a class="inline-block mt-6 bg-lab-accent text-[#fbf8f1] no-underline font-serif font-medium text-[0.98rem] tracking-wide py-2.5 px-7 rounded-full border border-lab-accent-deep transition-all duration-[180ms] hover:bg-lab-accent-deep hover:-translate-y-0.5 hover:shadow-lg" href={home}>{btn}</a>
+    <span class="inline-block text-[0.75rem] tracking-[0.15em] uppercase text-[var(--color-term-accent)]">404</span>
+    <h1 class="text-[clamp(2rem,1rem+4vw,3.5rem)] font-medium mt-4 mb-4">{title}</h1>
+    <p class="text-[var(--color-term-text-muted)]">{desc}</p>
+    <a class="inline-block mt-6 bg-[var(--color-term-accent)] text-[var(--color-term-bg)] no-underline text-sm font-medium tracking-wide py-2 px-5 border border-[var(--color-term-accent-dim)] transition-colors duration-150 hover:bg-[var(--color-term-accent-dim)]" href={home}>{btn}</a>
   </section>
 </BaseLayout>

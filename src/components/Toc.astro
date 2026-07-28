@@ -11,14 +11,14 @@ const t = useTranslations(locale);
 ---
 
 {headings.length > 0 && (
-  <nav class="sticky top-6 self-start max-h-[calc(100vh-24px)] overflow-y-auto font-serif pl-5 border-l border-border" aria-label={t('article.toc')}>
-    <span class="inline-block font-serif text-[0.74rem] font-medium tracking-[0.28em] uppercase text-lab-accent mb-3">{t('article.toc')}</span>
+  <nav class="sticky top-6 self-start max-h-[calc(100vh-24px)] overflow-y-auto pl-4 border-l border-[var(--color-border)]" aria-label={t('article.toc')}>
+    <span class="inline-block text-[0.72rem] tracking-[0.12em] uppercase text-[var(--color-term-accent)] mb-2">{t('article.toc')}</span>
     <ul class="list-none m-0 p-0">
       {headings.map((h) => (
         <li>
           <a href={`#${h.id}`} data-toc-link={h.id} class:list={[
-            'block py-1.5 text-[0.85rem] leading-snug text-lab-text-muted no-underline border-l-2 border-transparent pl-3 -ml-[1px] transition-all duration-150 hover:text-lab-accent',
-            h.level === 3 && 'text-[0.8rem] pl-6'
+            'block py-1 text-[0.82rem] leading-snug text-[var(--color-term-text-muted)] no-underline border-l-[1.5px] border-transparent pl-3 -ml-[1.5px] transition-colors duration-150 hover:text-[var(--color-term-accent)]',
+            h.level === 3 && 'text-[0.78rem] pl-5'
           ]}>{h.text}</a>
         </li>
       ))}
@@ -69,8 +69,7 @@ const t = useTranslations(locale);
 
 <style>
   a.is-active {
-    color: var(--color-lab-accent);
-    border-left-color: var(--color-lab-accent);
-    font-weight: 600;
+    color: var(--color-term-accent);
+    border-left-color: var(--color-term-accent);
   }
 </style>

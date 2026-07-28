@@ -53,23 +53,23 @@ const tools = [
 
   <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,340px),1fr))] gap-6 my-8">
     {tools.map((tool) => (
-      <section class="border border-border rounded-[10px] bg-lab-surface overflow-hidden shadow-sm transition-all duration-150 hover:border-lab-accent hover:shadow-md hover:-translate-y-0.5">
-        <div class="h-[150px] flex items-center justify-center bg-gradient-to-br from-lab-accent-soft to-lab-surface text-lab-accent-deep font-serif font-medium text-lg tracking-wide">
+      <section class="border border-[var(--color-border)] bg-[var(--color-term-surface)]">
+        <div class="h-[150px] flex items-center justify-center bg-[var(--color-term-accent-bg)] text-[var(--color-term-accent-dim)] text-sm tracking-wide">
           <span>{tool.tag}</span>
         </div>
         <div class="p-5">
           <h2 class="text-[1.35rem] m-0 mb-2.5">{tool.name}</h2>
-          <p class="text-lab-text-muted m-0 mb-3.5">{tool.desc}</p>
+          <p class="text-[var(--color-term-text-muted)] m-0 mb-3.5">{tool.desc}</p>
           <ul class="list-none p-0 m-0 mb-4 grid gap-1.5">
             {tool.points.map((p) => (
-              <li class="relative pl-[1.1rem] text-[0.92rem] text-lab-text-secondary before:content-[''] before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-lab-accent">{p}</li>
+              <li class="relative pl-[1.1rem] text-[0.92rem] text-[var(--color-term-text)] before:content-['→'] before:absolute before:left-0 before:text-[var(--color-term-accent)]">{p}</li>
             ))}
           </ul>
-          <div class="flex items-center justify-between border-t border-border pt-4">
-            <span class="font-serif text-[0.78rem] text-lab-text-muted tracking-wide">{tool.lang}</span>
+          <div class="flex items-center justify-between border-t border-[var(--color-border)] pt-4">
+            <span class="text-[0.78rem] text-[var(--color-term-text-muted)]">{tool.lang}</span>
             <span class="flex gap-4 flex-wrap">
-              <a class="font-semibold text-lab-accent no-underline hover:underline" href={withBase(tool.guide)}>{locale === 'zh' ? '使用指南 →' : 'Guide →'}</a>
-              <a class="font-semibold text-lab-accent no-underline hover:underline" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub →' : 'GitHub →'}</a>
+              <a class="text-[var(--color-term-accent)] no-underline hover:underline" href={withBase(tool.guide)}>{locale === 'zh' ? '使用指南 →' : 'Guide →'}</a>
+              <a class="text-[var(--color-term-accent)] no-underline hover:underline" href={tool.repo} target="_blank" rel="noopener">{locale === 'zh' ? 'GitHub →' : 'GitHub →'}</a>
             </span>
           </div>
         </div>

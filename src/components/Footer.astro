@@ -9,32 +9,35 @@ const t = useTranslations(locale);
 const year = new Date().getFullYear();
 const cats = SITE.categories[locale] as Record<string, string>;
 ---
-<footer class="border-t-3 border-lab-accent mt-12 bg-lab-surface py-12 px-5 text-lab-text-muted text-sm">
-  <div class="mx-auto max-w-4xl">
-    <div class="grid grid-cols-[2fr_1fr_1fr] gap-8 mb-8 max-sm:!grid-cols-1 max-sm:!gap-6">
-      <div class="flex flex-col gap-2">
-        <span class="font-serif font-bold text-2xl tracking-[0.14em] uppercase text-lab-text">{SITE.name}</span>
-        <p class="font-serif m-0 leading-normal max-w-[24rem]">{SITE.meta[locale].description}</p>
-        {SITE.social.github && <a class="font-serif text-lab-text-muted no-underline text-[0.82rem] mr-3 transition-colors duration-150 hover:text-lab-accent" href={SITE.social.github} rel="me">GitHub</a>}
-        {SITE.social.x && <a class="font-serif text-lab-text-muted no-underline text-[0.82rem] mr-3 transition-colors duration-150 hover:text-lab-accent" href={SITE.social.x} rel="me">X</a>}
+<footer class="mt-12 border-t border-[var(--color-border)] text-[var(--color-term-text-muted)] text-sm font-mono">
+  <div class="mx-auto max-w-4xl px-5 py-8">
+    <div class="term-prompt text-xs mb-6">exit</div>
+    <div class="grid grid-cols-[2fr_1fr_1fr] gap-8 mb-6 max-sm:!grid-cols-1 max-sm:!gap-4">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-[var(--color-term-text)] font-medium tracking-[0.08em]">{SITE.name}</span>
+        <p class="m-0 leading-normal max-w-[28rem] text-xs">{SITE.meta[locale].description}</p>
+        <div class="flex gap-3 mt-2 text-xs">
+          {SITE.social.github && <a class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]" href={SITE.social.github} rel="me">github</a>}
+          {SITE.social.x && <a class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]" href={SITE.social.x} rel="me">x</a>}
+        </div>
       </div>
-      <div class="flex flex-col gap-2">
-        <span class="font-serif font-semibold tracking-[0.16em] uppercase text-[0.72rem] text-lab-accent mb-2">{t('home.categories')}</span>
+      <div class="flex flex-col gap-1.5 text-xs">
+        <span class="text-[var(--color-term-accent)] tracking-[0.08em] uppercase mb-1">{t('home.categories')}</span>
         {Object.entries(cats).map(([key, name]) => (
-          <a href={withBase(`/${locale}/${key}`)} class="font-serif text-lab-text-muted no-underline transition-colors duration-150 hover:text-lab-accent">{name}</a>
+          <a href={withBase(`/${locale}/${key}`)} class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]">{name}</a>
         ))}
       </div>
-      <div class="flex flex-col gap-2">
-        <span class="font-serif font-semibold tracking-[0.16em] uppercase text-[0.72rem] text-lab-accent mb-2">{t('nav.about')}</span>
-        <a href={withBase(`/${locale}/about`)} class="font-serif text-lab-text-muted no-underline transition-colors duration-150 hover:text-lab-accent">{t('nav.about')}</a>
-        <a href={withBase(`/${locale}/contact`)} class="font-serif text-lab-text-muted no-underline transition-colors duration-150 hover:text-lab-accent">{t('nav.contact')}</a>
-        <a href={withBase(`/${locale}/free-resources`)} class="font-serif text-lab-text-muted no-underline transition-colors duration-150 hover:text-lab-accent">{t('nav.free')}</a>
-        <a href={withBase(`/${locale}/rss.xml`)} class="font-serif text-lab-text-muted no-underline transition-colors duration-150 hover:text-lab-accent">{t('rss.subscribe')}</a>
+      <div class="flex flex-col gap-1.5 text-xs">
+        <span class="text-[var(--color-term-accent)] tracking-[0.08em] uppercase mb-1">{t('nav.about')}</span>
+        <a href={withBase(`/${locale}/about`)} class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]">{t('nav.about')}</a>
+        <a href={withBase(`/${locale}/contact`)} class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]">{t('nav.contact')}</a>
+        <a href={withBase(`/${locale}/free-resources`)} class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]">{t('nav.free')}</a>
+        <a href={withBase(`/${locale}/rss.xml`)} class="text-[var(--color-term-text-muted)] no-underline hover:text-[var(--color-term-accent)]">rss</a>
       </div>
     </div>
-    <div class="flex justify-between items-center flex-wrap gap-2 pt-6 border-t border-border">
-      <span>&copy; {year} {SITE.name}. {t('footer.rights')}.</span>
-      <span class="opacity-70">{t('footer.built')}</span>
+    <div class="flex justify-between items-center flex-wrap gap-2 pt-4 border-t border-[var(--color-border-soft)] text-xs">
+      <span>&copy; {year} {SITE.name}</span>
+      <span class="opacity-60">session closed</span>
     </div>
   </div>
 </footer>

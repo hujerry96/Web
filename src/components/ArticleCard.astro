@@ -15,22 +15,22 @@ const cover = post.data.cover;
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 const isSelect = zone === 'select';
 ---
-<article class:list={['group border border-border bg-lab-surface h-full transition-all duration-200 hover:border-lab-accent', isSelect && 'border-lab-accent-soft']}>
+<article class="border border-[var(--color-border)] bg-[var(--color-term-surface)] h-full hover:border-[var(--color-term-accent)] transition-colors duration-150 grid grid-rows-[auto_1fr]">
   <a href={href} class="block text-inherit no-underline">
     {cover ? (
       <Image src={cover} alt={post.data.title} width={640} height={360} class="w-full h-auto aspect-video object-cover block" loading="lazy" />
     ) : (
-      <div class="w-full aspect-video flex items-center justify-center bg-gradient-to-br from-lab-accent-soft to-lab-surface text-lab-accent-deep font-serif font-medium text-lg tracking-wide">
+      <div class="w-full aspect-video flex items-center justify-center bg-[var(--color-term-accent-bg)] text-[var(--color-term-accent-dim)] text-sm tracking-wide">
         <span>{catName}</span>
       </div>
     )}
-    <div class="p-[1.1rem_1.15rem_1.25rem] border-t border-border">
-      <span class:list={['font-serif text-[0.72rem] text-lab-accent uppercase tracking-[0.18em] inline-block pb-1 border-b border-lab-accent', isSelect && 'text-lab-accent-deep border-lab-accent-soft']}>
-        {catName}{isSelect && <span class="inline-block ml-1.5 px-1.5 text-[0.62rem] font-semibold tracking-wide rounded bg-lab-accent-soft text-lab-accent-deep align-middle leading-relaxed">{t('nav.select')}</span>}
+    <div class="p-[1rem_1rem_1.15rem] border-t border-[var(--color-border)]">
+      <span class="text-[0.7rem] text-[var(--color-term-accent)] uppercase tracking-[0.12em]">
+        {catName}{isSelect && <span class="ml-1.5 px-1 text-[0.6rem] border border-[var(--color-sel-accent-bg)] text-[var(--color-sel-accent-dim)] align-middle">{t('nav.select')}</span>}
       </span>
-      <h3 class="text-[1.15rem] mt-2.5 mb-1.5 leading-snug font-medium font-serif dark:font-semibold">{post.data.title}</h3>
-      <p class="text-[0.9rem] text-lab-text-muted m-0 mb-2.5 line-clamp-2">{post.data.description}</p>
-      <time datetime={post.data.date.toISOString()} class="font-serif text-[0.76rem] text-lab-text-muted tracking-wide">
+      <h3 class="text-[1rem] mt-2 mb-1.5 leading-snug font-medium">{post.data.title}</h3>
+      <p class="text-[0.82rem] text-[var(--color-term-text-muted)] m-0 mb-2 line-clamp-2">{post.data.description}</p>
+      <time datetime={post.data.date.toISOString()} class="text-[0.75rem] text-[var(--color-term-text-muted)] tracking-wide">
         {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}
       </time>
     </div>

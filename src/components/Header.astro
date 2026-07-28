@@ -16,78 +16,35 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   { href: `/${locale}/about`, key: 'nav.about' },
   { href: `/${locale}/contact`, key: 'nav.contact' },
 ];
+const shortPath = path === '/' || path === '/zh' ? '~' : path;
 ---
-<header class="border-b border-border bg-lab-surface" id="site-header">
-  <div class="mx-auto flex max-w-4xl items-center justify-between px-5 h-13">
-    <button class="hamburger flex h-10 w-10 items-center justify-center border-none bg-transparent cursor-pointer text-lab-text" id="hamburger" aria-label={t('nav.home')}>
-      <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250"></span>
-      <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250 mt-[5px]"></span>
-      <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250 mt-[5px]"></span>
-    </button>
-    <a href={withBase(zone === 'select' ? `/${locale}/select` : `/${locale}`)} class="flex flex-col leading-none no-underline text-lab-text">
-      <span class="font-serif whitespace-nowrap font-medium text-xl tracking-[0.14em] uppercase">{zone === 'select' ? 'Hu · Select' : SITE.name}</span>
-      <span class="font-serif text-[0.6rem] tracking-[0.22em] text-lab-text-muted mt-[3px] font-normal">{zone === 'select' ? t('nav.select') : SITE.author}</span>
+<header class="border-b border-[var(--color-term-accent-dim)]" id="site-header">
+  <div class="mx-auto flex max-w-4xl items-center justify-between px-5 h-12">
+    <a href={withBase(zone === 'select' ? `/${locale}/select` : `/${locale}`)} class="term-prompt no-underline whitespace-nowrap text-sm">
+      <span class="text-[var(--color-term-accent)]">cd</span>
+      <span class="text-[var(--color-term-text)]"> {shortPath}</span>
     </a>
-    <div class="flex items-center gap-2">
-      <a class="flex h-9 w-9 items-center justify-center rounded-full text-lab-text-muted no-underline transition-colors duration-150 hover:bg-lab-accent-soft hover:text-lab-accent" href={withBase(`/${locale}/search`)} aria-label={t('nav.search')} title={t('nav.search')}>🔍</a>
-
-      <button class="theme-toggle flex h-9 w-9 border-none bg-transparent cursor-pointer p-0 rounded-full items-center justify-center text-lab-text-muted transition-all duration-150 hover:bg-lab-accent-soft hover:text-lab-accent hover:-rotate-15" id="theme-toggle" aria-label={t('a11y.theme')} title={t('a11y.theme')}>
-        <span class="tt-icon inline-block leading-none" aria-hidden="true">🌙</span>
+    <div class="flex items-center gap-1.5">
+      <a class="no-underline text-[var(--color-term-text-muted)] hover:text-[var(--color-term-accent)] text-sm px-1.5" href={withBase(`/${locale}/search`)} aria-label={t('nav.search')} title={t('nav.search')}>find</a>
+      <button class="theme-toggle border-none bg-transparent cursor-pointer text-[var(--color-term-text-muted)] hover:text-[var(--color-term-accent)] text-sm px-1.5 font-mono" id="theme-toggle" aria-label={t('a11y.theme')} title={t('a11y.theme')}>
+        <span class="tt-icon inline-block" aria-hidden="true">☾</span>
       </button>
       <LangSwitch path={path} locale={locale} />
     </div>
   </div>
-  <nav class="mx-auto flex max-w-4xl items-center gap-4 px-5 pb-2.5 pt-1 flex-wrap" aria-label="primary">
+  <nav class="mx-auto flex max-w-4xl items-center gap-3 px-5 pb-2.5 flex-wrap text-sm" aria-label="primary">
     {labNav.map((item) => (
-      <a href={withBase(item.href)} class="font-serif text-lab-text-secondary no-underline text-sm font-medium tracking-wide pb-0.5 border-b border-transparent transition-colors duration-150 hover:text-lab-accent hover:border-lab-accent">{t(item.key)}</a>
+      <a href={withBase(item.href)} class="no-underline text-[var(--color-term-text-muted)] hover:text-[var(--color-term-accent)] transition-colors duration-150">{t(item.key)}</a>
     ))}
     {selectNav ? (
       <>
-        <span class="text-[0.7rem] text-lab-text-muted tracking-wide font-serif" aria-hidden="true">·</span>
-        <a href={withBase(selectNav.href)} class="font-serif font-semibold text-lab-accent-deep tracking-wider">{t(selectNav.key)}</a>
+        <span class="text-[var(--color-term-text-muted)] opacity-40">|</span>
+        <a href={withBase(selectNav.href)} class="no-underline text-[var(--color-sel-accent)] hover:text-[var(--color-sel-accent-dim)]">{t(selectNav.key)}</a>
       </>
     ) : null}
-    <span class="text-[0.7rem] text-lab-text-muted tracking-wide font-serif" aria-hidden="true">·</span>
+    <span class="text-[var(--color-term-text-muted)] opacity-40">|</span>
     {staticLinks.map((item) => (
-      <a href={withBase(item.href)} class="font-serif text-lab-text-muted no-underline text-sm font-normal transition-colors duration-150 hover:text-lab-accent">{t(item.key)}</a>
+      <a href={withBase(item.href)} class="no-underline text-[var(--color-term-text-muted)] hover:text-[var(--color-term-accent)] transition-colors duration-150">{t(item.key)}</a>
     ))}
   </nav>
 </header>
-
-<script>
-  const header = document.getElementById('site-header');
-  const hamburger = document.getElementById('hamburger');
-  if (header && hamburger) {
-    hamburger.addEventListener('click', () => {
-      header.classList.toggle('nav-open');
-    });
-    header.querySelectorAll('nav a').forEach((link) => {
-      link.addEventListener('click', () => {
-        header.classList.remove('nav-open');
-      });
-    });
-  }
-</script>
-
-<style>
-  .hamburger-line + .hamburger-line { margin-top: 5px; }
-  .nav-open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-open .hamburger-line:nth-child(2) { opacity: 0; }
-  .nav-open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  @media (max-width: 640px) {
-    .hamburger { display: flex !important; margin-left: -8px; }
-    header nav {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 1rem 0 1.25rem;
-      border-top: 1px solid var(--color-border);
-    }
-    .nav-open nav { display: flex; }
-    header nav a { font-size: 1rem; }
-  }
-  @media (min-width: 641px) {
-    .hamburger { display: none !important; }
-  }
-</style>

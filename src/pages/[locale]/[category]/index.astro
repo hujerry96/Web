@@ -29,12 +29,12 @@ const path = `/${locale}/${category}`;
 <BaseLayout title={`${catName} | ${SITE.name}`} description={`${catName} — ${SITE.name}`} path={path} wide>
   <Breadcrumb locale={locale} items={[{ name: catName, url: path }]} />
   <h1 class="text-[clamp(1.8rem,1rem+3vw,2.6rem)]">{catName}</h1>
-  <p class="text-lab-text-muted">{t('home.postsCount', { n: posts.length })}</p>
+  <p class="text-[var(--color-term-text-muted)]">{t('home.postsCount', { n: posts.length })}</p>
   {posts.length > 0 ? (
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-5 my-6">
       {posts.map((post) => <ArticleCard post={post} locale={locale} />)}
     </div>
   ) : (
-    <p class="text-lab-text-muted text-[1.05rem] py-8">{t('category.empty')}</p>
+    <p class="text-[var(--color-term-text-muted)] text-[1.05rem] py-8">{t('category.empty')}</p>
   )}
 </BaseLayout>

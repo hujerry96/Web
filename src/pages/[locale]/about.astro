@@ -16,15 +16,15 @@ const path = `/${locale}/about`;
   <article class="prose">
     <div class="flex items-center gap-6 mb-8">
       {SITE.avatar
-        ? <img class="w-24 h-24 rounded-full object-cover border-2 border-lab-accent shrink-0" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
-        : <div class="w-24 h-24 rounded-full flex items-center justify-center bg-lab-accent-soft text-lab-accent-deep font-serif text-3xl font-medium shrink-0" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>}
+        ? <img class="w-24 h-24 object-cover border-2 border-[var(--color-term-accent)] shrink-0" src={SITE.avatar} alt={SITE.author} width={120} height={120} />
+        : <div class="w-24 h-24 flex items-center justify-center bg-[var(--color-term-accent-bg)] text-[var(--color-term-accent)] text-3xl font-medium shrink-0" aria-hidden="true">{SITE.author.split(' ').map((w) => w[0]).join('')}</div>}
       <div>
         <h1 class="m-0 text-[clamp(1.6rem,1rem+2vw,2.2rem)]">{SITE.author}</h1>
-        <p class="text-lab-text-muted mt-1 mb-0 text-[0.95rem]">{t('page.aboutRole')}</p>
+        <p class="text-[var(--color-term-text-muted)] mt-1 mb-0 text-[0.95rem]">{t('page.aboutRole')}</p>
       </div>
     </div>
 
-    <p class="text-[1.1rem] text-lab-text-secondary">{t('page.aboutLead', { name: SITE.name })}</p>
+    <p class="text-[1.1rem] text-[var(--color-term-text)]">{t('page.aboutLead', { name: SITE.name })}</p>
 
     <h2>{t('page.aboutWhyTitle')}</h2>
     <p>{t('page.aboutWhy1')}</p>

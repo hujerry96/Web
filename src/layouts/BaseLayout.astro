@@ -16,8 +16,8 @@ import { useTranslations } from '../i18n/ui';
 interface Props {
   title: string;
   description: string;
-  path: string;              // 當前頁路徑，如 /zh/reviews/foo
-  post?: Post | null;        // 文章頁傳入，用於 JSON-LD / OG 細節
+  path: string;
+  post?: Post | null;
   type?: 'website' | 'article';
   breadcrumb?: { name: string; url: string }[];
   wide?: boolean;
@@ -37,7 +37,6 @@ const image = post?.data.cover ? post.data.cover.src : `${SITE.url}/images/og-de
 const jsonLd: Record<string, unknown>[] = [];
 if (post) jsonLd.push(articleLd(post, url));
 if (breadcrumb && breadcrumb.length > 0) jsonLd.push(breadcrumbLd(breadcrumb, SITE.url));
-// 首頁（語系根，如 /、/en、/zh）補 WebSite LD；不受 featured post 影響
 if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
 ---
 <!doctype html>
@@ -48,18 +47,11 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
     <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale]} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}
-    <!-- Stripe Press direction: IBM Plex Serif (editorial) + Inter (tech UI) + JetBrains Mono (code) + Noto Serif TC (Chinese) -->
+    <!-- Terminal direction: JetBrains Mono + Noto Sans TC + Inter (Select body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,450;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,400;14..32,450;14..32,500;14..32,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,450;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,400;14..32,450;14..32,500;14..32,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap"
-    />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" />
     <script>
       (function() {
         const saved = localStorage.getItem('theme');
@@ -75,9 +67,8 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       <slot />
     </main>
     <Footer locale={locale} />
-    <button class="back-to-top" id="back-to-top" aria-label={t('a11y.top')}>↑</button>
+    <span class="back-to-top" id="back-to-top">↑ <span class="max-sm:hidden">back</span></span>
   <script>
-    // 返回頂部按鈕
     const btn = document.getElementById('back-to-top');
     if (btn) {
       let ticking = false;
@@ -89,20 +80,19 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
           });
           ticking = true;
         }
-      });
+      }, { passive: true });
       btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
-    // 主題切換
     const toggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     if (toggle) {
       const icon = toggle.querySelector('.tt-icon');
       const updateIcon = () => {
         const isDark = html.getAttribute('data-theme') === 'dark';
-        if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+        if (icon) icon.textContent = isDark ? '☀' : '☾';
       };
       updateIcon();
       toggle.addEventListener('click', () => {
@@ -113,7 +103,6 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       });
     }
 
-    // 閱讀進度條
     const bar = document.getElementById('reading-progress');
     if (bar) {
       let ticking = false;
@@ -129,52 +118,6 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       }, { passive: true });
       update();
     }
-  </script>
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script is:inline>
-    // 編輯風淡入動畫（GSAP）。尊重 prefers-reduced-motion；無 GSAP 時直接顯示。
-    (function () {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      const reveals = document.querySelectorAll('.reveal');
-      const staggerCards = document.querySelectorAll('.stagger-card');
-
-      if (reduce || typeof gsap === 'undefined') {
-        reveals.forEach((el) => el.classList.add('is-visible'));
-        return;
-      }
-
-      gsap.registerPlugin(ScrollTrigger);
-
-      // 輕量 CSS 淡入（.reveal）
-      reveals.forEach((el) => gsap.set(el, { opacity: 0, y: 24 }));
-      ScrollTrigger.batch('.reveal', {
-        start: 'top 90%',
-        onEnter: (batch) =>
-          gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.08,
-            ease: 'power2.out',
-            onComplete: () => batch.forEach((el) => el.classList.add('is-visible')),
-          }),
-      });
-
-      // 文章卡滾動浮起（stagger，無 3D 傾斜）
-      if (staggerCards.length) {
-        ScrollTrigger.batch('.stagger-card', {
-          start: 'top 92%',
-          onEnter: (batch) =>
-            gsap.fromTo(
-              batch,
-              { opacity: 0, y: 28 },
-              { opacity: 1, y: 0, duration: 0.6, stagger: 0.07, ease: 'power2.out' }
-            ),
-        });
-      }
-    })();
   </script>
   </body>
 </html>
