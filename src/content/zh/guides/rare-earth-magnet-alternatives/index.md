@@ -10,7 +10,7 @@ updated: 2026-07-24
 category: 'guides'
 tags: ['材料科學', '稀土', '電動車', '永磁']
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

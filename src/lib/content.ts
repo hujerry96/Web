@@ -14,12 +14,6 @@ export function readingTime(body: string, locale: Locale): string {
   return locale === 'zh' ? `${min} 分鐘閱讀` : `${min} min read`;
 }
 
-// 判斷內容所屬品牌區域
-export function getContentZone(category: string, brand?: string): 'lab' | 'select' {
-  if (brand === 'select' || brand === 'lab') return brand;
-  return category === 'select' ? 'select' : 'lab';
-}
-
 // 從 entry.id（如 "zh/ai/foo"）解析出 locale + category + slug
 export function parseId(id: string): { locale: Locale; category: string; slug: string } {
   const [locale, category, ...rest] = id.split('/');

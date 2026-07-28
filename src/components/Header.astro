@@ -4,13 +4,12 @@ import { useTranslations } from '../i18n/ui';
 import type { Locale } from '../i18n/config';
 import LangSwitch from './LangSwitch.astro';
 
-interface Props { path: string; locale: Locale; zone?: 'lab' | 'select'; }
-const { path, locale, zone = 'lab' } = Astro.props;
+interface Props { path: string; locale: Locale; }
+const { path, locale } = Astro.props;
 const t = useTranslations(locale);
 
 const allCats = SITE.categories[locale] as Record<string, string>;
-const labNav = Object.keys(allCats).filter((k) => k !== 'select').map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
-const selectNav = allCats.select ? { href: `/${locale}/select`, key: 'nav.select' as Parameters<typeof t>[0] } : null;
+const catNav = Object.keys(allCats).map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
 const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   { href: `/${locale}/free-resources`, key: 'nav.free' },
   { href: `/${locale}/about`, key: 'nav.about' },
@@ -19,19 +18,15 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
 ---
 <header class="site-header" id="site-header">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 h-16">
-    <a href={withBase(zone === 'select' ? `/${locale}/select` : `/${locale}`)} class="flex items-center gap-2 no-underline group">
+    <a href={withBase(`/${locale}`)} class="flex items-center gap-2 no-underline group">
       <span class="font-display font-semibold text-[var(--color-text)] text-lg tracking-tight">{SITE.name}</span>
-      {zone === 'select' && <span class="text-[0.65rem] font-medium tracking-wider uppercase px-1.5 py-0.5 rounded-md bg-[var(--color-select-muted)] text-[var(--color-select-accent)]">Select</span>}
     </a>
 
     <!-- Desktop nav -->
     <nav class="hidden md:flex items-center gap-1" aria-label="primary">
-      {labNav.map((item) => (
+      {catNav.map((item) => (
         <a href={withBase(item.href)} class="nav-link">{t(item.key)}</a>
       ))}
-      {selectNav && (
-        <a href={withBase(selectNav.href)} class="nav-link nav-link--select">{t(selectNav.key)}</a>
-      )}
       <span class="w-px h-4 bg-[var(--color-border)] mx-1"></span>
       {staticLinks.map((item) => (
         <a href={withBase(item.href)} class="nav-link">{t(item.key)}</a>
@@ -59,12 +54,9 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   <!-- Mobile nav -->
   <nav class="mobile-nav md:hidden" id="mobile-nav" aria-label="mobile">
     <div class="flex flex-col gap-1 px-5 pb-4">
-      {labNav.map((item) => (
+      {catNav.map((item) => (
         <a href={withBase(item.href)} class="mobile-nav-link">{t(item.key)}</a>
       ))}
-      {selectNav && (
-        <a href={withBase(selectNav.href)} class="mobile-nav-link mobile-nav-link--select">{t(selectNav.key)}</a>
-      )}
       <div class="h-px bg-[var(--color-border-subtle)] my-1"></div>
       {staticLinks.map((item) => (
         <a href={withBase(item.href)} class="mobile-nav-link">{t(item.key)}</a>
@@ -120,14 +112,6 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
     color: var(--color-text);
     background: var(--color-accent-muted);
   }
-  .nav-link--select {
-    color: var(--color-select-accent);
-  }
-  .nav-link--select:hover {
-    color: var(--color-select-dim);
-    background: var(--color-select-muted);
-  }
-
   .icon-btn {
     display: inline-flex;
     align-items: center;
@@ -167,8 +151,5 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   }
   .mobile-nav-link:hover {
     color: var(--color-text);
-  }
-  .mobile-nav-link--select {
-    color: var(--color-select-accent);
   }
 </style>

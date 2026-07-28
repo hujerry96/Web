@@ -20,7 +20,7 @@ tags:
   - '電池技術'
   - '能源儲存'
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

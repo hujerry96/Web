@@ -4,7 +4,6 @@ import { SITE } from '../consts';
 import { HREFLANG } from '../i18n/config';
 import type { Post } from '../lib/content';
 import { buildCanonical, buildHreflang, articleLd, breadcrumbLd, websiteLd } from '../lib/seo';
-import { getContentZone } from '../lib/content';
 import Meta from '../components/seo/Meta.astro';
 import OpenGraph from '../components/seo/OpenGraph.astro';
 import TwitterCard from '../components/seo/TwitterCard.astro';
@@ -25,9 +24,6 @@ interface Props {
 
 const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, wide = false } = Astro.props;
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
-const pathParts = path.split('/').filter(Boolean);
-const category = pathParts.length >= 2 ? pathParts[1] : '';
-const zone = category ? getContentZone(category, post?.data?.brand) : 'lab';
 const t = useTranslations(locale);
 const url = `${SITE.url}${path}`;
 const canonical = buildCanonical(post, path);
@@ -59,8 +55,8 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       })();
     </script>
   </head>
-  <body data-zone={zone}>
-    <Header path={path} locale={locale} zone={zone} />
+  <body>
+    <Header path={path} locale={locale} />
     <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
     <main class={`mx-auto px-5 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}>
       <slot />

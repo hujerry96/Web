@@ -9,8 +9,9 @@ cover: ./particle-analyzer-gui.png
 category: 'guides'
 tags: ['Python', 'SEM', '影像處理', '材料科學']
 locale: 'zh'
-brand: lab
+
 draft: false
+project: true
 ---
 
 在材料研究與品管流程中，粒徑分布的量化是一項基礎且頻繁的工作。典型情況是：取得一張掃描式電子顯微鏡（SEM）影像後，需要回報平均粒徑、分布寬度，以及 D10、D50、D90 等特徵值。若以人工方式逐顆量測，不僅耗時，量測邊界的判定也會帶入操作者間的變異。本篇介紹的 SEM 粒徑分析工具，即針對此需求設計，目標是以一致的流程產出可重複的數據。

@@ -9,11 +9,9 @@ cover: ./ai-productivity-cover.png
 category: 'guides'
 tags: ['KDP', 'Productivity', 'AI', 'Knowledge Work']
 locale: 'en'
-brand: select
-selectCategory: finance-career
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H6N4YY8K'
+
+
+draft: false
 ---
 
 Here is a thought worth sitting with: the average knowledge worker now spends more time managing their productivity system than actually doing productive work. Between the task manager you set up in January, the note-taking app you migrated to in March, the calendar blocking method you abandoned by May, and the AI writing assistant you are still not sure about, the tools have become the job. This is not laziness. It is the opposite. It is the desperate hope that the right configuration of software will finally make the hard parts of thinking feel easy.

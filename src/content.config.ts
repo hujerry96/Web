@@ -25,15 +25,10 @@ const post = defineCollection({
       cover: image().optional(),
       category: z.string(),
       tags: z.array(z.string()).default([]),
-      brand: z.enum(['lab', 'select']).default('lab'),
-      selectCategory: z.string().optional(),
+      project: z.boolean().default(false),
       canonical: z.string().url().optional(),
       locale: z.enum(['zh', 'en']),
       draft: z.boolean().default(false),
-      // 未來擴充：分潤連結（不加邏輯，僅預留欄位）
-      affiliate: z
-        .object({ shopee: z.string().url().optional(), amazon: z.string().url().optional() })
-        .optional(),
     }),
 });
 

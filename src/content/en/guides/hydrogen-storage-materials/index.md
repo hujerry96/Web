@@ -19,7 +19,7 @@ tags:
   - 'Hydrogen Energy'
   - 'Energy Storage'
 locale: 'en'
-brand: lab
+
 draft: false
 ---
 

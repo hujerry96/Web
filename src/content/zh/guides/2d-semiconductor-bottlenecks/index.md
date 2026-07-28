@@ -10,7 +10,7 @@ updated: 2026-07-28
 category: 'guides'
 tags: ['材料科學', '半導體', '二維材料']
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

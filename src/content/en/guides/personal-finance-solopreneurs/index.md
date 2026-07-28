@@ -9,11 +9,9 @@ cover: ./personal-finance-solopreneurs-cover.png
 category: 'guides'
 tags: ['KDP', 'Personal Finance', 'Solopreneur', 'Freelance']
 locale: 'en'
-brand: select
-selectCategory: finance-career
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H6M6KVGL'
+
+
+draft: false
 ---
 
 Most personal finance advice assumes you get paid the same amount on the same day every two weeks. If that describes your situation, the standard advice works fine. Put 20% toward savings. Build a three-month emergency fund. Max out your 401(k). Follow the flowchart and you will probably be okay.

@@ -9,11 +9,9 @@ cover: ./kyoto-travel-guide-cover.png
 category: 'guides'
 tags: ['KDP', 'Travel', 'Kyoto', 'Japan']
 locale: 'en'
-brand: select
-selectCategory: travel-food
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0GX2YCSN4'
+
+
+draft: false
 ---
 
 Kyoto has a problem that most cities would envy. It is too popular. The temples, the bamboo grove, the geisha district, these are genuine cultural treasures that draw visitors from everywhere. They are also so crowded during peak hours that the experience can become the opposite of what you traveled across the world to find. You came for tranquility and instead you are shuffling through a corridor of selfie sticks.

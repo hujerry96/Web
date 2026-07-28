@@ -9,8 +9,9 @@ cover: ./particle-analyzer-gui.png
 category: 'guides'
 tags: ['Python', 'SEM', 'Image Processing', 'Materials']
 locale: 'en'
-brand: lab
+
 draft: false
+project: true
 ---
 
 Quantifying particle size distribution is a frequent and foundational task in materials research and quality control. The typical workflow begins with a scanning electron microscopy (SEM) image, after which the mean diameter, distribution width, and characteristic values such as D10, D50, and D90 must be reported. Manual measurement by hand is time consuming and introduces inter-operator variability in how boundaries are drawn. The SEM Particle Analyzer described here targets this need: it produces reproducible numbers through a consistent, automated pipeline.

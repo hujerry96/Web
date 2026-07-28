@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   const all = await getPosts();
   const locales = ['zh', 'en'] as Locale[];
   return locales.map((locale) => {
-    const posts = all.filter((p) => p.id.startsWith(`${locale}/`) && p.data.brand !== 'select');
+    const posts = all.filter((p) => p.id.startsWith(`${locale}/`));
     return { params: { locale }, props: { posts } };
   });
 }
@@ -18,80 +18,73 @@ export async function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const { posts } = Astro.props as { posts: any[] };
 const t = useTranslations(locale);
-const cats = SITE.categories[locale] as Record<string, string>;
 const path = `/${locale}`;
 
-const featured = posts[0];
-const rest = posts.slice(1, 10);
-const featuredCat = featured ? (featured.id.split('/')[1] as string) : '';
-const featuredCatName = featured ? ((SITE.categories[locale] as Record<string, string>)[featuredCat] ?? featuredCat) : '';
+const projects = posts.filter((p) => p.data.project).slice(0, 2);
+const latest = posts.slice(0, 6);
 const catCounts: Record<string, number> = {};
 for (const p of posts) { const c = p.id.split('/')[1]; catCounts[c] = (catCounts[c] ?? 0) + 1; }
+const cats = SITE.categories[locale] as Record<string, string>;
 ---
-<BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} post={featured} breadcrumb={[]} wide>
+<BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} wide>
 
-  {/* ── Hero ── */}
-  <section class="pt-[clamp(3rem,8vw,7rem)] pb-[clamp(2rem,4vw,4rem)] reveal">
-    <div class="max-w-3xl">
-      <span class="inline-block text-[0.72rem] font-medium tracking-[0.15em] uppercase text-[var(--color-accent)] mb-4">{t('home.tagline')}</span>
-      <h1 class="text-[clamp(2.2rem,1rem+5vw,3.75rem)] tracking-tight leading-[1.08] mb-5">{SITE.name}</h1>
-      <p class="text-[var(--color-text-secondary)] text-[clamp(1rem,0.9rem+0.5vw,1.15rem)] leading-relaxed max-w-[38rem]">{t('home.intro')}</p>
+  <!-- ── Particle Hero ── -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <span class="hero-badge">{t('home.tagline')}</span>
+      <h1 class="hero-title">Hu Lab</h1>
+      <p class="hero-desc">{t('home.intro')}</p>
+      <div class="hero-cats">
+        {Object.entries(cats).map(([key, name]) => (
+          <a href={withBase(`/${locale}/${key}`)} class="hero-cat">
+            {name}
+            <span class="hero-cat-count">{catCounts[key] ?? 0}</span>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
-  {/* ── Category filters ── */}
-  <nav class="flex flex-wrap gap-2 mb-10 reveal reveal-delay-1" aria-label="categories">
-    {Object.entries(cats).map(([key, name]) => {
-      const isSel = key === 'select';
-      return (
-        <a
-          href={withBase(`/${locale}/${key}`)}
-          class:list={[
-            'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium border transition-all duration-200',
-            isSel
-              ? 'border-[var(--color-select-accent)] bg-[var(--color-select-muted)] text-[var(--color-select-accent)] hover:bg-[var(--color-select-glow)]'
-              : 'border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-muted)]'
-          ]}
-        >
-          {name}
-          <span class="text-[0.7rem] opacity-60">{catCounts[key] ?? 0}</span>
-        </a>
-      );
-    })}
-  </nav>
-
-  {/* ── Featured ── */}
-  {featured && (
-    <section class="mb-14 reveal reveal-delay-2">
-      <a
-        class="featured-card group"
-        href={withBase(`/${locale}/${featuredCat}/${featured.data.slug ?? featured.id.split('/').slice(2).join('/')}`)}
-      >
-        <div class="featured-card__image">
-          {featured.data.cover
-            ? <Image src={featured.data.cover} alt={featured.data.title} width={900} height={560} class="w-full h-full object-cover" loading="eager" />
-            : <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm"><span>{featuredCatName}</span></div>
-          }
-        </div>
-        <div class="featured-card__body">
-          <span class="text-[0.72rem] font-medium uppercase tracking-[0.1em] text-[var(--color-accent)]">{featuredCatName}</span>
-          <h2 class="text-[clamp(1.15rem,0.9rem+1vw,1.5rem)] font-display font-semibold mt-3 mb-2 leading-snug group-hover:text-[var(--color-accent)] transition-colors duration-200">{featured.data.title}</h2>
-          <p class="text-[var(--color-text-secondary)] text-[0.9rem] mb-3 leading-relaxed">{featured.data.description}</p>
-          <div class="flex gap-3 items-center text-[0.8rem] text-[var(--color-text-tertiary)]">
-            <span>{featured.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</span>
-            <span class="opacity-40">·</span>
-            <span>{readingTime(featured.body, locale)}</span>
-          </div>
-        </div>
-      </a>
+  <!-- ── Projects ── -->
+  {projects.length > 0 && (
+    <section class="section reveal">
+      <h2 class="section-label">{t('home.projects')}</h2>
+      <div class="project-grid">
+        {projects.map((post) => {
+          const cat = post.id.split('/')[1];
+          const catName = cats[cat] ?? cat;
+          const slug = post.data.slug ?? post.id.split('/').slice(2).join('/');
+          return (
+            <a href={withBase(`/${locale}/${cat}/${slug}`)} class="project-card group">
+              <div class="project-card__image">
+                {post.data.cover
+                  ? <Image src={post.data.cover} alt={post.data.title} width={640} height={400} class="w-full h-full object-cover" loading="lazy" />
+                  : <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm">{catName}</div>
+                }
+              </div>
+              <div class="project-card__body">
+                <span class="project-card__cat">{catName}</span>
+                <h3 class="project-card__title">{post.data.title}</h3>
+                <p class="project-card__desc">{post.data.description}</p>
+                <div class="project-card__meta">
+                  <span>{post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</span>
+                  <span class="opacity-40">·</span>
+                  <span>{readingTime(post.body, locale)}</span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
     </section>
   )}
 
-  {/* ── Latest posts ── */}
-  <section class="mb-16 reveal reveal-delay-3">
-    <h2 class="text-[0.72rem] font-medium tracking-[0.1em] uppercase text-[var(--color-text-tertiary)] mb-5 font-body">{t('home.latest')}</h2>
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-5">
-      {rest.map((post) => (
+  <!-- ── Latest posts ── -->
+  <section class="section reveal reveal-delay-1">
+    <h2 class="section-label">{t('home.latest')}</h2>
+    <div class="post-grid">
+      {latest.map((post) => (
         <ArticleCard post={post} locale={locale} />
       ))}
     </div>
@@ -99,48 +92,319 @@ for (const p of posts) { const c = p.id.split('/')[1]; catCounts[c] = (catCounts
 </BaseLayout>
 
 <style>
-  .featured-card {
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6rem 1.5rem 4rem;
+  }
+  .hero-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 640px;
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 1.5rem + 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    color: var(--color-text);
+  }
+  .hero-desc {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 2rem;
+  }
+  .hero-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+  .hero-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition: all 200ms var(--ease);
+  }
+  .hero-cat:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background: var(--color-accent-muted);
+  }
+  .hero-cat-count {
+    font-size: 0.7rem;
+    opacity: 0.6;
+  }
+
+  /* ── Sections ── */
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 0 0 1.5rem;
+  }
+
+  /* ── Project cards ── */
+  .project-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .project-card {
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--color-border);
     border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease);
+    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
+    background: var(--color-surface);
   }
-  .featured-card:hover {
+  .project-card:hover {
     border-color: var(--color-accent);
     box-shadow: 0 12px 40px -10px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
   }
-  .featured-card__image {
-    min-height: 280px;
+  .project-card__image {
+    aspect-ratio: 16/10;
     overflow: hidden;
-    background: var(--color-surface);
+    background: var(--color-surface-raised);
   }
-  .featured-card__image :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 600ms var(--ease);
+  .project-card__image :global(img) {
+    transition: transform 500ms var(--ease);
   }
-  .featured-card:hover .featured-card__image :global(img) {
-    transform: scale(1.03);
+  .project-card:hover .project-card__image :global(img) {
+    transform: scale(1.04);
   }
-  .featured-card__body {
-    padding: clamp(1.5rem, 3vw, 2.5rem);
+  .project-card__body {
+    padding: 1.25rem 1.5rem 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background: var(--color-surface);
+    gap: 0.35rem;
+    flex: 1;
+  }
+  .project-card__cat {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+  .project-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    color: var(--color-text);
+    transition: color 200ms var(--ease);
+  }
+  .project-card:hover .project-card__title {
+    color: var(--color-accent);
+  }
+  .project-card__desc {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .project-card__meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--color-text-tertiary);
+    margin-top: auto;
+    padding-top: 0.75rem;
+  }
+
+  /* ── Post grid ── */
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: 1.25rem;
   }
 
   @media (max-width: 640px) {
-    .featured-card {
+    .project-grid {
       grid-template-columns: 1fr;
     }
-    .featured-card__image {
-      min-height: 180px;
+    .hero {
+      min-height: 80vh;
+      padding: 4rem 1.5rem 3rem;
     }
   }
 </style>
+
+<script>
+  // ── Particle canvas (Vercel-style, parallax depth + glow) ──
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, particles = [], mouse = { x: 0, y: 0 };
+    const LAYERS = 3;
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function getAccent() {
+      const style = getComputedStyle(document.documentElement);
+      return style.getPropertyValue('--color-accent').trim() || '#6c8cff';
+    }
+
+    function hexToRgb(hex) {
+      const r = parseInt(hex.slice(1,3), 16);
+      const g = parseInt(hex.slice(3,5), 16);
+      const b = parseInt(hex.slice(5,7), 16);
+      return { r, g, b };
+    }
+
+    function createParticles() {
+      particles = [];
+      const accent = hexToRgb(getAccent());
+      // ponytail: fixed particle count, fine for ~200 viewports; dynamic scaling if perf matters
+      for (let i = 0; i < 120; i++) {
+        const layer = Math.floor(Math.random() * LAYERS);
+        const size = layer === 0 ? 0.5 + Math.random() * 1 : layer === 1 ? 1.2 + Math.random() * 1.5 : 2 + Math.random() * 2.5;
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * (0.15 + layer * 0.08),
+          vy: (Math.random() - 0.5) * (0.15 + layer * 0.08),
+          size,
+          opacity: layer === 0 ? 0.2 + Math.random() * 0.3 : layer === 1 ? 0.3 + Math.random() * 0.4 : 0.15 + Math.random() * 0.25,
+          layer,
+          // ponytail: color clamped to accent; multi-color if brand needs it
+          glow: layer === 2,
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      const accent = hexToRgb(getAccent());
+      const parX = (mouse.x / w - 0.5) * 2;
+      const parY = (mouse.y / h - 0.5) * 2;
+
+      for (const p of particles) {
+        const dx = parX * (1 + p.layer * 0.8) * 20;
+        const dy = parY * (1 + p.layer * 0.8) * 20;
+        const px = p.x + dx;
+        const py = p.y + dy;
+
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+
+        if (p.glow) {
+          // ponytail: single-pass radial glow; multi-pass for bloom quality
+          const g = ctx.createRadialGradient(px, py, 0, px, py, p.size * 4);
+          g.addColorStop(0, `rgba(${accent.r},${accent.g},${accent.b},${p.opacity * 0.8})`);
+          g.addColorStop(0.4, `rgba(${accent.r},${accent.g},${accent.b},${p.opacity * 0.2})`);
+          g.addColorStop(1, `rgba(${accent.r},${accent.g},${accent.b},0)`);
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(px, py, p.size * 0.6, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${accent.r},${accent.g},${accent.b},${p.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    function update() {
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -50) p.x = w + 50;
+        if (p.x > w + 50) p.x = -50;
+        if (p.y < -50) p.y = h + 50;
+        if (p.y > h + 50) p.y = -50;
+      }
+      draw();
+      requestAnimationFrame(update);
+    }
+
+    function handleMouse(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    }
+
+    function handleResize() {
+      resize();
+      createParticles();
+    }
+
+    // Re-read accent on theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        setTimeout(createParticles, 50);
+      });
+    }
+
+    resize();
+    createParticles();
+    update();
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouse);
+  })();
+</script>

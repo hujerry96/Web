@@ -9,11 +9,9 @@ cover: ./sport-anatomy-coloring-book-cover.png
 category: 'journal'
 tags: ['KDP', 'Coloring Book', 'Sports Anatomy', 'Physiotherapy', 'Athletic Training']
 locale: 'en'
-brand: select
-selectCategory: lifestyle
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0GYWP33WH'
+
+
+draft: false
 ---
 
 Ask any physiotherapy student, athletic trainer, or serious weekend athlete what the hardest part of learning anatomy is, and you'll rarely hear "there's too little information." Textbooks are thick, YouTube channels are endless, and every search engine will happily bury you in diagrams. The real problem is retention. You can read about the piriformis muscle fifteen times and still blank on where it attaches the moment a patient describes deep gluteal pain shooting down the leg. Anatomy isn't a knowledge problem. It's a memory problem, and memory responds to a very specific kind of effort.

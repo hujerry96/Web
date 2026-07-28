@@ -9,10 +9,8 @@ cover: ./materials-characterization-notebook-cover.png
 category: 'reviews'
 tags: ['KDP', 'Lab Notebook', 'Materials Characterization', 'Engineering']
 locale: 'en'
-brand: lab
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H8M556H3'
+
+draft: false
 ---
 
 Materials characterization generates a specific kind of mess. The instruments produce digital files, but the context for those files lives in your head or in a scribbled note. That XRD pattern you ran last month, what were the scan parameters? That SEM image from three weeks ago, was that the sample with the longer annealing time or the higher temperature? These questions come up constantly in characterization work, and the answers are surprisingly hard to retrieve unless you have a system.

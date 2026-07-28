@@ -9,11 +9,9 @@ cover: ./organs-adventure-cover.png
 category: 'reviews'
 tags: ['KDP', 'Puzzles', 'Brain Games', 'Cognitive Training']
 locale: 'en'
-brand: select
-selectCategory: lifestyle
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H8Q8H9LR'
+
+
+draft: false
 ---
 
 There are broadly two kinds of puzzle books. The first is the kind that demands serious concentration. Sudoku at the expert level, cryptic crosswords, math puzzles that make you reach for scratch paper. These are rewarding if you are in the mood, but they require a specific mental state that is not always available after a long day. The second kind is the activity book designed for children, which is engaging for about five minutes before the adult brain craves something with more substance.

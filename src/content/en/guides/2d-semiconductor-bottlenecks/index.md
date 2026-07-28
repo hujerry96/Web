@@ -10,7 +10,7 @@ updated: 2026-07-28
 category: 'guides'
 tags: ['Materials Science', 'Semiconductors', '2D Materials']
 locale: 'en'
-brand: lab
+
 draft: false
 ---
 

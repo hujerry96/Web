@@ -19,7 +19,7 @@ tags:
   - 'Nuclear Fusion'
   - 'Energy'
 locale: 'en'
-brand: lab
+
 draft: false
 ---
 

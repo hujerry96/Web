@@ -19,7 +19,7 @@ tags:
   - '核融合'
   - '能源'
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

@@ -9,8 +9,9 @@ cover: ./thesis-formatter-gui.png
 category: 'guides'
 tags: ['Python', 'Word', 'Thesis', 'Automation']
 locale: 'en'
-brand: lab
+
 draft: false
+project: true
 ---
 
 Bringing a master or PhD thesis into formal compliance is often a heavy and error-prone stage of the writing process. Institutional style guides are typically lengthy and demanding: Roman numerals for the front matter, Arabic for the body; figure numbers as "Figure 1.1" rather than "Figure 1-1"; heading levels, first-line indents, line spacing, and reference cross-references, any one of which can trigger a rejection. The Thesis Format Fixer presented here targets this repetitive, rule-defined work with an automated solution.

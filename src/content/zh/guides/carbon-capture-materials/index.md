@@ -19,7 +19,7 @@ tags:
   - '碳捕捉'
   - '氣候科技'
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

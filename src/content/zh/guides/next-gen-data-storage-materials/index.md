@@ -10,7 +10,7 @@ updated: 2026-07-24
 category: 'guides'
 tags: ['材料科學', '數據儲存', '半導體記憶體']
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

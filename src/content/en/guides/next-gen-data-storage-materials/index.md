@@ -10,7 +10,7 @@ updated: 2026-07-24
 category: 'guides'
 tags: ['Materials Science', 'Data Storage', 'Semiconductor Memory']
 locale: 'en'
-brand: lab
+
 draft: false
 ---
 

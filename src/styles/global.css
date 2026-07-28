@@ -24,10 +24,6 @@
   --color-accent-dim: #4a6adf;
   --color-accent-muted: rgba(108, 140, 255, 0.08);
   --color-accent-glow: rgba(108, 140, 255, 0.15);
-  --color-select-accent: #e8a87c;
-  --color-select-dim: #d4946a;
-  --color-select-muted: rgba(232, 168, 124, 0.08);
-  --color-select-glow: rgba(232, 168, 124, 0.15);
   --color-border: #26262e;
   --color-border-subtle: #1e1e24;
   --color-border-hover: #363640;
@@ -50,22 +46,10 @@
   --color-accent-dim: #2d4ab8;
   --color-accent-muted: rgba(61, 92, 204, 0.06);
   --color-accent-glow: rgba(61, 92, 204, 0.1);
-  --color-select-accent: #b87530;
-  --color-select-dim: #9a5f20;
-  --color-select-muted: rgba(184, 117, 48, 0.06);
-  --color-select-glow: rgba(184, 117, 48, 0.1);
   --color-border: #e2e0dc;
   --color-border-subtle: #ece9e4;
   --color-border-hover: #ccc8c0;
   --color-selection: rgba(61, 92, 204, 0.15);
-}
-
-/* ── Select zone ── */
-[data-zone="select"] {
-  --color-accent: var(--color-select-accent);
-  --color-accent-dim: var(--color-select-dim);
-  --color-accent-muted: var(--color-select-muted);
-  --color-accent-glow: var(--color-select-glow);
 }
 
 /* ═══════════════════════════════════════════
@@ -202,9 +186,6 @@ h4 { font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
   line-height: 1.75;
   max-width: 72ch;
   color: var(--color-text);
-}
-[data-zone="select"] .prose {
-  font-family: var(--font-body);
 }
 
 .prose p { margin: 1rem 0; }

@@ -9,11 +9,9 @@ cover: ./mid-career-pivot-cover.png
 category: 'reviews'
 tags: ['KDP', 'Career', 'Tech', 'Pivot']
 locale: 'en'
-brand: select
-selectCategory: finance-career
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H6NF1513'
+
+
+draft: false
 ---
 
 Around year ten in a tech career, something shifts. The problems that used to feel interesting start feeling repetitive. The frameworks you spent years mastering are being replaced by newer ones you are supposed to learn in your spare time. The idea of starting another project with the same architecture, the same standup format, the same sprint cycle, becomes less motivating than it once was.

@@ -9,10 +9,8 @@ cover: ./materials-science-guide-cover.png
 category: 'guides'
 tags: ['KDP', 'Materials Science', 'Study Guide', 'Engineering']
 locale: 'en'
-brand: lab
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H8TMBJ4T'
+
+draft: false
 ---
 
 Materials science occupies an awkward spot in the engineering curriculum. It is not purely theoretical like thermodynamics, and it is not purely applied like mechanics. It sits in the middle, demanding that you understand atomic-scale phenomena well enough to predict macroscopic behavior. This is hard because the intuitive models that work for larger scales (rigid bodies, continuous fluids) break down at the atomic level. You cannot see a dislocation move, but you need to know how it moves to understand why metals deform the way they do.

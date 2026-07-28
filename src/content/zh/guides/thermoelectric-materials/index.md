@@ -10,7 +10,7 @@ updated: 2026-07-24
 category: 'guides'
 tags: ['材料科學', '熱電', '能源效率']
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

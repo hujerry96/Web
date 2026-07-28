@@ -25,7 +25,7 @@ tags:
   - '太陽能'
   - '半導體'
 locale: 'zh'
-brand: lab
+
 draft: true
 ---
 

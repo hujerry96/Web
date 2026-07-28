@@ -9,11 +9,9 @@ cover: ./side-hustle-cover.png
 category: 'guides'
 tags: ['KDP', 'Side Hustle', 'Parenting', 'Income']
 locale: 'en'
-brand: select
-selectCategory: finance-career
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H6NGXD4Z'
+
+
+draft: false
 ---
 
 Read any side hustle guide and you will notice something. The advice assumes you have uninterrupted blocks of time. "Spend two hours a day on your freelance work." "Dedicate weekends to building your audience." "Wake up at 5 AM to grind before your real job starts." If you are a parent of young children, this advice is not just unhelpful. It is insulting, because it implies the only barrier between you and extra income is motivation, as if you are choosing not to find the hours.

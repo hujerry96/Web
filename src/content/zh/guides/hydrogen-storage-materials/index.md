@@ -19,7 +19,7 @@ tags:
   - '氫能'
   - '能源儲存'
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 

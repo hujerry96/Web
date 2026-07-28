@@ -9,10 +9,8 @@ cover: ./materials-thermodynamics-notes-cover.png
 category: 'guides'
 tags: ['KDP', 'Thermodynamics', 'Materials Science', 'Engineering']
 locale: 'en'
-brand: lab
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H93B39Q8'
+
+draft: false
 ---
 
 Thermodynamics has a reputation among engineering students that precedes it. It is the course that filters out the people who were not serious. The equations are numerous, the notation is dense, and the problems require a kind of systematic thinking that does not come naturally to everyone. But here is the thing. Thermodynamics is not actually that conceptually complex. The underlying ideas are remarkably few. What makes it hard is that the mathematical formalism is taught before the physical intuition, and students end up manipulating symbols they do not understand.

@@ -9,10 +9,8 @@ cover: ./semiconductor-lab-notebook-cover.png
 category: 'reviews'
 tags: ['KDP', 'Lab Notebook', 'Semiconductor', 'Engineering']
 locale: 'en'
-brand: lab
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H8M1CGC4'
+
+draft: false
 ---
 
 Ask any semiconductor process engineer about the worst mistake they have seen in a cleanroom, and the answer will probably involve a missing or incorrect log entry. A deposition recipe that ran at the wrong temperature because the previous user did not record a change. A lithography step that failed because the resist batch was not noted. A CMP polish that damaged a wafer because the pad conditioning history was unclear. The equipment itself is reliable. The human layer on top of it, the tracking of what was done, when, and under what conditions, is where things fall apart.

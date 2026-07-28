@@ -9,11 +9,9 @@ cover: ./mediterranean-meal-planning-cover.png
 category: 'guides'
 tags: ['KDP', 'Mediterranean Diet', 'Meal Planning', 'Family', 'Nutrition']
 locale: 'en'
-brand: select
-selectCategory: travel-food
-draft: false
-affiliate:
-  amazon: 'https://www.amazon.com/dp/B0H6NC92BH'
+
+
+draft: false
 ---
 
 The Mediterranean diet has been ranked the best overall diet by nutrition professionals for seven consecutive years. It reduces cardiovascular risk, supports cognitive health, and is associated with lower rates of chronic disease across the board. The evidence is about as solid as nutritional epidemiology gets. Yet when you suggest a family adopt Mediterranean eating, the reaction is often the same. "That sounds expensive." "My kids will not eat that." "I do not have time to cook like that."

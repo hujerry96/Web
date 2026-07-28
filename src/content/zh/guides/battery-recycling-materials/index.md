@@ -10,7 +10,7 @@ updated: 2026-07-24
 category: 'guides'
 tags: ['材料科學', '電池回收', '循環經濟']
 locale: 'zh'
-brand: lab
+
 draft: false
 ---
 
