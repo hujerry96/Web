@@ -17,7 +17,7 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   { href: `/${locale}/contact`, key: 'nav.contact' },
 ];
 ---
-<header class="sticky top-0 z-50 border-b border-border bg-lab-bg/80 backdrop-blur-md backdrop-saturate-150" id="site-header">
+<header class="border-b border-border bg-lab-surface" id="site-header">
   <div class="mx-auto flex max-w-4xl items-center justify-between px-5 h-13">
     <button class="hamburger flex h-10 w-10 items-center justify-center border-none bg-transparent cursor-pointer text-lab-text" id="hamburger" aria-label={t('nav.home')}>
       <span class="hamburger-line block w-full h-[2px] bg-current rounded-sm transition-all duration-250"></span>

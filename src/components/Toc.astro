@@ -11,7 +11,7 @@ const t = useTranslations(locale);
 ---
 
 {headings.length > 0 && (
-  <nav class="sticky top-[104px] self-start max-h-[calc(100vh-110px)] overflow-y-auto font-serif pl-5 border-l border-border" aria-label={t('article.toc')}>
+  <nav class="sticky top-6 self-start max-h-[calc(100vh-24px)] overflow-y-auto font-serif pl-5 border-l border-border" aria-label={t('article.toc')}>
     <span class="inline-block font-serif text-[0.74rem] font-medium tracking-[0.28em] uppercase text-lab-accent mb-3">{t('article.toc')}</span>
     <ul class="list-none m-0 p-0">
       {headings.map((h) => (

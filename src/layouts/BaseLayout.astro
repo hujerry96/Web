@@ -48,17 +48,17 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
     <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale]} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}
-    <!-- 全襯線字體：Lora（英文）+ Noto Serif TC（中文）。preconnect + preload 防 FOUC -->
+    <!-- Stripe Press direction: IBM Plex Serif (editorial) + Inter (tech UI) + JetBrains Mono (code) + Noto Serif TC (Chinese) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,450;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,400;14..32,450;14..32,500;14..32,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,450;0,500;0,600;1,400;1,500&family=Inter:opsz,wght@14..32,400;14..32,450;14..32,500;14..32,600&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap"
     />
     <script>
       (function() {
