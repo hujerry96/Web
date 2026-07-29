@@ -52,6 +52,9 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
         const saved = localStorage.getItem('theme');
         const prefers = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', saved || prefers);
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('js');
+        }
       })();
     </script>
   </head>
