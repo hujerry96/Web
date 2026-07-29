@@ -50,7 +50,8 @@ import GithubSlugger from 'github-slugger';
 export function extractHeadings(body: string): { text: string; id: string; level: number }[] {
   const out: { text: string; id: string; level: number }[] = [];
   const slugger = new GithubSlugger();
-  const lines = body.split('\n');
+  // Normalise Windows \r\n so $ anchor works correctly
+  const lines = body.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
   let inFence = false;
   for (const line of lines) {
     if (/^\s*```/.test(line)) { inFence = !inFence; continue; }
