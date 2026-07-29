@@ -44,7 +44,7 @@ const searchIndexUrl = withBase('/search-index.json');
     border-radius: 10px;
     background: var(--color-surface);
     color: var(--color-text);
-    transition: border-color 250ms var(--ease-out), box-shadow 250ms var(--ease-out);
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
   }
   .search-input:focus {
     outline: none;
@@ -105,14 +105,11 @@ const searchIndexUrl = withBase('/search-index.json');
     border-radius: 10px;
     background: var(--color-surface);
     text-decoration: none;
-    transition: border-color 300ms var(--ease-out), transform 300ms var(--ease-out-expo), box-shadow 300ms var(--ease-out);
+    transition: border-color 200ms var(--ease), transform 200ms var(--ease), box-shadow 200ms var(--ease);
   }
   .search-result:hover {
     border-color: var(--color-accent);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px -6px var(--color-accent-glow);
-  }
-  .search-result:active {
-    transform: scale(0.98);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px -4px var(--color-accent-glow);
   }
 </style>

@@ -51,14 +51,11 @@ const social = SITE.social as Record<string, string>;
     border-radius: 10px;
     background: var(--color-surface);
     text-decoration: none;
-    transition: border-color 300ms var(--ease-out), box-shadow 300ms var(--ease-out), transform 300ms var(--ease-out-expo);
+    transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease), transform 200ms var(--ease);
   }
   .contact-card:hover {
     border-color: var(--color-accent);
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 8px 24px -6px var(--color-accent-glow);
-  }
-  .contact-card:active {
-    transform: scale(0.98);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px -4px var(--color-accent-glow);
   }
 </style>

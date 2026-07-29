@@ -67,7 +67,7 @@ const breadcrumb = [
         </article>
 
         {post.data.tags.length > 0 && (
-          <div class="tags reveal fade reveal-delay-2">
+          <div class="tags">
             {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
           </div>
         )}
@@ -82,7 +82,7 @@ const breadcrumb = [
     {related.length > 0 && (
       <section class="mt-16 pt-10 border-t border-[var(--color-border-subtle)] reveal">
         <h2 class="text-center text-[clamp(1.3rem,0.9rem+1.5vw,1.75rem)] font-display font-semibold mb-8">{t('article.related')}</h2>
-        <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-5 stagger-children">
+        <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-5">
           {related.map((r) => <ArticleCard post={r} locale={locale} />)}
         </div>
       </section>

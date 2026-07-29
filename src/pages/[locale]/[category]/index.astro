@@ -31,7 +31,7 @@ const path = `/${locale}/${category}`;
     <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-2 reveal">{catName}</h1>
     <p class="text-[var(--color-text-secondary)] text-[0.95rem] mb-8 reveal reveal-delay-1">{t('home.postsCount', { n: posts.length })}</p>
     {posts.length > 0 ? (
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-5 stagger-children">
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-5 reveal reveal-delay-2">
         {posts.map((post) => <ArticleCard post={post} locale={locale} />)}
       </div>
     ) : (
