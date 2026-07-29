@@ -89,12 +89,16 @@ const tools = [
     border-radius: 12px;
     overflow: hidden;
     background: var(--color-surface);
-    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
+    transition: border-color 400ms var(--ease-out), box-shadow 400ms var(--ease-out), transform 400ms var(--ease-out-expo);
   }
   .tool-card:hover {
     border-color: var(--color-accent);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px -6px var(--color-accent-glow), 0 2px 8px rgba(0,0,0,0.12);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 12px 32px -8px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .tool-card:active {
+    transform: scale(0.98);
+    transition-duration: 100ms;
   }
   .tool-card__header {
     height: 120px;

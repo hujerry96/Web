@@ -50,7 +50,7 @@ const cats = SITE.categories[locale] as Record<string, string>;
   {projects.length > 0 && (
     <section class="section reveal">
       <h2 class="section-label">{t('home.projects')}</h2>
-      <div class="project-grid">
+      <div class="project-grid stagger-children">
         {projects.map((post) => {
           const cat = post.id.split('/')[1];
           const catName = cats[cat] ?? cat;
@@ -83,7 +83,7 @@ const cats = SITE.categories[locale] as Record<string, string>;
   <!-- ── Latest posts ── -->
   <section class="section reveal reveal-delay-1">
     <h2 class="section-label">{t('home.latest')}</h2>
-    <div class="post-grid">
+    <div class="post-grid stagger-children">
       {latest.map((post) => (
         <ArticleCard post={post} locale={locale} />
       ))}
@@ -124,6 +124,12 @@ const cats = SITE.categories[locale] as Record<string, string>;
     text-transform: uppercase;
     color: var(--color-accent);
     margin-bottom: 1.25rem;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: heroBadgeIn 0.8s var(--ease-out-expo) 0.2s forwards;
+  }
+  @keyframes heroBadgeIn {
+    to { opacity: 1; transform: translateY(0); }
   }
   .hero-title {
     font-family: var(--font-display);
@@ -133,6 +139,12 @@ const cats = SITE.categories[locale] as Record<string, string>;
     line-height: 1.05;
     margin: 0 0 1rem;
     color: var(--color-text);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroTitleIn 0.9s var(--ease-out-expo) 0.4s forwards;
+  }
+  @keyframes heroTitleIn {
+    to { opacity: 1; transform: translateY(0); }
   }
   .hero-desc {
     font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
@@ -140,12 +152,24 @@ const cats = SITE.categories[locale] as Record<string, string>;
     line-height: 1.7;
     max-width: 480px;
     margin: 0 auto 2rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: heroDescIn 0.8s var(--ease-out-expo) 0.6s forwards;
+  }
+  @keyframes heroDescIn {
+    to { opacity: 1; transform: translateY(0); }
   }
   .hero-cats {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: heroCatsIn 0.8s var(--ease-out-expo) 0.8s forwards;
+  }
+  @keyframes heroCatsIn {
+    to { opacity: 1; transform: translateY(0); }
   }
   .hero-cat {
     display: inline-flex;
@@ -158,12 +182,17 @@ const cats = SITE.categories[locale] as Record<string, string>;
     color: var(--color-text-secondary);
     border: 1px solid var(--color-border);
     text-decoration: none;
-    transition: all 200ms var(--ease);
+    transition: all 300ms var(--ease-out), transform 250ms var(--ease-spring);
+    will-change: transform;
   }
   .hero-cat:hover {
     color: var(--color-accent);
     border-color: var(--color-accent);
     background: var(--color-accent-muted);
+    transform: translateY(-2px);
+  }
+  .hero-cat:active {
+    transform: scale(0.95);
   }
   .hero-cat-count {
     font-size: 0.7rem;
@@ -200,24 +229,45 @@ const cats = SITE.categories[locale] as Record<string, string>;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
+    position: relative;
+    transition: border-color 450ms var(--ease-out),
+                box-shadow 450ms var(--ease-out),
+                transform 450ms var(--ease-out-expo);
     background: var(--color-surface);
+    will-change: transform;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, var(--color-accent), transparent 40%, transparent 60%, var(--color-accent-dim));
+    opacity: 0;
+    transition: opacity 450ms var(--ease-out);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .project-card:hover::before {
+    opacity: 0.35;
   }
   .project-card:hover {
-    border-color: var(--color-accent);
-    box-shadow: 0 12px 40px -10px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.15);
-    transform: translateY(-3px);
+    border-color: transparent;
+    box-shadow: 0 16px 48px -12px var(--color-accent-glow), 0 4px 16px rgba(0,0,0,0.2);
+    transform: translateY(-5px) scale(1.01);
   }
   .project-card__image {
     aspect-ratio: 16/10;
     overflow: hidden;
     background: var(--color-surface-raised);
+    position: relative;
+    z-index: 1;
   }
   .project-card__image :global(img) {
-    transition: transform 500ms var(--ease);
+    transition: transform 600ms var(--ease-out-expo);
+    will-change: transform;
   }
   .project-card:hover .project-card__image :global(img) {
-    transform: scale(1.04);
+    transform: scale(1.06);
   }
   .project-card__body {
     padding: 1.25rem 1.5rem 1.5rem;
@@ -225,6 +275,13 @@ const cats = SITE.categories[locale] as Record<string, string>;
     flex-direction: column;
     gap: 0.35rem;
     flex: 1;
+    position: relative;
+    z-index: 1;
+    background: var(--color-surface);
+    transition: transform 400ms var(--ease-out-expo);
+  }
+  .project-card:hover .project-card__body {
+    transform: translateY(-2px);
   }
   .project-card__cat {
     font-size: 0.7rem;
@@ -270,6 +327,14 @@ const cats = SITE.categories[locale] as Record<string, string>;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     gap: 1.25rem;
+  }
+
+  /* Section label enhancement */
+  .section-label {
+    transition: color 300ms var(--ease-out);
+  }
+  .section:hover .section-label {
+    color: var(--color-text-secondary);
   }
 
   @media (max-width: 640px) {

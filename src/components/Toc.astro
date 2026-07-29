@@ -17,7 +17,7 @@ const t = useTranslations(locale);
       {headings.map((h) => (
         <li>
           <a href={`#${h.id}`} data-toc-link={h.id} class:list={[
-            'block py-1.5 text-[0.82rem] leading-snug text-[var(--color-text-secondary)] no-underline border-l-2 border-transparent pl-3 -ml-[2px] transition-all duration-200 hover:text-[var(--color-text)]',
+            'block py-1.5 text-[0.82rem] leading-snug text-[var(--color-text-secondary)] no-underline border-l-2 border-transparent pl-3 -ml-[2px] transition-all duration-300 hover:text-[var(--color-text)]',
             h.level === 3 && 'text-[0.78rem] pl-5'
           ]}>{h.text}</a>
         </li>

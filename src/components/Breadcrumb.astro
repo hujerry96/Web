@@ -8,7 +8,7 @@ const { items, locale } = Astro.props;
 const t = useTranslations(locale);
 const trail = [{ name: t('breadcrumb.home'), url: withBase(`/${locale}`) }, ...items];
 ---
-<nav class="text-[0.82rem] text-[var(--color-text-secondary)] mb-6 flex flex-wrap gap-1.5" aria-label="breadcrumb">
+<nav class="text-[0.82rem] text-[var(--color-text-secondary)] mb-6 flex flex-wrap gap-1.5 animate-fade-in" aria-label="breadcrumb" style="animation: fadeIn 0.6s var(--ease-out-expo) both;">
   {trail.map((item, i) => (
     <span class="flex items-center gap-1.5">
       {i > 0 && <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="opacity-30"><path d="M4.5 2.5l3.5 3.5-3.5 3.5"/></svg>}
