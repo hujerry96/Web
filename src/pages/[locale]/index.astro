@@ -307,10 +307,13 @@ const cats = SITE.categories[locale] as Record<string, string>;
       return { r, g, b };
     }
 
-    const PALETTE = ['accent', 'accent', 'accent', 'white', 'white'];
+    // Copper accent for light theme harmony
+    const COPPER = { r: 232, g: 168, b: 124 };
+    const PALETTE = ['accent', 'copper', 'white', 'white', 'accent', 'copper'];
     function pickColor(accent) {
       const t = PALETTE[Math.floor(Math.random() * PALETTE.length)];
       if (t === 'white') return { r: 255, g: 255, b: 255 };
+      if (t === 'copper') return COPPER;
       return accent;
     }
 
@@ -331,17 +334,17 @@ const cats = SITE.categories[locale] as Record<string, string>;
     function createParticles() {
       particles = [];
       const accent = hexToRgb(getAccent());
-      const COUNT = 130;
-      const FIREFLY_COUNT = 6;
+      const COUNT = 1100;
+      const FIREFLY_COUNT = 18;
 
       for (let i = 0; i < COUNT; i++) {
         const isFirefly = i < FIREFLY_COUNT;
         const baseSize = isFirefly
-          ? 1.8 + Math.random() * 1.5   // bigger
-          : 0.5 + Math.random() * 1.6;  // tiny dust
+          ? 2.0 + Math.random() * 2.0   // bigger
+          : 1.0 + Math.random() * 1.8;  // dust
         const baseOpacity = isFirefly
-          ? 0.35 + Math.random() * 0.4
-          : 0.06 + Math.random() * 0.18;
+          ? 0.3 + Math.random() * 0.35
+          : 0.04 + Math.random() * 0.12;
         const color = pickColor(accent);
 
         particles.push({
@@ -441,8 +444,8 @@ const cats = SITE.categories[locale] as Record<string, string>;
         const dx = p.x + p.dx - mouse.x;
         const dy = p.y + p.dy - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const RADIUS = 140;
-        const PUSH = 8;
+        const RADIUS = 160;
+        const PUSH = 6;
 
         if (dist < RADIUS && dist > 0.5) {
           const strength = (1 - dist / RADIUS);
