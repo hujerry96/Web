@@ -101,6 +101,10 @@ const cats = SITE.categories[locale] as Record<string, string>;
     justify-content: center;
     overflow: hidden;
     padding: 6rem 1.5rem 4rem;
+    /* Break out of parent max-w container */
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(-50vw + 50% - 1.25rem);
   }
   .hero-canvas {
     position: absolute;
@@ -279,6 +283,17 @@ const cats = SITE.categories[locale] as Record<string, string>;
     .hero {
       min-height: 80vh;
       padding: 4rem 1.5rem 3rem;
+    }
+  }
+  @media (min-width: 72rem) {
+    /* Subtle radial edge fade so particles don't clip harshly at viewport edges */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, var(--color-bg) 100%);
     }
   }
 </style>
