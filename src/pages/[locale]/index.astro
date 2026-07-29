@@ -307,13 +307,18 @@ const cats = SITE.categories[locale] as Record<string, string>;
       return { r, g, b };
     }
 
-    // Copper accent for light theme harmony
+    // 5-color palette
     const COPPER = { r: 232, g: 168, b: 124 };
-    const PALETTE = ['accent', 'copper', 'white', 'white', 'accent', 'copper'];
+    const PURPLE = { r: 167, g: 139, b: 250 };
+    const TEAL  = { r: 94,  g: 234, b: 212 };
+    const WHITE = { r: 255, g: 255, b: 255 };
+    const PALETTE = ['accent', 'copper', 'purple', 'teal', 'white'];
     function pickColor(accent) {
       const t = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-      if (t === 'white') return { r: 255, g: 255, b: 255 };
       if (t === 'copper') return COPPER;
+      if (t === 'purple') return PURPLE;
+      if (t === 'teal') return TEAL;
+      if (t === 'white') return WHITE;
       return accent;
     }
 
@@ -369,6 +374,9 @@ const cats = SITE.categories[locale] as Record<string, string>;
           freqY: 0.002 + Math.random() * 0.004,
           ampX: 4 + Math.random() * 6,
           ampY: 4 + Math.random() * 6,
+          // Brownian jitter seed
+          jitterX: (Math.random() - 0.5) * 0.2,
+          jitterY: (Math.random() - 0.5) * 0.2,
           // Original position for ripple return
           originX: 0,
           originY: 0,
@@ -429,9 +437,9 @@ const cats = SITE.categories[locale] as Record<string, string>;
           p.y += Math.sin(time * p.freqY + p.phaseY) * 0.04;
         }
 
-        // ── Natural drift ──
-        p.x += p.vx;
-        p.y += p.vy;
+        // ── Brownian motion: random jitter each frame ──
+        p.x += p.vx + (Math.random() - 0.5) * 0.14;
+        p.y += p.vy + (Math.random() - 0.5) * 0.14;
 
         // ── Wrap around ──
         const margin = 100;
