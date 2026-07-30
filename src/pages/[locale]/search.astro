@@ -29,7 +29,7 @@ const searchIndexUrl = withBase('/search-index.json');
       />
       <p class="text-[0.85rem] text-[var(--color-text-secondary)] mt-3 mb-0" id="count"></p>
       <ul class="list-none p-0 m-0 flex flex-col gap-3 mt-5" id="results"></ul>
-      <p class="text-[var(--color-text-secondary)]" id="empty" hidden>沒有找到結果。</p>
+      <p class="text-[var(--color-text-secondary)]" id="empty" hidden></p>
     </div>
   </section>
 </BaseLayout>
@@ -82,8 +82,9 @@ const searchIndexUrl = withBase('/search-index.json');
         p.tags.some((t) => t.toLowerCase().includes(term))
       )
       .slice(0, 20);
-    count.textContent = `${hits.length} 筆結果`;
+    count.textContent = `${hits.length} ${currentLocale === 'zh' ? '筆結果' : 'results'}`;
     empty.hidden = hits.length > 0;
+    empty.textContent = currentLocale === 'zh' ? '沒有找到結果。' : 'No results found.';
     results.innerHTML = hits
       .map(
         (p) =>

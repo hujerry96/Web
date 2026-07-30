@@ -56,9 +56,10 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
     </script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">{t('a11y.skip')}</a>
     <Header path={path} locale={locale} />
     <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
-    <main class={`mx-auto px-5 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}>
+    <main id="main-content" class={`mx-auto px-5 ${wide ? 'max-w-6xl' : 'max-w-4xl'}`}>
       <slot />
     </main>
     <Footer locale={locale} />

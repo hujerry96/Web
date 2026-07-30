@@ -1,0 +1,27 @@
+{
+  "detector": {
+    "ignoreRules": ["side-tab"],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "Inter",
+        "reason": "Brand font chosen intentionally — see DESIGN.md"
+      },
+      {
+        "rule": "overused-font",
+        "value": "JetBrains Mono",
+        "reason": "Brand display font chosen intentionally — see DESIGN.md"
+      },
+      {
+        "rule": "overused-font",
+        "value": "Space Grotesk",
+        "reason": "Brand display font chosen intentionally — see DESIGN.md"
+      },
+      {
+        "rule": "overused-font",
+        "value": "Noto Sans TC",
+        "reason": "Required for Chinese/CJK text rendering"
+      }
+    ]
+  }
+}

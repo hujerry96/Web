@@ -17,7 +17,7 @@ const catName = (SITE.categories[locale] as Record<string, string>)[category] ??
   <a href={href} class="block text-inherit no-underline">
     <div class="article-card__image">
       {cover ? (
-        <Image src={cover} alt={post.data.title} width={640} height={360} class="w-full h-full object-cover" loading="lazy" />
+        <Image src={cover} alt={`${post.data.title} — ${catName}`} width={640} height={360} class="w-full h-full object-cover" loading="lazy" />
       ) : (
         <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm tracking-wide">
           <span>{catName}</span>

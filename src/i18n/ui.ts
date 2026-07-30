@@ -53,6 +53,7 @@ export const ui = {
     'page.toolsDesc': '我自己做、自己也在用的兩個免費小工具，開源、可離線執行，歡迎取用。',
     'a11y.theme': '切換深色模式',
     'a11y.top': '回到頂部',
+    'a11y.skip': '跳到主要內容',
   },
   en: {
     'nav.home': 'Home',
@@ -106,6 +107,7 @@ export const ui = {
     'page.toolsDesc': 'Two free open-source tools I built and use myself. They run offline, and you are welcome to take and adapt them.',
     'a11y.theme': 'Toggle dark mode',
     'a11y.top': 'Back to top',
+    'a11y.skip': 'Skip to content',
   },
 } as const;
 

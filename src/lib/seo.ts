@@ -3,18 +3,16 @@ import { HREFLANG, LOCALES } from '../i18n/config';
 import type { Post } from './content';
 import { parseId, postPath, postSlug } from './content';
 
-// 組出該頁的 hreflang 連結陣列（含 x-default）
-// 中英內容各自獨立：文章頁只標自己語系，x-default 指向自己語系首頁；
-// 靜態頁（about/contact 等雙語皆有）才做同路徑跨語系。
+// 組出該頁的 hreflang 連結陣列
+// 靜態頁（about/contact 等雙語皆有）：依當前路徑產生各語系版本的 hreflang 連結。
+// 文章頁（中英各自獨立，無交叉翻譯）：僅標註自身語系，不做跨語系對應。
 export function buildHreflang(current: Post | null, currentPath: string): { lang: string; href: string }[] {
   const site = SITE.url;
   if (current) {
-    const links = LOCALES.map((loc) => ({
-      lang: HREFLANG[loc],
-      href: `${site}/${loc}`,
-    }));
-    return [...links, { lang: 'x-default', href: `${site}/${LOCALES[0]}` }];
+    // 文章頁：各語系文章獨立，僅標註自身語系，無 alternative
+    return [{ lang: HREFLANG[parseId(current.id).locale], href: `${site}${currentPath}` }];
   }
+  // 靜態頁：雙語皆有對應頁面，產生跨語系連結
   const links = LOCALES.map((loc) => ({
     lang: HREFLANG[loc],
     href: `${site}/${loc}${currentPath}`,
