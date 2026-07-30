@@ -429,6 +429,11 @@ const cats = SITE.categories[locale] as Record<string, string>;
     const tFOCUS = 3800;
     const tSHOW  = 4000;
 
+    // ── Theme detection ──
+    function isLight() {
+      return document.documentElement.getAttribute('data-theme') === 'light';
+    }
+
     // ── Helpers ──
     function readCss(n, fb) {
       return getComputedStyle(document.documentElement)
@@ -549,56 +554,81 @@ const cats = SITE.categories[locale] as Record<string, string>;
 
       // Scan-line noise during warm-up (fades as glow increases)
       if (elapsed < tBEAM) {
-        drawScanlines(1 - smoothstep(clamp(elapsed / tGLOW, 0, 1)));
+        const sl = isLight() ? 0.4 : 1;
+        drawScanlines((1 - smoothstep(clamp(elapsed / tGLOW, 0, 1))) * sl);
       }
 
-      // Phase 1: phosphor warm-up glow (blue, pulsing)
+      // Phase 1: phosphor warm-up glow
       if (glow > 0.01) {
         const pulse = 1 + 0.04 * Math.sin(time * 0.06);
         const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.65 * pulse);
-        const a = (glow * 0.14).toFixed(3);
-        grad.addColorStop(0, `rgba(35, 65, 110, ${a})`);
-        grad.addColorStop(0.5, `rgba(20, 40, 80, ${(a * 0.45).toFixed(3)})`);
-        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        if (isLight()) {
+          // Light theme: warm paper glow
+          const a = (glow * 0.07).toFixed(3);
+          grad.addColorStop(0, `rgba(110, 130, 160, ${a})`);
+          grad.addColorStop(0.6, `rgba(160, 170, 185, ${(a * 0.35).toFixed(3)})`);
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+        } else {
+          // Dark theme: blue phosphor glow
+          const a = (glow * 0.14).toFixed(3);
+          grad.addColorStop(0, `rgba(35, 65, 110, ${a})`);
+          grad.addColorStop(0.5, `rgba(20, 40, 80, ${(a * 0.45).toFixed(3)})`);
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+        }
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
       }
 
       // Beam-flash radial shockwave (brief over-exposed moment)
       if (flashIntensity > 0.01) {
-        // Central pure-white flash
-        const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.5 * flashRadius);
-        const fa = (flashIntensity * 0.35).toFixed(3);
-        core.addColorStop(0,   `rgba(220,235,255,${fa})`);
-        core.addColorStop(0.4, `rgba(150,190,240,${(fa * 0.6).toFixed(3)})`);
-        core.addColorStop(1,   'rgba(0,0,0,0)');
-        ctx.fillStyle = core;
-        ctx.fillRect(0, 0, w, h);
+        if (isLight()) {
+          // Light theme: darker flash (contrast against light bg)
+          const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.5 * flashRadius);
+          const fa = (flashIntensity * 0.18).toFixed(3);
+          core.addColorStop(0,   `rgba(100,130,190,${fa})`);
+          core.addColorStop(0.4, `rgba(80,110,170,${(fa * 0.5).toFixed(3)})`);
+          core.addColorStop(1,   'rgba(0,0,0,0)');
+          ctx.fillStyle = core;
+          ctx.fillRect(0, 0, w, h);
+        } else {
+          // Dark theme: bright white-blue flash
+          const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.5 * flashRadius);
+          const fa = (flashIntensity * 0.35).toFixed(3);
+          core.addColorStop(0,   `rgba(220,235,255,${fa})`);
+          core.addColorStop(0.4, `rgba(150,190,240,${(fa * 0.6).toFixed(3)})`);
+          core.addColorStop(1,   'rgba(0,0,0,0)');
+          ctx.fillStyle = core;
+          ctx.fillRect(0, 0, w, h);
 
-        // Ring shockwave expanding
-        const sw = ctx.createRadialGradient(cx, cy, flashRadius * Math.max(w, h) * 0.2,
-                                            cx, cy, flashRadius * Math.max(w, h) * 0.5);
-        const swa = (flashIntensity * 0.2).toFixed(3);
-        sw.addColorStop(0, 'rgba(255,255,255,0)');
-        sw.addColorStop(0.5, `rgba(180,210,255,${swa})`);
-        sw.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = sw;
-        ctx.beginPath();
-        ctx.arc(cx, cy, flashRadius * Math.max(w, h) * 0.5, 0, Math.PI * 2);
-        ctx.fill();
+          // Ring shockwave expanding (dark only)
+          const sw = ctx.createRadialGradient(cx, cy, flashRadius * Math.max(w, h) * 0.2,
+                                              cx, cy, flashRadius * Math.max(w, h) * 0.5);
+          const swa = (flashIntensity * 0.2).toFixed(3);
+          sw.addColorStop(0, 'rgba(255,255,255,0)');
+          sw.addColorStop(0.5, `rgba(180,210,255,${swa})`);
+          sw.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = sw;
+          ctx.beginPath();
+          ctx.arc(cx, cy, flashRadius * Math.max(w, h) * 0.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
       // Draw spots (with flash multiplier)
       for (const p of spots) drawSpot(p, focusBlur, 1 + flashIntensity * 2);
 
-      // Vignette: strong during warm-up, lighter after
-      const vigBase = elapsed < tGLOW ? 0.7
-        : elapsed < tBEAM ? 0.5
-        : 0.25;
+      // Vignette: adapt to theme
+      let vigBase;
+      if (isLight()) {
+        vigBase = elapsed < tGLOW ? 0.12 : elapsed < tBEAM ? 0.08 : 0;
+      } else {
+        vigBase = elapsed < tGLOW ? 0.7 : elapsed < tBEAM ? 0.5 : 0.25;
+      }
       if (vigBase > 0.01) {
+        const col = isLight() ? '120,125,135' : '0,0,0';
         const vig = ctx.createRadialGradient(cx, cy, w * 0.2, cx, cy, Math.max(w, h) * 0.72);
         vig.addColorStop(0, 'rgba(0,0,0,0)');
-        vig.addColorStop(1, `rgba(0,0,0,${vigBase.toFixed(3)})`);
+        vig.addColorStop(1, `rgba(${col},${vigBase.toFixed(3)})`);
         ctx.fillStyle = vig;
         ctx.fillRect(0, 0, w, h);
       }
@@ -703,10 +733,14 @@ const cats = SITE.categories[locale] as Record<string, string>;
       createSpots();
     }
 
+    // ── Watch theme toggle ──
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
       themeToggle.addEventListener('click', () => setTimeout(createSpots, 60));
     }
+    // Also re-read if data-theme changes externally
+    const themeObserver = new MutationObserver(() => setTimeout(createSpots, 60));
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     // ── Init ──
     resize();
