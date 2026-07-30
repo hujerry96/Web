@@ -405,12 +405,12 @@ const cats = SITE.categories[locale] as Record<string, string>;
   }
 
   /* ── Header hidden during hero animation, revealed together with content ── */
-  #site-header {
+  :global(#site-header) {
     opacity: 0;
     pointer-events: none;
     transition: opacity 700ms var(--ease-out), background 300ms var(--ease), border-color 300ms var(--ease), backdrop-filter 300ms var(--ease);
   }
-  #site-header.revealed {
+  :global(#site-header.revealed) {
     opacity: 1;
     pointer-events: auto;
   }
