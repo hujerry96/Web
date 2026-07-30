@@ -37,10 +37,10 @@
 
 /* ── Light theme ── warm paper, clean blue accent */
 [data-theme='light'] {
-  --color-bg: #f2f0ed;
-  --color-surface: #fafaf9;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
   --color-surface-raised: #ffffff;
-  --color-surface-overlay: rgba(250, 250, 249, 0.90);
+  --color-surface-overlay: rgba(255, 255, 255, 0.90);
   --color-text: #1e2331;
   --color-text-secondary: #5a6273;
   --color-text-tertiary: #9da6b5;

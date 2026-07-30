@@ -403,6 +403,17 @@ const cats = SITE.categories[locale] as Record<string, string>;
       background: radial-gradient(ellipse at center, transparent 58%, var(--color-bg) 100%);
     }
   }
+
+  /* ── Header hidden during hero animation, revealed together with content ── */
+  #site-header {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 700ms var(--ease-out), background 300ms var(--ease), border-color 300ms var(--ease), backdrop-filter 300ms var(--ease);
+  }
+  #site-header.revealed {
+    opacity: 1;
+    pointer-events: auto;
+  }
 </style>
 
 <script>
@@ -680,9 +691,10 @@ const cats = SITE.categories[locale] as Record<string, string>;
         ctx.fillRect(0, 0, w, h);
       }
 
-      // ── Reveal content after animation completes ──
+      // ── Reveal header + content together after animation completes ──
       if (elapsed >= tSHOW && !shownContent) {
         shownContent = true;
+        document.getElementById('site-header')?.classList.add('revealed');
         document.querySelector('.hero-content')?.classList.add('revealed');
         document.querySelectorAll('.hero-anno').forEach((el) => el.classList.add('revealed'));
         document.querySelector('.hero-scale')?.classList.add('revealed');
