@@ -65,8 +65,8 @@ Spectra Studio 採用 **Freemium** 模式，免費版就是完整的日常工具
 
 兩種安裝方式：
 
-1. **安裝程式**（推薦）：下載 `SpectraStudio-Setup-v2.0.0.exe`，雙擊執行，安裝至目前使用者目錄（不需管理員權限），並提供開始功能表捷徑與解除安裝程式。
-2. **免安裝版**：直接下載 `SpectraStudio.exe`，雙擊即可執行。
+1. **安裝程式**（推薦）：[下載 SpectraStudio-Setup-v2.0.0.exe（120 MB）](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.0.0.exe)，雙擊執行，安裝至目前使用者目錄（不需管理員權限），並提供開始功能表捷徑與解除安裝程式。
+2. **免安裝版**：[下載 SpectraStudio.exe（120 MB）](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio.exe)，雙擊即可執行。
 
 > ⚠️ **SmartScreen 說明**：軟體目前尚未購買程式碼簽章憑證，Windows 可能顯示「Windows 已保護您的電腦」警告。點擊「更多資訊」→「仍要執行」即可繼續。我們會在累積足夠收入後盡快補上簽章。
 

@@ -65,8 +65,8 @@ The student edition runs on the honor system: current students may purchase it, 
 
 Two ways to install:
 
-1. **Setup program** (recommended): Download `SpectraStudio-Setup-v2.0.0.exe`, double-click to install into the current user's directory (no administrator rights needed), with Start-menu shortcut and uninstaller.
-2. **Portable build**: Download `SpectraStudio.exe` and double-click to run.
+1. **Setup program** (recommended): [Download SpectraStudio-Setup-v2.0.0.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.0.0.exe), double-click to install into the current user's directory (no administrator rights needed), with Start-menu shortcut and uninstaller.
+2. **Portable build**: [Download SpectraStudio.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio.exe) and double-click to run.
 
 > ⚠️ **About the SmartScreen warning**: The software does not yet have a code-signing certificate. Windows may show a "Windows protected your PC" warning — click "More info" → "Run anyway" to continue. We plan to add signing as soon as revenue allows.
 
