@@ -19,22 +19,22 @@
 <p>下面以「三組 XRD 樣品 → ACS 期刊樣式投稿圖」為例，走完整個流程。</p>
 <h3 id="第-1-步載入數據">第 1 步：載入數據</h3>
 <p>點「載入數據」選擇檔案（或直接拖曳進視窗）。支援一次載入多個檔案，左側樣品清單會依序出現，曲線立即繪出；「堆疊」「歸一化」「垂直偏移」等選項讓多筆數據一目了然。</p>
-<p><img src="/Web/_astro/scene_0_main.ZYF3QrbC_2dp0ns.webp" alt="多筆樣品載入後的主畫面" loading="lazy" decoding="async" width="1440" height="900"></p>
+<p><img src="/Web/_astro/scene_0_main.DhalcaCJ_NGqsY.webp" alt="多筆樣品載入後的主畫面" loading="lazy" decoding="async" width="1440" height="900"></p>
 <h3 id="第-2-步預處理平滑基線">第 2 步：預處理（平滑＋基線）</h3>
 <p>在「預處理」面板調整平滑視窗（Savitzky-Golay）與基線參數（ALS），<strong>所有修改即時預覽</strong>，不用等。常見做法：平滑視窗 9–15 消除雜訊，再用基線校正把背景拉平。</p>
-<p><img src="/Web/_astro/scene_3_preprocessed.Cbi05mQi_Z13nPgw.webp" alt="平滑與基線校正後的乾淨曲線" loading="lazy" decoding="async" width="1440" height="900"></p>
+<p><img src="/Web/_astro/scene_3_preprocessed.BM14i1Nr_IrveK.webp" alt="平滑與基線校正後的乾淨曲線" loading="lazy" decoding="async" width="1440" height="900"></p>
 <h3 id="第-3-步自動尋峰">第 3 步：自動尋峰</h3>
 <p>點「自動尋峰」，工具會依峰高與形狀自動標出候選峰（可調整敏感度）。找到的峰會顯示在峰位表，可直接在圖上檢查標註位置。</p>
-<p><img src="/Web/_astro/scene_1_peak_detect.DF6SEEh0_24rSMk.webp" alt="自動尋峰對話框：候選峰即時標註" loading="lazy" decoding="async" width="1440" height="900"></p>
+<p><img src="/Web/_astro/scene_1_peak_detect.5FmhVmnm_ZhOqRC.webp" alt="自動尋峰對話框：候選峰即時標註" loading="lazy" decoding="async" width="1440" height="900"></p>
 <h3 id="第-4-步分峰擬合pro">第 4 步：分峰擬合（Pro）</h3>
 <p>如果峰有重疊，用「分峰擬合」拆解：工具以尋峰結果為初始值，自動擬合 Gaussian / Lorentzian（或混合）峰型，輸出每個峰的<strong>位置、半高寬（FWHM）、面積、R² 與殘差</strong>，結果表可直接貼進補充材料。</p>
-<p><img src="/Web/_astro/scene_2_fit_done.Cgu9d3QV_1icTAk.webp" alt="分峰擬合完成：擬合曲線、個別峰與殘差一併顯示" loading="lazy" decoding="async" width="1440" height="900"></p>
+<p><img src="/Web/_astro/scene_2_fit_done.DOoYF1VI_1cW9v.webp" alt="分峰擬合完成：擬合曲線、個別峰與殘差一併顯示" loading="lazy" decoding="async" width="1440" height="900"></p>
 <h3 id="第-5-步套用期刊樣式">第 5 步：套用期刊樣式</h3>
 <p>切換 Nature / ACS / Elsevier 樣式，圖例位置、字型、線寬、刻度方向等細項都能再微調；Pro 版還可開啟 Miller 指數標註與相位比對結果。</p>
-<p><img src="/Web/_astro/scene_4_style_miller.BwBi8xO6_1QjKTn.webp" alt="期刊樣式輸出與 Miller 指數標註" loading="lazy" decoding="async" width="1440" height="900"></p>
+<p><img src="/Web/_astro/scene_4_style_miller.DjyVs8Qu_ABxtU.webp" alt="期刊樣式輸出與 Miller 指數標註" loading="lazy" decoding="async" width="1440" height="900"></p>
 <h3 id="第-6-步匯出">第 6 步：匯出</h3>
 <p>匯出前可先預覽，選擇格式與解析度。PNG / JPG 最高 300 DPI；Pro 版支援 PDF / SVG / EPS / TIFF 向量格式與更高解析度，投稿用的圖直接從這裡出去。</p>
-<p><img src="/Web/_astro/scene_5_export.B2NthDYO_Z2mgMej.webp" alt="匯出對話框：格式與解析度選擇" loading="lazy" decoding="async" width="1440" height="900"></p>
+<p><img src="/Web/_astro/scene_5_export.BGDgjRWq_UICV6.webp" alt="匯出對話框：格式與解析度選擇" loading="lazy" decoding="async" width="1440" height="900"></p>
 <h2 id="功能細節">功能細節</h2>
 <h3 id="支援的數據格式">支援的數據格式</h3>
 
