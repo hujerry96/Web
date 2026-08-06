@@ -24,8 +24,8 @@ export const SITE = {
         'Hu Lab — Jerry Hu’s corner: casual notes, handy Python tools, and personally picked products and self-published books.',
     },
   } as Record<'zh' | 'en', { title: string; description: string }>,
-  // 注意：需與 astro.config.mjs 的 site 一致（含 base）；鏡像站以 ASTRO_SITE 覆寫
-  url: process.env.ASTRO_SITE || 'https://hujerry96.github.io/Web',
+  // 注意：需與 astro.config.mjs 的 site 一致（含 base）；正式站為 hulab.pages.dev，GitHub Pages 為備援（以 ASTRO_SITE 覆寫）
+  url: process.env.ASTRO_SITE || 'https://hulab.pages.dev',
   author: 'Jerry Hu',
   locale: 'en-US',
   ogLocale: 'en_US',

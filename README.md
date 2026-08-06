@@ -29,5 +29,17 @@ npm run ai -- "New Balance 1080 v15" --locale zh --category reviews
 產出 `drafts/<slug>/` 提示詞包，交給 AI 完成後確認，再移入 `src/content/`。
 
 ## 部署
-推送 `main` 即由 GitHub Actions 自動部署到 GitHub Pages。
-修改 `astro.config.mjs` 的 `site` 與 `base`（project page 需 `/<repo>`）。
+
+**正式站：Cloudflare Pages（https://hulab.pages.dev）**，GitHub Pages（https://hujerry96.github.io/Web）為備援（兩站內容相同、同步部署）。
+
+```bash
+# 正式站（Cloudflare Pages）
+ASTRO_BASE=none npm run build          # dist/
+ npx wrangler pages deploy dist --project-name hulab
+
+# 備援站（GitHub Pages，legacy branch 模式：main/docs，不依賴 Actions）
+ASTRO_SITE=https://hujerry96.github.io/Web ASTRO_OUT_DIR=dist-gh npm run build
+cp -r dist-gh docs && touch docs/.nojekyll && git push
+```
+
+修改 `astro.config.mjs` 的 `site` 與 `base`（project page 需 `/<repo>`；正式站 base 用 `none`，因 Astro 6.4.8 對顯式 `base:'/'` 有 i18n bug）。

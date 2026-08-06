@@ -14,7 +14,7 @@ const GITHUB_PAGES_BASE = '/Web';
 //   注意：base 顯式設 '/' 會觸發 astro 6.4.8 的 i18n bug，故省略 base 用 'none'
 const BASE = process.env.ASTRO_BASE === 'none' ? undefined : (process.env.ASTRO_BASE || GITHUB_PAGES_BASE);
 export default defineConfig({
-  site: process.env.ASTRO_SITE || 'https://hujerry96.github.io/Web',
+  site: process.env.ASTRO_SITE || 'https://hulab.pages.dev',
   base: BASE,
   outDir: process.env.ASTRO_OUT_DIR || 'dist',
   output: 'static',
