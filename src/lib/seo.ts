@@ -13,11 +13,13 @@ export function buildHreflang(current: Post | null, currentPath: string): { lang
     return [{ lang: HREFLANG[parseId(current.id).locale], href: `${site}${currentPath}` }];
   }
   // 靜態頁：雙語皆有對應頁面，產生跨語系連結
+  // currentPath 已含語系前綴（如 /en/about/），需先移除再套用目標語系，避免產生 /en/en 這類錯誤網址
+  const barePath = currentPath.replace(/^\/(en|zh)(?=\/|$)/, '') || '/';
   const links = LOCALES.map((loc) => ({
     lang: HREFLANG[loc],
-    href: `${site}/${loc}${currentPath}`,
+    href: `${site}/${loc}${barePath}`,
   }));
-  return [...links, { lang: 'x-default', href: `${site}/${LOCALES[0]}${currentPath}` }];
+  return [...links, { lang: 'x-default', href: `${site}/${LOCALES[0]}${barePath}` }];
 }
 
 // canonical URL：frontmatter 優先，否則由路徑自動產
