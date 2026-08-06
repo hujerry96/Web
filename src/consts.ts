@@ -1,7 +1,7 @@
 // 全站常數：改這裡即可更新品牌/作者/社群資訊（DRY 單一來源）
 // 網站 base 路徑（GitHub Pages project page 為 "/<repo>"，user page 為 "/"）
-// 與 astro.config.mjs 的 base 保持一致
-export const BASE = '/Web';
+// 與 astro.config.mjs 的 base 保持一致（鏡像站以 ASTRO_BASE=none 省略前綴）
+export const BASE = process.env.ASTRO_BASE === 'none' ? '' : (process.env.ASTRO_BASE || '/Web');
 
 // 給內部路徑補上 base 前綴（project page = /Web）
 export function withBase(path: string): string {
@@ -24,8 +24,8 @@ export const SITE = {
         'Hu Lab — Jerry Hu’s corner: casual notes, handy Python tools, and personally picked products and self-published books.',
     },
   } as Record<'zh' | 'en', { title: string; description: string }>,
-  // 注意：需與 astro.config.mjs 的 site 一致（含 base）
-  url: 'https://hujerry96.github.io/Web',
+  // 注意：需與 astro.config.mjs 的 site 一致（含 base）；鏡像站以 ASTRO_SITE 覆寫
+  url: process.env.ASTRO_SITE || 'https://hujerry96.github.io/Web',
   author: 'Jerry Hu',
   locale: 'en-US',
   ogLocale: 'en_US',
