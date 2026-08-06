@@ -5,7 +5,7 @@ description: '免費的光譜分析繪圖工具：支援 XRD、FTIR、RAMAN、DS
 keywords: ['XRD', 'FTIR', 'RAMAN', 'DSC', '光譜分析', '繪圖工具', '分峰擬合', '相位比對', '期刊出圖', 'Spectra Studio']
 author: 'Jerry Hu'
 date: 2026-08-07
-cover: ./spectra-studio-cover.png
+cover: ./spectra-studio-gui.png
 category: 'guides'
 tags: ['Python', 'XRD', '光譜', '資料視覺化']
 locale: 'zh'

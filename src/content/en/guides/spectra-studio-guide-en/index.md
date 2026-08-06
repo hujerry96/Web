@@ -5,7 +5,7 @@ description: 'A free spectral analysis and plotting tool for XRD, FTIR, RAMAN an
 keywords: ['XRD', 'FTIR', 'RAMAN', 'DSC', 'spectral analysis', 'plotting tool', 'peak fitting', 'phase matching', 'journal figures', 'Spectra Studio']
 author: 'Jerry Hu'
 date: 2026-08-07
-cover: ./spectra-studio-cover.png
+cover: ./spectra-studio-gui.png
 category: 'guides'
 tags: ['Python', 'XRD', 'Spectroscopy', 'Data Visualization']
 locale: 'en'
