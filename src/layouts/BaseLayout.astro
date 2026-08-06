@@ -120,18 +120,28 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       update();
     }
 
-    // ── Scroll reveal ──
+    // ── Scroll reveal（無 JS / IO 失敗時內容仍可見；僅在 JS 成功時套用隱藏動畫）──
     if ('IntersectionObserver' in window) {
       const reveals = document.querySelectorAll('.reveal');
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add('revealed');
-            io.unobserve(e.target);
-          }
+      if (reveals.length) {
+        document.documentElement.classList.add('reveal-init');
+        const show = (el) => el.classList.add('revealed');
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              show(e.target);
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach((el) => {
+          // 已在視口內的元素立即顯示，不依賴 IO 回呼排程
+          if (el.getBoundingClientRect().top < window.innerHeight) show(el);
+          else io.observe(el);
         });
-      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-      reveals.forEach((el) => io.observe(el));
+        // 保險：任何情況下 6 秒後全部顯示（動畫早已淡入，使用者無感）
+        setTimeout(() => reveals.forEach(show), 6000);
+      }
     }
 
     // ── Frosted glass header ──
