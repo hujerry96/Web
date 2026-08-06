@@ -16,7 +16,12 @@ project: true
 
 In materials, chemistry and physics labs, plotting spectral data is a daily task that rarely gets the attention it deserves. The usual workarounds are: Excel (tedious formatting, inconsistent output quality), expensive commercial software (licenses cost hundreds to thousands of dollars), or hand-written Python scripts (rewritten from scratch every time). Spectra Studio was built for exactly this need: **free, ready to use in seconds, and designed to produce reproducible, journal-ready figures through a consistent workflow.**
 
-![Screenshot: the Spectra Studio main window — sample list and tools on the left, live stacked-spectrum preview on the right](./spectra-studio-gui.png)
+## 🎬 Spectra Studio in 60 Seconds
+
+<video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
+  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-demo.mp4`} type="video/mp4" />
+  Your browser does not support video playback — <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-demo.mp4`}>download the video</a> instead.
+</video>
 
 ## Quick Start: What You Get in the Free Download
 
@@ -31,28 +36,87 @@ The Free edition ($0, forever, no watermarks) includes:
 - **Journal styles**: one-click Nature / ACS / Elsevier, fine-tunable legend and ticks
 - **Export**: PNG / JPG (up to 300 DPI), watermark-free, free to use in papers and reports
 
-![Example: a journal-style multi-sample stacked figure exported directly from the tool](./spectra-studio-output.png)
+![Spectra Studio main window: sample list and tools on the left, live stacked-spectrum preview on the right](./spectra-studio-gui.png)
 
-## What the Tool Does
+## Step by Step: A Journal Figure in 10 Minutes
 
-Spectra Studio loads common spectral data formats and provides live preview plus a complete analysis toolbox (★ = Pro feature):
+Here is the full workflow, using "three XRD samples → an ACS-style submission figure" as the example.
 
-- **Multi-format loading**: XRD (.txt / .xy / .csv / .dat), FTIR (.asc, with automatic wavenumber-axis correction), RAMAN and DSC/TGA (Excel .xlsx / .xls), and PDF# reference cards
-- **Multi-sample management**: overlay, stack, normalize, vertical offset, batch coloring
-- **Preprocessing**: Savitzky-Golay smoothing, ALS baseline correction
-- **Peak analysis**: automatic peak detection; ★ peak fitting (Gaussian / Lorentzian with position, FWHM, area, R² and residuals)
-- **Phase matching**: ★ compare sample peaks against PDF reference cards, annotate phases and Miller indices directly on the plot
-- **Journal styles**: one-click Nature / ACS / Elsevier styles, Miller index annotation, legend placement, fonts, tick direction — all fine-tunable
-- **High-resolution export**: PNG / JPG / TIFF / PDF / SVG / EPS; ★ vector formats (PDF / SVG / EPS / TIFF) and output above 300 DPI
+### Step 1: Load Your Data
 
-## The Problems It Solves
+Click "Load data" and pick files (or drag & drop them into the window). Multiple files load at once — the sample list on the left fills in and the curves appear immediately. Stack, normalize and vertical-offset options keep multi-sample comparisons clear.
 
-Spectral plotting suffers from a few recurring pain points that Spectra Studio is designed to eliminate:
+![Main window after loading multiple samples](./scene_0_main.png)
 
-1. **Software cost**: Commercial tools (Jade, Match!, OriginPro) cost hundreds to thousands of dollars. Individual researchers often cannot afford them. The free edition covers all everyday plotting needs.
-2. **Format drudgery**: Different instruments produce different file formats; manual cleanup is time-consuming and error-prone. The tool auto-detects format by extension and content — drop the file in and it plots.
-3. **Repetitive work**: The same dataset often needs several versions (different styles, different ranges). Every setting previews live, so you adjust and export without redoing anything.
-4. **Output quality**: Journals impose strict requirements on resolution, format and layout. Built-in journal styles and vector export produce submission-ready figures.
+### Step 2: Preprocess (Smoothing + Baseline)
+
+Adjust the smoothing window (Savitzky-Golay) and baseline parameters (ALS) in the preprocessing panel — **every change previews live**. A typical workflow: smooth with a window of 9–15 to remove noise, then flatten the background with baseline correction.
+
+![Clean curves after smoothing and baseline correction](./scene_3_preprocessed.png)
+
+### Step 3: Automatic Peak Detection
+
+Click "Auto peak detection" and the tool marks candidate peaks based on height and shape (sensitivity is adjustable). Detected peaks appear in a table and are annotated on the plot for immediate review.
+
+![Peak detection dialog with candidate peaks annotated live](./scene_1_peak_detect.png)
+
+### Step 4: Peak Fitting (Pro)
+
+For overlapping peaks, use peak fitting: the tool seeds initial values from the detection results and fits Gaussian / Lorentzian (or mixed) profiles, reporting each peak's **position, FWHM, area, R² and residuals** — a results table you can paste straight into supplementary materials.
+
+![Peak fitting complete: fit curve, individual peaks and residuals shown together](./scene_2_fit_done.png)
+
+### Step 5: Apply a Journal Style
+
+Switch between Nature / ACS / Elsevier styles with one click; legend position, fonts, line widths and tick directions are all fine-tunable. Pro adds Miller-index annotation and phase-matching labels on the plot.
+
+![Journal-style output with Miller index annotation](./scene_4_style_miller.png)
+
+### Step 6: Export
+
+Preview before saving, then pick a format and resolution. PNG / JPG go up to 300 DPI; Pro unlocks PDF / SVG / EPS / TIFF vector export and higher resolutions — submission figures leave from here.
+
+![Export dialog with format and resolution options](./scene_5_export.png)
+
+## Feature Details
+
+### Supported Data Formats
+
+| Instrument / type | Formats | Notes |
+|---|---|---|
+| XRD powder diffraction | .txt / .xy / .csv / .dat | 2θ–intensity columns auto-detected |
+| FTIR | .asc | wavenumber axis direction auto-corrected |
+| RAMAN | .txt / .xy / .csv | same loading flow as XRD |
+| DSC / TGA | .xlsx / .xls | read Excel sheets directly |
+| PDF# reference cards | built-in format | used for phase matching (Pro) |
+
+### Peak Analysis
+
+- **Auto peak detection**: height/shape-based detector with adjustable sensitivity
+- **Peak fitting (Pro)**: Gaussian / Lorentzian / mixed profiles; automatic initial values (seeded from detection); outputs position, FWHM, area, R², residuals; results table exportable
+- **Calculus (Pro)**: first derivative (inflection/phase-transition points) and integration (area/crystallinity)
+
+### Phase Matching (Pro)
+
+Sample peaks are matched against PDF reference cards, with the corresponding phase and Miller indices (hkl) annotated directly on the peaks, including a tolerance setting. "Is this the α phase or the β phase?" — answered in seconds.
+
+### Journal Styles
+
+| Style | Character |
+|---|---|
+| Nature | borderless, minimal, compact fonts |
+| ACS | left/bottom axes, bold lines, in-figure legend |
+| Elsevier | full box frame, classic academic layout |
+
+Every style remains fine-tunable: fonts, sizes, line widths, tick direction/length, legend position, axis ranges, titles.
+
+### Export Formats
+
+| Format | Free | Pro |
+|---|---|---|
+| PNG / JPG | ✅ (≤300 DPI) | ✅ (up to 600 DPI) |
+| PDF / SVG / EPS | — | ✅ (vector, ideal for submission) |
+| TIFF | — | ✅ (300/600 DPI presets) |
 
 ## Free vs. Pro
 
@@ -113,3 +177,9 @@ Yes. The Pro edition reports each fitted peak's parameters plus residuals, ready
 
 **Q: What if I switch computers?**
 Licenses are bound offline. If you change machines, contact us with your machine code for a key reissue (keep your purchase receipt).
+
+**Q: Can I load data exported by my instrument software?**
+Yes. The tool auto-detects format and columns from extension and content; exports from most instruments (Bruker, PANalytical, Rigaku, etc.) load directly.
+
+**Q: Can I output the same data in different styles?**
+Yes. Style switches take effect instantly — produce a Nature version and an ACS version of the same dataset by switching and saving each.
