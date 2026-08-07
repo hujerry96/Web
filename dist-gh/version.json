@@ -1,6 +1,6 @@
 {
-  "version": "2.0.3",
-  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.0.3.exe",
-  "notes": "v2.0.3：商店遷移至 Polar——新金鑰格式 SS_ 支援、退款自動失效、2 台裝置啟用上限",
+  "version": "2.1.0",
+  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.0.exe",
+  "notes": "v2.1.0：光譜深度分析版——Scherrer/W-H 晶粒尺寸、結晶度、Tauc 能隙（UV-Vis 新支援）",
   "mandatory": false
 }
