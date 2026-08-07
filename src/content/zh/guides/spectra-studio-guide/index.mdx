@@ -29,7 +29,7 @@ project: true
 
 免費版（$0，無限期、無浮水印）包含：
 
-- **數據載入**：XRD（.txt / .xy / .csv / .dat）、FTIR（.asc）、RAMAN、DSC/TGA（Excel .xlsx / .xls）
+- **數據載入**：儀器原生檔直接讀取——PANalytical（.xrdml）、Bruker（.brml）、通用 .uxd，以及 .txt / .xy / .csv / .dat、FTIR（.asc）、DSC/TGA（Excel .xlsx / .xls）
 - **多筆數據管理**：同時顯示、堆疊、歸一化、垂直偏移、批次上色
 - **預處理**：Savitzky-Golay 平滑、ALS 基線校正
 - **峰值分析**：自動尋峰
@@ -84,6 +84,9 @@ project: true
 
 | 儀器/類型 | 格式 | 說明 |
 |---|---|---|
+| PANalytical（X'Pert 等） | .xrdml | XML 掃描數據直接讀取，免轉檔 |
+| Bruker（DIFFRAC 等） | .brml | XML 掃描數據直接讀取，免轉檔 |
+| 通用儀器 | .uxd | 雙欄文字檔（2θ–強度） |
 | XRD 粉末繞射 | .txt / .xy / .csv / .dat | 依內容自動偵測 2θ–強度欄位 |
 | FTIR | .asc | 自動修正波數軸方向 |
 | RAMAN | .txt / .xy / .csv | 與 XRD 相同載入流程 |
@@ -181,7 +184,7 @@ Spectra Studio 只有兩種版本：**免費版**與 **Pro 版**。免費版就�
 授權採離線綁定，換機時提供本機代碼即可補發金鑰（請保留購買證明）。
 
 **Q：儀器軟體匯出的數據可以直接用嗎？**
-可以。工具依副檔名與內容自動偵測格式與欄位，多數儀器（Bruker、PANalytical、Rigaku 等）的 .txt/.csv/.xy 匯出都能直接載入。
+可以。除了常見的 .txt/.csv/.xy 雙欄檔，**PANalytical（.xrdml）、Bruker（.brml）儀器原生檔與 .uxd 也能直接讀取**，免去先匯出再轉檔的麻煩；其他儀器的 .txt/.csv 匯出同樣依內容自動偵測欄位。
 
 **Q：一組數據可以輸出不同樣式嗎？**
 可以。樣式切換即時生效，同一組數據想輸出 Nature 版與 ACS 版，切換後各存一份即可。

@@ -29,7 +29,7 @@ The installer you download is the complete application — **all Free-edition fe
 
 The Free edition ($0, forever, no watermarks) includes:
 
-- **Data loading**: XRD (.txt / .xy / .csv / .dat), FTIR (.asc), RAMAN, DSC/TGA (Excel .xlsx / .xls)
+- **Data loading**: instrument files read directly — PANalytical (.xrdml), Bruker (.brml), generic .uxd — plus .txt / .xy / .csv / .dat, FTIR (.asc), DSC/TGA (Excel .xlsx / .xls)
 - **Multi-sample management**: overlay, stack, normalize, vertical offset, batch coloring
 - **Preprocessing**: Savitzky-Golay smoothing, ALS baseline correction
 - **Peak analysis**: automatic peak detection
@@ -84,6 +84,9 @@ Preview before saving, then pick a format and resolution. PNG / JPG go up to 300
 
 | Instrument / type | Formats | Notes |
 |---|---|---|
+| PANalytical (X'Pert etc.) | .xrdml | XML scan data read directly — no export roundtrip |
+| Bruker (DIFFRAC etc.) | .brml | XML scan data read directly — no export roundtrip |
+| Generic instruments | .uxd | two-column text (2θ–intensity) |
 | XRD powder diffraction | .txt / .xy / .csv / .dat | 2θ–intensity columns auto-detected |
 | FTIR | .asc | wavenumber axis direction auto-corrected |
 | RAMAN | .txt / .xy / .csv | same loading flow as XRD |
@@ -181,7 +184,7 @@ Yes. The Pro edition reports each fitted peak's parameters plus residuals, ready
 Licenses are bound offline. If you change machines, contact us with your machine code for a key reissue (keep your purchase receipt).
 
 **Q: Can I load data exported by my instrument software?**
-Yes. The tool auto-detects format and columns from extension and content; exports from most instruments (Bruker, PANalytical, Rigaku, etc.) load directly.
+Yes. Besides common .txt/.csv/.xy two-column files, native instrument files — PANalytical (.xrdml), Bruker (.brml) and .uxd — load directly, so no export-to-text roundtrip is needed; exports from other instruments (.txt/.csv) are auto-detected by content.
 
 **Q: Can I output the same data in different styles?**
 Yes. Style switches take effect instantly — produce a Nature version and an ACS version of the same dataset by switching and saving each.
