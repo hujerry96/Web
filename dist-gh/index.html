@@ -1,8 +1,0 @@
-<!DOCTYPE html><html lang="en-US"> <head><meta charset="utf-8"><meta name="google-site-verification" content="6BKS1UzkFp8C0T4foAaRIy17em4j1IxYLyJDMvSDvbI"><link rel="canonical" href="/Web/en/"><meta http-equiv="refresh" content="0; url=/Web/en/"><title>Loading…</title></head> <body> <p>Going to <a href="/Web/en/">homepage</a>…</p> <script>
-      const base = '{BASE}';
-      const nav = (navigator.language || 'zh').toLowerCase().startsWith('en') ? 'en/' : 'zh/';
-      const t = (base.replace(/\/$/, '') + '/' + nav).replace(/\/{2,}/g, '/');
-      if (location.pathname === base || location.pathname === base.replace(/\/$/, '') || location.pathname === '/') {
-        location.replace(t);
-      }
-    </script> </body> </html>
