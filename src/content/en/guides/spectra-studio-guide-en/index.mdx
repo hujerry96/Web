@@ -78,13 +78,15 @@ Preview before saving, then pick a format and resolution. PNG / JPG go up to 300
 
 ![Export dialog with format and resolution options](./scene_5_export.png)
 
-## Deep Analysis (Pro): Crystallite Size, Crystallinity & Tauc Bandgap
+## Crystallite Size (Pro): Grain Size, Crystallinity & Tauc Bandgap
 
 The three quantities reviewers ask for most often — crystallite size, crystallinity and bandgap — are now computed in one click (v2.1), no more manual Excel or Origin work.
 
 ### Crystallite Size & Strain (Scherrer / Williamson-Hall)
 
-Run peak fitting on the sample (Step 4), then click "Deep Analysis":
+![Crystallite size dialog: Scherrer grain-size table + Williamson–Hall plot](./scene_7_grain_size.png)
+
+Since v2.1.1, peak fitting is no longer required first — peak sources degrade automatically: ①peak-fitting results → ②auto-detected peaks → ③one-click detection inside the dialog. You can also run peak fitting (Step 4) first, then click "Crystallite Size". It will:
 
 - Computes the crystallite size of every fitted peak via the **Scherrer equation D = Kλ/(βcosθ)**, with error propagation, in a single results table
 - With 2+ peaks, automatically draws a **Williamson-Hall plot** (βcosθ vs 4sinθ); the weighted linear fit reports **crystallite size D, microstrain ε and R²** — the size-vs-strain distinction reviewers love to ask about, answered in 30 seconds
@@ -94,7 +96,7 @@ Run peak fitting on the sample (Step 4), then click "Deep Analysis":
 
 ### Crystallinity
 
-After fitting, the crystallinity tab of Deep Analysis computes **crystallinity = fitted peak area / total area in the fit range**, with the integration range drawn on the plot. Works directly for samples with a flat background; for large amorphous humps (e.g. polymers), apply baseline correction first.
+After fitting, the crystallinity tab of Crystallite Size computes **crystallinity = fitted peak area / total area in the fit range**, with the integration range drawn on the plot. Works directly for samples with a flat background; for large amorphous humps (e.g. polymers), apply baseline correction first.
 
 ### Tauc Bandgap Analysis (UV-Vis)
 
@@ -125,7 +127,7 @@ v2.1 adds **UV-Vis spectra** support (wavelength in nm, auto-detected). Load abs
 
 - **Auto peak detection**: height/shape-based detector with adjustable sensitivity
 - **Peak fitting (Pro)**: Gaussian / Lorentzian / mixed profiles; automatic initial values (seeded from detection); outputs position, FWHM, area, R², residuals; results table exportable
-- **Deep analysis (Pro)**: Scherrer crystallite size, Williamson-Hall strain, crystallinity, Tauc bandgap (see section above)
+- **Crystallite size (Pro)**: Scherrer crystallite size, Williamson-Hall strain, crystallinity, Tauc bandgap (see section above)
 - **Calculus (Pro)**: first derivative (inflection/phase-transition points) and integration (area/crystallinity)
 
 ### Phase Matching (Pro)
@@ -161,13 +163,13 @@ Spectra Studio comes in two editions only: **Free** and **Pro**. The free editio
 | Smoothing, baseline correction, peak detection | ✅ | ✅ |
 | Journal styles & PNG/JPG export (≤300 DPI) | ✅ | ✅ |
 | Peak fitting (with R² and residuals) | — | ✅ |
-| Deep analysis: Scherrer crystallite size / Williamson-Hall strain / crystallinity | — | ✅ |
+| Crystallite size: Scherrer crystallite size / Williamson-Hall strain / crystallinity | — | ✅ |
 | Tauc bandgap analysis (UV-Vis, direct/indirect, thickness conversion) | — | ✅ |
 | Phase matching (PDF cards) & Miller indices | — | ✅ |
 | Derivative / integral calculus | — | ✅ |
 | Vector export (PDF / SVG / EPS / TIFF) & high DPI | — | ✅ |
 
-**Pro is already complete**: every Pro feature is finished and built into the v2.1.0 installer — nothing extra to download. After purchase, paste the key you receive by email under "🔑 Unlock Pro" in the app (one online verification on first activation, offline afterwards).
+**Pro is already complete**: every Pro feature is finished and built into the v2.1.1 installer — nothing extra to download. After purchase, paste the key you receive by email under "🔑 Unlock Pro" in the app (one online verification on first activation, offline afterwards).
 
 [🛒 Buy Pro on Polar ($79 one-time)](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO)
 
@@ -181,15 +183,15 @@ Spectra Studio comes in two editions only: **Free** and **Pro**. The free editio
 
 Both options are identical in content — the full application including Pro features:
 
-1. **Setup program** (recommended): [Download SpectraStudio-Setup-v2.1.0.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.0.exe), double-click to install into the current user's directory (no administrator rights needed), with Start-menu shortcut and uninstaller.
-2. **Portable build**: [Download SpectraStudio-v2.1.0-portable.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-v2.1.0-portable.exe) and double-click to run.
+1. **Setup program** (recommended): [Download SpectraStudio-Setup-v2.1.1.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe), double-click to install into the current user's directory (no administrator rights needed), with Start-menu shortcut and uninstaller.
+2. **Portable build**: [Download SpectraStudio-v2.1.1-portable.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-v2.1.1-portable.exe) and double-click to run.
 
 > ⚠️ **About the SmartScreen warning**: The software does not yet have a code-signing certificate. Windows may show a "Windows protected your PC" warning — click "More info" → "Run anyway" to continue. We plan to add signing as soon as revenue allows.
 
 **SHA-256 checksums** (verify file integrity after download):
 
-- Setup `SpectraStudio-Setup-v2.1.0.exe`: `13f5310bbae4f613af4dcc408c867f5b93c6c5c17c8ac71131f8d1a14ea47a1d`
-- Portable `SpectraStudio-v2.1.0-portable.exe`: `1dffcfa3f24791b74e8790cf0e9be368aeb48528d545b7146811fbb21e3a5ae7`
+- Setup `SpectraStudio-Setup-v2.1.1.exe`: `6484aae6f2ce08e27ecb6caaf9485dfc37e6bb0047925882be8b37e178795579`
+- Portable `SpectraStudio-v2.1.1-portable.exe`: `166a13b4f3eceb038a96235e95e6bd4a759b3789309e276dda749fdd80fef40b`
 
 Updates: the app silently checks for new versions on startup (prompt only, never forced).
 
@@ -209,7 +211,7 @@ Yes. The free edition covers everyday plotting, exports have no watermarks, and 
 After purchasing on [Polar](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO), Polar emails you a key (`SS_-XXXX-...` format). Click "🔑 Unlock Pro" in the sidebar, paste the key, and the features unlock immediately (one online verification on first activation, then 30 days fully offline with a brief daily online check) — no reinstall needed.
 
 **Q: How are crystallite size and strain computed?**
-Run peak fitting to get each peak's FWHM, then click "Deep Analysis" — the Scherrer equation (D=Kλ/βcosθ) computes the crystallite size of every peak automatically; with 2+ peaks a Williamson-Hall plot gives microstrain ε and R² as well. Wavelength and shape factor K are adjustable.
+Click "Crystallite Size" (since v2.1.1 no peak fitting is needed first — the dialog can auto-detect peaks; you may still fit peaks first to get each FWHM) — the Scherrer equation (D=Kλ/βcosθ) computes the crystallite size of every peak automatically; with 2+ peaks a Williamson-Hall plot gives microstrain ε and R² as well. Wavelength and shape factor K are adjustable.
 
 **Q: Can I do bandgap analysis on UV-Vis data?**
 Yes. v2.1 auto-detects UV-Vis data (wavelength in nm); click "Tauc Bandgap" — switch between direct/indirect bandgaps in one click, the linear region is detected automatically, and Eg is annotated on the plot. You can enter film thickness for the absorption coefficient, or fine-tune the linear region manually by clicking twice on the plot.

@@ -1,6 +1,6 @@
 {
-  "version": "2.1.0",
-  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.0.exe",
-  "notes": "v2.1.0：光譜深度分析版——Scherrer/W-H 晶粒尺寸、結晶度、Tauc 能隙（UV-Vis 新支援）",
+  "version": "2.1.1",
+  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe",
+  "notes": "v2.1.1：晶粒大小分析＋Miller 指數標定——常見材料預設、晶格常數自動優化、平均晶粒尺寸與 CSV 匯出",
   "mandatory": false
 }

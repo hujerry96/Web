@@ -78,13 +78,15 @@ project: true
 
 ![匯出對話框：格式與解析度選擇](./scene_5_export.png)
 
-## 深度分析（Pro）：晶粒尺寸、結晶度、Tauc 能隙
+## 晶粒大小分析（Pro）：晶粒尺寸、結晶度、Tauc 能隙
 
 論文裡最常被要求附上的三個分析量——晶粒尺寸、結晶度、能隙——v2.1 起全部一鍵算出，不需要再開 Excel 或 Origin 慢慢手算。
 
 ### 晶粒尺寸與應變（Scherrer / Williamson-Hall）
 
-先對樣品執行「分峰擬合」（第 4 步），再點「深度分析」，工具會：
+![晶粒大小分析對話框：Scherrer 晶粒尺寸表＋Williamson-Hall 圖](./scene_7_grain_size.png)
+
+v2.1.1 起不需先分峰擬合——峰來源自動降級：①分峰擬合結果 → ②自動尋峰峰 → ③對話框內「自動偵測峰」一鍵偵測；也可以先執行「分峰擬合」（第 4 步）再點「晶粒大小」，工具會：
 
 - 以 **Scherrer 公式 D = Kλ/(βcosθ)** 自動計算每個峰的晶粒尺寸（含誤差傳播），表格一次列出
 - 有 2 個峰以上時自動繪製 **Williamson-Hall 圖**（βcosθ vs 4sinθ），加權線性擬合同時給出**晶粒尺寸 D、微應變 ε 與 R²**——粒徑與應變的區分是期刊審稿最常問的問題，30 秒就有答案
@@ -94,7 +96,7 @@ project: true
 
 ### 結晶度計算
 
-擬合完成後，「深度分析」的結晶度分頁自動算出**結晶度 = 擬合峰面積 / 擬合範圍總面積**，並以圖形標出積分範圍。背景平緩的樣品可直接使用；非晶暈較大的樣品（如聚合物）建議先做基線校正。
+擬合完成後，「晶粒大小」的結晶度分頁自動算出**結晶度 = 擬合峰面積 / 擬合範圍總面積**，並以圖形標出積分範圍。背景平緩的樣品可直接使用；非晶暈較大的樣品（如聚合物）建議先做基線校正。
 
 ### Tauc 能隙分析（UV-Vis）
 
@@ -125,7 +127,7 @@ v2.1 起支援 **UV-Vis 光譜**（波長 nm 自動偵測）。載入吸收度�
 
 - **自動尋峰**：基於峰高/形狀的偵測器，敏感度可調
 - **分峰擬合（Pro）**：Gaussian / Lorentzian / 混合峰型；自動初始值（從尋峰結果帶入）；輸出位置、FWHM、面積、R²、殘差；結果表可匯出
-- **深度分析（Pro）**：Scherrer 晶粒尺寸、Williamson-Hall 應變、結晶度、Tauc 能隙（詳見上方章節）
+- **晶粒大小（Pro）**：Scherrer 晶粒尺寸、Williamson-Hall 應變、結晶度、Tauc 能隙（詳見上方章節）
 - **微積分（Pro）**：一階微分（找轉折/相變點）與積分（算面積/結晶度）
 
 ### 相位比對（Pro）
@@ -161,13 +163,13 @@ Spectra Studio 只有兩種版本：**免費版**與 **Pro 版**。免費版就�
 | 平滑、基線校正、自動尋峰 | ✅ | ✅ |
 | 期刊樣式與 PNG/JPG 匯出（≤300 DPI） | ✅ | ✅ |
 | 分峰擬合（含 R² 與殘差） | — | ✅ |
-| 深度分析：Scherrer 晶粒尺寸 / Williamson-Hall 應變 / 結晶度 | — | ✅ |
+| 晶粒大小：Scherrer 晶粒尺寸 / Williamson-Hall 應變 / 結晶度 | — | ✅ |
 | Tauc 能隙分析（UV-Vis，直接/間接、厚度換算） | — | ✅ |
 | 相位比對（PDF 卡片）與 Miller 指數 | — | ✅ |
 | 微分 / 積分運算 | — | ✅ |
 | 向量匯出（PDF / SVG / EPS / TIFF）與高 DPI | — | ✅ |
 
-**Pro 版已經完成**：所有 Pro 功能都已開發完畢並內建在 v2.1.0 安裝檔中，不需要另外下載。購買 Pro 金鑰後，在程式內「🔑 解鎖 Pro」貼上金鑰即可立即啟用（需連網驗證一次，之後 30 天內可完全離線使用）。
+**Pro 版已經完成**：所有 Pro 功能都已開發完畢並內建在 v2.1.1 安裝檔中，不需要另外下載。購買 Pro 金鑰後，在程式內「🔑 解鎖 Pro」貼上金鑰即可立即啟用（需連網驗證一次，之後 30 天內可完全離線使用）。
 
 [🛒 在 Polar 購買 Pro（$79 一次買斷）](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO)
 
@@ -181,15 +183,15 @@ Spectra Studio 只有兩種版本：**免費版**與 **Pro 版**。免費版就�
 
 兩種安裝方式（內容完全相同，都是含 Pro 功能的完整版）：
 
-1. **安裝程式**（推薦）：[下載 SpectraStudio-Setup-v2.1.0.exe（120 MB）](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.0.exe)，雙擊執行，安裝至目前使用者目錄（不需管理員權限），並提供開始功能表捷徑與解除安裝程式。
-2. **免安裝版**：[下載 SpectraStudio-v2.1.0-portable.exe（120 MB）](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-v2.1.0-portable.exe)，雙擊即可執行。
+1. **安裝程式**（推薦）：[下載 SpectraStudio-Setup-v2.1.1.exe（120 MB）](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe)，雙擊執行，安裝至目前使用者目錄（不需管理員權限），並提供開始功能表捷徑與解除安裝程式。
+2. **免安裝版**：[下載 SpectraStudio-v2.1.1-portable.exe（120 MB）](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-v2.1.1-portable.exe)，雙擊即可執行。
 
 > ⚠️ **SmartScreen 說明**：軟體目前尚未購買程式碼簽章憑證，Windows 可能顯示「Windows 已保護您的電腦」警告。點擊「更多資訊」→「仍要執行」即可繼續。我們會在累積足夠收入後盡快補上簽章。
 
 **SHA-256 檢查碼**（下載後可自行驗證檔案完整性）：
 
-- 安裝程式 `SpectraStudio-Setup-v2.1.0.exe`：`13f5310bbae4f613af4dcc408c867f5b93c6c5c17c8ac71131f8d1a14ea47a1d`
-- 免安裝版 `SpectraStudio-v2.1.0-portable.exe`：`1dffcfa3f24791b74e8790cf0e9be368aeb48528d545b7146811fbb21e3a5ae7`
+- 安裝程式 `SpectraStudio-Setup-v2.1.1.exe`：`6484aae6f2ce08e27ecb6caaf9485dfc37e6bb0047925882be8b37e178795579`
+- 免安裝版 `SpectraStudio-v2.1.1-portable.exe`：`166a13b4f3eceb038a96235e95e6bd4a759b3789309e276dda749fdd80fef40b`
 
 更新方式：軟體啟動時會自動檢查新版本（僅提示，不強制）。
 
@@ -209,7 +211,7 @@ Spectra Studio 只有兩種版本：**免費版**與 **Pro 版**。免費版就�
 在 [Polar](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO) 購買後，Polar 會寄送一組金鑰（`SS_-XXXX-...` 格式）。在程式左側欄點「🔑 解鎖 Pro」，貼上金鑰即可立即啟用（首次需連網驗證，之後 30 天內可完全離線使用；每天會有一次短暫線上檢查），不需重新安裝。
 
 **Q：晶粒尺寸和應變怎麼算？**
-先用「分峰擬合」得到每個峰的 FWHM，再點「深度分析」——自動以 Scherrer 公式（D=Kλ/βcosθ）計算各峰晶粒尺寸；2 個峰以上自動繪 Williamson-Hall 圖，同時給出微應變 ε 與 R²。波長與形狀因子 K 皆可調整。
+點「晶粒大小」即可（v2.1.1 起不需先分峰擬合，對話框可自動偵測峰位；也可先用「分峰擬合」得到每個峰的 FWHM）——自動以 Scherrer 公式（D=Kλ/βcosθ）計算各峰晶粒尺寸；2 個峰以上自動繪 Williamson-Hall 圖，同時給出微應變 ε 與 R²。波長與形狀因子 K 皆可調整。
 
 **Q：UV-Vis 數據可以做能隙分析嗎？**
 可以。v2.1 起自動偵測 UV-Vis（波長 nm）數據，點「Tauc 能隙」即可：直接/間接能隙一鍵切換，自動偵測線性區並把 Eg 標在圖上；可輸入薄膜厚度換算吸收係數，或用手動模式在圖上點兩下微調線性區。
