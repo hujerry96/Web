@@ -96,6 +96,8 @@ The three quantities reviewers ask for most often — crystallite size, crystall
 Since v2.1.1, peak fitting is no longer required first — peak sources degrade automatically: ①peak-fitting results → ②auto-detected peaks → ③one-click detection inside the dialog. You can also run peak fitting (Step 4) first, then click "Crystallite Size". It will:
 
 - Computes the crystallite size of every fitted peak via the **Scherrer equation D = Kλ/(βcosθ)**, with error propagation, in a single results table
+
+> New to the calculation? Read [how to calculate crystallite size from XRD](${import.meta.env.BASE_URL}/en/guides/how-to-calculate-crystallite-size-from-xrd/) or try the [interactive Scherrer calculator](${import.meta.env.BASE_URL}/en/tools/crystallite-size-calculator/) — then come back and let the software do it in one click.
 - With 2+ peaks, automatically draws a **Williamson-Hall plot** (βcosθ vs 4sinθ); the weighted linear fit reports **crystallite size D, microstrain ε and R²** — the size-vs-strain distinction reviewers love to ask about, answered in 30 seconds
 - X-ray wavelength (default Cu Kα = 0.15406 nm) and shape factor K are both adjustable
 
