@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { useTranslations } from '../../../i18n/ui';
+import { SITE, withBase, type Locale } from '../../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const path = `/${locale}/tools/crystallite-size-calculator`;
+const guidePath = locale === 'zh'
+  ? '/zh/guides/how-to-calculate-crystallite-size-from-xrd'
+  : '/en/guides/how-to-calculate-crystallite-size-from-xrd';
+const appPath = locale === 'zh' ? '/zh/guides/spectra-studio-guide' : '/en/guides/spectra-studio-guide-en';
+const wavelengths = [
+  { v: '1.5406', label: 'Cu Kα₁ · 1.5406 Å' },
+  { v: '1.5418', label: 'Cu Kα · 1.5418 Å' },
+  { v: '1.7890', label: 'Co Kα · 1.7890 Å' },
+  { v: '1.9360', label: 'Fe Kα · 1.9360 Å' },
+  { v: '0.7093', label: 'Mo Kα · 0.7093 Å' },
+  { v: '2.2897', label: 'Cr Kα · 2.2897 Å' },
+  { v: 'custom', label: t('calc.wlCustom') },
+];
+---
+<BaseLayout title={t('calc.metaTitle', { name: SITE.name })} description={t('calc.metaDesc')} path={path}>
+  <section class="py-8 max-w-4xl mx-auto">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.tools'), url: `/${locale}/tools` }, { name: t('calc.title'), url: path }]} />
+    <h1 class="text-[clamp(1.7rem,1rem+2.5vw,2.4rem)] font-display font-semibold mb-2 reveal">{t('calc.title')}</h1>
+    <p class="text-[var(--color-text-secondary)] mb-8 reveal reveal-delay-1">{t('calc.subtitle')}</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 reveal reveal-delay-2">
+      <!-- ── Calculator ── -->
+      <div class="calc-panel">
+        <label class="calc-label" for="c-two-theta">{t('calc.twoTheta')}</label>
+        <input class="calc-input" id="c-two-theta" type="number" step="0.001" value="38.18" inputmode="decimal" />
+
+        <label class="calc-label" for="c-fwhm">{t('calc.fwhm')}</label>
+        <input class="calc-input" id="c-fwhm" type="number" step="0.001" min="0.001" value="0.42" inputmode="decimal" />
+
+        <label class="calc-label" for="c-wl">{t('calc.wavelength')}</label>
+        <select class="calc-input" id="c-wl">
+          {wavelengths.map((w) => <option value={w.v}>{w.label}</option>)}
+        </select>
+        <input class="calc-input" id="c-wl-custom" type="number" step="0.0001" value="1.5406" placeholder="λ (Å)" hidden />
+
+        <label class="calc-label" for="c-k">{t('calc.k')}</label>
+        <input class="calc-input" id="c-k" type="number" step="0.01" min="0.1" max="2" value="0.9" inputmode="decimal" />
+
+        <div class="calc-result">
+          <span class="calc-result__label">{t('calc.result')}</span>
+          <span class="calc-result__value"><span id="c-out">20.0</span> <span class="calc-result__unit">{t('calc.resultHint')}</span></span>
+        </div>
+        <p class="calc-note">{t('calc.formulaNote')}</p>
+      </div>
+
+      <!-- ── Explanation + CTA ── -->
+      <div class="flex flex-col gap-6">
+        <div class="prose calc-prose">
+          <p>{locale === 'zh'
+            ? 'Scherrer 公式從 XRD 峰的展寬估算晶粒尺寸：峰越寬，晶粒越小。這個計算器把單位換算與三角函數都處理好了 — 你只需要峰位與 FWHM。'
+            : 'The Scherrer equation estimates crystallite size from XRD peak broadening: the broader the peak, the smaller the crystallites. This calculator handles the unit conversions for you — you only need the peak position and the FWHM.'}
+          </p>
+          <p>{locale === 'zh'
+            ? '怎麼取得 2θ 與 FWHM：打開 XRD 圖，讀取目標峰的最高點角度（2θ）；FWHM 是峰一半高度處的寬度（度）。多數分析軟體（含免費工具）會自動標出。'
+            : 'Getting 2θ and FWHM: open your XRD pattern, read the angle at the top of the peak (2θ); FWHM is the width of the peak at half its maximum height, in degrees. Most analysis software (including free tools) reports it automatically.'}
+          </p>
+          <p><a href={withBase(guidePath)}>{locale === 'zh' ? '完整教學：從 XRD 計算晶粒尺寸 →' : 'Full tutorial: how to calculate crystallite size from XRD →'}</a></p>
+        </div>
+
+        <div class="cta-card">
+          <h2 class="cta-card__title">{t('calc.ctaTitle')}</h2>
+          <p class="cta-card__body">{t('calc.ctaBody')}</p>
+          <a class="cta-card__link" href={withBase(appPath)}>{t('calc.ctaLink')}</a>
+        </div>
+
+        <p class="calc-note">{t('calc.note')}</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .calc-panel {
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-surface);
+    padding: 1.25rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-self: start;
+  }
+  .calc-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
+  }
+  .calc-input {
+    width: 100%;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+  }
+  .calc-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+  .calc-result {
+    margin-top: 1rem;
+    border: 1px solid var(--color-accent-dim);
+    border-radius: 10px;
+    background: var(--color-accent-muted);
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .calc-result__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+  .calc-result__value {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .calc-result__unit {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .calc-note {
+    font-size: 0.78rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.55;
+    margin: 0.6rem 0 0;
+  }
+  .cta-card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-surface);
+    padding: 1.25rem 1.5rem;
+  }
+  .cta-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+    color: var(--color-text);
+  }
+  .cta-card__body {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0 0 0.7rem;
+  }
+  .cta-card__link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .cta-card__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+
+<script>
+  const el2t = document.getElementById('c-two-theta');
+  const elF = document.getElementById('c-fwhm');
+  const elWl = document.getElementById('c-wl');
+  const elWlC = document.getElementById('c-wl-custom');
+  const elK = document.getElementById('c-k');
+  const out = document.getElementById('c-out');
+
+  function compute() {
+    const twoTheta = parseFloat(el2t.value);
+    const fwhmDeg = parseFloat(elF.value);
+    const k = parseFloat(elK.value) || 0.9;
+    let lambda = parseFloat(elWl.value);
+    if (elWl.value === 'custom') {
+      lambda = parseFloat(elWlC.value);
+      elWlC.hidden = false;
+    } else {
+      elWlC.hidden = true;
+    }
+    if (!isFinite(twoTheta) || !isFinite(fwhmDeg) || !isFinite(lambda) || fwhmDeg <= 0) {
+      out.textContent = '—';
+      return;
+    }
+    const theta = (twoTheta / 2) * Math.PI / 180;
+    const beta = fwhmDeg * Math.PI / 180;
+    const D = (k * lambda) / (beta * Math.cos(theta)); // Å
+    out.textContent = (D / 10).toFixed(1); // nm
+  }
+
+  [el2t, elF, elWl, elWlC, elK].forEach((el) => el.addEventListener('input', compute));
+  compute();
+</script>
