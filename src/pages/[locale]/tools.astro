@@ -51,6 +51,32 @@ const tools = getTools(locale);
         </section>
       ))}
     </div>
+
+    <!-- ── Online tools ── -->
+    <h2 class="text-[0.7rem] font-mono font-semibold tracking-[0.12em] uppercase text-[var(--color-text-tertiary)] mb-4 mt-10">
+      {locale === 'zh' ? '線上工具' : 'Online Tools'}
+    </h2>
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,360px),1fr))] gap-6">
+      <a class="tool-card group" href={withBase(`/${locale}/tools/crystallite-size-calculator`)}>
+        <div class="tool-card__header">
+          <span class="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-[var(--color-accent)]">Scherrer Calculator</span>
+        </div>
+        <div class="tool-card__body">
+          <h2 class="text-[1.25rem] font-display font-semibold m-0 mb-2">
+            {locale === 'zh' ? '晶粒尺寸計算器（Scherrer 公式）' : 'Crystallite Size Calculator (Scherrer Equation)'}
+          </h2>
+          <p class="text-[var(--color-text-secondary)] m-0 mb-4 leading-relaxed">
+            {locale === 'zh'
+              ? '輸入 XRD 峰位 2θ 與 FWHM，即時以 Scherrer 公式估算晶粒尺寸，附單位換算與注意事項。'
+              : 'Enter XRD peak position 2θ and FWHM to estimate crystallite size instantly with the Scherrer equation — unit conversion included.'}
+          </p>
+          <div class="flex items-center justify-between border-t border-[var(--color-border-subtle)] pt-4">
+            <span class="text-[0.78rem] text-[var(--color-text-tertiary)]">Web</span>
+            <span class="text-[var(--color-accent)] text-[0.85rem] font-medium group-hover:underline">{locale === 'zh' ? '開啟計算器 →' : 'Open calculator →'}</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </section>
 </BaseLayout>
 
