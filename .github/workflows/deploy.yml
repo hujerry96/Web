@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: withastro/action@v6
+        env:
+          # SEO 主站是 Cloudflare Pages：canonical/sitemap 統一指向 CF，
+          # GH Pages 僅作為備援（Google 權重合併到 CF）
+          ASTRO_SITE: https://hulab.pages.dev
 
   deploy:
     needs: build

@@ -30,7 +30,17 @@ export default defineConfig({
     },
   },
 
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      // GitHub Pages 鏡像（base=/Web）生成的 sitemap 會把 /Web/ 前綴帶進 URL，
+      // 指向 CF 站 404 路徑；統一剝掉，讓兩站 sitemap 都指向 CF 主站。
+      serialize: (item) => {
+        if (item.url.includes('/Web/')) item.url = item.url.replace('/Web/', '');
+        return item;
+      },
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],
