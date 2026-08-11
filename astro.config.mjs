@@ -36,7 +36,8 @@ export default defineConfig({
       // GitHub Pages 鏡像（base=/Web）生成的 sitemap 會把 /Web/ 前綴帶進 URL，
       // 指向 CF 站 404 路徑；統一剝掉，讓兩站 sitemap 都指向 CF 主站。
       serialize: (item) => {
-        if (item.url.includes('/Web/')) item.url = item.url.replace('/Web/', '');
+        // GH 鏡像（base=/Web）生成的 URL 形如 …/Web/en/；移除段但保留分隔斜線
+        if (item.url.includes('/Web/')) item.url = item.url.replace('/Web/', '/');
         return item;
       },
     }),
