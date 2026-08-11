@@ -16,12 +16,12 @@ export const SITE = {
     zh: {
       title: 'Hu Lab',
       description:
-        'Hu Lab — Jerry Hu 的角落：生活雜感、Python 實用小工具，以及親自篩選的好物與自出版書籍。',
+        '材料科學筆記與免費分析工具：光譜繪圖與 XRD 分析軟體 Spectra Studio、SEM 粒徑分析、論文格式工具，以及能源材料、半導體等領域的技術指南。',
     },
     en: {
       title: 'Hu Lab',
       description:
-        'Hu Lab — Jerry Hu’s corner: casual notes, handy Python tools, and personally picked products and self-published books.',
+        'Materials science notes and free analysis tools — Spectra Studio for XRD & spectral plotting, SEM particle analysis, thesis formatting, plus technical guides on energy materials and semiconductors.',
     },
   } as Record<'zh' | 'en', { title: string; description: string }>,
   // 注意：需與 astro.config.mjs 的 site 一致（含 base）；正式站為 hulab.pages.dev，GitHub Pages 為備援（以 ASTRO_SITE 覆寫）

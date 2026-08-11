@@ -15,12 +15,19 @@ export async function getStaticPaths() {
   });
 }
 
+import { getTools } from '../../lib/tools';
+
 const { locale } = Astro.params as { locale: Locale };
 const { posts } = Astro.props as { posts: any[] };
 const t = useTranslations(locale);
 const path = `/${locale}`;
 
-const projects = posts.filter((p) => p.data.project).slice(0, 3);
+const tools = getTools(locale);
+const featuredTool = tools.find((tl) => tl.featured)!;
+const sideTools = tools.filter((tl) => !tl.featured);
+const featuredPost = posts.find((p) => p.data.project);
+const featuredSlug = featuredPost ? (featuredPost.data.slug ?? featuredPost.id.split('/').slice(2).join('/')) : '';
+const featuredCat = featuredPost ? featuredPost.id.split('/')[1] : 'guides';
 const latest = posts.slice(0, 6);
 const catCounts: Record<string, number> = {};
 for (const p of posts) { const c = p.id.split('/')[1]; catCounts[c] = (catCounts[c] ?? 0) + 1; }
@@ -49,49 +56,61 @@ const cats = SITE.categories[locale] as Record<string, string>;
       <h1 class="hero-title">{SITE.name}</h1>
       <p class="hero-desc">{t('home.intro')}</p>
       <div class="hero-cats">
-        {Object.entries(cats).map(([key, name]) => (
-          <a href={withBase(`/${locale}/${key}`)} class="hero-cat">
-            <span class="hero-cat-name">{name}</span>
-            <span class="hero-cat-count">{String(catCounts[key] ?? 0).padStart(2,'0')}</span>
+        <a href={withBase(`/${locale}/guides`)} class="hero-cat">
+          <span class="hero-cat-name">{locale === 'zh' ? '指南' : 'Guides'}</span>
+          <span class="hero-cat-count">{String(catCounts['guides'] ?? 0).padStart(2, '0')}</span>
+        </a>
+        <a href={withBase(`/${locale}/tools`)} class="hero-cat">
+          <span class="hero-cat-name">{locale === 'zh' ? '工具' : 'Tools'}</span>
+          <span class="hero-cat-count">{String(tools.length).padStart(2, '0')}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Software (featured + side tools) ── -->
+  <section class="section reveal">
+    <h2 class="section-label">{t('home.software')}</h2>
+    <div class="sw-grid">
+      {featuredPost && featuredTool && (
+        <a href={withBase(`/${locale}/${featuredCat}/${featuredSlug}`)} class="sw-featured group">
+          <div class="sw-featured__media">
+            {featuredPost.data.cover
+              ? <Image src={featuredPost.data.cover} alt={featuredPost.data.title} width={720} height={450} class="w-full h-full object-cover" loading="eager" />
+              : <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm">{featuredTool.tag}</div>
+            }
+          </div>
+          <div class="sw-featured__body">
+            <span class="sw-cat">{featuredTool.tag}</span>
+            <h3 class="sw-featured__title">{featuredTool.name}</h3>
+            <p class="sw-featured__desc">{featuredTool.desc}</p>
+            <ul class="sw-points">
+              {featuredTool.points.slice(0, 3).map((p) => <li>{p}</li>)}
+            </ul>
+            <div class="sw-featured__cta">{locale === 'zh' ? '認識 Spectra Studio →' : 'Meet Spectra Studio →'}</div>
+          </div>
+        </a>
+      )}
+      <div class="sw-side">
+        {sideTools.map((tool) => (
+          <a href={withBase(tool.guide)} class="sw-card group">
+            <div class="sw-card__head">
+              <span class="sw-cat">{tool.tag}</span>
+            </div>
+            <div class="sw-card__body">
+              <h3 class="sw-card__title">{tool.name}</h3>
+              <p class="sw-card__desc">{tool.desc}</p>
+              <div class="sw-card__meta">
+                <span>{locale === 'zh' ? '免費開源' : 'Free & open source'}</span>
+                <span class="opacity-40">·</span>
+                <span>{locale === 'zh' ? '使用指南 →' : 'Guide →'}</span>
+              </div>
+            </div>
           </a>
         ))}
       </div>
     </div>
   </section>
-
-  <!-- ── Projects ── -->
-  {projects.length > 0 && (
-    <section class="section reveal">
-      <h2 class="section-label">{t('home.projects')}</h2>
-      <div class="project-grid">
-        {projects.map((post) => {
-          const cat = post.id.split('/')[1];
-          const catName = cats[cat] ?? cat;
-          const slug = post.data.slug ?? post.id.split('/').slice(2).join('/');
-          return (
-            <a href={withBase(`/${locale}/${cat}/${slug}`)} class="project-card group">
-              <div class="project-card__image">
-                {post.data.cover
-                  ? <Image src={post.data.cover} alt={post.data.title} width={640} height={400} class="w-full h-full object-cover" loading="lazy" />
-                  : <div class="w-full h-full flex items-center justify-center bg-[var(--color-accent-muted)] text-[var(--color-accent)] text-sm">{catName}</div>
-                }
-              </div>
-              <div class="project-card__body">
-                <span class="project-card__cat">{catName}</span>
-                <h3 class="project-card__title">{post.data.title}</h3>
-                <p class="project-card__desc">{post.data.description}</p>
-                <div class="project-card__meta">
-                  <span>{post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</span>
-                  <span class="opacity-40">·</span>
-                  <span>{readingTime(post.body, locale)}</span>
-                </div>
-              </div>
-            </a>
-          );
-        })}
-      </div>
-    </section>
-  )}
 
   <!-- ── Latest posts ── -->
   <section class="section reveal reveal-delay-1">
@@ -294,47 +313,46 @@ const cats = SITE.categories[locale] as Record<string, string>;
     background: linear-gradient(90deg, var(--color-accent), transparent);
   }
 
-  /* ── Project cards ── */
-  .project-grid {
+  /* ── Software section: featured + side cards ── */
+  .sw-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
   }
-  .project-card {
-    display: flex;
-    flex-direction: column;
+  .sw-featured {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
     border: 1px solid var(--color-border);
     border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
     background: var(--color-surface);
+    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
   }
-  .project-card:hover {
+  .sw-featured:hover {
     border-color: var(--color-accent);
     box-shadow: 0 12px 40px -10px var(--color-accent-glow), 0 4px 12px rgba(0,0,0,0.15);
     transform: translateY(-3px);
   }
-  .project-card__image {
+  .sw-featured__media {
     aspect-ratio: 16/10;
     overflow: hidden;
     background: var(--color-surface-raised);
   }
-  .project-card__image :global(img) {
+  .sw-featured__media :global(img) {
     transition: transform 500ms var(--ease);
   }
-  .project-card:hover .project-card__image :global(img) {
+  .sw-featured:hover .sw-featured__media :global(img) {
     transform: scale(1.04);
   }
-  .project-card__body {
-    padding: 1.25rem 1.5rem 1.5rem;
+  .sw-featured__body {
+    padding: 1.5rem 1.75rem;
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
-    flex: 1;
+    gap: 0.45rem;
+    align-items: flex-start;
   }
-  .project-card__cat {
+  .sw-cat {
     font-family: var(--font-mono);
     font-size: 0.66rem;
     font-weight: 600;
@@ -342,20 +360,96 @@ const cats = SITE.categories[locale] as Record<string, string>;
     letter-spacing: 0.1em;
     color: var(--color-accent);
   }
-  .project-card__title {
+  .sw-featured__title {
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--color-text);
+    transition: color 200ms var(--ease);
+  }
+  .sw-featured:hover .sw-featured__title {
+    color: var(--color-accent);
+  }
+  .sw-featured__desc {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .sw-points {
+    list-style: none;
+    padding: 0;
+    margin: 0.35rem 0 0;
+    display: grid;
+    gap: 0.3rem;
+  }
+  .sw-points li {
+    position: relative;
+    padding-left: 1.1rem;
+    font-size: 0.84rem;
+    color: var(--color-text-secondary);
+  }
+  .sw-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+  }
+  .sw-featured__cta {
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .sw-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .sw-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-surface);
+    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
+  }
+  .sw-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 10px 30px -10px var(--color-accent-glow), 0 3px 10px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+  }
+  .sw-card__head {
+    padding: 0.85rem 1.25rem 0;
+    display: flex;
+  }
+  .sw-card__body {
+    padding: 0.4rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .sw-card__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
     margin: 0;
     color: var(--color-text);
     transition: color 200ms var(--ease);
   }
-  .project-card:hover .project-card__title {
+  .sw-card:hover .sw-card__title {
     color: var(--color-accent);
   }
-  .project-card__desc {
-    font-size: 0.85rem;
+  .sw-card__desc {
+    font-size: 0.82rem;
     color: var(--color-text-secondary);
     line-height: 1.55;
     margin: 0;
@@ -364,14 +458,26 @@ const cats = SITE.categories[locale] as Record<string, string>;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .project-card__meta {
+  .sw-card__meta {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     color: var(--color-text-tertiary);
     margin-top: auto;
-    padding-top: 0.75rem;
+    padding-top: 0.6rem;
+  }
+
+  @media (max-width: 760px) {
+    .sw-featured {
+      grid-template-columns: 1fr;
+    }
+    .sw-featured__media {
+      aspect-ratio: 16/9;
+    }
+    .sw-side {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* ── Post grid ── */
@@ -382,9 +488,6 @@ const cats = SITE.categories[locale] as Record<string, string>;
   }
 
   @media (max-width: 640px) {
-    .project-grid {
-      grid-template-columns: 1fr;
-    }
     .hero {
       min-height: 80vh;
       padding: 4rem 1.5rem 3rem;
