@@ -1,6 +1,6 @@
 {
-  "version": "2.1.1",
-  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe",
-  "notes": "v2.1.1：晶粒大小分析＋Miller 指數標定——常見材料預設、晶格常數自動優化、平均晶粒尺寸與 CSV 匯出",
+  "version": "2.1.2",
+  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.2.exe",
+  "notes": "v2.1.2：UV-Vis 匯入強化（Hitachi U-3900 專屬解析、%T/%R/Abs 單位）＋檔案右鍵手動切換數據類型",
   "mandatory": false
 }
