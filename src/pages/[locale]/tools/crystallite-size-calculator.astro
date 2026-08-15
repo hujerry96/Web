@@ -11,7 +11,7 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/tools/crystallite-size-calculator`;
 const guidePath = locale === 'zh'
-  ? '/zh/guides/how-to-calculate-crystallite-size-from-xrd'
+  ? '/en/guides/how-to-calculate-crystallite-size-from-xrd'
   : '/en/guides/how-to-calculate-crystallite-size-from-xrd';
 const appPath = locale === 'zh' ? '/zh/guides/spectra-studio-guide' : '/en/guides/spectra-studio-guide-en';
 const wavelengths = [

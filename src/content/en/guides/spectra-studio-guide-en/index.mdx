@@ -1,10 +1,11 @@
 ---
-title: 'Spectra Studio: A Free Spectral Plotting Tool for XRD, FTIR, RAMAN, UV-Vis & DSC'
+title: 'Spectra Studio: Turn XRD, FTIR, Raman & UV-Vis Data Into Publication-Ready Figures — Without Origin or Python'
 slug: 'spectra-studio-guide-en'
-description: 'A free spectral analysis and plotting tool for XRD, FTIR, RAMAN, UV-Vis and DSC/TGA data — multi-format loading, peak fitting, phase matching, journal-ready figure export, plus crystallite size (Scherrer/Williamson-Hall), crystallinity and Tauc bandgap analysis in Pro. Download and use the free edition now; Pro unlocks instantly with a key.'
-keywords: ['XRD', 'FTIR', 'RAMAN', 'UV-Vis', 'DSC', 'spectral analysis', 'plotting tool', 'peak fitting', 'crystallite size', 'Scherrer', 'Williamson-Hall', 'crystallinity', 'Tauc bandgap', 'bandgap analysis', 'phase matching', 'journal figures', 'Spectra Studio']
+description: 'Free Windows app that turns raw XRD, FTIR, RAMAN, UV-Vis and DSC/TGA data into journal-ready figures in minutes — no Origin, no Python, no watermark. Multi-format loading, peak fitting with R² and residuals, Scherrer & Williamson-Hall crystallite size, Tauc bandgap, PDF-card phase matching, Miller indices, and vector export (PDF/SVG/EPS/TIFF). Download free; Pro unlocks instantly with a key.'
+keywords: ['XRD', 'FTIR', 'RAMAN', 'UV-Vis', 'DSC', 'spectral analysis', 'plotting tool', 'Origin alternative', 'plot without Python', 'peak fitting', 'crystallite size', 'Scherrer', 'Williamson-Hall', 'crystallinity', 'Tauc bandgap', 'bandgap analysis', 'phase matching', 'Miller indices', 'journal figures', 'Spectra Studio']
 author: 'Jerry Hu'
 date: 2026-08-08
+updated: 2026-08-16
 cover: ./spectra-studio-gui.png
 category: 'guides'
 tags: ['Python', 'XRD', 'Spectroscopy', 'Data Visualization']
@@ -14,36 +15,157 @@ draft: false
 project: true
 ---
 
-In materials, chemistry and physics labs, plotting spectral data is a daily task that rarely gets the attention it deserves. The usual workarounds are: Excel (tedious formatting, inconsistent output quality), expensive commercial software (licenses cost hundreds to thousands of dollars), or hand-written Python scripts (rewritten from scratch every time). Spectra Studio was built for exactly this need: **free, ready to use in seconds, and designed to produce reproducible, journal-ready figures through a consistent workflow.**
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
 
-## 🎬 Meet Spectra Studio in 30 Seconds
+  <div style={{ fontSize: 'clamp(1.5rem, 1.1rem + 2.2vw, 2.3rem)', fontWeight: 700, lineHeight: 1.18, letterSpacing: '-0.01em', maxWidth: '900px' }}>
+    Turn XRD, FTIR, Raman &amp; UV-Vis Data Into Publication-Ready Figures —<br />Without Origin or Python.
+  </div>
+
+  <div style={{ fontSize: '1.05rem', color: 'var(--color-text-secondary)', maxWidth: '760px', lineHeight: 1.6 }}>
+    A free Windows app that reads your instrument files, cleans them, fits the peaks and exports journal-style figures. <strong>No watermark. No coding. No subscription.</strong>
+  </div>
+
+  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+    <a href="https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
+      ⬇ Download Free
+    </a>
+    <a href="#demo" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-text)', border: '1px solid var(--color-border)', background: 'var(--color-surface)', textDecoration: 'none' }}>
+      ▶ Watch the 30-sec demo
+    </a>
+  </div>
+
+  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem 1.1rem', fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>
+    <span>✅ Windows 10+ (64-bit)</span>
+    <span>✅ 120 MB installer</span>
+    <span>✅ No Python / no dependencies</span>
+    <span>✅ Data stays on your machine</span>
+  </div>
+
+</div>
+
+### The pipeline, in one line
+
+<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '0.9rem', margin: '0.4rem 0 1.2rem', padding: '1.1rem 1.4rem', borderRadius: '12px', border: '1px dashed var(--color-border)' }}>
+
+  <div style={{ textAlign: 'center' }}>
+    <div style={{ fontWeight: 700 }}>Instrument data</div>
+    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>.xrdml · .brml · .uxd · .asc<br />.xlsx / .csv / .xy / .txt</div>
+  </div>
+
+  <div style={{ color: 'var(--color-accent)', fontSize: '1.3rem', fontWeight: 700 }}>→</div>
+
+  <div style={{ textAlign: 'center' }}>
+    <div style={{ fontWeight: 700 }}>Spectra Studio</div>
+    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>smooth · baseline · detect<br />fit · analyze · style</div>
+  </div>
+
+  <div style={{ color: 'var(--color-accent)', fontSize: '1.3rem', fontWeight: 700 }}>→</div>
+
+  <div style={{ textAlign: 'center' }}>
+    <div style={{ fontWeight: 700 }}>Journal figure</div>
+    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Nature / ACS / Elsevier<br />PNG · PDF · SVG · EPS · TIFF</div>
+  </div>
+
+</div>
+
+## Before / After: the same data, 10 minutes apart
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.1rem', margin: '1rem 0' }}>
+
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+    <img src="./scene_0_main.png" alt="Raw spectral data freshly loaded into Spectra Studio" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>Freshly loaded — six raw XRD scans, still noisy and unformatted.</figcaption>
+  </figure>
+
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+    <img src="./scene_4_journal.png" alt="The same data exported as a journal-style figure" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>The same data, ten minutes later — stacked, baseline-corrected, ACS-styled.</figcaption>
+  </figure>
+
+</div>
+
+## 🎬 Demo: 30 seconds
+
+<a id="demo"></a>
 
 <video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
   <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo.mp4`} type="video/mp4" />
   Your browser does not support video playback — <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo.mp4`}>download the video</a> instead.
 </video>
 
-## 🎬 60-Second Feature Tour: Every Tool, Live
+## What You Get in the Free Download
+
+The installer is the complete application — **all Free-edition features work immediately** ($0, forever, no watermarks). Pro features are already inside the same installer; a key unlocks them in seconds, with no re-download.
+
+- **Data loading**: instrument files read directly — PANalytical (.xrdml), Bruker (.brml), .uxd — plus .txt / .xy / .csv / .dat, FTIR (.asc), **UV-Vis (nm, auto-detected)**, DSC/TGA (Excel .xlsx / .xls)
+- **Multi-sample management**: overlay, stack, normalize, vertical offset, batch coloring
+- **Preprocessing**: Savitzky-Golay smoothing, ALS baseline correction — every change previews live
+- **Peak analysis**: automatic peak detection (height/shape based, sensitivity adjustable)
+- **Journal styles**: one-click Nature / ACS / Elsevier, fine-tunable legend and ticks
+- **Export**: PNG / JPG up to 300 DPI, watermark-free — free to use in papers and reports
+
+![Spectra Studio main window: sample list and tools on the left, live stacked-spectrum preview on the right](./spectra-studio-gui.png)
+
+## Why Researchers Upgrade to Pro
+
+These are the steps that eat your evenings — and the ones Pro compresses into seconds. Four of them, live:
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.1rem', margin: '1.2rem 0' }}>
+
+  <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
+    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+      <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-fit.mp4`} type="video/mp4" />
+    </video>
+    <div style={{ padding: '0.85rem 1rem' }}>
+      <div style={{ fontWeight: 700 }}>Peak fitting <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--color-accent)', border: '1px solid var(--color-accent)', borderRadius: '999px', padding: '0.1rem 0.5rem', marginLeft: '0.3rem', verticalAlign: 'middle' }}>PRO</span></div>
+      <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginTop: '0.3rem' }}>Gaussian / Lorentzian / mixed profiles, seeded from auto-detection. Position, FWHM, area, <strong>R² and residuals</strong> in one table — paste-ready for supplementary materials.</div>
+    </div>
+  </div>
+
+  <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
+    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+      <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-grain.mp4`} type="video/mp4" />
+    </video>
+    <div style={{ padding: '0.85rem 1rem' }}>
+      <div style={{ fontWeight: 700 }}>Crystallite size &amp; strain <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--color-accent)', border: '1px solid var(--color-accent)', borderRadius: '999px', padding: '0.1rem 0.5rem', marginLeft: '0.3rem', verticalAlign: 'middle' }}>PRO</span></div>
+      <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginTop: '0.3rem' }}>Scherrer D = Kλ/βcosθ for every peak, then a Williamson–Hall plot with <strong>D, ε and R²</strong>. XRD file → click → numbers reviewers ask about.</div>
+    </div>
+  </div>
+
+  <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
+    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+      <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-miller.mp4`} type="video/mp4" />
+    </video>
+    <div style={{ padding: '0.85rem 1rem' }}>
+      <div style={{ fontWeight: 700 }}>Phase matching &amp; Miller indices <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--color-accent)', border: '1px solid var(--color-accent)', borderRadius: '999px', padding: '0.1rem 0.5rem', marginLeft: '0.3rem', verticalAlign: 'middle' }}>PRO</span></div>
+      <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginTop: '0.3rem' }}>Sample peaks matched against PDF reference cards, <strong>(hkl) labels drawn on the peaks</strong>. "α phase or β phase?" — answered in seconds.</div>
+    </div>
+  </div>
+
+  <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
+    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+      <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-export.mp4`} type="video/mp4" />
+    </video>
+    <div style={{ padding: '0.85rem 1rem' }}>
+      <div style={{ fontWeight: 700 }}>Vector export <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--color-accent)', border: '1px solid var(--color-accent)', borderRadius: '999px', padding: '0.1rem 0.5rem', marginLeft: '0.3rem', verticalAlign: 'middle' }}>PRO</span></div>
+      <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginTop: '0.3rem' }}><strong>PDF · SVG · EPS · TIFF</strong> (up to 600 DPI) — vector figures go straight into your manuscript, crisp at any zoom. No screenshots, no re-drawing.</div>
+    </div>
+  </div>
+
+</div>
+
+**Also in Pro — Tauc bandgap (UV-Vis):** load absorbance data, click "Tauc Bandgap", and get the direct (αhν)² or indirect (αhν)^½ gap with the linear region detected automatically — **Eg and its wavelength are annotated right on the plot** (auto precision ≈ ±0.1 eV). Optional film thickness converts to α = 2.303A/d; leave it blank and the bandgap value is unaffected.
+
+> 💡 **The workflow people actually run**: load → smooth/baseline → auto-detect peaks → fit → Scherrer / Williamson–Hall → Miller-index the phases → export vector. In Origin or a Python script this is an afternoon; in Spectra Studio it's the natural order of the UI.
+
+## 🎬 The Full Feature Tour (55 seconds)
+
+Prefer to watch the whole workflow once, live?
 
 <video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
   <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour.mp4`} type="video/mp4" />
   Your browser does not support video playback — <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour.mp4`}>download the video</a> instead.
 </video>
-
-## Quick Start: What You Get in the Free Download
-
-The installer you download is the complete application — **all Free-edition features work immediately**. Pro features are already built into the same installer; buy a key and they unlock instantly, with no re-download.
-
-The Free edition ($0, forever, no watermarks) includes:
-
-- **Data loading**: instrument files read directly — PANalytical (.xrdml), Bruker (.brml), generic .uxd — plus .txt / .xy / .csv / .dat, FTIR (.asc), **UV-Vis (wavelength in nm, auto-detected)**, DSC/TGA (Excel .xlsx / .xls)
-- **Multi-sample management**: overlay, stack, normalize, vertical offset, batch coloring
-- **Preprocessing**: Savitzky-Golay smoothing, ALS baseline correction
-- **Peak analysis**: automatic peak detection
-- **Journal styles**: one-click Nature / ACS / Elsevier, fine-tunable legend and ticks
-- **Export**: PNG / JPG (up to 300 DPI), watermark-free, free to use in papers and reports
-
-![Spectra Studio main window: sample list and tools on the left, live stacked-spectrum preview on the right](./spectra-studio-gui.png)
 
 ## Step by Step: A Journal Figure in 10 Minutes
 
@@ -98,6 +220,7 @@ Since v2.1.1, peak fitting is no longer required first — peak sources degrade 
 - Computes the crystallite size of every fitted peak via the **Scherrer equation D = Kλ/(βcosθ)**, with error propagation, in a single results table
 
 > New to the calculation? Read [how to calculate crystallite size from XRD](${import.meta.env.BASE_URL}/en/guides/how-to-calculate-crystallite-size-from-xrd/) or try the [interactive Scherrer calculator](${import.meta.env.BASE_URL}/en/tools/crystallite-size-calculator/) — then come back and let the software do it in one click.
+
 - With 2+ peaks, automatically draws a **Williamson-Hall plot** (βcosθ vs 4sinθ); the weighted linear fit reports **crystallite size D, microstrain ε and R²** — the size-vs-strain distinction reviewers love to ask about, answered in 30 seconds
 - X-ray wavelength (default Cu Kα = 0.15406 nm) and shape factor K are both adjustable
 
@@ -165,6 +288,8 @@ Every style remains fine-tunable: fonts, sizes, line widths, tick direction/leng
 
 Spectra Studio comes in two editions only: **Free** and **Pro** — both live in the same installer. **Download once and use the free edition immediately**: no time limits, no watermarks. When you are ready, buying a key unlocks Pro in seconds — nothing to re-download.
 
+**One license. All Pro features included.** Peak fitting, crystallite size, Williamson–Hall, crystallinity, Tauc bandgap, phase matching, Miller indices, vector export — every Pro feature unlocks with a single key. No tiers, no add-ons, no monthly fees.
+
 **Pro pays for itself in the hours it gives back**: the evenings spent stretching baselines in Excel, guessing peak widths, and screenshotting figures into Word are exactly what Pro removes. On the night before submission, vector figures at 600 DPI go straight from the app into your manuscript — no re-drawing.
 
 | | Free | Pro |
@@ -174,75 +299,62 @@ Spectra Studio comes in two editions only: **Free** and **Pro** — both live in
 | Smoothing, baseline correction, peak detection | ✅ | ✅ |
 | Journal styles & PNG/JPG export (≤300 DPI) | ✅ | ✅ |
 | Peak fitting (with R² and residuals) | — | ✅ |
-| Crystallite size: Scherrer crystallite size / Williamson-Hall strain / crystallinity | — | ✅ |
-| Tauc bandgap analysis (UV-Vis, direct/indirect, thickness conversion) | — | ✅ |
-| Phase matching (PDF cards) & Miller indices | — | ✅ |
-| Derivative / integral calculus | — | ✅ |
-| Vector export (PDF / SVG / EPS / TIFF) & high DPI | — | ✅ |
+| Crystallite size: Scherrer / Williamson-Hall / crystallinity | — | ✅ |
+| Tauc bandgap analysis (UV-Vis) | — | ✅ |
+| Phase matching & Miller indices | — | ✅ |
+| Vector export: PDF / SVG / EPS / TIFF (≤600 DPI) | — | ✅ |
+| Watermarks / time limits | none | none |
 
-Pro is a natural fit when:
-
-- **Submitting papers & reports**: PDF / SVG / EPS vector export + journal styles — figures go into the manuscript as-is, crisp at any zoom
-- **Labs & teaching**: phase matching auto-labels Miller indices, crystallite size in one click — a much shorter learning curve for students and colleagues
-- **Analytical centers & industry**: multi-sample management + Tauc bandgap + Williamson-Hall in one routine workflow
-
-**Pro is already complete**: every Pro feature is finished and built into the v2.1.1 installer — nothing extra to download. After purchase, paste the key you receive by email under "🔑 Unlock Pro" in the app (one online verification on first activation, offline afterwards).
-
-> ### 🛒 Unlock every Pro feature now
->
-> **[🛒 Buy Pro on Polar ($79 one-time)](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO)**
->
-> - **One-time purchase**, permanent license, includes updates within the current major version
-> - **30-day money-back guarantee** — if it is not for you, zero risk
-> - Key (`SS_-XXXX-...`, up to 2 devices) arrives instantly in your receipt email; re-paste it after reinstalling or switching machines
+> 🛒 **Get Pro**: [Buy on Polar ($79, one-time)](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO) — pay once, receive the key immediately, and paste it into the app. One license covers all Pro features, all future updates, and works on 2 devices. Not sure? Start free, hit a Pro feature, and decide when it actually matters.
 
 ## Installation & Download
 
-**System requirements**: Windows 10 or later (64-bit). No Python or dependencies needed.
+- **Download**: [Latest release on GitHub](https://github.com/hujerry96/Web/releases) — the newest version always ships there first.
+- **System**: Windows 10 / 11 (64-bit). The installer is about 120 MB; no Python or other runtime is required.
+- **Verify integrity** (optional but recommended): every release page lists the SHA-256 checksum of the installer. In PowerShell:
 
-Both options are identical in content — the full application including Pro features:
+```powershell
+Get-FileHash .\SpectraStudio-Setup.exe -Algorithm SHA256
+```
 
-1. **Setup program** (recommended): [Download SpectraStudio-Setup-v2.1.1.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe), double-click to install into the current user's directory (no administrator rights needed), with Start-menu shortcut and uninstaller.
-2. **Portable build**: [Download SpectraStudio-v2.1.1-portable.exe (120 MB)](https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-v2.1.1-portable.exe) and double-click to run.
+Compare the output against the checksum on the release page — this confirms the file you downloaded is exactly what we published.
 
-> ⚠️ **About the SmartScreen warning**: The software does not yet have a code-signing certificate. Windows may show a "Windows protected your PC" warning — click "More info" → "Run anyway" to continue. We plan to add signing as soon as revenue allows.
-
-**SHA-256 checksums** (verify file integrity after download):
-
-- Setup `SpectraStudio-Setup-v2.1.1.exe`: `6484aae6f2ce08e27ecb6caaf9485dfc37e6bb0047925882be8b37e178795579`
-- Portable `SpectraStudio-v2.1.1-portable.exe`: `166a13b4f3eceb038a96235e95e6bd4a759b3789309e276dda749fdd80fef40b`
-
-Updates: the app silently checks for new versions on startup (prompt only, never forced).
+> ⚠️ **First launch**: Windows SmartScreen may show "Windows protected your PC" for unsigned installers. Click **More info → Run anyway** once — we are working toward code signing so this warning disappears in future releases. (If you prefer, that's exactly what the SHA-256 check above is for: verify, then run with confidence.)
 
 ## Privacy
 
-All data is processed locally on your machine — **no data files are ever uploaded**. License verification is offline; only the version number is checked on startup. See the [privacy policy](/privacy.md) for details.
+- **100% local processing.** Spectra Studio analyzes your data on your machine; your spectra, samples and lab data never leave your computer.
+- The app contains no analytics, no telemetry, no internet calls at runtime. The only network feature is the license-key check when you activate Pro.
+- **No account required** for the Free edition — download, install, use.
 
 ## FAQ
 
-**Q: Is there a Mac or Linux version?**
-Windows only for now; a macOS build is planned.
+### How is this different from Origin / MATLAB / Python scripts?
 
-**Q: Can I use the free edition for published data?**
-Yes. The free edition covers everyday plotting, exports have no watermarks, and figures can be used freely in papers and reports.
+Origin's licensing model is built around seats, and its scripting curve is real; Python gives you full control but demands an environment, a plotting library, and time. Spectra Studio is the middle path for the 95% case: it reads your instrument files directly, and the features you actually use in a lab — preprocessing, peak fitting, Scherrer/Williamson-Hall, Tauc, journal styling — are one click, with the exact numbers (R², residuals, ε) a reviewer will ask for. When you outgrow it, export clean data and hand it to your Python pipeline; the two coexist.
 
-**Q: How do I activate Pro after buying?**
-After purchasing on [Polar](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO), Polar emails you a key (`SS_-XXXX-...` format). Click "🔑 Unlock Pro" in the sidebar, paste the key, and the features unlock immediately (one online verification on first activation, then 30 days fully offline with a brief daily online check) — no reinstall needed.
+### Is the Free version really free forever?
 
-**Q: How are crystallite size and strain computed?**
-Click "Crystallite Size" (since v2.1.1 no peak fitting is needed first — the dialog can auto-detect peaks; you may still fit peaks first to get each FWHM) — the Scherrer equation (D=Kλ/βcosθ) computes the crystallite size of every peak automatically; with 2+ peaks a Williamson-Hall plot gives microstrain ε and R² as well. Wavelength and shape factor K are adjustable.
+Yes. No trial countdown, no time limit, no watermark. The Free edition is a complete tool for the most common workflow (load → smooth → detect → style → export PNG). Pro only adds the deep-analysis features listed above.
 
-**Q: Can I do bandgap analysis on UV-Vis data?**
-Yes. v2.1 auto-detects UV-Vis data (wavelength in nm); click "Tauc Bandgap" — switch between direct/indirect bandgaps in one click, the linear region is detected automatically, and Eg is annotated on the plot. You can enter film thickness for the absorption coefficient, or fine-tune the linear region manually by clicking twice on the plot.
+### Do I need to re-download the installer when I buy Pro?
 
-**Q: Can I export peak-fitting results?**
-Yes. The Pro edition reports each fitted peak's parameters plus residuals, ready for supplementary materials.
+No. The same installer contains both editions; a key unlocks Pro in seconds.
 
-**Q: What if I switch computers?**
-Licenses are bound offline. If you change machines, contact us with your machine code for a key reissue (keep your purchase receipt).
+### Is my data uploaded anywhere?
 
-**Q: Can I load data exported by my instrument software?**
-Yes. Besides common .txt/.csv/.xy two-column files, native instrument files — PANalytical (.xrdml), Bruker (.brml) and .uxd — load directly, so no export-to-text roundtrip is needed; exports from other instruments (.txt/.csv) are auto-detected by content.
+No. Everything runs locally; nothing is transmitted (see Privacy above).
 
-**Q: Can I output the same data in different styles?**
-Yes. Style switches take effect instantly — produce a Nature version and an ACS version of the same dataset by switching and saving each.
+### Can I use the figures in my thesis/paper?
+
+Yes — free edition included. Exported figures carry no watermark and no attribution requirement.
+
+### I use a Mac / Linux — any plan?
+
+Windows first (the vast majority of instrument PCs run Windows). A macOS version is a possible next step; Linux users typically run it in a Windows VM or dual-boot — or use the guides below, which cover the same calculations.
+
+## Related Resources
+
+- [How to calculate crystallite size from XRD (Scherrer & Williamson–Hall, with worked examples)](${import.meta.env.BASE_URL}/en/guides/how-to-calculate-crystallite-size-from-xrd/)
+- [Interactive Scherrer / Williamson–Hall calculator](${import.meta.env.BASE_URL}/en/tools/crystallite-size-calculator/) — enter FWHM, 2θ and K, get D and ε instantly
+- More guides and calculators are added continuously — [all guides](${import.meta.env.BASE_URL}/en/guides/) · [all tools](${import.meta.env.BASE_URL}/en/tools/)
