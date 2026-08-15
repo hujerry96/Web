@@ -16,8 +16,11 @@ project: true
 ---
 
 import { Image } from 'astro:assets';
-import scene0 from './scene_0_main.png';
 import scene4 from './scene_4_journal.png';
+import scene4miller from './scene_4_style_miller.png';
+import scene2 from './scene_2_fit_done.png';
+import scene7 from './scene_7_grain_size.png';
+import outputFig from './spectra-studio-output.png';
 
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
 
@@ -72,18 +75,35 @@ import scene4 from './scene_4_journal.png';
 
 </div>
 
-## 前後對比：同一份數據，10 分鐘的差距
+## 成品展示：畫出來長這樣
+
+以下每一張都是 Spectra Studio 從原始儀器檔直接做出來的真實成品：
 
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.1rem', margin: '1rem 0' }}>
 
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-    <Image src={scene0} alt="剛載入 Spectra Studio 的原始光譜數據" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>剛載入 — 六組 XRD 原始掃描，又吵又沒格式。</figcaption>
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
+    <Image src={scene4} alt="期刊樣式 XRD 圖：六組掃描以 ACS 樣式堆疊" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>ACS 期刊樣式 — 六組樣品堆疊偏移，直接可投稿。</figcaption>
   </figure>
 
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-    <Image src={scene4} alt="同一份數據匯出為期刊樣式圖" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>同一份數據，十分鐘後 — 堆疊、去基線、ACS 樣式。</figcaption>
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
+    <Image src={scene4miller} alt="期刊圖上直接標註 (hkl) Miller 指數" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>相位比對 — (hkl) Miller 指數直接標在峰上。</figcaption>
+  </figure>
+
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
+    <Image src={scene2} alt="分峰擬合結果含殘差面板" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>分峰擬合 — 擬合分量加上殘差面板。</figcaption>
+  </figure>
+
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
+    <Image src={scene7} alt="晶粒尺寸報告：Scherrer 表與 Williamson-Hall 圖" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>晶粒尺寸報告 — Scherrer 表 + Williamson–Hall 圖（D、ε、R²）。</figcaption>
+  </figure>
+
+  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
+    <Image src={outputFig} alt="Spectra Studio 匯出的完成品圖" style={{ width: '100%', display: 'block' }} />
+    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>匯出成品 — 直接出自 Spectra Studio，無浮水印。</figcaption>
   </figure>
 
 </div>
