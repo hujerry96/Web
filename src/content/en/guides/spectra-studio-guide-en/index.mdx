@@ -15,6 +15,10 @@ draft: false
 project: true
 ---
 
+import { Image } from 'astro:assets';
+import scene0 from './scene_0_main.png';
+import scene4 from './scene_4_journal.png';
+
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
 
   <div style={{ fontSize: 'clamp(1.5rem, 1.1rem + 2.2vw, 2.3rem)', fontWeight: 700, lineHeight: 1.18, letterSpacing: '-0.01em', maxWidth: '900px' }}>
@@ -26,7 +30,7 @@ project: true
   </div>
 
   <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-    <a href="https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.1.exe" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
+    <a href="https://github.com/hujerry96/Web/releases/download/v2.1.2/SpectraStudio-Setup-v2.1.2.exe" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
       ⬇ Download Free
     </a>
     <a href="#demo" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-text)', border: '1px solid var(--color-border)', background: 'var(--color-surface)', textDecoration: 'none' }}>
@@ -73,12 +77,12 @@ project: true
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.1rem', margin: '1rem 0' }}>
 
   <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-    <img src="./scene_0_main.png" alt="Raw spectral data freshly loaded into Spectra Studio" style={{ width: '100%', display: 'block' }} />
+    <Image src={scene0} alt="Raw spectral data freshly loaded into Spectra Studio" style={{ width: '100%', display: 'block' }} />
     <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>Freshly loaded — six raw XRD scans, still noisy and unformatted.</figcaption>
   </figure>
 
   <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-    <img src="./scene_4_journal.png" alt="The same data exported as a journal-style figure" style={{ width: '100%', display: 'block' }} />
+    <Image src={scene4} alt="The same data exported as a journal-style figure" style={{ width: '100%', display: 'block' }} />
     <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>The same data, ten minutes later — stacked, baseline-corrected, ACS-styled.</figcaption>
   </figure>
 
@@ -309,7 +313,9 @@ Spectra Studio comes in two editions only: **Free** and **Pro** — both live in
 
 ## Installation & Download
 
-- **Download**: [Latest release on GitHub](https://github.com/hujerry96/Web/releases) — the newest version always ships there first.
+- **Setup program** (recommended): [Download SpectraStudio-Setup-v2.1.2.exe (120 MB)](https://github.com/hujerry96/Web/releases/download/v2.1.2/SpectraStudio-Setup-v2.1.2.exe) — double-click to install into the current user's directory (no administrator rights needed), with a Start-menu shortcut and uninstaller.
+- **Portable build**: [Download SpectraStudio-v2.1.2-portable.exe (119 MB)](https://github.com/hujerry96/Web/releases/download/v2.1.2/SpectraStudio-v2.1.2-portable.exe) — double-click to run, no installation.
+- **Release page**: [All versions on GitHub](https://github.com/hujerry96/Web/releases) — newest versions always ship there first.
 - **System**: Windows 10 / 11 (64-bit). The installer is about 120 MB; no Python or other runtime is required.
 - **Verify integrity** (optional but recommended): every release page lists the SHA-256 checksum of the installer. In PowerShell:
 
