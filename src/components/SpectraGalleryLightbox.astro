@@ -1,0 +1,155 @@
+<script>
+  const setupGalleryLightboxes = () => {
+    const galleries = document.querySelectorAll('[data-spectra-gallery]');
+
+    galleries.forEach((gallery) => {
+      if (gallery.dataset.lightboxReady) return;
+      gallery.dataset.lightboxReady = 'true';
+
+      const items = Array.from(gallery.querySelectorAll('figure'));
+      if (!items.length) return;
+
+      const overlay = document.createElement('div');
+      overlay.hidden = true;
+      overlay.setAttribute('data-spectra-lightbox', 'true');
+      Object.assign(overlay.style, {
+        position: 'fixed',
+        inset: '0',
+        zIndex: '9999',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 'clamp(1rem, 4vw, 3rem)',
+        background: 'rgba(2, 6, 23, 0.9)',
+        cursor: 'zoom-out',
+      });
+
+      const frame = document.createElement('div');
+      Object.assign(frame.style, {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 'min(1500px, 96vw)',
+        height: 'min(92vh, 1100px)',
+        cursor: 'default',
+      });
+
+      const image = document.createElement('img');
+      Object.assign(image.style, {
+        maxWidth: '100%',
+        maxHeight: '100%',
+        width: 'auto',
+        height: 'auto',
+        objectFit: 'contain',
+        borderRadius: '8px',
+        boxShadow: '0 20px 70px rgba(0, 0, 0, 0.45)',
+      });
+
+      const makeButton = (label, text) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.setAttribute('aria-label', label);
+        button.textContent = text;
+        Object.assign(button.style, {
+          position: 'absolute',
+          display: 'grid',
+          placeItems: 'center',
+          width: '2.8rem',
+          height: '2.8rem',
+          border: '1px solid rgba(255, 255, 255, 0.28)',
+          borderRadius: '999px',
+          color: '#fff',
+          background: 'rgba(15, 23, 42, 0.72)',
+          fontSize: '1.7rem',
+          lineHeight: '1',
+          cursor: 'pointer',
+          backdropFilter: 'blur(8px)',
+        });
+        return button;
+      };
+
+      const close = makeButton('Close image', '×');
+      Object.assign(close.style, { top: '0.5rem', right: '0.5rem', fontSize: '2rem' });
+      const previous = makeButton('Previous image', '‹');
+      Object.assign(previous.style, { left: '0.5rem', top: '50%', transform: 'translateY(-50%)' });
+      const next = makeButton('Next image', '›');
+      Object.assign(next.style, { right: '0.5rem', top: '50%', transform: 'translateY(-50%)' });
+
+      const counter = document.createElement('div');
+      Object.assign(counter.style, {
+        position: 'absolute',
+        bottom: '0.65rem',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        padding: '0.3rem 0.65rem',
+        borderRadius: '999px',
+        color: '#fff',
+        background: 'rgba(15, 23, 42, 0.72)',
+        fontSize: '0.8rem',
+        fontVariantNumeric: 'tabular-nums',
+      });
+
+      frame.append(image, close, previous, next, counter);
+      overlay.append(frame);
+      document.body.append(overlay);
+
+      let current = 0;
+      let previousOverflow = '';
+
+      const show = (index) => {
+        current = (index + items.length) % items.length;
+        const source = items[current].querySelector('img');
+        image.src = source.currentSrc || source.src;
+        image.alt = source.alt;
+        counter.textContent = `${current + 1} / ${items.length}`;
+      };
+
+      const open = (index) => {
+        show(index);
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        overlay.hidden = false;
+        close.focus();
+      };
+
+      const dismiss = () => {
+        overlay.hidden = true;
+        document.body.style.overflow = previousOverflow;
+      };
+
+      items.forEach((item, index) => {
+        item.tabIndex = 0;
+        item.setAttribute('role', 'button');
+        item.setAttribute('aria-label', `Open image ${index + 1}`);
+        item.style.cursor = 'zoom-in';
+        item.addEventListener('click', () => open(index));
+        item.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            open(index);
+          }
+        });
+      });
+
+      close.addEventListener('click', dismiss);
+      previous.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
+      overlay.addEventListener('click', (event) => {
+        if (event.target === overlay) dismiss();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (overlay.hidden) return;
+        if (event.key === 'Escape') dismiss();
+        if (event.key === 'ArrowLeft') show(current - 1);
+        if (event.key === 'ArrowRight') show(current + 1);
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupGalleryLightboxes, { once: true });
+  } else {
+    setupGalleryLightboxes();
+  }
+</script>

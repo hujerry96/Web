@@ -16,6 +16,7 @@ project: true
 ---
 
 import { Image } from 'astro:assets';
+import SpectraGalleryLightbox from '../../../../components/SpectraGalleryLightbox.astro';
 import gallery01 from './gallery-01.png';
 import gallery02 from './gallery-02.png';
 import gallery03 from './gallery-03.png';
@@ -84,7 +85,7 @@ import gallery10 from './gallery-10.png';
 
 Ten finished outputs from the supplied sample folder, arranged as a responsive collage:
 
-<div style={{ columns: '3 260px', columnGap: '0.9rem', margin: '1rem 0 1.5rem' }}>
+<div data-spectra-gallery="true" style={{ columns: '3 260px', columnGap: '0.9rem', margin: '1rem 0 1.5rem' }}>
   <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
     <div style={{ position: 'relative', background: '#fff' }}>
       <Image src={gallery01} alt="Real exported figure 01 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
@@ -156,6 +157,8 @@ Ten finished outputs from the supplied sample folder, arranged as a responsive c
     <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>Output 10</figcaption>
   </figure>
 </div>
+
+<SpectraGalleryLightbox />
 
 ## 🎬 Demo: 30 seconds
 
