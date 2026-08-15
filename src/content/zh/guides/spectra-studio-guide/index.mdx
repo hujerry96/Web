@@ -16,11 +16,6 @@ project: true
 ---
 
 import { Image } from 'astro:assets';
-import scene4 from './scene_4_journal.png';
-import scene4miller from './scene_4_style_miller.png';
-import scene2 from './scene_2_fit_done.png';
-import scene7 from './scene_7_grain_size.png';
-import outputFig from './spectra-studio-output.png';
 import gallery01 from './gallery-01.png';
 import gallery02 from './gallery-02.png';
 import gallery03 from './gallery-03.png';
@@ -87,52 +82,79 @@ import gallery10 from './gallery-10.png';
 
 ## 成品展示：畫出來長這樣
 
-以下每一張都是 Spectra Studio 從原始儀器檔直接做出來的真實成品：
+以下 10 張全部來自你提供的繪圖成品範例，採 responsive masonry 拼貼排版：
 
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.1rem', margin: '1rem 0' }}>
-
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
-    <Image src={scene4} alt="期刊樣式 XRD 圖：六組掃描以 ACS 樣式堆疊" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>ACS 期刊樣式 — 六組樣品堆疊偏移，直接可投稿。</figcaption>
+<div style={{ columns: '3 260px', columnGap: '0.9rem', margin: '1rem 0 1.5rem' }}>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery01} alt="真實匯出成品 01 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>01</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 01</figcaption>
   </figure>
-
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
-    <Image src={scene4miller} alt="期刊圖上直接標註 (hkl) Miller 指數" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>相位比對 — (hkl) Miller 指數直接標在峰上。</figcaption>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery02} alt="真實匯出成品 02 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>02</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 02</figcaption>
   </figure>
-
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
-    <Image src={scene2} alt="分峰擬合結果含殘差面板" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>分峰擬合 — 擬合分量加上殘差面板。</figcaption>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery03} alt="真實匯出成品 03 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>03</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 03</figcaption>
   </figure>
-
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
-    <Image src={scene7} alt="晶粒尺寸報告：Scherrer 表與 Williamson-Hall 圖" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>晶粒尺寸報告 — Scherrer 表 + Williamson–Hall 圖（D、ε、R²）。</figcaption>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery04} alt="真實匯出成品 04 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>04</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 04</figcaption>
   </figure>
-
-  <figure style={{ margin: 0, borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}>
-    <Image src={outputFig} alt="Spectra Studio 匯出的完成品圖" style={{ width: '100%', display: 'block' }} />
-    <figcaption style={{ padding: '0.6rem 0.9rem', fontSize: '0.88rem', color: 'var(--color-text-secondary)' }}>匯出成品 — 直接出自 Spectra Studio，無浮水印。</figcaption>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery05} alt="真實匯出成品 05 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>05</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 05</figcaption>
   </figure>
-
-</div>
-
-### 更多真實匯出成品
-
-以下是使用提供的範例檔案製作出的另一組完成品：
-
-<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.9rem', margin: '1rem 0 1.5rem' }}>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery01} alt="Spectra Studio 真實匯出成品 01" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 01</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery02} alt="Spectra Studio 真實匯出成品 02" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 02</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery03} alt="Spectra Studio 真實匯出成品 03" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 03</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery04} alt="Spectra Studio 真實匯出成品 04" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 04</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery05} alt="Spectra Studio 真實匯出成品 05" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 05</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery06} alt="Spectra Studio 真實匯出成品 06" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 06</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery07} alt="Spectra Studio 真實匯出成品 07" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 07</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery08} alt="Spectra Studio 真實匯出成品 08" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 08</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery09} alt="Spectra Studio 真實匯出成品 09" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 09</figcaption></figure>
-  <figure style={{ margin: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff' }}><Image src={gallery10} alt="Spectra Studio 真實匯出成品 10" style={{ width: '100%', display: 'block' }} /><figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>真實匯出成品 10</figcaption></figure>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery06} alt="真實匯出成品 06 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>06</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 06</figcaption>
+  </figure>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery07} alt="真實匯出成品 07 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>07</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 07</figcaption>
+  </figure>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery08} alt="真實匯出成品 08 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>08</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 08</figcaption>
+  </figure>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery09} alt="真實匯出成品 09 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>09</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 09</figcaption>
+  </figure>
+  <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
+    <div style={{ position: 'relative', background: '#fff' }}>
+      <Image src={gallery10} alt="真實匯出成品 10 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
+      <span style={{ position: 'absolute', top: '0.55rem', left: '0.55rem', padding: '0.2rem 0.45rem', borderRadius: '999px', background: 'rgba(15,23,42,0.78)', color: '#fff', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em' }}>10</span>
+    </div>
+    <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 10</figcaption>
+  </figure>
 </div>
 
 ## 🎬 30 秒示範
