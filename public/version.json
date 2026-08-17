@@ -1,6 +1,6 @@
 {
-  "version": "2.1.2",
-  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.2.exe",
-  "notes": "v2.1.2：UV-Vis 匯入強化（Hitachi U-3900 專屬解析、%T/%R/Abs 單位）＋檔案右鍵手動切換數據類型",
+  "version": "2.1.4",
+  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.4.exe",
+  "notes": "v2.1.4：修正首次啟動同意 EULA 後主視窗未顯示問題；重新打包便攜版與安裝版。",
   "mandatory": false
 }
