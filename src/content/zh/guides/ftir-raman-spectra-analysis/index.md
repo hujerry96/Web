@@ -20,7 +20,7 @@ FTIR 與 Raman 儀器產生的檔案通常不難取得，真正耗時的地方�
 
 **Spectra Studio** 是一個 Windows 桌面工具，除了 XRD，也支援 FTIR、Raman、UV-Vis 以及 DSC/TGA 資料的載入與圖譜整理。
 
-![Spectra Studio 主畫面：載入多組量測曲線。](../spectra-studio-guide/scene_0_main.png)
+![使用資料夾中的範例資料製作的 FTIR 光譜圖。](../spectra-studio-guide/examples/ftir-spectrum.png)
 
 ## Spectra Studio 支援哪些 FTIR 與 Raman 檔案？
 
@@ -32,7 +32,7 @@ FTIR 與 Raman 儀器產生的檔案通常不難取得，真正耗時的地方�
 
 FTIR 的 wavenumber 軸若是反向輸出，工具可以自動修正軸方向，讓不同儀器輸出的資料更容易放在同一個閱讀方向中。載入前仍建議確認第一欄是波數或 Raman shift，第二欄是吸光度、強度或儀器輸出的對應訊號。
 
-![Spectra Studio 預處理畫面：平滑與基線校正後的光譜曲線。](../spectra-studio-guide/scene_3_preprocessed.png)
+![FTIR 峰偵測結果，標出候選特徵峰。](../spectra-studio-guide/examples/ftir-peak-detection.png)
 
 ## FTIR、Raman 光譜整理的推薦流程
 
@@ -85,7 +85,7 @@ Spectra Studio 提供 Nature、ACS 與 Elsevier 風格，可快速建立一致�
 
 如果同一篇論文同時放入 XRD、FTIR、Raman 與 UV-Vis，使用相近的版面規則，可以降低讀者切換圖表時的負擔。
 
-![Spectra Studio 輸出面板：設定論文圖的輸出格式。](../spectra-studio-guide/scene_5_export.png)
+![使用資料夾中的範例資料製作的 Raman 光譜圖。](../spectra-studio-guide/examples/raman-spectrum.png)
 
 ## Free 版與 Pro 版的差別
 

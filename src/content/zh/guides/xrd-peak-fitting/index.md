@@ -18,7 +18,7 @@ XRD 圖譜中的峰位置、峰高、峰面積與半高寬，往往會被用來�
 
 這就是 **XRD peak fitting（XRD 峰擬合）** 的用途：用數學峰形描述實驗資料，將重疊峰拆開，並回報每一個峰的中心位置、FWHM、面積與擬合品質。對需要把數值放進論文結果表或 supplementary materials 的研究者來說，峰擬合通常比手動量測更容易重複。
 
-![Spectra Studio 主畫面：準備進行 XRD 圖譜分析。](../spectra-studio-guide/scene_0_main.png)
+![使用資料夾中的範例資料製作的期刊風格 XRD 圖。](../spectra-studio-guide/examples/xrd-overview.png)
 
 ## Gaussian、Lorentzian 與 mixed profile 有什麼差別？
 
@@ -30,7 +30,7 @@ XRD 圖譜中的峰位置、峰高、峰面積與半高寬，往往會被用來�
 
 沒有任何一種峰形可以對所有材料與儀器資料一律適用。選擇模型時，應該結合儀器設定、研究領域常用方法、峰形殘差與擬合穩定性，而不是只挑讓 R² 最高的模型。
 
-![Spectra Studio 自動峰偵測畫面與候選峰清單。](../spectra-studio-guide/scene_1_peak_detect.png)
+![Gaussian 峰擬合結果，顯示個別峰、擬合曲線與 residuals。](../spectra-studio-guide/examples/gaussian-peak-fitting.png)
 
 ## XRD 峰擬合通常會得到哪些結果？
 
@@ -77,7 +77,7 @@ R² 很高不代表模型一定正確。建議同時觀察原始曲線、總擬�
 
 完成後，結果表會列出 position、FWHM、area、R² 與 residuals，可整理到論文或補充資料中。
 
-![Spectra Studio 峰擬合結果：顯示個別峰與 residuals。](../spectra-studio-guide/scene_2_fit_done.png)
+![AlN XRD 峰部放大圖，可用來檢查定量分析前的峰寬。](../spectra-studio-guide/examples/xrd-peak-width.png)
 
 ## 峰擬合與晶粒尺寸計算的關係
 

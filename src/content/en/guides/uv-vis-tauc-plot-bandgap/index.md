@@ -19,7 +19,7 @@ In semiconductor, photocatalyst, thin-film, perovskite and optoelectronic-materi
 
 The important part is not simply drawing a line. You need to select a transition model—direct or indirect—and justify the linear region. A visually attractive fit can still produce an unreliable band-gap estimate if the model or region is inappropriate.
 
-![Illustrative Tauc plot showing a linear-region fit extrapolated to the Eg intercept.](./tauc-plot-example.svg)
+![A UV-Vis spectrum generated from the supplied sample data.](../spectra-studio-guide-en/examples/uv-vis-spectrum.png)
 
 ## The Tauc equation
 
@@ -44,7 +44,7 @@ Two practical choices are especially common:
 
 Fit the approximately linear region near the absorption edge and extend the line to `y = 0`. The x-axis intercept is the estimated `Eg`. If the transition type is uncertain, use the material's electronic structure, literature and experimental context rather than selecting the result that merely looks closest to expectation.
 
-![Spectra Studio main window illustrating the application workflow for instrument data.](../spectra-studio-guide-en/scene_0_main.png)
+![Spectra Studio Tauc bandgap analysis showing the fitted region and Eg annotation.](../spectra-studio-guide-en/examples/tauc-bandgap.png)
 
 ## From UV-Vis data to a Tauc plot
 
@@ -98,7 +98,7 @@ For films, thickness and baseline affect the absorption coefficient. For powders
 
 Automatic detection accelerates repetitive work, but it does not replace scientific review. Confirm that the selected region, transition model and resulting value are consistent with the material and relevant literature.
 
-![Spectra Studio export panel for saving a publication-ready figure.](../spectra-studio-guide-en/scene_5_export.png)
+![A Gaussian peak-fitting output with component peaks and residuals.](../spectra-studio-guide-en/examples/gaussian-peak-fitting.png)
 
 ## Why use Spectra Studio for Tauc analysis?
 
