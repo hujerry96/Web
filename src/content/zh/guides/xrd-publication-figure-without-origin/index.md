@@ -6,6 +6,7 @@ keywords: ['免費 XRD 作圖軟體', '不用 Origin 做 XRD 圖', 'XRD 論文�
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['XRD', '數據視覺化', '論文配圖', 'Windows 軟體']
 locale: 'zh'

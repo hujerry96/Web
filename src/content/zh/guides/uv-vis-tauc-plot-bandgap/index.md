@@ -6,6 +6,7 @@ keywords: ['Tauc plot band gap 計算', 'UV-Vis band gap 怎麼算', 'Tauc plot 
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['UV-Vis', '能隙', '半導體', '數據分析']
 locale: 'zh'

@@ -6,6 +6,7 @@ keywords: ['XRD crystallite size calculation', 'Scherrer equation', 'Williamsonâ
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['XRD', 'Materials Science', 'Crystallite Size', 'Data Analysis']
 locale: 'en'

@@ -6,6 +6,7 @@ keywords: ['XRD 峰擬合', 'XRD peak fitting software', 'XRD Gaussian Lorentzia
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['XRD', '峰擬合', '材料科學', '數據分析']
 locale: 'zh'

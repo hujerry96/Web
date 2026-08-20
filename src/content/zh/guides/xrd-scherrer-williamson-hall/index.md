@@ -6,6 +6,7 @@ keywords: ['XRD 晶粒尺寸計算', 'XRD Scherrer 方程怎麼算', 'Williamson
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['XRD', '材料科學', '晶粒尺寸', '數據分析']
 locale: 'zh'

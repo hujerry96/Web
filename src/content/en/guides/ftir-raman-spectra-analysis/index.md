@@ -6,6 +6,7 @@ keywords: ['FTIR Raman analysis software', 'FTIR plotting software for Windows',
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['FTIR', 'Raman', 'Spectroscopy', 'Publication Figures']
 locale: 'en'

@@ -6,6 +6,7 @@ keywords: ['Tauc plot band gap calculation', 'UV-Vis band gap', 'how to draw a T
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['UV-Vis', 'Band Gap', 'Semiconductors', 'Data Analysis']
 locale: 'en'

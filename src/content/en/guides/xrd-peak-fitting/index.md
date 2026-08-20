@@ -6,6 +6,7 @@ keywords: ['XRD peak fitting', 'XRD peak fitting software', 'Gaussian Lorentzian
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['XRD', 'Peak Fitting', 'Materials Science', 'Data Analysis']
 locale: 'en'

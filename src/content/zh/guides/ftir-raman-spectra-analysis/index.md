@@ -6,6 +6,7 @@ keywords: ['FTIR Raman 光譜分析軟體', 'FTIR 作圖軟體 Windows', 'Raman 
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['FTIR', 'Raman', '光譜學', '論文配圖']
 locale: 'zh'

@@ -6,6 +6,7 @@ keywords: ['free XRD plotting software', 'XRD figure without Origin', 'XRD journ
 author: 'Jerry Hu'
 date: 2026-08-20
 updated: 2026-08-20
+cover: ./cover.png
 category: 'guides'
 tags: ['XRD', 'Data Visualization', 'Publication Figures', 'Windows Software']
 locale: 'en'
