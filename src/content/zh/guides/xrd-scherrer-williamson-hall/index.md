@@ -18,6 +18,8 @@ draft: false
 
 如果一個顆粒由多個微晶組成，XRD 算出的尺寸可能小於 SEM 粒徑。這個區分在論文撰寫與回覆審稿意見時很重要。最常見的第一步分析，是使用 **Scherrer 方程**；如果還想區分晶粒尺寸與微應變，則可以進一步使用 **Williamson–Hall plot**。
 
+![Spectra Studio 主畫面：載入並堆疊多組 XRD 圖譜。](../spectra-studio-guide/scene_0_main.png)
+
 ## Scherrer 方程式與所需參數
 
 Scherrer 方程如下：
@@ -69,6 +71,8 @@ D = (0.9 × 1.5406) / (0.00733 × cos 19.09°)
 
 實際研究通常會分析多個主要峰，再比較各峰的結果，而不是只挑一個峰就把它當成整個樣品的代表值。分析前也要確認峰沒有嚴重重疊，否則量到的 FWHM 可能是多個峰疊在一起的寬度。
 
+![Spectra Studio 峰擬合畫面：顯示個別峰、擬合曲線與殘差。](../spectra-studio-guide/scene_2_fit_done.png)
+
 ## 為什麼只用 Scherrer 方程有時不夠？
 
 XRD 峰變寬不只可能來自微晶尺寸，還可能受到以下因素影響：
@@ -79,6 +83,8 @@ XRD 峰變寬不只可能來自微晶尺寸，還可能受到以下因素影響�
 4. **背景與基線**：非晶背景或螢光背景若沒有處理，會影響峰面積與半高寬。
 
 Scherrer 方程把主要展寬視為尺寸效應，因此適合作為快速估算，但不一定能單獨分離尺寸與應變效應。
+
+![Spectra Studio 晶粒尺寸分析視窗與 Williamson–Hall plot。](../spectra-studio-guide/scene_7_grain_size.png)
 
 ## Williamson–Hall plot 怎麼畫？
 

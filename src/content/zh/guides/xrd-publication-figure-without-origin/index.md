@@ -18,6 +18,8 @@ XRD 儀器通常可以很快產生繞射資料，但從原始檔案到能放進�
 
 Origin 很強大，Python 也能做到高度客製化；但如果你的需求是把多組 XRD、FTIR、Raman 或 UV-Vis 資料快速整理成乾淨的投稿圖，未必需要先學習一整套繪圖環境。**Spectra Studio** 的定位，就是把材料實驗室最常用的資料處理與作圖流程集中在一個 Windows 桌面工具裡。
 
+![Spectra Studio 主畫面：多組樣品以堆疊方式顯示。](../spectra-studio-guide/scene_0_main.png)
+
 ## Spectra Studio 適合哪些人？
 
 這個工具特別適合以下情境：
@@ -41,6 +43,8 @@ Free 版不是只能試看的 demo：基本載入、預處理、峰偵測、期�
 
 多個樣品載入後，左側會出現 sample list，右側即時顯示曲線。你可以選擇 overlay 來比較峰位，也可以使用 stack 或 vertical offset，讓不同樣品的峰形不會互相遮住。
 
+![Spectra Studio 預處理畫面：平滑與基線校正後的曲線。](../spectra-studio-guide/scene_3_preprocessed.png)
+
 ### Step 2：先處理平滑與基線
 
 如果原始資料的雜訊較多，可在 preprocessing 面板調整 Savitzky–Golay smoothing。若背景有明顯斜率或螢光背景，再使用 ALS baseline correction。
@@ -62,6 +66,8 @@ Free 版不是只能試看的 demo：基本載入、預處理、峰偵測、期�
 - **Elsevier style**：完整框線、傳統學術版面
 
 套用樣式後，仍然可以調整字型、字級、線寬、tick direction、tick length、圖例位置、標題與座標範圍。這樣可以先維持一致的視覺基礎，再依照目標期刊的 author guidelines 微調。
+
+![Spectra Studio 輸出面板：選擇圖檔格式與解析度。](../spectra-studio-guide/scene_5_export.png)
 
 ### Step 5：選擇正確輸出格式與解析度
 

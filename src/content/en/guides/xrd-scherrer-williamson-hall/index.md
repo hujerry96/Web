@@ -21,6 +21,8 @@ There is an important terminology point. The value obtained from peak broadening
 
 When the goal is to separate size broadening from microstrain, the next step is often a **Williamson–Hall plot**.
 
+![Spectra Studio main window showing multiple XRD patterns loaded and stacked.](../spectra-studio-guide-en/scene_0_main.png)
+
 ## The Scherrer equation and its parameters
 
 The Scherrer equation is:
@@ -72,6 +74,8 @@ The apparent crystallite size for this peak is therefore about **20.0 nm**.
 
 In a real study, analyze several strong, well-resolved peaks rather than treating one peak as the entire sample. A partially merged peak can produce an artificially large FWHM, so overlapping peaks should be fitted individually whenever possible.
 
+![Spectra Studio peak-fitting view with fitted components and residuals.](../spectra-studio-guide-en/scene_2_fit_done.png)
+
 ## Why Scherrer alone may not be enough
 
 Peak broadening can come from more than crystallite size. Important sources include:
@@ -82,6 +86,8 @@ Peak broadening can come from more than crystallite size. Important sources incl
 4. **Background and baseline**: fluorescence or an amorphous contribution affects the measured width and area.
 
 The Scherrer equation is useful for a rapid apparent-size estimate, but it does not automatically separate all of these effects.
+
+![Spectra Studio crystallite-size dialog with a Williamson–Hall plot.](../spectra-studio-guide-en/scene_7_grain_size.png)
 
 ## How to make a Williamson–Hall plot
 

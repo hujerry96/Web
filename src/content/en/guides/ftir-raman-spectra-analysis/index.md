@@ -21,6 +21,8 @@ Excel or a general plotting application may be enough for one curve. But when yo
 
 **Spectra Studio** is a Windows desktop application for loading and organizing XRD, FTIR, Raman, UV-Vis and DSC/TGA data.
 
+![Spectra Studio main window with multiple measurement curves loaded.](../spectra-studio-guide-en/scene_0_main.png)
+
 ## Which FTIR and Raman formats are supported?
 
 Common inputs include:
@@ -30,6 +32,8 @@ Common inputs include:
 - **Generic spectra**: two-column text or CSV files
 
 If an FTIR wavenumber axis is exported in the opposite direction, the application can automatically correct the direction for display. Before loading, still confirm that the first column is the wavenumber or Raman shift and that the second column is the corresponding absorbance or intensity signal.
+
+![Spectra Studio preprocessing view with smoothed and baseline-corrected curves.](../spectra-studio-guide-en/scene_3_preprocessed.png)
 
 ## A practical FTIR and Raman processing workflow
 
@@ -81,6 +85,8 @@ Nature, ACS and Elsevier starting styles provide a common basis for fonts, lines
 - sample labels for overlay or stacked curves.
 
 When XRD, FTIR, Raman and UV-Vis figures appear in the same paper, consistent layout rules make it easier for readers to move between panels.
+
+![Spectra Studio export panel showing available figure output settings.](../spectra-studio-guide-en/scene_5_export.png)
 
 ## Free and Pro features
 

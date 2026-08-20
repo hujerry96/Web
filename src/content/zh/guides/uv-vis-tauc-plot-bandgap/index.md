@@ -18,6 +18,8 @@ draft: false
 
 Tauc 分析的重點不是只按下「畫一條直線」，而是要先確認材料適合直接躍遷（direct transition）或間接躍遷（indirect transition）的模型，並合理選擇線性區域。若模型或區域選錯，即使圖看起來很漂亮，Eg 也可能沒有可靠的物理意義。
 
+![示意 Tauc plot：線性區間外推至 Eg 能隙截距。](./tauc-plot-example.svg)
+
 ## Tauc plot 的基本公式
 
 常見形式為：
@@ -40,6 +42,8 @@ Tauc 分析的重點不是只按下「畫一條直線」，而是要先確認材
 - **間接允許躍遷**：繪製 `(αhν)^(1/2)` 對 `hν`
 
 在接近吸收邊的近似線性區域做線性擬合，將直線延伸至 y = 0，與 x 軸的交點就是估計的 `Eg`。若你不確定材料屬於哪一種躍遷，應依材料文獻、晶體結構與實驗條件進行判斷，不能只因某一種模型得到更接近預期的數字就直接採用。
+
+![Spectra Studio 主畫面：示意從儀器資料開始的分析流程。](../spectra-studio-guide/scene_0_main.png)
 
 ## 從 UV-Vis 原始資料到 Tauc plot 的操作步驟
 
@@ -92,6 +96,8 @@ Tauc plot 的線性區域通常只在吸收邊附近。若把低能量尾端、�
 ### 5. 把自動結果當成不需要審查的答案
 
 自動偵測適合加速重複工作，不代表可以跳過科學判讀。最終仍要確認線性區、相別、材料模型與文獻是否一致。
+
+![Spectra Studio 輸出面板：將圖譜儲存為投稿用圖檔。](../spectra-studio-guide/scene_5_export.png)
 
 ## 為什麼用 Spectra Studio 做 Tauc plot？
 

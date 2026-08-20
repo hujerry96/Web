@@ -19,6 +19,8 @@ The diffractometer can generate a pattern quickly. Turning that raw file into a 
 
 Origin is powerful and Python is highly customizable, but neither is always the fastest starting point for a researcher who only needs a clean, repeatable workflow for common XRD and spectroscopy figures. **Spectra Studio** puts the routine steps into a Windows desktop app, so you can move from instrument data to a journal-style figure without setting up a programming environment.
 
+![Spectra Studio main window with several samples displayed as an offset stack.](../spectra-studio-guide-en/scene_0_main.png)
+
 ## Who needs a simpler XRD plotting workflow?
 
 Spectra Studio is useful when you:
@@ -42,6 +44,8 @@ Click **Load data**, or drag files into the application. Spectra Studio reads PA
 
 After loading, the sample list appears on the left and the curves are shown immediately. Use **overlay** when the main goal is to compare peak positions. Use **stack** or **vertical offset** when the curves would otherwise cover one another.
 
+![Spectra Studio preprocessing view showing cleaned curves after smoothing and baseline correction.](../spectra-studio-guide-en/scene_3_preprocessed.png)
+
 ### Step 2: Preview smoothing and baseline correction
 
 If the pattern is noisy, adjust Savitzky–Golay smoothing in the preprocessing panel. If the background slopes or contains fluorescence, try ALS baseline correction. Changes are previewed live, so you can see whether a weak feature remains visible.
@@ -63,6 +67,8 @@ Spectra Studio provides three starting styles:
 - **Elsevier**: a full frame with a classic academic layout.
 
 Each style remains adjustable. Tune the font, font size, line width, tick direction, tick length, legend position, title and axis ranges. Treat these as a starting point, then check the target journal's author guidelines before submission.
+
+![Spectra Studio export panel for selecting figure formats and resolution.](../spectra-studio-guide-en/scene_5_export.png)
 
 ### Step 5: Export at the right resolution
 

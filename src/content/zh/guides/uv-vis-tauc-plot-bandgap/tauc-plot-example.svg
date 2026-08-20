@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Illustrative direct-transition Tauc plot</title>
+  <desc id="desc">An illustrative Tauc plot showing a linear fit extrapolated to the photon-energy axis to estimate Eg.</desc>
+  <rect width="1200" height="700" fill="#ffffff"/>
+  <text x="600" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#1f2937">Illustrative Tauc plot</text>
+  <line x1="130" y1="590" x2="1110" y2="590" stroke="#1f2937" stroke-width="3"/>
+  <line x1="130" y1="590" x2="130" y2="110" stroke="#1f2937" stroke-width="3"/>
+  <g font-family="Arial, sans-serif" font-size="22" fill="#374151">
+    <text x="620" y="650" text-anchor="middle">Photon energy, hν (eV)</text>
+    <text x="42" y="360" text-anchor="middle" transform="rotate(-90 42 360)">(αhν)²</text>
+    <text x="130" y="625" text-anchor="middle">1.5</text>
+    <text x="375" y="625" text-anchor="middle">2.0</text>
+    <text x="620" y="625" text-anchor="middle">2.5</text>
+    <text x="865" y="625" text-anchor="middle">3.0</text>
+    <text x="1110" y="625" text-anchor="middle">3.5</text>
+  </g>
+  <g stroke="#d1d5db" stroke-width="1">
+    <line x1="375" y1="590" x2="375" y2="110"/>
+    <line x1="620" y1="590" x2="620" y2="110"/>
+    <line x1="865" y1="590" x2="865" y2="110"/>
+  </g>
+  <path d="M 130 585 C 260 584, 380 580, 485 560 C 570 543, 625 500, 680 430 C 745 346, 830 246, 930 174 C 1005 123, 1065 112, 1110 108" fill="none" stroke="#2563eb" stroke-width="7" stroke-linecap="round"/>
+  <line x1="400" y1="590" x2="930" y2="142" stroke="#dc2626" stroke-width="5" stroke-dasharray="14 10"/>
+  <line x1="400" y1="590" x2="400" y2="590" stroke="#dc2626" stroke-width="5"/>
+  <line x1="400" y1="590" x2="400" y2="620" stroke="#dc2626" stroke-width="4" stroke-dasharray="8 8"/>
+  <circle cx="400" cy="590" r="9" fill="#dc2626"/>
+  <g font-family="Arial, sans-serif" font-size="24" fill="#374151">
+    <text x="414" y="555" fill="#dc2626">Eg intercept</text>
+    <text x="418" y="680" fill="#dc2626">Eg</text>
+    <text x="790" y="205" fill="#2563eb">transformed absorption data</text>
+    <text x="690" y="300" fill="#dc2626">linear-region fit</text>
+  </g>
+</svg>

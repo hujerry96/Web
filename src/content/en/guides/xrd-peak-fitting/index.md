@@ -21,6 +21,8 @@ Peak position, peak height, area and width are often used to discuss phase compo
 
 For researchers preparing numerical tables or supplementary information, fitting is often easier to document and reproduce than measuring each width by hand.
 
+![Spectra Studio main window with XRD data ready for analysis.](../spectra-studio-guide-en/scene_0_main.png)
+
 ## Gaussian, Lorentzian and mixed profiles
 
 The most common profile choices include Gaussian and Lorentzian functions:
@@ -30,6 +32,8 @@ The most common profile choices include Gaussian and Lorentzian functions:
 - **Mixed profile**: a combination of Gaussian and Lorentzian contributions for peaks that are not described well by one ideal shape.
 
 There is no single profile that is correct for every material and instrument. Select a model using the instrument context, established practice for the material, residual behavior and fit stability. Do not choose a profile only because it produces the highest R².
+
+![Spectra Studio automatic peak-detection view with candidate peaks listed.](../spectra-studio-guide-en/scene_1_peak_detect.png)
 
 ## What should an XRD peak-fitting result contain?
 
@@ -75,6 +79,8 @@ Ask the following questions:
 - Could instrumental broadening or baseline treatment be dominating the FWHM?
 
 The final table reports position, FWHM, area, R² and residual information that can be organized into a manuscript or supplementary table.
+
+![Spectra Studio peak-fitting result showing component peaks and residuals.](../spectra-studio-guide-en/scene_2_fit_done.png)
 
 ## How peak fitting affects crystallite-size analysis
 
