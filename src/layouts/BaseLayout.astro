@@ -19,10 +19,11 @@ interface Props {
   post?: Post | null;
   type?: 'website' | 'article';
   breadcrumb?: { name: string; url: string }[];
+  jsonLd?: Record<string, unknown>[];
   wide?: boolean;
 }
 
-const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, wide = false } = Astro.props;
+const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, jsonLd: extraJsonLd = [], wide = false } = Astro.props;
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
 const t = useTranslations(locale);
 const url = `${SITE.url}${path}`;
@@ -30,7 +31,7 @@ const canonical = buildCanonical(post, path);
 const hreflang = buildHreflang(post, path);
 const image = post?.data.cover ? post.data.cover.src : `${SITE.url}/images/og-default.png`;
 
-const jsonLd: Record<string, unknown>[] = [];
+const jsonLd: Record<string, unknown>[] = [...extraJsonLd];
 if (post) jsonLd.push(articleLd(post, url));
 if (breadcrumb && breadcrumb.length > 0) jsonLd.push(breadcrumbLd(breadcrumb, SITE.url));
 if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());

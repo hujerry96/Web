@@ -7,13 +7,16 @@ import { SITE, withBase, type Locale } from '../../../consts';
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
 }
+
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/tools/crystallite-size-calculator`;
-const guidePath = locale === 'zh'
-  ? '/en/guides/how-to-calculate-crystallite-size-from-xrd'
-  : '/en/guides/how-to-calculate-crystallite-size-from-xrd';
+const toolsPath = `/${locale}/tools`;
+const guidePath = '/en/guides/how-to-calculate-crystallite-size-from-xrd';
 const appPath = locale === 'zh' ? '/zh/guides/spectra-studio-guide' : '/en/guides/spectra-studio-guide-en';
+const guideLinkLabel = locale === 'zh'
+  ? '不確定 FWHM 怎麼量？看完整計算步驟（英文） →'
+  : t('calc.guideLink');
 const wavelengths = [
   { v: '1.5406', label: 'Cu Kα₁ · 1.5406 Å' },
   { v: '1.5418', label: 'Cu Kα · 1.5418 Å' },
@@ -23,189 +26,716 @@ const wavelengths = [
   { v: '2.2897', label: 'Cr Kα · 2.2897 Å' },
   { v: 'custom', label: t('calc.wlCustom') },
 ];
+const faqItems = [
+  { question: t('calc.faqQ1'), answer: t('calc.faqA1') },
+  { question: t('calc.faqQ2'), answer: t('calc.faqA2') },
+  { question: t('calc.faqQ3'), answer: t('calc.faqA3') },
+];
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: t('calc.title'),
+    url: `${SITE.url}${path}`,
+    description: t('calc.metaDesc'),
+    applicationCategory: 'EducationalApplication',
+    operatingSystem: 'All',
+    browserRequirements: 'Requires JavaScript',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+    author: { '@type': 'Person', name: SITE.author },
+    inLanguage: locale === 'zh' ? 'zh-TW' : 'en-US',
+    featureList: [
+      'Scherrer equation calculation',
+      'XRD 2θ and FWHM input',
+      'Wavelength unit handling',
+      'Instant crystallite-size estimate',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(({ question, answer }) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  },
+];
 ---
-<BaseLayout title={t('calc.metaTitle', { name: SITE.name })} description={t('calc.metaDesc')} path={path}>
-  <section class="py-8 max-w-4xl mx-auto">
-    <Breadcrumb locale={locale} items={[{ name: t('nav.tools'), url: `/${locale}/tools` }, { name: t('calc.title'), url: path }]} />
-    <h1 class="text-[clamp(1.7rem,1rem+2.5vw,2.4rem)] font-display font-semibold mb-2 reveal">{t('calc.title')}</h1>
-    <p class="text-[var(--color-text-secondary)] mb-8 reveal reveal-delay-1">{t('calc.subtitle')}</p>
+<BaseLayout
+  title={t('calc.metaTitle', { name: SITE.name })}
+  description={t('calc.metaDesc')}
+  path={path}
+  breadcrumb={[{ name: t('nav.tools'), url: toolsPath }, { name: t('calc.title'), url: path }]}
+  jsonLd={structuredData}
+>
+  <section class="calc-page py-8">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.tools'), url: toolsPath }, { name: t('calc.title'), url: path }]} />
 
-    <div class="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-6 reveal reveal-delay-2">
-      <!-- ── Calculator ── -->
-      <div class="calc-panel">
-        <label class="calc-label" for="c-two-theta">{t('calc.twoTheta')}</label>
-        <input class="calc-input" id="c-two-theta" type="number" step="0.001" value="38.18" inputmode="decimal" />
-
-        <label class="calc-label" for="c-fwhm">{t('calc.fwhm')}</label>
-        <input class="calc-input" id="c-fwhm" type="number" step="0.001" min="0.001" value="0.42" inputmode="decimal" />
-
-        <label class="calc-label" for="c-wl">{t('calc.wavelength')}</label>
-        <select class="calc-input" id="c-wl">
-          {wavelengths.map((w) => <option value={w.v}>{w.label}</option>)}
-        </select>
-        <input class="calc-input" id="c-wl-custom" type="number" step="0.0001" value="1.5406" placeholder="λ (Å)" hidden />
-
-        <label class="calc-label" for="c-k">{t('calc.k')}</label>
-        <input class="calc-input" id="c-k" type="number" step="0.01" min="0.1" max="2" value="0.9" inputmode="decimal" />
-
-        <div class="calc-result">
-          <span class="calc-result__label">{t('calc.result')}</span>
-          <span class="calc-result__value"><span id="c-out">20.0</span> <span class="calc-result__unit">{t('calc.resultHint')}</span></span>
+    <header class="calc-hero reveal">
+      <div class="calc-hero__copy">
+        <p class="calc-kicker">{t('calc.kicker')}</p>
+        <h1>{t('calc.title')}</h1>
+        <p class="calc-subtitle">{t('calc.subtitle')}</p>
+        <div class="calc-proof" aria-label={locale === 'zh' ? '工具特色' : 'Tool benefits'}>
+          <span>{t('calc.proofFree')}</span>
+          <span>{t('calc.proofNoInstall')}</span>
+          <span>{t('calc.proofInstant')}</span>
         </div>
-        <p class="calc-note">{t('calc.formulaNote')}</p>
       </div>
+      <div class="calc-hero__formula" aria-label={locale === 'zh' ? 'Scherrer 公式' : 'Scherrer equation'}>
+        <span class="calc-hero__formula-label">Scherrer equation</span>
+        <code>D = Kλ / (β cosθ)</code>
+        <span class="calc-hero__formula-note">β = FWHM · θ = 2θ / 2</span>
+      </div>
+    </header>
 
-      <!-- ── Explanation + CTA ── -->
-      <div class="flex flex-col gap-6">
-        <div class="prose calc-prose">
-          <p>{locale === 'zh'
-            ? 'Scherrer 公式從 XRD 峰的展寬估算晶粒尺寸：峰越寬，晶粒越小。這個計算器把單位換算與三角函數都處理好了 — 你只需要峰位與 FWHM。'
-            : 'The Scherrer equation estimates crystallite size from XRD peak broadening: the broader the peak, the smaller the crystallites. This calculator handles the unit conversions for you — you only need the peak position and the FWHM.'}
-          </p>
-          <p>{locale === 'zh'
-            ? '怎麼取得 2θ 與 FWHM：打開 XRD 圖，讀取目標峰的最高點角度（2θ）；FWHM 是峰一半高度處的寬度（度）。多數分析軟體（含免費工具）會自動標出。'
-            : 'Getting 2θ and FWHM: open your XRD pattern, read the angle at the top of the peak (2θ); FWHM is the width of the peak at half its maximum height, in degrees. Most analysis software (including free tools) reports it automatically.'}
-          </p>
-          <p><a href={withBase(guidePath)}>{locale === 'zh' ? '完整教學：從 XRD 計算晶粒尺寸 →' : 'Full tutorial: how to calculate crystallite size from XRD →'}</a></p>
+    <div class="calc-layout">
+      <section class="calc-panel reveal reveal-delay-1" aria-labelledby="calculator-heading">
+        <div class="calc-panel__head">
+          <div>
+            <h2 id="calculator-heading">{t('calc.formTitle')}</h2>
+            <p class="calc-sample"><span aria-hidden="true">●</span>{t('calc.sample')}</p>
+          </div>
+          <button class="calc-example-button" id="c-example" type="button">{t('calc.exampleButton')}</button>
         </div>
 
-        <div class="cta-card">
-          <h2 class="cta-card__title">{t('calc.ctaTitle')}</h2>
+        <form id="crystallite-calculator" data-invalid-message={t('calc.invalid')} novalidate>
+          <div class="calc-fields">
+            <div class="calc-field">
+              <label class="calc-label" for="c-two-theta">{t('calc.twoTheta')}</label>
+              <input class="calc-input" id="c-two-theta" type="number" step="0.001" min="0.001" max="179.999" value="38.18" inputmode="decimal" aria-describedby="c-two-theta-hint" required />
+              <p class="calc-field__hint" id="c-two-theta-hint">{t('calc.twoThetaHint')}</p>
+            </div>
+
+            <div class="calc-field">
+              <label class="calc-label" for="c-fwhm">{t('calc.fwhm')}</label>
+              <input class="calc-input" id="c-fwhm" type="number" step="0.001" min="0.001" value="0.42" inputmode="decimal" aria-describedby="c-fwhm-hint" required />
+              <p class="calc-field__hint" id="c-fwhm-hint">{t('calc.fwhmHint')}</p>
+            </div>
+
+            <div class="calc-field">
+              <label class="calc-label" for="c-wl">{t('calc.wavelength')}</label>
+              <select class="calc-input" id="c-wl" aria-describedby="c-wl-hint">
+                {wavelengths.map((w) => <option value={w.v}>{w.label}</option>)}
+              </select>
+              <input class="calc-input calc-input--custom" id="c-wl-custom" type="number" step="0.0001" min="0.0001" value="1.5406" placeholder="λ (Å)" aria-label={locale === 'zh' ? '自訂波長（Å）' : 'Custom wavelength (Å)'} aria-describedby="c-wl-hint" hidden disabled />
+              <p class="calc-field__hint" id="c-wl-hint">{t('calc.wavelengthHint')}</p>
+            </div>
+
+            <div class="calc-field">
+              <label class="calc-label" for="c-k">{t('calc.k')}</label>
+              <input class="calc-input" id="c-k" type="number" step="0.01" min="0.1" max="2" value="0.9" inputmode="decimal" aria-describedby="c-k-hint" required />
+              <p class="calc-field__hint" id="c-k-hint">{t('calc.kHint')}</p>
+            </div>
+          </div>
+
+          <div class="calc-result" aria-label={t('calc.result')}>
+            <div class="calc-result__meta">
+              <span class="calc-result__label">{t('calc.result')}</span>
+              <span class="calc-result__context">{t('calc.resultLabel')}</span>
+            </div>
+            <div class="calc-result__value">
+              <output id="c-out" aria-live="polite">20.0</output>
+              <span class="calc-result__unit">{t('calc.resultHint')}</span>
+            </div>
+          </div>
+          <p class="calc-error" id="c-error" role="alert" hidden></p>
+          <p class="calc-note">{t('calc.note')}</p>
+          <p class="calc-formula-note">{t('calc.formulaNote')}</p>
+        </form>
+      </section>
+
+      <aside class="calc-side">
+        <section class="calc-steps reveal reveal-delay-2" aria-labelledby="steps-heading">
+          <h2 id="steps-heading">{t('calc.stepsTitle')}</h2>
+          <ol class="calc-steps__list">
+            <li>
+              <span class="calc-step__number" aria-hidden="true">1</span>
+              <div><strong>{t('calc.step1Title')}</strong><p>{t('calc.step1Body')}</p></div>
+            </li>
+            <li>
+              <span class="calc-step__number" aria-hidden="true">2</span>
+              <div><strong>{t('calc.step2Title')}</strong><p>{t('calc.step2Body')}</p></div>
+            </li>
+            <li>
+              <span class="calc-step__number" aria-hidden="true">3</span>
+              <div><strong>{t('calc.step3Title')}</strong><p>{t('calc.step3Body')}</p></div>
+            </li>
+          </ol>
+          <a class="calc-guide-link" href={withBase(guidePath)}>{guideLinkLabel}</a>
+        </section>
+
+        <section class="calc-limits reveal reveal-delay-3" aria-labelledby="limits-heading">
+          <h2 id="limits-heading">{t('calc.limitsTitle')}</h2>
+          <p>{t('calc.limitsBody')}</p>
+        </section>
+
+        <section class="cta-card reveal reveal-delay-4" aria-labelledby="cta-heading">
+          <h2 class="cta-card__title" id="cta-heading">{t('calc.ctaTitle')}</h2>
           <p class="cta-card__body">{t('calc.ctaBody')}</p>
           <a class="cta-card__link" href={withBase(appPath)}>{t('calc.ctaLink')}</a>
-        </div>
-
-        <p class="calc-note">{t('calc.note')}</p>
-      </div>
+        </section>
+      </aside>
     </div>
+
+    <section class="calc-faq reveal" aria-labelledby="faq-heading">
+      <div class="calc-faq__intro">
+        <h2 id="faq-heading">{t('calc.faqTitle')}</h2>
+      </div>
+      <div class="calc-faq__list">
+        {faqItems.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
   </section>
 </BaseLayout>
 
 <style>
-  .calc-panel {
+  .calc-page {
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+
+  .calc-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: end;
+    padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .calc-kicker {
+    margin: 0 0 1.1rem;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .calc-hero h1 {
+    max-width: 15ch;
+    margin: 0 0 1rem;
+    font-size: clamp(2.1rem, 1.2rem + 3.5vw, 3.5rem);
+    line-height: 1.08;
+  }
+
+  .calc-subtitle {
+    max-width: 42rem;
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: clamp(1rem, 0.9rem + 0.3vw, 1.15rem);
+    line-height: 1.65;
+  }
+
+  .calc-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.2rem;
+    margin-top: 1.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+  }
+
+  .calc-proof span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .calc-proof span::before {
+    content: '✓';
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .calc-hero__formula {
+    display: grid;
+    gap: 0.8rem;
+    align-self: center;
+    padding: 1.35rem 1.5rem;
     border: 1px solid var(--color-border);
     border-radius: 14px;
     background: var(--color-surface);
-    padding: 1.25rem 1.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    align-self: start;
   }
-  .calc-label {
-    font-size: 0.8rem;
-    font-weight: 600;
+
+  .calc-hero__formula-label {
     color: var(--color-text-secondary);
-    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 600;
   }
+
+  .calc-hero__formula code {
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: clamp(1.05rem, 0.8rem + 1.2vw, 1.55rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  .calc-hero__formula-note {
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+  }
+
+  .calc-layout {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.96fr) minmax(0, 1.04fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  .calc-panel {
+    padding: clamp(1.2rem, 2.5vw, 1.6rem);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-surface);
+  }
+
+  .calc-panel__head {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .calc-panel__head h2,
+  .calc-steps h2,
+  .calc-limits h2,
+  .calc-faq h2 {
+    margin: 0;
+    font-size: clamp(1.25rem, 1rem + 0.8vw, 1.55rem);
+  }
+
+  .calc-sample {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.45rem 0 0;
+    color: var(--color-text-tertiary);
+    font-size: 0.76rem;
+  }
+
+  .calc-sample span {
+    color: var(--color-accent);
+    font-size: 0.55rem;
+  }
+
+  .calc-example-button {
+    flex: 0 0 auto;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 7px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.76rem;
+    transition: border-color 180ms var(--ease), color 180ms var(--ease), background 180ms var(--ease);
+  }
+
+  .calc-example-button:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-muted);
+    color: var(--color-accent);
+  }
+
+  .calc-fields {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .calc-field {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .calc-label {
+    color: var(--color-text);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+
   .calc-input {
     width: 100%;
-    padding: 0.55rem 0.7rem;
-    border-radius: 8px;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.75rem;
     border: 1px solid var(--color-border);
+    border-radius: 8px;
     background: var(--color-surface-raised);
     color: var(--color-text);
     font-family: var(--font-mono);
     font-size: 0.95rem;
+    transition: border-color 180ms var(--ease), box-shadow 180ms var(--ease);
   }
+
   .calc-input:focus {
     outline: none;
     border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-muted);
   }
+
+  .calc-input.is-invalid {
+    border-color: var(--color-accent-dim);
+  }
+
+  .calc-field__hint {
+    margin: 0;
+    color: var(--color-text-tertiary);
+    font-size: 0.75rem;
+    line-height: 1.45;
+  }
+
   .calc-result {
-    margin-top: 1rem;
-    border: 1px solid var(--color-accent-dim);
-    border-radius: 10px;
-    background: var(--color-accent-muted);
-    padding: 0.9rem 1.1rem;
     display: flex;
-    align-items: baseline;
+    align-items: end;
     justify-content: space-between;
     gap: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--color-accent-dim);
+    border-radius: 11px;
+    background: var(--color-accent-muted);
   }
+
+  .calc-result__meta {
+    display: grid;
+    gap: 0.2rem;
+  }
+
   .calc-result__label {
-    font-size: 0.82rem;
-    font-weight: 600;
     color: var(--color-text-secondary);
-  }
-  .calc-result__value {
-    font-family: var(--font-display);
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .calc-result__unit {
-    font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.8;
-  }
-  .calc-note {
     font-size: 0.78rem;
-    color: var(--color-text-tertiary);
-    line-height: 1.55;
-    margin: 0.6rem 0 0;
+    font-weight: 600;
   }
+
+  .calc-result__context {
+    color: var(--color-text-tertiary);
+    font-size: 0.74rem;
+  }
+
+  .calc-result__value {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .calc-result__value output {
+    font-size: clamp(1.8rem, 1.3rem + 1.8vw, 2.45rem);
+    font-weight: 700;
+  }
+
+  .calc-result__unit {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .calc-error {
+    margin: 0.75rem 0 0;
+    color: var(--color-accent-dim);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .calc-note,
+  .calc-formula-note {
+    margin: 0.8rem 0 0;
+    color: var(--color-text-tertiary);
+    font-size: 0.76rem;
+    line-height: 1.55;
+  }
+
+  .calc-formula-note {
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .calc-side {
+    display: grid;
+    gap: 2.2rem;
+  }
+
+  .calc-steps h2,
+  .calc-limits h2 {
+    margin-bottom: 1rem;
+  }
+
+  .calc-steps__list {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .calc-steps__list li {
+    display: grid;
+    grid-template-columns: 1.8rem minmax(0, 1fr);
+    gap: 0.8rem;
+    align-items: start;
+  }
+
+  .calc-step__number {
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    border: 1px solid var(--color-accent-dim);
+    border-radius: 50%;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .calc-steps strong {
+    display: block;
+    margin: 0.1rem 0 0.2rem;
+    color: var(--color-text);
+    font-size: 0.92rem;
+  }
+
+  .calc-steps p,
+  .calc-limits p {
+    max-width: 55ch;
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .calc-guide-link {
+    display: inline-flex;
+    margin-top: 1.35rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .calc-limits {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
   .cta-card {
+    padding: 1.25rem 1.4rem;
     border: 1px solid var(--color-border);
     border-radius: 12px;
     background: var(--color-surface);
-    padding: 1.25rem 1.5rem;
   }
+
   .cta-card__title {
+    margin: 0 0 0.45rem;
     font-family: var(--font-display);
     font-size: 1.05rem;
     font-weight: 600;
-    margin: 0 0 0.4rem;
-    color: var(--color-text);
   }
+
   .cta-card__body {
-    font-size: 0.88rem;
+    margin: 0 0 0.8rem;
     color: var(--color-text-secondary);
+    font-size: 0.88rem;
     line-height: 1.6;
-    margin: 0 0 0.7rem;
   }
+
   .cta-card__link {
     font-size: 0.88rem;
     font-weight: 600;
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-  .cta-card__link:hover {
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-underline-offset: 4px;
+  }
+
+  .calc-faq {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    margin-top: clamp(4rem, 8vw, 7rem);
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .calc-faq__list {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .calc-faq details {
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .calc-faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 600;
+    list-style: none;
+  }
+
+  .calc-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .calc-faq summary::after {
+    content: '+';
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+
+  .calc-faq details[open] summary::after {
+    content: '−';
+  }
+
+  .calc-faq details p {
+    max-width: 65ch;
+    margin: -0.2rem 2rem 1rem 0;
+    color: var(--color-text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 840px) {
+    .calc-hero,
+    .calc-layout,
+    .calc-faq {
+      grid-template-columns: 1fr;
+    }
+
+    .calc-hero {
+      gap: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    .calc-hero__formula {
+      max-width: 30rem;
+    }
+
+    .calc-faq {
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .calc-panel__head {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .calc-example-button {
+      align-self: start;
+    }
+
+    .calc-result {
+      align-items: start;
+      flex-direction: column;
+    }
   }
 </style>
 
 <script>
-  const el2t = document.getElementById('c-two-theta');
-  const elF = document.getElementById('c-fwhm');
-  const elWl = document.getElementById('c-wl');
-  const elWlC = document.getElementById('c-wl-custom');
-  const elK = document.getElementById('c-k');
-  const out = document.getElementById('c-out');
+  const form = document.getElementById('crystallite-calculator') as HTMLFormElement | null;
+  const el2t = document.getElementById('c-two-theta') as HTMLInputElement | null;
+  const elF = document.getElementById('c-fwhm') as HTMLInputElement | null;
+  const elWl = document.getElementById('c-wl') as HTMLSelectElement | null;
+  const elWlC = document.getElementById('c-wl-custom') as HTMLInputElement | null;
+  const elK = document.getElementById('c-k') as HTMLInputElement | null;
+  const out = document.getElementById('c-out') as HTMLOutputElement | null;
+  const error = document.getElementById('c-error') as HTMLParagraphElement | null;
+  const exampleButton = document.getElementById('c-example') as HTMLButtonElement | null;
 
-  function compute() {
-    const twoTheta = parseFloat(el2t.value);
-    const fwhmDeg = parseFloat(elF.value);
-    const k = parseFloat(elK.value) || 0.9;
-    let lambda = parseFloat(elWl.value);
-    if (elWl.value === 'custom') {
-      lambda = parseFloat(elWlC.value);
-      elWlC.hidden = false;
-    } else {
-      elWlC.hidden = true;
-    }
-    if (!isFinite(twoTheta) || !isFinite(fwhmDeg) || !isFinite(lambda) || fwhmDeg <= 0) {
-      out.textContent = '—';
-      return;
-    }
-    const theta = (twoTheta / 2) * Math.PI / 180;
-    const beta = fwhmDeg * Math.PI / 180;
-    const D = (k * lambda) / (beta * Math.cos(theta)); // Å
-    out.textContent = (D / 10).toFixed(1); // nm
+  if (form && el2t && elF && elWl && elWlC && elK && out && error) {
+    const inputs = [el2t, elF, elWl, elWlC, elK];
+    const invalidMessage = form.dataset.invalidMessage || 'Please check your inputs.';
+
+    const setCustomWavelengthState = () => {
+      const isCustom = elWl.value === 'custom';
+      elWlC.hidden = !isCustom;
+      elWlC.disabled = !isCustom;
+      elWlC.setAttribute('aria-hidden', String(!isCustom));
+    };
+
+    const setInvalidState = (invalid: boolean) => {
+      error.hidden = !invalid;
+      error.textContent = invalid ? invalidMessage : '';
+      inputs.forEach((input) => input.classList.toggle('is-invalid', invalid && input !== elWlC));
+    };
+
+    const compute = () => {
+      setCustomWavelengthState();
+
+      const twoTheta = Number.parseFloat(el2t.value);
+      const fwhmDeg = Number.parseFloat(elF.value);
+      const k = Number.parseFloat(elK.value);
+      const lambda = elWl.value === 'custom'
+        ? Number.parseFloat(elWlC.value)
+        : Number.parseFloat(elWl.value);
+      const valid = Number.isFinite(twoTheta)
+        && Number.isFinite(fwhmDeg)
+        && Number.isFinite(lambda)
+        && Number.isFinite(k)
+        && twoTheta > 0
+        && twoTheta < 180
+        && fwhmDeg > 0
+        && lambda > 0
+        && k >= 0.1
+        && k <= 2;
+
+      if (!valid) {
+        out.textContent = '—';
+        setInvalidState(true);
+        return;
+      }
+
+      const theta = (twoTheta / 2) * Math.PI / 180;
+      const beta = fwhmDeg * Math.PI / 180;
+      const crystalliteSizeAngstrom = (k * lambda) / (beta * Math.cos(theta));
+      const crystalliteSizeNm = crystalliteSizeAngstrom / 10;
+
+      if (!Number.isFinite(crystalliteSizeNm)) {
+        out.textContent = '—';
+        setInvalidState(true);
+        return;
+      }
+
+      out.textContent = crystalliteSizeNm.toFixed(1);
+      setInvalidState(false);
+    };
+
+    inputs.forEach((input) => input.addEventListener('input', compute));
+    elWl.addEventListener('change', compute);
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      compute();
+    });
+    exampleButton?.addEventListener('click', () => {
+      el2t.value = '38.18';
+      elF.value = '0.42';
+      elWl.value = '1.5406';
+      elWlC.value = '1.5406';
+      elK.value = '0.9';
+      compute();
+    });
+
+    compute();
   }
-
-  [el2t, elF, elWl, elWlC, elK].forEach((el) => el.addEventListener('input', compute));
-  compute();
 </script>
