@@ -7,6 +7,7 @@ export interface Tool {
   repo: string;
   lang: string;
   guide: string;
+  landing?: string;
   featured?: boolean;
 }
 
@@ -14,18 +15,19 @@ export function getTools(locale: 'zh' | 'en'): Tool[] {
   if (locale === 'zh') {
     return [
       {
-        name: 'Spectra Studio — 光譜繪圖與 XRD 分析',
+        name: 'Spectra Studio 光譜繪圖與 XRD 分析',
         tag: 'Spectra Studio',
-        desc: '免費的光譜繪圖與 XRD 分析工具：載入 XRD / FTIR / RAMAN / UV-Vis / DSC 數據，平滑、基線校正、自動尋峰、分峰擬合、晶粒尺寸、Tauc 能隙與相位比對，輸出期刊級圖表。',
+        desc: '免費 Windows 光譜繪圖工具，在本機整理 XRD、FTIR、Raman 與 UV-Vis 數據，輸出期刊樣式圖表。需要分峰擬合與進階分析時，再升級 Pro。',
         points: [
-          '多格式載入（.xrdml / .brml / .uxd / .txt / .csv）',
-          '自動尋峰與多峰擬合（含 R² 與殘差）',
-          '晶粒尺寸（Scherrer / Williamson-Hall）、Tauc 能隙（Pro）',
-          '期刊樣式與向量輸出（最高 600 DPI）',
+          '載入 XRDML、雙欄 UXD、XY 與常見文字格式',
+          'Free：平滑、基線、自動尋峰與多樣品堆疊',
+          'Free：期刊樣式，PNG / JPG 最高 300 DPI',
+          'Pro：峰擬合、晶粒尺寸、Tauc 能隙與向量匯出',
         ],
-        repo: '',
+        repo: 'https://github.com/hujerry96/Web/releases',
         lang: 'English / 中文',
         guide: '/zh/guides/spectra-studio-guide',
+        landing: '/zh/spectra-studio',
         featured: true,
       },
       {
@@ -60,18 +62,19 @@ export function getTools(locale: 'zh' | 'en'): Tool[] {
   }
   return [
     {
-      name: 'Spectra Studio — Spectral Plotting & XRD Analysis',
+      name: 'Spectra Studio Spectral Plotting & XRD Analysis',
       tag: 'Spectra Studio',
-      desc: 'Free spectral plotting and XRD analysis for XRD, FTIR, RAMAN, UV-Vis & DSC — load, clean, fit, and export journal-ready figures in minutes.',
+      desc: 'Free Windows spectral plotting for XRD, FTIR, Raman, and UV-Vis. Prepare data locally and export journal-style figures. Upgrade to Pro for peak fitting and advanced analysis.',
       points: [
-        'Multi-format loading (.xrdml / .brml / .uxd / .txt / .csv)',
-        'Auto peak finding & multi-peak fitting (R² / residuals)',
-        'Crystallite size (Scherrer / Williamson-Hall), Tauc bandgap (Pro)',
-        'Journal styles & vector export (up to 600 DPI)',
+        'Load XRDML, two-column UXD, XY, and text formats',
+        'Free: smoothing, baseline, peak detection, and stacking',
+        'Free: journal styles and PNG / JPG up to 300 DPI',
+        'Pro: peak fitting, crystallite size, Tauc, and vector export',
       ],
-      repo: '',
+      repo: 'https://github.com/hujerry96/Web/releases',
       lang: 'English / 中文',
       guide: '/en/guides/spectra-studio-guide-en',
+      landing: '/en/spectra-studio',
       featured: true,
     },
     {

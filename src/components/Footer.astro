@@ -2,67 +2,65 @@
 import { SITE, withBase } from '../consts';
 import { useTranslations } from '../i18n/ui';
 import type { Locale } from '../i18n/config';
+import { getTools } from '../lib/tools';
+import { TOPICS } from '../lib/topics';
 
 interface Props { locale: Locale; }
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const year = new Date().getFullYear();
-const cats = SITE.categories[locale] as Record<string, string>;
+const zh = locale === 'zh';
+const tools = getTools(locale);
 ---
-<footer class="mt-20 border-t border-[var(--color-border-subtle)] text-[var(--color-text-secondary)]">
+<footer class="site-footer">
+  <div class="spectrum-rule" aria-hidden="true"></div>
   <div class="mx-auto max-w-6xl px-5 py-12">
-    <div class="grid grid-cols-[2fr_1fr_1fr] gap-10 mb-10 max-sm:!grid-cols-1 max-sm:!gap-6">
+    <div class="footer-grid">
       <div class="flex flex-col gap-2">
-        <span class="font-display font-semibold text-[var(--color-text)] text-lg tracking-tight">{SITE.name}</span>
-        <p class="m-0 leading-relaxed text-sm max-w-[28rem]">{SITE.meta[locale].description}</p>
-        <div class="flex gap-3 mt-3">
-          {SITE.social.github && (
-            <a class="social-link" href={SITE.social.github} rel="me noopener noreferrer" target="_blank">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            </a>
-          )}
-          {SITE.social.x && (
-            <a class="social-link" href={SITE.social.x} rel="me noopener noreferrer" target="_blank">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/></svg>
-            </a>
-          )}
-          
-        </div>
+        <span class="font-display font-bold text-[var(--color-text)] text-lg">{SITE.name}</span>
+        <p class="m-0 leading-relaxed text-sm max-w-[26rem]">{SITE.meta[locale].description}</p>
+        {SITE.social.github && (
+          <a class="social-link mt-2" href={SITE.social.github} rel="me noopener noreferrer" target="_blank" aria-label="GitHub">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          </a>
+        )}
       </div>
-      <div class="flex flex-col gap-2 text-sm">
-        <span class="text-[0.72rem] font-medium tracking-[0.1em] uppercase text-[var(--color-accent)] mb-1">{t('home.categories')}</span>
-        {Object.entries(cats).map(([key, name]) => (
-          <a href={withBase(`/${locale}/${key}`)} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200">{name}</a>
-        ))}
-      </div>
-      <div class="flex flex-col gap-2 text-sm">
-        <span class="text-[0.72rem] font-medium tracking-[0.1em] uppercase text-[var(--color-accent)] mb-1">{t('nav.about')}</span>
-        <a href={withBase(`/${locale}/about`)} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200">{t('nav.about')}</a>
-        <a href={withBase(`/${locale}/contact`)} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200">{t('nav.contact')}</a>
-        <a href={withBase(`/${locale}/free-resources`)} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200">{t('nav.free')}</a>
-        <a href={withBase(`/${locale}/rss.xml`)} class="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors duration-200">RSS</a>
-      </div>
+      <nav class="footer-col" aria-label={zh ? '軟體' : 'Software'}>
+        <span class="footer-label">{zh ? '軟體與工具' : 'Software'}</span>
+        <a href={withBase(`/${locale}/spectra-studio`)} class="text-[var(--color-accent)] font-medium">Spectra Studio</a>
+        {tools.filter((tool) => !tool.featured).map((tool) => <a href={withBase(tool.guide)}>{tool.tag}</a>)}
+        <a href={withBase(`/${locale}/tools/crystallite-size-calculator`)}>{zh ? '晶粒尺寸計算器' : 'Crystallite size calculator'}</a>
+      </nav>
+      <nav class="footer-col" aria-label={t('nav.guides')}>
+        <span class="footer-label">{t('nav.guides')}</span>
+        {TOPICS.map((topic) => <a href={withBase(`/${locale}/guides#${topic.id}`)}>{topic.name[locale]}</a>)}
+      </nav>
+      <nav class="footer-col" aria-label={t('nav.about')}>
+        <span class="footer-label">{SITE.name}</span>
+        <a href={withBase(`/${locale}/about`)}>{t('nav.about')}</a>
+        <a href={withBase(`/${locale}/contact`)}>{t('nav.contact')}</a>
+        <a href={withBase(`/${locale}/search`)}>{t('nav.search')}</a>
+        <a href={withBase(`/${locale}/rss.xml`)}>RSS</a>
+      </nav>
     </div>
-    <div class="flex justify-between items-center flex-wrap gap-3 pt-6 border-t border-[var(--color-border-subtle)] text-xs">
-      <span>&copy; {year} {SITE.name}. {t('footer.rights')}</span>
-      <span class="text-[var(--color-text-tertiary)]">{t('footer.built')}</span>
+    <div class="footer-bottom">
+      <span>&copy; {year} {SITE.name} · {SITE.author}. {t('footer.rights')}</span>
+      <span class="font-mono">hulab.pages.dev</span>
     </div>
   </div>
 </footer>
 
 <style>
-  .social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    color: var(--color-text-secondary);
-    transition: all 200ms var(--ease);
-  }
-  .social-link:hover {
-    color: var(--color-text);
-    background: var(--color-surface-raised);
-  }
+  .site-footer { margin-top: 5rem; background: var(--color-surface); color: var(--color-text-secondary); }
+  .site-footer .spectrum-rule { border-radius: 0; height: 2px; }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 0.8fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+  @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+  .footer-col { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; }
+  .footer-col a:not(.text-\[var\(--color-accent\)\]) { color: var(--color-text-secondary); }
+  .footer-col a:hover { color: var(--color-text); }
+  .footer-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 0.25rem; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-subtle); font-size: 0.78rem; }
+  .social-link { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border: 1px solid var(--color-border); border-radius: 6px; color: var(--color-text-secondary); transition: all 200ms var(--ease); }
+  .social-link:hover { color: var(--color-text); border-color: var(--color-border-hover); }
 </style>

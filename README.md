@@ -32,12 +32,39 @@ npm run ai -- "New Balance 1080 v15" --locale zh --category reviews
 
 **正式站：Cloudflare Pages（https://hulab.pages.dev）**，GitHub Pages（https://hujerry96.github.io/Web）為備援（兩站內容相同、同步部署）。
 
-```bash
-# 正式站（Cloudflare Pages）
-ASTRO_BASE=none npm run build          # dist/
- npx wrangler pages deploy dist --project-name hulab
+### ⚠️ Cloudflare Pages 部署注意事項（重要）
 
-# 備援站（GitHub Pages，legacy branch 模式：main/docs，不依賴 Actions）
+本專案預設是 GitHub Pages project site，`astro.config.mjs` 的 base 會是 `/Web`。Cloudflare Pages 使用網域根目錄，**不能直接執行 `npm run build` 後部署**，否則 CSS、圖片與 JS 會指向 `/Web/_astro/...`，頁面看似部署成功但會「跑掉」或資源全部 404。
+
+Cloudflare 正式站請固定使用以下 **bash / Git Bash** 指令：
+
+```bash
+ASTRO_BASE=none ASTRO_SITE=https://hulab.pages.dev ASTRO_OUT_DIR=dist npm run build
+npx wrangler pages deploy dist --project-name hulab
+```
+
+不要在 bash / Git Bash 寫 `set ASTRO_BASE=none`；那不是正確的環境變數匯出方式。若使用 PowerShell，改用：
+
+```powershell
+$env:ASTRO_BASE="none"
+$env:ASTRO_SITE="https://hulab.pages.dev"
+$env:ASTRO_OUT_DIR="dist"
+npm run build
+npx wrangler pages deploy dist --project-name hulab
+```
+
+部署前可確認產物沒有錯誤的 `/Web` 前綴：
+
+```bash
+grep -R '"/Web/_astro/' dist --include='*.html' --include='*.xml'
+# 必須沒有輸出；有輸出就不要部署，先重新用 ASTRO_BASE=none build
+```
+
+注意：`npx wrangler pages deploy` 是直接部署本機目前的工作樹，不等於 GitHub commit/push；部署前應先確認 `git diff` 內容，避免把未預期的修改一起上線。
+
+### 備援站（GitHub Pages）
+
+```bash
 ASTRO_SITE=https://hujerry96.github.io/Web ASTRO_OUT_DIR=dist-gh npm run build
 cp -r dist-gh docs && touch docs/.nojekyll && git push
 ```

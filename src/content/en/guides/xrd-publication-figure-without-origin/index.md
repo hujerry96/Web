@@ -1,11 +1,11 @@
 ---
 title: 'How to Make a Publication-Ready XRD Figure Without Origin'
 slug: 'xrd-publication-figure-without-origin'
-description: 'Create a clean XRD journal figure on Windows without Origin or Python: load multiple files, correct the baseline, stack samples, apply journal styles and export at 300 DPI.'
+description: 'Create a clean XRD journal figure on Windows without Origin or Python: load files, correct the baseline, stack samples, apply journal styles and export at 300 DPI.'
 keywords: ['free XRD plotting software', 'XRD figure without Origin', 'XRD journal figure software', 'XRD plotting software for Windows', '300 DPI XRD figure', 'Origin alternative for XRD']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['XRD', 'Data Visualization', 'Publication Figures', 'Windows Software']
@@ -122,9 +122,15 @@ The analysis runs locally. The Free edition does not require an account, and the
 
 The current release targets Windows 10/11 64-bit. macOS and Linux users would need a compatible Windows environment.
 
+## Related guides
+
+- [How to Standardize Spectroscopy Figures for a Paper](/en/guides/publication-spectra-figure-workflow/)
+- [How to Overlay FTIR, Raman, and XRD Spectra](/en/guides/multi-sample-ftir-raman-xrd-comparison/)
+- [How to Fit XRD Peaks: Gaussian, Lorentzian and FWHM Analysis](/en/guides/xrd-peak-fitting/)
+
 ## Final takeaway
 
 The purpose of a publication figure is to make material differences and analysis results easy to read—not to consume an entire evening in manual formatting. Spectra Studio combines multi-file loading, preprocessing, peak detection, journal styling and high-resolution export in one Windows workflow, so you can make a first clean XRD figure without starting with Origin or Python.
 
 👉 **Download Spectra Studio and start making XRD figures:**
-[See the complete Spectra Studio guide](../spectra-studio-guide-en/)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)

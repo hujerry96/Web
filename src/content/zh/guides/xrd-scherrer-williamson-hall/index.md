@@ -1,11 +1,12 @@
 ---
 title: 'XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學'
+seoTitle: 'XRD 晶粒尺寸怎麼算？Scherrer 與 Williamson–Hall 教學'
 slug: 'xrd-scherrer-williamson-hall'
 description: '用 XRD 峰寬計算晶粒尺寸，完整說明 Scherrer 方程、FWHM、單位換算與 Williamson–Hall plot，並介紹免 Python 的分析流程。'
 keywords: ['XRD 晶粒尺寸計算', 'XRD Scherrer 方程怎麼算', 'Williamson–Hall plot 怎麼畫', 'XRD FWHM 晶粒尺寸', 'XRD 晶粒尺寸軟體', 'XRD 峰展寬', '微應變']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['XRD', '材料科學', '晶粒尺寸', '數據分析']
@@ -136,10 +137,16 @@ Spectra Studio 是 Windows 10/11 64-bit 工具，資料在本機處理，不需�
 
 可以試用 Spectra Studio。它提供 Windows 免費版，並將峰偵測、峰擬合、Scherrer 與 Williamson–Hall 分析放在同一個工作流程中。
 
+## 延伸閱讀
+
+- [XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南](/zh/guides/xrd-peak-fitting/)
+- [XRD 重疊峰怎麼分析？手動讀 FWHM 為什麼讓結果不穩定](/zh/guides/xrd-overlapping-peak-fitting/)
+- [免費線上 XRD 晶粒尺寸計算器](/zh/tools/crystallite-size-calculator/)
+
 ## 結語：先確認峰寬品質，再相信計算結果
 
 XRD 晶粒尺寸計算的難點通常不是把公式輸入計算機，而是取得可信的峰位置與 FWHM，並確認儀器展寬、微應變、基線與峰重疊沒有主導結果。若只是快速估算，Scherrer 方程很實用；若要討論尺寸與應變的差異，則可進一步檢查 Williamson–Hall plot。
 
 👉 **下載 Spectra Studio，免費開始處理 XRD 資料：**
-[前往 Spectra Studio 官方功能介紹](../spectra-studio-guide/)
+[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio)
 

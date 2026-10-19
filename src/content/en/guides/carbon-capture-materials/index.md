@@ -1,12 +1,13 @@
 ---
 title: 'The Materials Race in Carbon Capture: Amines, MOFs, and Zeolites'
+seoTitle: 'Carbon Capture Materials: Amines vs MOFs vs Zeolites'
 slug: 'carbon-capture-materials'
-description: 'Carbon capture has been talked about for decades. The bottleneck is not engineering — it is materials chemistry.'
+description: 'Carbon capture is limited by materials chemistry, not engineering. Compare amine solvents, MOFs and zeolites and the tradeoffs that slow deployment.'
 keywords: ['carbon capture', 'MOF', 'metal-organic framework', 'zeolite', 'amine', 'CO2']
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Carbon Capture', 'Climate Tech']
 locale: 'en'
@@ -145,3 +146,10 @@ Carbon capture will not be solved by a single breakthrough material. The three f
 The likely outcome is not one winner but a portfolio of materials matched to specific sources. High-purity CO₂ streams (cement kilns, ethanol plants) might use simple physical adsorbents. Coal power plants may continue using amines with waste-heat integration to reduce the penalty. Natural gas combined-cycle plants, with their lower CO₂ concentrations, might benefit from advanced zeolites or early commercial MOFs. Long-term, MOF-based membranes that separate CO₂ without a regeneration step could bypass the energy penalty entirely — but that technology remains years from pilot testing.
 
 The challenges also extend beyond materials chemistry. Integration with existing power plant heat and water systems, solvent or sorbent handling at massive scale, CO₂ transport and storage infrastructure, and regulatory frameworks all matter. But the materials question is the hardest scientific bottleneck. Until a capture material exists that combines low cost, low regeneration energy, high selectivity, and long-term stability under real flue gas conditions, carbon capture will remain a technology of great promise and limited deployment.
+
+## Related guides
+
+- [The Most Underestimated Bottleneck in Hydrogen Energy: Materials for Storage](/en/guides/hydrogen-storage-materials/)
+- [The Materials Science of Lithium-Ion Battery Recycling: Mining the Urban Mine](/en/guides/battery-recycling-materials/)
+- [How to Process FTIR and Raman Spectra for a Publication Figure](/en/guides/ftir-raman-spectra-analysis/)
+

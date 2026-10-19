@@ -7,6 +7,9 @@ interface Props { path: string; locale: Locale; }
 const { path, locale } = Astro.props;
 
 function switchPath(target: Locale): string {
+  if (/^\/(en|zh)\/spectra-studio\/?$/.test(path)) {
+    return withBase(`/${target}/spectra-studio`);
+  }
   return withBase(`/${target}`);
 }
 const others = LOCALES.filter((l) => l !== locale);

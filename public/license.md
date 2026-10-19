@@ -18,8 +18,6 @@
   與 PNG/JPG 匯出。免費版之使用亦受本授權條款拘束。
 - **Pro / Lab（專業版 / 實驗室版）**：您購買之授權允許您在授權台數（單一電腦或購買方案之席數）
   內安裝與使用全部功能。
-- **Student（學生版）**：僅限目前在學之學生購買與使用；畢業或離校後應停止使用或升級為 Pro。
-  授權人得要求提供在學證明。
 
 所有付費授權為永久授權，但僅限其所屬 major 版本（如 v2.x）；major 版本升級（如 v3）需另行購買。
 
@@ -81,8 +79,6 @@ right to use Spectra Studio (the "Software") subject to these terms.
   preprocessing, PNG/JPG export) free of charge and indefinitely, subject to these terms.
 - **Pro / Lab editions**: A paid license authorizes installation and use of all
   features on the licensed number of seats (a single computer or the seats of your plan).
-- **Student edition**: For current students only. You must stop using the Student
-  license after graduation or upgrade to Pro. The Licensor may request proof of enrollment.
 
 Paid licenses are perpetual but limited to their major version (e.g., v2.x);
 upgrading to a new major version (e.g., v3) requires a separate purchase.

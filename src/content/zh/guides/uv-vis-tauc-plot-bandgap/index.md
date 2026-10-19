@@ -1,11 +1,12 @@
 ---
 title: 'UV-Vis Tauc plot 怎麼畫？一鍵計算材料 Band Gap 的完整教學'
+seoTitle: 'UV-Vis Tauc plot 怎麼畫？能隙 Band Gap 計算教學'
 slug: 'uv-vis-tauc-plot-bandgap'
 description: '從 UV-Vis 吸收光譜建立 Tauc plot，說明直接與間接能隙、吸收係數、線性區間與 Eg 判讀，並介紹免 Python 的分析工具。'
 keywords: ['Tauc plot band gap 計算', 'UV-Vis band gap 怎麼算', 'Tauc plot 怎麼畫', '薄膜吸收係數 alpha 計算', 'UV-Vis bandgap software Windows', '直接間接能隙']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['UV-Vis', '能隙', '半導體', '數據分析']
@@ -135,10 +136,16 @@ Tauc plot 得到的是根據吸收資料、躍遷模型與線性外推得到的�
 
 Spectra Studio Pro 可直接載入 UV-Vis 資料，切換 direct/indirect 模式，自動或手動選擇線性區並標註 Eg。
 
+## 延伸閱讀
+
+- [Tauc plot 每次重算都出不同 Eg？UV-Vis Band Gap 估算的常見陷阱](/zh/guides/uv-vis-tauc-bandgap-workflow/)
+- [SiC 與 GaN：寬能隙半導體如何重塑電動車與綠能](/zh/guides/wide-bandgap-semiconductors/)
+- [鈣鈦礦太陽能電池：效率奇蹟背後的材料工程挑戰](/zh/guides/perovskite-solar-materials/)
+
 ## 結語
 
 Tauc plot 的價值在於把 UV-Vis 吸收邊轉成可比較的光學能隙估計，但可靠結果來自正確的資料、合理的躍遷模型與透明的線性區選擇。Spectra Studio 可以把 wavelength 轉換、Tauc 變換、線性區與圖上標註集中處理，讓你把時間留給材料判讀，而不是重複搬運欄位與公式。
 
 👉 **用 Spectra Studio 整理 UV-Vis 與 Tauc band gap：**
-[查看官方功能與下載方式](../spectra-studio-guide/)
+[查看官方功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
 

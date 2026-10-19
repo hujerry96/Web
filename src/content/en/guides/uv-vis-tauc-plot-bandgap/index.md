@@ -1,11 +1,12 @@
 ---
 title: 'How to Draw a UV-Vis Tauc Plot and Estimate Band Gap'
+seoTitle: 'How to Make a Tauc Plot from UV-Vis Data (Band Gap)'
 slug: 'uv-vis-tauc-plot-bandgap'
-description: 'Learn how to estimate optical band gap from UV-Vis data with a Tauc plot, including direct and indirect transitions, absorption coefficient, linear-region selection and Eg.'
+description: 'Estimate optical band gap from UV-Vis data with a Tauc plot: absorption coefficient, direct vs indirect transitions, choosing the linear region and reading Eg.'
 keywords: ['Tauc plot band gap calculation', 'UV-Vis band gap', 'how to draw a Tauc plot', 'optical band gap software', 'absorption coefficient alpha', 'direct indirect band gap', 'UV-Vis bandgap software']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['UV-Vis', 'Band Gap', 'Semiconductors', 'Data Analysis']
@@ -136,9 +137,15 @@ Use the material's known electronic structure, literature and research context. 
 
 Spectra Studio Pro loads UV-Vis data, switches between direct and indirect modes, detects or manually sets the linear region, and annotates `Eg` on the plot.
 
+## Related guides
+
+- [Why Your Tauc Band Gap Changes With the Fit Range](/en/guides/uv-vis-tauc-bandgap-workflow/)
+- [SiC and GaN: How Wide-Bandgap Semiconductors Are Reshaping EVs and Renewable Energy](/en/guides/wide-bandgap-semiconductors/)
+- [Perovskite Solar Cells: The Material Engineering Behind Record Efficiencies](/en/guides/perovskite-solar-materials/)
+
 ## Final takeaway
 
 A Tauc plot is useful because it turns an absorption edge into a comparable optical band-gap estimate, but a credible result requires the right data, a defensible transition model and a transparent linear-region choice. Spectra Studio reduces the repeated spreadsheet work so you can spend more time checking the material interpretation.
 
 👉 **Use Spectra Studio for UV-Vis and Tauc band-gap analysis:**
-[Open the official feature guide](../spectra-studio-guide-en/)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)

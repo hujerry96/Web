@@ -1,12 +1,13 @@
 ---
 title: 'SiC and GaN: How Wide-Bandgap Semiconductors Are Reshaping EVs and Renewable Energy'
+seoTitle: 'SiC vs GaN: Wide-Bandgap Semiconductors for EVs'
 slug: 'wide-bandgap-semiconductors'
 description: 'SiC and GaN waited nearly a century for their moment. Now they power EV inverters and 5G base stations — but manufacturing defects still hold them back.'
 keywords: ['SiC', 'GaN', 'wide-bandgap semiconductor', 'silicon carbide', 'gallium nitride', 'electric vehicle']
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Semiconductor', 'Electric Vehicle']
 locale: 'en'
@@ -177,3 +178,10 @@ Lateral GaN HEMTs — the standard architecture in production power devices toda
 The roadblock is substrate availability. Bulk GaN wafers are produced by ammonothermal or HVPE (hydride vapor phase epitaxy) methods, yielding substrates 2–4 inches in diameter at thousands of dollars per wafer — compared to under $100 for an equivalent-size silicon wafer. Defect densities remain in the 10⁵–10⁶ cm⁻² range. Until GaN substrates approach the cost and quality baseline of 6-inch SiC, vertical GaN devices will remain in the laboratory-to-pilot-line transition. NexGen, Avogy, and Odyssey Semiconductor have each demonstrated vertical GaN transistors above 1,200V, but none have reached volume production. The consensus roadmap targets 2028–2030 for first commercial vertical GaN diodes, with transistors trailing by several years.
 
 Wide-bandgap semiconductors are not a sudden revolution. They are a decades-long materials advance, moving from laboratory demonstrations to automotive qualification to million-unit production — one manufacturing yield improvement at a time. SiC and GaN were discovered over a century ago. What changed was not the materials themselves, but the applications that finally demanded what only they could deliver. The next decade will determine whether the wide-bandgap supply chain can mature fast enough to meet the electrification demands of a planet-wide energy transition. Both SiC and GaN share the same industrial arc: a century of dormancy, a decade of laboratory proof-of-concept, and now the hard manufacturing slog toward commodity pricing and automotive-grade reliability.
+
+## Related guides
+
+- [Five Bottlenecks Blocking 2D Semiconductors from the Fab](/en/guides/2d-semiconductor-bottlenecks/)
+- [How to Draw a UV-Vis Tauc Plot and Estimate Band Gap](/en/guides/uv-vis-tauc-plot-bandgap/)
+- [The Materials Science of Data Storage: From HDDs to MRAM, PCM, and Beyond](/en/guides/next-gen-data-storage-materials/)
+

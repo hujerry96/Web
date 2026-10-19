@@ -6,7 +6,7 @@ keywords: ['二維半導體', 'MoS₂', 'TMD', '過渡金屬硫族化合物', '�
 author: 'Jerry Hu'
 date: 2026-07-28
 cover: ./cover.webp
-updated: 2026-07-28
+updated: 2026-10-20
 category: 'guides'
 tags: ['材料科學', '半導體', '二維材料']
 locale: 'zh'
@@ -109,3 +109,10 @@ Intel、台積電和三星都已經在研究部門投入二維半導體的製程
 好消息是進步的速度在加快。2025 年 Nature Electronics 報導的晶態銻歐姆接觸、2024 年 Nature Communications 報導的精準 p/n 型摻雜、以及 cm 等級均勻 WSe₂ 薄膜的合成，都代表著這些瓶頸正在被逐步打通。
 
 二維半導體不會在明天取代矽。但它正在走一條跟 SiC、GaN 類似的路，從實驗室的零星突破到工程化的反覆迭代，最終在某個應用場景中站穩腳跟。差別只在於，這條路還要走多久。
+
+## 延伸閱讀
+
+- [SiC 與 GaN：寬能隙半導體如何重塑電動車與綠能](/zh/guides/wide-bandgap-semiconductors/)
+- [數據儲存的材料科學：從 HDD 到 MRAM、PCM 與下一代記憶體](/zh/guides/next-gen-data-storage-materials/)
+- [FTIR、Raman 光譜怎麼整理？批次疊圖、基線校正與投稿圖輸出](/zh/guides/ftir-raman-spectra-analysis/)
+

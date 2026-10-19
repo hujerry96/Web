@@ -1,0 +1,22 @@
+---
+import { withBase, type Locale } from '../consts';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const isZh = locale === 'zh';
+const productPath = `/${locale}/spectra-studio`;
+---
+
+<aside class="spectra-sticky-cta" aria-label={isZh ? '認識 Spectra Studio' : 'Explore Spectra Studio'}>
+  <div class="spectra-sticky-cta__message">
+    <span class="spectra-sticky-cta__eyebrow">Spectra Studio</span>
+    <strong>{isZh ? '從光譜數據到論文圖，先從免費版開始。' : 'From spectra to paper-ready figures. Start with Free.'}</strong>
+  </div>
+  <div class="spectra-sticky-cta__actions">
+    <a class="spectra-sticky-cta__details" href={withBase(`${productPath}#pricing`)}>{isZh ? '比較版本' : 'Compare editions'}</a>
+    <a class="spectra-sticky-cta__button" href={withBase(productPath)}>{isZh ? '功能與免費下載' : 'Explore & download'}</a>
+  </div>
+</aside>

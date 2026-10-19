@@ -6,7 +6,7 @@ keywords: ['鋰電池回收', '正極材料', 'LFP', 'NMC', '濕法冶金', '直
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['材料科學', '電池回收', '循環經濟']
 locale: 'zh'
@@ -134,6 +134,12 @@ NMC（鎳錳鈷氧化物）的化學計量不停演進：NMC-111 → 532 → 622
 | 有毒副產物 | 尾礦庫污染風險 | 酸性廢水（可控） |
 
 數據清楚顯示：即使將回收過程中的化學品消耗和廢水處理納入考量，回收的環境足跡仍顯著低於開採。問題不在於「要不要回收」，而在於「誰來支付這個環境帳單」。
+
+## 延伸閱讀
+
+- [固態電池的材料科學突破：三大電解質路線的取捨之戰](/zh/guides/solid-state-battery-materials/)
+- [稀土危機與永磁材料替代：電動車馬達的材料困境](/zh/guides/rare-earth-magnet-alternatives/)
+- [XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南](/zh/guides/xrd-peak-fitting/)
 
 ## 結語
 

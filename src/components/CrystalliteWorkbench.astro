@@ -1,0 +1,311 @@
+---
+import type { Locale } from '../consts';
+import CrystalliteChartControls from './CrystalliteChartControls.astro';
+const { locale } = Astro.props as { locale: Locale };
+const zh = locale === 'zh';
+const copy = zh ? {
+  settings: '共用計算設定', wavelength: 'X 光波長', custom: '自訂波長', k: '形狀因子 K', correction: '儀器展寬修正', none: '不修正', gaussian: 'Gaussian · 平方差開根號', lorentzian: 'Lorentzian · 直接相減', instrument: '儀器 FWHM（°）', assumption: '共用儀器峰寬是簡化假設，實際可能隨角度改變。請使用相同量測條件下的標準樣品數據。Voigt／pseudo-Voigt 峰應分別處理線形分量，不能任意套用這兩種修正。',
+  peaks: '峰資料', sample: '示範資料，非實驗量測', own: '自訂資料', example: '載入三峰範例', add: '新增峰', paste: '貼上 Excel／CSV', importTitle: '貼上峰資料', importHint: '每行兩欄：2θ、FWHM；或三欄：標籤、2θ、FWHM。以 Tab 或逗號分隔，可含標題列。角度單位為度，小數點使用「.」。最多 200 峰。', append: '加入表格', label: '標籤／hkl', angle: '2θ（°）', width: 'FWHM（°）', size: '尺寸（nm）', status: '狀態', remove: '刪除峰', detail: '檢視計算', empty: '還沒有峰資料。新增一個峰，或從 Excel 貼上資料。',
+  results: '結果比較', resultHint: '逐峰 Scherrer 表觀晶粒尺寸', valid: '可計算', pending: '請檢查', unresolved: '無法解析', summary: '有效峰', mean: '平均尺寸（算術平均）', meanNote: '請使用同一樣品、同一晶相的峰。僅平均有效峰的未四捨五入結果；描述性參考，不代表更準確的尺寸。', png: '匯出 PNG', svg: '匯出 SVG', figureTitle: '晶粒尺寸圖形', figureHint: '期刊風格預覽，隨計算結果即時更新。', figureNote: '預覽與匯出共用圖形設定。投稿前請核對最終尺寸、字體與顏色對比。平均線不是擬合或不確定度。', plotError: '圖形設定無效：', clipped: '個峰超出自訂顯示範圍；平均值仍使用全部有效峰。', plotErrors: { density: '刻度太密，請增加間距（每軸最多 100 個間隔）。', number: '請確認尺寸、字體與線寬等數值位於欄位標示範圍內。', range: '範圍須為有效數值，且最小值小於最大值；X 軸限 0–180°，Y 軸不可為負。', step: '刻度間距必須大於 0。', color: '請使用有效的六位 HEX 顏色。', layout: '圖形太扁或字體太大，請增加高度、寬度或縮小字體。', barBaseline: '條狀圖的 Y 軸必須從 0 開始。' }, imageReady: '已準備圖像下載。', imageError: '圖像匯出失敗，請重試或改用 SVG。', range: '尺寸範圍', noResults: '輸入有效的 2θ 與 FWHM 後，結果會即時顯示。', interpretation: '不同峰的差異可能來自各向異性、應變、重疊峰或擬合方式。比較圖不代表粒徑分布，也不自動判定異常。微應變未移除。', exportLabel: '匯出 CSV', copy: '複製計算摘要', copied: '已複製計算摘要。', copyFailed: '無法存取剪貼簿。請選取下方摘要手動複製。', download: '已準備 CSV 下載。', calculation: '計算明細', select: '點選有效尺寸，查看該峰的計算過程。', measured: '量測 FWHM', corrected: '使用的 β（°）', radians: 'β（rad）', theta: 'θ（rad）', limits: '結果為相干繞射域尺寸，不等於 SEM 粒徑。K = 0.9 是常用近似值，並非所有材料通用。', uncorrected: '未修正儀器展寬', correctedLabel: '已依選定線形修正儀器展寬', exampleConfirm: '載入範例會取代目前的峰資料與設定，確定繼續？', max: '最多支援 200 個峰。', imported: '已加入峰資料。', errors: { angle: '2θ 必須大於 0 且小於 180°。', width: 'FWHM 必須大於 0 且小於 180°。', wavelength: '波長必須是大於 0 的數值（Å）。', k: 'K 必須介於 0.1 與 2。', instrument: '儀器 FWHM 必須大於 0 且小於 180°。', unresolved: '量測峰寬不大於儀器峰寬，或超出可計算範圍；無法解析尺寸。' }, importError: '資料未加入。請確認每行有兩或三欄、數值有效，且不超過 200 峰。'
+} : {
+  settings: 'Shared calculation settings', wavelength: 'X-ray wavelength', custom: 'Custom wavelength', k: 'Shape factor K', correction: 'Instrument broadening', none: 'No correction', gaussian: 'Gaussian · quadrature subtraction', lorentzian: 'Lorentzian · linear subtraction', instrument: 'Instrument FWHM (°)', assumption: 'A shared instrument width is a simplification: resolution can vary with angle. Use a standard measured under the same conditions. Voigt / pseudo-Voigt peaks require component-wise treatment, not arbitrary use of either correction.',
+  peaks: 'Peak data', sample: 'Illustrative data, not measurements', own: 'Your data', example: 'Load three-peak example', add: 'Add peak', paste: 'Paste Excel / CSV', importTitle: 'Paste peak data', importHint: 'Two columns per line: 2θ, FWHM; or three: label, 2θ, FWHM. Tab or comma separated; a header is optional. Angles in degrees, decimals with a dot. Up to 200 peaks.', append: 'Append to table', label: 'Label / hkl', angle: '2θ (°)', width: 'FWHM (°)', size: 'Size (nm)', status: 'Status', remove: 'Remove peak', detail: 'View calculation', empty: 'No peaks yet. Add a peak or paste data from Excel.',
+  results: 'Result comparison', resultHint: 'Scherrer apparent crystallite size per peak', valid: 'Calculated', pending: 'Check input', unresolved: 'Unresolved', summary: 'Valid peaks', mean: 'Mean size (arithmetic)', meanNote: 'Use peaks from the same sample and phase. Averages unrounded valid results only; descriptive, not a more accurate size estimate.', png: 'Export PNG', svg: 'Export SVG', figureTitle: 'Crystallite size figure', figureHint: 'Journal-style preview, updated with each calculation.', figureNote: 'Preview and exports share your figure settings. Check final size, typography and color contrast against your journal. The mean line is not a fit or uncertainty.', plotError: 'Invalid figure settings: ', clipped: 'peaks are outside the custom display range; the mean still uses all valid peaks.', plotErrors: { density: 'Ticks are too dense. Increase the interval (up to 100 intervals per axis).', number: 'Check dimensions, font size, line width and other numbers against the field limits.', range: 'Use finite ranges with minimum < maximum; X must be within 0–180°, Y nonnegative.', step: 'Tick intervals must be greater than zero.', color: 'Use valid six-digit HEX colors.', layout: 'The figure is too short or the font too large. Increase its height / width or reduce the font size.', barBaseline: 'Bar charts must start at zero on the Y axis.' }, imageReady: 'Image download prepared.', imageError: 'Image export failed. Retry or use SVG instead.', range: 'Size range', noResults: 'Enter valid 2θ and FWHM values to see live results.', interpretation: 'Differences may reflect anisotropy, strain, overlapping peaks or fitting choices. This is not a particle-size distribution or an automatic outlier test. Microstrain is not removed.', exportLabel: 'Export CSV', copy: 'Copy calculation summary', copied: 'Calculation summary copied.', copyFailed: 'Clipboard unavailable. Select the summary below and copy it manually.', download: 'CSV download prepared.', calculation: 'Calculation details', select: 'Select a valid size to inspect its calculation.', measured: 'Measured FWHM', corrected: 'β used (°)', radians: 'β (rad)', theta: 'θ (rad)', limits: 'This estimates coherent diffraction-domain size, not SEM particle size. K = 0.9 is a common approximation, not a universal material constant.', uncorrected: 'Instrument broadening not corrected', correctedLabel: 'Instrument broadening corrected using selected line shape', exampleConfirm: 'Replace your current peaks and settings with example data?', max: 'Up to 200 peaks are supported.', imported: 'Peak data appended.', errors: { angle: '2θ must be greater than 0 and less than 180°.', width: 'FWHM must be greater than 0 and less than 180°.', wavelength: 'Wavelength must be a positive number in Å.', k: 'K must be between 0.1 and 2.', instrument: 'Instrument FWHM must be greater than 0 and less than 180°.', unresolved: 'Measured width is not greater than instrument width, or the result is outside the calculable range; size cannot be resolved.' }, importError: 'Nothing imported. Check for two or three columns per line, valid numbers, and no more than 200 peaks.'
+};
+---
+<div class="workbench" id="crystallite-workbench" data-copy={JSON.stringify(copy)}>
+  <section class="settings" aria-labelledby="settings-heading">
+    <h2 id="settings-heading">{copy.settings}</h2>
+    <div class="settings-grid">
+      <label>{copy.wavelength}<select id="wb-wavelength"><option value="1.5406">Cu Kα₁ · 1.5406 Å</option><option value="1.5418">Cu Kα · 1.5418 Å</option><option value="1.7890">Co Kα · 1.7890 Å</option><option value="1.9360">Fe Kα · 1.9360 Å</option><option value="0.7093">Mo Kα · 0.7093 Å</option><option value="2.2897">Cr Kα · 2.2897 Å</option><option value="custom">{copy.custom}</option></select></label>
+      <label id="wb-custom-field" hidden>{copy.custom} (Å)<input id="wb-custom" type="number" value="1.5406" step="any" min="0" disabled /></label>
+      <label>{copy.k}<input id="wb-k" type="number" value="0.9" step="any" min="0.1" max="2" /></label>
+      <label>{copy.correction}<select id="wb-correction"><option value="none">{copy.none}</option><option value="gaussian">{copy.gaussian}</option><option value="lorentzian">{copy.lorentzian}</option></select></label>
+      <label id="wb-instrument-field" hidden>{copy.instrument}<input id="wb-instrument" type="number" value="0.1" min="0" step="any" disabled /></label>
+    </div>
+    <p id="wb-setting-error" class="error" role="alert" hidden></p>
+    <p id="wb-assumption" class="muted small" hidden>{copy.assumption}</p>
+  </section>
+  <div class="workspace">
+    <section class="peak-panel" aria-labelledby="peaks-heading">
+      <div class="section-head"><div><h2 id="peaks-heading">{copy.peaks}</h2><p id="wb-source" class="muted small">{copy.sample}</p></div><button id="wb-example" type="button">{copy.example}</button></div>
+      <details class="paste-panel"><summary>{copy.paste}</summary><label for="wb-paste">{copy.importTitle}</label><p id="wb-paste-hint" class="muted small">{copy.importHint}</p><textarea id="wb-paste" rows="4" placeholder={'Label\t2theta\tFWHM\n(111)\t38.18\t0.42'} aria-describedby="wb-paste-hint"></textarea><button id="wb-import" type="button">{copy.append}</button><p id="wb-import-error" class="error" role="alert" hidden></p></details>
+      <div class="table-scroll" role="region" aria-label={copy.peaks} tabindex="0"><table><thead><tr><th scope="col">{copy.label}</th><th scope="col">{copy.angle}</th><th scope="col">{copy.width}</th><th scope="col">{copy.size}</th><th scope="col">{copy.status}</th><th scope="col"><span class="sr-only">{copy.remove}</span></th></tr></thead><tbody id="wb-rows"></tbody></table></div>
+      <p id="wb-empty" class="muted" hidden>{copy.empty}</p>
+      <div class="table-footer"><button id="wb-add" type="button">+ {copy.add}</button><span class="muted small">D = Kλ / (β cosθ)</span></div>
+      <details class="calculation" id="wb-details"><summary>{copy.calculation}</summary><div id="wb-detail-content" class="small">{copy.select}</div></details>
+    </section>
+    <aside class="result-panel" aria-labelledby="results-heading"><h2 id="results-heading">{copy.results}</h2><p class="muted small">{copy.resultHint}</p><p id="wb-method" class="method"></p><dl class="stats"><div><dt>{copy.summary}</dt><dd id="wb-count">0 / 1</dd></div><div><dt>{copy.range}</dt><dd id="wb-range">—</dd></div><div class="mean-stat"><dt>{copy.mean}</dt><dd id="wb-mean" aria-live="polite">—</dd></div></dl><p class="muted small">{copy.meanNote}</p><p id="wb-no-results" class="muted">{copy.noResults}</p><p class="muted small">{copy.interpretation}</p><div class="export-actions"><button id="wb-export" type="button">{copy.exportLabel}</button><button id="wb-copy" type="button">{copy.copy}</button></div><textarea id="wb-copy-fallback" rows="8" readonly aria-label={copy.copy} hidden></textarea></aside>
+  </div>
+  <figure class="journal-figure" id="wb-figure" aria-labelledby="figure-heading" hidden>
+    <div class="figure-head"><div><h2 id="figure-heading">{copy.figureTitle}</h2><p class="muted small">{copy.figureHint}</p></div><div class="figure-actions"><button id="wb-svg" type="button">{copy.svg}</button><button id="wb-png" type="button">{copy.png}</button></div></div>
+    <div class="plot-editor"><CrystalliteChartControls locale={locale} /><div class="plot-preview"><p id="wb-plot-error" class="error" role="alert" hidden></p><p id="wb-plot-warning" class="small muted" role="status" hidden></p><div class="plot-scroll" role="region" aria-label={copy.figureTitle} tabindex="0"><img id="wb-plot" width="900" height="600" alt={copy.figureTitle} /></div></div></div>
+    <figcaption><p id="wb-figure-settings" class="small"></p><p id="wb-figure-source" class="small muted" hidden></p><p class="small muted">{copy.figureNote}</p><p class="small muted">{copy.meanNote} {copy.interpretation}</p></figcaption>
+  </figure>
+  <p id="wb-notice" class="notice small" role="status" aria-live="polite"></p>
+  <p class="muted small bottom-note">{copy.limits}</p>
+  <noscript><p>{zh ? '請啟用 JavaScript 以使用計算工具。' : 'Enable JavaScript to use the calculator.'}</p></noscript>
+</div>
+
+<style>
+  .workbench { --muted: var(--color-text-secondary); }
+  h2 { font-family: var(--font-body); font-size: 1.05rem; margin: 0 0 .65rem; }
+  p { line-height: 1.65; margin: .5rem 0; }
+  .muted { color: var(--muted); } .small { font-size: .82rem; }
+  .settings { padding: 1rem 1.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; }
+  .settings-grid { display: grid; grid-template-columns: minmax(12rem, 1.3fr) minmax(7rem, .6fr) minmax(14rem, 1.4fr); gap: 1rem; }
+  label { display: block; font-size: .82rem; font-weight: 500; } label > input, label > select { margin-top: .4rem; }
+  input, select, textarea { width: 100%; min-height: 42px; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border-hover); border-radius: 6px; padding: .55rem .65rem; font: inherit; }
+  textarea { font-family: var(--font-mono); font-size: .85rem; resize: vertical; }
+  input { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  button { min-height: 40px; border: 1px solid var(--color-border-hover); border-radius: 6px; padding: .5rem .8rem; color: var(--color-text); background: var(--color-surface-raised); font: inherit; font-size: .8rem; cursor: pointer; }
+  button:hover { border-color: var(--color-accent); background: var(--color-accent-muted); } button:disabled { opacity: .5; cursor: not-allowed; }
+  :is(button, input, select, textarea, summary, .table-scroll):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  [hidden] { display: none !important; }
+  .workspace { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 2rem; margin-top: 1.25rem; align-items: start; }
+  .section-head { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: .5rem; } .section-head p { margin: 0; }
+  details { border-top: 1px solid var(--color-border); padding: .5rem 0; } summary { cursor: pointer; font-size: .85rem; font-weight: 500; padding: .25rem 0; } .paste-panel { margin-bottom: .6rem; } .paste-panel label { margin-top: .8rem; } .paste-panel button { margin-top: .6rem; }
+  .table-scroll { overflow-x: auto; } table { width: 100%; border-collapse: collapse; font-size: .8rem; text-align: left; } th { font-weight: 500; color: var(--muted); padding: .45rem .3rem; white-space: nowrap; } td { padding: .6rem .3rem; border-top: 1px solid var(--color-border); vertical-align: top; } td input { min-width: 4.7rem; font-size: .82rem; } td:first-child input { min-width: 5.7rem; } td:nth-child(4) { min-width: 4.7rem; } td:nth-child(5) { min-width: 5.5rem; }
+  .table-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 1rem 0; }
+  .peak-panel, .result-panel { min-width: 0; }
+  .result-panel { border-left: 1px solid var(--color-border); padding-left: 2rem; } .method { color: var(--color-accent); font-size: .8rem; }
+  .stats { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem; margin: 1.2rem 0; } dt { font-size: .75rem; color: var(--muted); } dd { font-family: var(--font-mono); font-size: 1rem; margin: .35rem 0 0; font-variant-numeric: tabular-nums; }
+  .mean-stat { grid-column: 1 / -1; }
+  .journal-figure { margin: 2rem 0 0; padding-top: 1.5rem; border-top: 1px solid var(--color-border); }
+  .figure-head { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .figure-actions { display: flex; gap: .5rem; flex-shrink: 0; }
+  .plot-editor { display: grid; grid-template-columns: 16rem minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+  .plot-preview { min-width: 0; }
+  .plot-scroll { background: white; overflow-x: auto; }
+  .plot-scroll:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  .plot-scroll img { display: block; width: 100%; max-width: 900px; min-width: 580px; height: auto; margin: auto; }
+  figcaption { margin-top: .9rem; max-width: 90ch; overflow-wrap: anywhere; }
+  .export-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; } .export-actions button:first-child { background: var(--color-accent); color: #08090c; font-weight: 600; border-color: transparent; } :global([data-theme='light']) .export-actions button:first-child { color: var(--color-on-accent); background: var(--color-accent-dim); }
+  .error { color: #ffb5b5; font-size: .8rem; } :global([data-theme='light']) .error { color: #a12525; } .notice { min-height: 1.4rem; color: var(--color-accent); } .bottom-note { max-width: 80ch; }
+  /* Dynamic rows inherit this scoped surface through the workbench root. */
+  .workbench :global(.row-size) { color: var(--color-accent); background: transparent; border: 0; padding: .5rem .1rem; font-family: var(--font-mono); font-size: .9rem; text-decoration: underline; text-underline-offset: 4px; }
+  .workbench :global(.row-remove) { padding: .45rem .65rem; font-size: 1rem; }
+  .workbench :global(.row-message) { margin: .3rem 0 0; font-size: .7rem; max-width: 15rem; line-height: 1.5; }
+  .workbench :global(input[aria-invalid='true']) { border-color: #d26666; }
+  .workbench :global(.detail-grid) { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin: .9rem 0; }
+  .workbench :global(.detail-grid dt) { color: var(--muted); } .workbench :global(.detail-grid dd) { margin: .2rem 0 0; font-family: var(--font-mono); }
+  .workbench :global(.detail-formula) { display: block; overflow-wrap: anywhere; line-height: 1.8; }
+  @media (max-width: 960px) { .plot-editor { grid-template-columns: minmax(0, 1fr); } .workspace { grid-template-columns: minmax(0, 1fr); } .result-panel { border-left: 0; border-top: 1px solid var(--color-border); padding: 1.5rem 0 0; } .settings-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .settings { padding: 1rem; } .settings-grid { grid-template-columns: 1fr; } .section-head, .figure-head { flex-direction: column; } .table-footer { align-items: start; } }
+</style>
+
+<script>
+  import { calculate, meanSize, parsePeaks, csvCell, type Peak, type Settings, type Correction, type Result } from '../lib/crystallite';
+  import { createSizeChart, DEFAULT_CHART_OPTIONS, ChartSettingsError, type ChartOptions } from '../lib/crystallite-chart';
+  const root = document.getElementById('crystallite-workbench');
+  if (root) {
+    const c = JSON.parse(root.dataset.copy!);
+    const el = <T extends HTMLElement = HTMLElement>(id: string) => root.querySelector<T>(`#wb-${id}`)!;
+    const wavelength = el<HTMLSelectElement>('wavelength');
+    const custom = el<HTMLInputElement>('custom'); const k = el<HTMLInputElement>('k');
+    const correction = el<HTMLSelectElement>('correction'); const instrument = el<HTMLInputElement>('instrument');
+    const rows = el<HTMLTableSectionElement>('rows');
+    let currentChart: ReturnType<typeof createSizeChart> | null = null;
+    let previewURL: string | null = null;
+    let currentOptions: ChartOptions = { ...DEFAULT_CHART_OPTIONS };
+    const controls = el<HTMLFormElement>('plot-controls');
+    let peaks: (Peak & { example?: boolean })[] = [{ label: '(111)', twoTheta: '38.18', fwhm: '0.42', example: true }];
+    let illustrative = true; let selected = 0; let results: Result[] = [];
+    const number = (input: HTMLInputElement) => input.value.trim() ? Number(input.value) : NaN;
+    const settings = (): Settings => ({ wavelength: wavelength.value === 'custom' ? number(custom) : Number(wavelength.value), k: number(k), correction: correction.value as Correction, instrument: number(instrument) });
+    const format = (n: number) => n >= 0.01 && n < 100000 ? n.toFixed(2) : n.toExponential(3);
+    const scopeAttributes = root.getAttributeNames().filter(name => name.startsWith('data-astro-cid-'));
+    const scopeClasses = Array.from(root.classList).filter(name => name.startsWith('astro-'));
+    const node = <K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, cls?: string) => { const n = document.createElement(tag); scopeAttributes.forEach(name => n.setAttribute(name, '')); n.classList.add(...scopeClasses); if (text !== undefined) n.textContent = text; if (cls) n.classList.add(...cls.split(' ')); return n; };
+    const notice = (text: string) => { el('notice').textContent = text; };
+    const markOwn = () => { illustrative = false; el('source').textContent = c.own; el<HTMLTextAreaElement>('copy-fallback').hidden = true; notice(''); };
+    function renderRows() {
+      rows.replaceChildren();
+      peaks.forEach((peak, index) => {
+        const tr = node('tr'); tr.dataset.index = String(index);
+        (['label', 'twoTheta', 'fwhm'] as const).forEach((field) => {
+          const td = node('td'); const input = node('input'); input.type = field === 'label' ? 'text' : 'number';
+          input.value = peak[field]; input.dataset.field = field; input.setAttribute('aria-label', `${index + 1}: ${field === 'label' ? c.label : field === 'twoTheta' ? c.angle : c.width}`);
+          if (field !== 'label') { input.step = 'any'; input.min = '0'; input.max = '179.999999'; input.inputMode = 'decimal'; }
+          td.append(input); tr.append(td);
+        });
+        tr.append(node('td'), node('td'));
+        const removeCell = node('td'); const remove = node('button', '×', 'row-remove'); remove.type = 'button'; remove.dataset.action = 'remove'; remove.setAttribute('aria-label', `${c.remove} ${index + 1}`); removeCell.append(remove); tr.append(removeCell); rows.append(tr);
+      });
+      update();
+    }
+    function details() {
+      const content = el('detail-content'); content.replaceChildren();
+      const result = results[selected]; const peak = peaks[selected];
+      if (!peak || !result?.ok) { content.textContent = c.select; return; }
+      content.append(node('strong', `${peak.label || `Peak ${selected + 1}`} · ${peak.twoTheta}°`));
+      const dl = node('dl', undefined, 'detail-grid');
+      [[c.measured, `${peak.fwhm}°`], [c.corrected, `${result.correctedWidth.toPrecision(6)}°`], [c.theta, result.theta.toPrecision(6)], [c.radians, result.beta.toPrecision(6)]].forEach(([label, value]) => { const div = node('div'); div.append(node('dt', label), node('dd', value)); dl.append(div); });
+      const s = settings();
+      content.append(dl, node('code', `D = (${s.k} × ${s.wavelength} Å) / (${result.beta.toPrecision(6)} × cos(${result.theta.toPrecision(6)})) / 10 = ${format(result.size)} nm`, 'detail-formula'));
+      if (s.correction !== 'none') content.append(node('p', s.correction === 'gaussian' ? 'β° = √(FWHM² − FWHMᵢₙₛₜ²)' : 'β° = FWHM − FWHMᵢₙₛₜ'));
+    }
+    function update() {
+      const s = settings();
+      const isCustom = wavelength.value === 'custom'; custom.disabled = !isCustom; el('custom-field').hidden = !isCustom;
+      const corrected = s.correction !== 'none'; instrument.disabled = !corrected; el('instrument-field').hidden = !corrected; el('assumption').hidden = !corrected;
+      const settingIssue = !Number.isFinite(s.wavelength) || s.wavelength <= 0 ? 'wavelength' : !Number.isFinite(s.k) || s.k < 0.1 || s.k > 2 ? 'k' : corrected && (!Number.isFinite(s.instrument) || s.instrument <= 0 || s.instrument >= 180) ? 'instrument' : null;
+      el('setting-error').hidden = !settingIssue; el('setting-error').textContent = settingIssue ? c.errors[settingIssue] : '';
+      [[custom, 'wavelength'], [k, 'k'], [instrument, 'instrument']].forEach(([input, issue]) => (input as HTMLInputElement).setAttribute('aria-invalid', String(settingIssue === issue)));
+      results = peaks.map(peak => calculate(peak, s));
+      const valid: { index: number; size: number }[] = [];
+      Array.from(rows.rows).forEach((tr, index) => {
+        const result = results[index]; const sizeCell = tr.cells[3]; const statusCell = tr.cells[4]; sizeCell.replaceChildren(); statusCell.replaceChildren();
+        tr.querySelectorAll<HTMLInputElement>('input[data-field]').forEach(input => {
+          const bad = !result.ok && ((input.dataset.field === 'twoTheta' && result.issue === 'angle') || (input.dataset.field === 'fwhm' && (result.issue === 'width' || result.issue === 'unresolved')));
+          input.setAttribute('aria-invalid', String(bad)); if (bad) input.setAttribute('aria-describedby', `wb-row-error-${index}`); else input.removeAttribute('aria-describedby');
+        });
+        if (result.ok) {
+          const button = node('button', format(result.size), 'row-size'); button.type = 'button'; button.dataset.action = 'detail'; button.setAttribute('aria-label', `${c.detail} ${index + 1}: ${format(result.size)} nm`); sizeCell.append(button); statusCell.append(node('span', c.valid, 'muted small')); valid.push({ index, size: result.size });
+        } else {
+          sizeCell.textContent = '—'; statusCell.append(node('span', result.issue === 'unresolved' ? c.unresolved : c.pending, 'small'));
+          const message = node('p', c.errors[result.issue], 'row-message error'); message.id = `wb-row-error-${index}`; statusCell.append(message);
+        }
+      });
+      el('empty').hidden = peaks.length > 0;
+      const sampleCount = peaks.filter(peak => peak.example).length;
+      el('source').textContent = sampleCount ? `${c.sample} · ${sampleCount} / ${peaks.length}` : c.own;
+      el('count').textContent = `${valid.length} / ${peaks.length}`;
+      const sizes = valid.map(r => r.size); const max = sizes.length ? Math.max(...sizes) : 0;
+      const mean = meanSize(results);
+      el('mean').textContent = mean === null ? '—' : `${format(mean)} nm`;
+      el<HTMLButtonElement>('png').disabled = !valid.length;
+      el<HTMLButtonElement>('svg').disabled = !valid.length;
+      el('range').textContent = sizes.length ? `${format(Math.min(...sizes))}–${format(max)} nm` : '—';
+      el('method').textContent = corrected ? `${c.correctedLabel} · ${s.correction === 'gaussian' ? 'Gaussian' : 'Lorentzian'}` : c.uncorrected;
+      el('no-results').hidden = valid.length > 0;
+      updateFigure();
+      el<HTMLButtonElement>('export').disabled = !valid.length; el<HTMLButtonElement>('copy').disabled = !valid.length; el<HTMLButtonElement>('add').disabled = peaks.length >= 200;
+      details();
+    }
+    rows.addEventListener('input', event => {
+      const input = event.target as HTMLInputElement; const index = Number(input.closest('tr')?.dataset.index); const field = input.dataset.field as keyof Peak;
+      if (!field || !peaks[index]) return; peaks[index][field] = input.value; peaks[index].example = false; markOwn(); update();
+    });
+    rows.addEventListener('click', event => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-action]'); if (!button) return;
+      const index = Number(button.closest('tr')!.dataset.index);
+      if (button.dataset.action === 'remove') { peaks.splice(index, 1); selected = Math.min(selected, peaks.length - 1); markOwn(); renderRows(); const next = rows.rows[Math.min(index, rows.rows.length - 1)]?.querySelector('input'); (next || el('add')).focus(); }
+      else { selected = index; details(); el<HTMLDetailsElement>('details').open = true; }
+    });
+    [wavelength, custom, k, correction, instrument].forEach(input => {
+      const onChange = () => { markOwn(); update(); };
+      input.addEventListener('input', onChange);
+      if (input instanceof HTMLSelectElement) input.addEventListener('change', onChange);
+    });
+    el('add').addEventListener('click', () => { if (peaks.length >= 200) return notice(c.max); peaks.push({ label: '', twoTheta: '', fwhm: '' }); markOwn(); renderRows(); rows.rows[rows.rows.length - 1].querySelector('input')!.focus(); });
+    el('example').addEventListener('click', () => {
+      if (!illustrative && !window.confirm(c.exampleConfirm)) return;
+      peaks = [{ label: '(111)', twoTheta: '38.18', fwhm: '0.42', example: true }, { label: '(200)', twoTheta: '44.39', fwhm: '0.46', example: true }, { label: '(220)', twoTheta: '64.58', fwhm: '0.55', example: true }];
+      wavelength.value = '1.5406'; custom.value = '1.5406'; k.value = '0.9'; correction.value = 'none'; instrument.value = '0.1'; selected = 0; illustrative = true; el('source').textContent = c.sample; el<HTMLTextAreaElement>('copy-fallback').hidden = true; notice(''); renderRows();
+    });
+    el('import').addEventListener('click', () => {
+      const error = el('import-error');
+      try { const imported = parsePeaks(el<HTMLTextAreaElement>('paste').value); if (peaks.length + imported.length > 200) throw new Error('limit'); peaks.push(...imported); markOwn(); renderRows(); error.hidden = true; error.textContent = ''; el<HTMLTextAreaElement>('paste').value = ''; notice(c.imported); }
+      catch { error.textContent = c.importError; error.hidden = false; }
+    });
+    function summary() {
+      const s = settings();
+      const mean = meanSize(results);
+      return ['Hu Lab · Scherrer crystallite-size calculation', `${c.mean}: ${mean === null ? '—' : `${mean.toPrecision(8)} nm`}; n = ${results.filter(result => result.ok).length}`, c.meanNote, illustrative ? c.sample : c.own, `λ = ${s.wavelength} Å; K = ${s.k}; correction = ${s.correction}; instrument FWHM = ${s.correction === 'none' ? 'not used' : `${s.instrument}°`}`, 'D = Kλ / (β cosθ); β in rad; θ = 2θ / 2; Å / 10 → nm', ...peaks.map((peak, index) => { const result = results[index]; return `${peak.example ? `[${c.sample}] ` : ''}${peak.label || `Peak ${index + 1}`}: 2θ = ${peak.twoTheta}°; FWHM = ${peak.fwhm}°; ${result.ok ? `β = ${result.beta.toPrecision(8)} rad; D = ${result.size.toPrecision(8)} nm` : c.errors[result.issue]}`; }), c.limits, c.interpretation, ...(s.correction !== 'none' ? [c.assumption] : [])].join('\n');
+    }
+    el('copy').addEventListener('click', async () => { const text = summary(); try { await navigator.clipboard.writeText(text); notice(c.copied); } catch { const fallback = el<HTMLTextAreaElement>('copy-fallback'); fallback.value = text; fallback.hidden = false; fallback.focus(); fallback.select(); notice(c.copyFailed); } });
+    el('export').addEventListener('click', () => {
+      const s = settings();
+      const header = ['Label', '2theta_deg', 'FWHM_deg', 'Wavelength_A', 'K', 'Correction', 'Instrument_FWHM_deg', 'Corrected_FWHM_deg', 'Beta_rad', 'Size_nm', 'Status', 'Data_source', 'Mean_size_nm', 'Valid_peak_count', 'Limitations'];
+      const data = peaks.map((peak, index) => { const result = results[index]; return [peak.label, peak.twoTheta, peak.fwhm, s.wavelength, s.k, s.correction, s.correction === 'none' ? '' : s.instrument, result.ok ? result.correctedWidth : '', result.ok ? result.beta : '', result.ok ? result.size : '', result.ok ? c.valid : c.errors[result.issue], peak.example ? c.sample : c.own, meanSize(results) ?? '', results.filter(result => result.ok).length, `${c.meanNote} ${c.limits} ${c.interpretation}${s.correction !== 'none' ? ` ${c.assumption}` : ''}`]; });
+      const csv = '\uFEFF' + [header, ...data].map(row => row.map(csvCell).join(',')).join('\r\n'); const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); const a = node('a'); a.href = url; a.download = 'hulab-scherrer-peaks.csv'; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 60000); notice(c.download);
+    });
+    function readPlotOptions(): ChartOptions {
+      const o: Record<string, unknown> = { ...DEFAULT_CHART_OPTIONS };
+      const field = (key: string) => controls.querySelector<HTMLInputElement | HTMLSelectElement>(`[data-plot-field="${key}"]`)!;
+      const bar = field('type').value === 'bar';
+      ['marker', 'markerSize'].forEach(key => { field(key).disabled = bar; });
+      field('barWidth').disabled = !bar;
+      if (bar) field('yMin').value = '0';
+      ['xMin', 'xMax', 'xStep', 'yMin'].forEach(key => { field(key).disabled = bar; });
+      const ratio = controls.querySelector<HTMLSelectElement>('#plot-ratio')!;
+      const height = field('heightMm'); height.disabled = ratio.value !== 'custom';
+      if (ratio.value !== 'custom') height.value = String(Number((Number(field('widthMm').value) / Number(ratio.value)).toFixed(3)));
+      controls.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-plot-field]').forEach(input => {
+        const key = input.dataset.plotField!;
+        if (input instanceof HTMLInputElement && input.type === 'checkbox') o[key] = input.checked;
+        else if (input instanceof HTMLInputElement && input.type === 'number') o[key] = input.value.trim() ? Number(input.value) : ['xMin', 'xMax', 'yMin', 'yMax', 'xStep', 'yStep'].includes(key) ? undefined : NaN;
+        else o[key] = key === 'pngWidth' ? Number(input.value) : input.value;
+      });
+      if (bar) { o.xMin = undefined; o.xMax = undefined; o.xStep = undefined; o.yMin = 0; }
+      return o as unknown as ChartOptions;
+    }
+    controls.addEventListener('submit', event => event.preventDefault());
+    controls.addEventListener('input', () => updateFigure());
+    controls.addEventListener('change', () => updateFigure());
+    controls.addEventListener('reset', () => requestAnimationFrame(() => updateFigure()));
+    function updateFigure() {
+      const mean = meanSize(results); const s = settings();
+      const oldURL = previewURL; previewURL = null; currentChart = null;
+      el('figure').hidden = mean === null;
+      const image = el<HTMLImageElement>('plot'); image.hidden = true; image.removeAttribute('src');
+      if (oldURL) URL.revokeObjectURL(oldURL);
+      if (mean === null) return;
+      const valid = results.flatMap((result, index) => result.ok ? [{ label: `${peaks[index].example ? '* ' : ''}${peaks[index].label || `Peak ${index + 1}`}`, twoTheta: Number(peaks[index].twoTheta), size: result.size }] : []);
+      const notes = [c.meanNote, c.interpretation];
+      if (peaks.some(peak => peak.example)) notes.push(`* ${c.sample}`);
+      if (s.correction !== 'none') notes.push(c.assumption);
+      const figureSettings = `λ = ${s.wavelength.toPrecision(6)} Å; K = ${s.k}; instrument correction: ${s.correction}${s.correction === 'none' ? '' : `; instrument FWHM = ${s.instrument.toPrecision(6)}°`}`;
+      el('plot-error').hidden = true; el('plot-error').textContent = ''; el('plot-warning').hidden = true;
+      try {
+        currentOptions = readPlotOptions();
+        currentChart = createSizeChart({ title: c.figureTitle, subtitle: `${c.resultHint}; n = ${valid.length} / ${peaks.length}`, settings: figureSettings, meanLabel: c.mean, mean, peaks: valid, notes }, currentOptions);
+        previewURL = URL.createObjectURL(new Blob([currentChart.svg], { type: 'image/svg+xml;charset=utf-8' }));
+        image.src = previewURL; image.hidden = false; image.width = currentChart.width; image.height = Math.round(currentChart.height);
+        image.alt = `${c.figureTitle}; ${currentOptions.type}; ${c.mean}: ${format(mean)} nm; n = ${valid.length} / ${peaks.length}`;
+        const scale = Math.min(currentOptions.pngWidth / currentChart.width, Math.sqrt(24000000 / (currentChart.width * currentChart.height)));
+        el('figure-settings').textContent = `${figureSettings}; ${c.mean}: ${format(mean)} nm; n = ${valid.length} / ${peaks.length}; SVG ${currentOptions.widthMm} × ${currentOptions.heightMm} mm; PNG ${Math.round(currentChart.width * scale)} × ${Math.round(currentChart.height * scale)} px`;
+        el('plot-warning').hidden = !currentChart.clipped;
+        el('plot-warning').textContent = `${currentChart.clipped} ${c.clipped}`;
+      } catch (error) {
+        currentChart = null; el('figure-settings').textContent = ''; el('plot-error').hidden = false;
+        el('plot-error').textContent = c.plotError + (error instanceof ChartSettingsError ? c.plotErrors[error.message] : c.imageError);
+      }
+      el<HTMLButtonElement>('png').disabled = !currentChart; el<HTMLButtonElement>('svg').disabled = !currentChart;
+      el('figure-source').hidden = !peaks.some(peak => peak.example);
+      el('figure-source').textContent = `* ${c.sample}`;
+    }
+    window.addEventListener('pagehide', () => { if (previewURL) URL.revokeObjectURL(previewURL); });
+    window.addEventListener('pageshow', event => { if (event.persisted) updateFigure(); });
+    function downloadImage(blob: Blob, extension: string) {
+      const url = URL.createObjectURL(blob); const a = node('a');
+      a.href = url; a.download = `hulab-scherrer-comparison.${extension}`;
+      document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 60000); notice(c.imageReady);
+    }
+    async function exportImage(kind: 'png' | 'svg') {
+      const button = el<HTMLButtonElement>(kind); button.disabled = true;
+      try {
+        const chart = currentChart; const options = currentOptions; if (!chart) return;
+        const blob = new Blob([chart.svg], { type: 'image/svg+xml;charset=utf-8' });
+        if (kind === 'svg') { downloadImage(blob, kind); return; }
+        const url = URL.createObjectURL(blob);
+        try {
+          const image = new Image();
+          await new Promise<void>((resolve, reject) => { image.onload = () => resolve(); image.onerror = () => reject(new Error('SVG load failed')); image.src = url; });
+          const scale = Math.min(options.pngWidth / chart.width, Math.sqrt(24000000 / (chart.width * chart.height)));
+          const canvas = document.createElement('canvas'); canvas.width = Math.round(chart.width * scale); canvas.height = Math.round(chart.height * scale);
+          const context = canvas.getContext('2d'); if (!context) throw new Error('Canvas unavailable');
+          context.drawImage(image, 0, 0, canvas.width, canvas.height);
+          const png = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('PNG encoding failed')), 'image/png'));
+          downloadImage(png, kind);
+        } finally { URL.revokeObjectURL(url); }
+      } catch { notice(c.imageError); }
+      finally { button.disabled = !currentChart; }
+    }
+    el('png').addEventListener('click', () => { void exportImage('png'); });
+    el('svg').addEventListener('click', () => { void exportImage('svg'); });
+    renderRows();
+  }
+</script>

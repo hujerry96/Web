@@ -1,7 +1,9 @@
 ---
 title: 'Thesis Format Fixer: Get Your Word Thesis Format Right in One Pass'
+updated: 2026-10-20
+seoTitle: 'Fix Word Thesis Formatting Automatically (Free Tool)'
 slug: 'thesis-formatter-guide-en'
-description: 'A practical guide to the Thesis Format Fixer: what pain it removes, who it is for, how to install and run it, and which formatting problems it fixes automatically.'
+description: 'A free tool that fixes Word thesis formatting in one pass: page numbers, figure and table numbering, heading levels, references and cover. Setup guide inside.'
 keywords: ['thesis format', 'Word', 'Python tool', 'master thesis', 'automation', 'python-docx']
 author: 'Jerry Hu'
 date: 2026-07-20
@@ -113,3 +115,10 @@ On the limits, the tool applies rule-based fixes for specific formatting problem
 ## Wrap-up
 
 This tool does not help write the thesis content, but it compresses the most draining part, the repetitive format check, into three steps: drop the file, review the list, run the fix. Investing the saved time in refining the content is where its real value lies. The source and a built executable are on GitHub, and you are welcome to take them.
+
+## Related guides
+
+- [How to Standardize Spectroscopy Figures for a Paper](/en/guides/publication-spectra-figure-workflow/)
+- [SEM Particle Analyzer: Turning SEM Images into Real Size Distributions](/en/guides/particle-analyzer-guide-en/)
+- [Spectra Studio: Turn XRD, FTIR, Raman & UV-Vis Data Into Publication-Ready Figures — Without Origin or Python](/en/guides/spectra-studio-guide-en/)
+

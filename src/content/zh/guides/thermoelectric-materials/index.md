@@ -6,7 +6,7 @@ keywords: ['熱電材料', 'ZT值', 'Bi2Te3', 'SnSe', 'Skutterudite', '廢熱回
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['材料科學', '熱電', '能源效率']
 locale: 'zh'
@@ -164,6 +164,12 @@ Half-Heusler 化合物（如 **NbFeSb**、**ZrNiSn**）以其優異的機械強�
 ### 工業餘熱
 
 鋼鐵廠、水泥窯、玻璃爐的排煙溫度在 400–800°C。這是最有潛力的應用場景，因為廢熱量大、溫度高、並且可以持續運行。但工業客戶對成本極度敏感，熱電發電系統的回收週期（payback period）需要低於 3 年才有吸引力。
+
+## 延伸閱讀
+
+- [鈣鈦礦太陽能電池：效率奇蹟背後的材料工程挑戰](/zh/guides/perovskite-solar-materials/)
+- [SiC 與 GaN：寬能隙半導體如何重塑電動車與綠能](/zh/guides/wide-bandgap-semiconductors/)
+- [XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學](/zh/guides/xrd-scherrer-williamson-hall/)
 
 ## 結語：ZT 競賽的尾聲
 

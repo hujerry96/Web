@@ -6,7 +6,7 @@ keywords: ['MRAM', 'PCM', '相變化記憶體', 'GST', 'FeRAM', 'RRAM', '數據�
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['材料科學', '數據儲存', '半導體記憶體']
 locale: 'zh'
@@ -96,3 +96,10 @@ RRAM 最大的材料難題是導電絲形成的隨機性。每次形成和斷開
 - **RRAM** 因為材料選擇的靈活性，可能在特殊應用（如類神經計算、內存內運算）中找到獨特優勢。
 
 所有這些技術都有一個共同的前提：材料科學必須先解決它們各自最卡住的問題——MTJ 障壁層的均勻性、GST 的疲勞壽命與熱穩定性、HfO₂ 鐵電體的晶相控制、RRAM 導電絲的隨機性。這些問題不是物理原理上的不可能，但它們需要的可能是十年以上的工程迭代才能解決。
+
+## 延伸閱讀
+
+- [二維半導體的五道關卡：從實驗室到晶圓廠，它卡在哪裡？](/zh/guides/2d-semiconductor-bottlenecks/)
+- [SiC 與 GaN：寬能隙半導體如何重塑電動車與綠能](/zh/guides/wide-bandgap-semiconductors/)
+- [XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南](/zh/guides/xrd-peak-fitting/)
+

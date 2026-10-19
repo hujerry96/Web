@@ -1,12 +1,13 @@
 ---
 title: 'The Rare Earth Crisis vs Materials Substitution: Permanent Magnets for EV Motors'
+seoTitle: 'Rare Earth-Free Magnets for EV Motors: NdFeB Alternatives'
 slug: 'rare-earth-magnet-alternatives'
-description: 'NdFeB is the strongest permanent magnet, but over 70% of rare earth supply comes from China. Alternative materials MnBi, MnAl, and ferrite each offer different tradeoffs.'
+description: 'NdFeB is the strongest permanent magnet, but rare earth supply is concentrated. How MnBi, MnAl and ferrite alternatives trade off strength, heat and cost.'
 keywords: ['rare earth', 'NdFeB', 'permanent magnet', 'MnBi', 'ferrite', 'EV motor']
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Rare Earth', 'Electric Vehicle', 'Magnets']
 locale: 'en'
@@ -167,6 +168,12 @@ The pandemic era triggered a second spike. Neodymium oxide rose from $70/kg in m
 In early 2026, Nd₂O₃ prices moved toward $120–150/kg as EU and US magnet manufacturing capacity came online, pulling demand against an inelastic supply base. Dysprosium remained at $300–450/kg, elevated by heavy rare earth scarcity — Dy occurs at roughly 1–5% concentration within bastnäsite and monazite deposits, making its supply inherently coupled to neodymium production volume. Each unit of Nd₂O₃ output from Mountain Pass yields roughly 0.02–0.05 units of Dy₂O₃, creating a structural supply imbalance. Terbium oxide — used in the highest-coercivity grades — reached $1,200–2,000/kg in 2025, reflecting its even greater scarcity.
 
 These price trajectories explain why grain boundary diffusion has been the most impactful innovation of the past decade: at 2026 prices, removing dysprosium from a 1 kg magnet saves $15–50 in raw material cost. Across 10 million motors per year, that is a $150–500 million annual differential — more than enough to justify the capital cost of GBD equipment.
+
+## Related guides
+
+- [The Materials Science of Lithium-Ion Battery Recycling: Mining the Urban Mine](/en/guides/battery-recycling-materials/)
+- [The Materials Science of Solid-State Batteries: A Three-Way Tradeoff](/en/guides/solid-state-battery-materials/)
+- [How to Fit XRD Peaks: Gaussian, Lorentzian and FWHM Analysis](/en/guides/xrd-peak-fitting/)
 
 ## Conclusion
 

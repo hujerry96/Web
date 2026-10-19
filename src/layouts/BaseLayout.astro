@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { SITE } from '../consts';
 import { HREFLANG } from '../i18n/config';
 import type { Post } from '../lib/content';
-import { buildCanonical, buildHreflang, articleLd, breadcrumbLd, websiteLd } from '../lib/seo';
+import { buildCanonical, buildHreflang, articleLd, breadcrumbLd, websiteLd, absoluteUrl, withSlash } from '../lib/seo';
 import Meta from '../components/seo/Meta.astro';
 import OpenGraph from '../components/seo/OpenGraph.astro';
 import TwitterCard from '../components/seo/TwitterCard.astro';
@@ -20,39 +20,43 @@ interface Props {
   type?: 'website' | 'article';
   breadcrumb?: { name: string; url: string }[];
   jsonLd?: Record<string, unknown>[];
+  image?: string;
   wide?: boolean;
+  alternates?: { locale: 'zh' | 'en'; path: string }[];
 }
 
-const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, jsonLd: extraJsonLd = [], wide = false } = Astro.props;
+const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, jsonLd: extraJsonLd = [], image: customImage, wide = false, alternates = [] } = Astro.props;
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
 const t = useTranslations(locale);
-const url = `${SITE.url}${path}`;
+const url = `${SITE.url}${withSlash(path)}`;
 const canonical = buildCanonical(post, path);
-const hreflang = buildHreflang(post, path);
-const image = post?.data.cover ? post.data.cover.src : `${SITE.url}/images/og-default.png`;
+const hreflang = buildHreflang(post, path, alternates);
+const image = absoluteUrl(customImage ?? (post?.data.cover ? post.data.cover.src : '/images/og-default.png'));
 
 const jsonLd: Record<string, unknown>[] = [...extraJsonLd];
 if (post) jsonLd.push(articleLd(post, url));
 if (breadcrumb && breadcrumb.length > 0) jsonLd.push(breadcrumbLd(breadcrumb, SITE.url));
-if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
+if (/^\/(en|zh)?$/.test(path)) jsonLd.push(...websiteLd(locale));
 ---
 <!doctype html>
-<html lang={HREFLANG[locale]}>
+<html lang={HREFLANG[locale]} data-theme="light">
   <head>
+    <meta charset="utf-8" />
     <Meta title={title} description={description} canonical={canonical} path={path} hreflang={hreflang}
       published={post?.data.date.toISOString()} modified={post?.data.updated?.toISOString()} />
-    <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale]} siteName={SITE.name} type={type} />
+    <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale].replace('-', '_')} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" />
     <script>
       (function() {
-        const saved = localStorage.getItem('theme');
-        const prefers = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', saved || prefers);
+        // 品牌預設為白底儀器風；使用者手動切換過才套用深色
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+        document.documentElement.setAttribute('data-theme', saved === 'dark' ? 'dark' : 'light');
       })();
     </script>
   </head>
@@ -99,7 +103,7 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       toggle.addEventListener('click', () => {
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
         updateIcon();
       });
     }
@@ -126,7 +130,7 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
       const reveals = document.querySelectorAll('.reveal');
       if (reveals.length) {
         document.documentElement.classList.add('reveal-init');
-        const show = (el) => el.classList.add('revealed');
+        const show = (el: Element) => el.classList.add('revealed');
         const io = new IntersectionObserver((entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) {
@@ -142,6 +146,51 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(websiteLd());
         });
         // 保險：任何情況下 6 秒後全部顯示（動畫早已淡入，使用者無感）
         setTimeout(() => reveals.forEach(show), 6000);
+      }
+    }
+
+    // ── Lazy video loading + playback ──
+    // Feature previews only decode while they are near the viewport. This keeps
+    // long tool guides responsive without removing the native video fallback.
+    const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video[data-lazy-video]');
+    if (lazyVideos.length) {
+      const connection = (navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }).connection;
+      const allowAutoplay = !matchMedia('(prefers-reduced-motion: reduce)').matches
+        && !connection?.saveData
+        && !/(^|-)2g/.test(connection?.effectiveType || '');
+
+      const loadVideo = (video: HTMLVideoElement) => {
+        if (video.dataset.loaded !== 'true') {
+          video.dataset.loaded = 'true';
+          video.load();
+        }
+        if (video.dataset.autoplay === 'true') {
+          if (allowAutoplay) {
+            video.controls = false;
+            video.play().catch(() => {});
+          } else {
+            video.controls = true;
+          }
+        }
+      };
+
+      if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const video = entry.target as HTMLVideoElement;
+            if (entry.isIntersecting) {
+              loadVideo(video);
+              if (video.dataset.autoplay !== 'true') videoObserver.unobserve(video);
+            } else if (video.dataset.autoplay === 'true') {
+              video.pause();
+            }
+          });
+        }, { rootMargin: '360px 0px', threshold: 0 });
+        lazyVideos.forEach((video) => videoObserver.observe(video));
+      } else {
+        lazyVideos.forEach(loadVideo);
       }
     }
 

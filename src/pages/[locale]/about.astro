@@ -40,7 +40,14 @@ const path = `/${locale}/about`;
       </ul>
 
       <h2 class="reveal">{t('page.aboutContactTitle')}</h2>
-      <p class="reveal reveal-delay-1" set:html={t('page.aboutContact', { email: SITE.email })} />
+      {SITE.email ? (
+        <p class="reveal reveal-delay-1" set:html={t('page.aboutContact', { email: SITE.email })} />
+      ) : (
+        <p class="reveal reveal-delay-1">
+          {locale === 'zh' ? '問題、合作或產品回報，歡迎透過 ' : 'Questions, collaborations, or product feedback? Reach me through '}
+          <a href={SITE.social.github} target="_blank" rel="me noopener noreferrer">GitHub</a>{locale === 'zh' ? '。' : '.'}
+        </p>
+      )}
     </article>
   </section>
 </BaseLayout>

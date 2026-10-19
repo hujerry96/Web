@@ -12,7 +12,7 @@ keywords:
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags:
   - '材料科學'
@@ -142,3 +142,10 @@ DAC 對材料的要求比點源更嚴格：更高的選擇性（避免被氮氣�
 目前各種新材料層出不窮，但從論文到每年處理百萬噸 CO₂ 的工業設施，中間還有很長一段路要走。
 
 這場材料競賽的勝負不只取決於實驗室效率，更取決於能否在真實工業條件下兼顧成本、壽命與大規模製造。未來十年，碳定價機制與政策補貼的力度，將決定哪些材料能真正走出論文、走進工廠。
+
+## 延伸閱讀
+
+- [氫能的最大瓶頸不是製造，是儲存：材料科學的隱形戰場](/zh/guides/hydrogen-storage-materials/)
+- [鋰電池回收的材料科學：從黑粉中提煉城市礦山](/zh/guides/battery-recycling-materials/)
+- [FTIR、Raman 光譜怎麼整理？批次疊圖、基線校正與投稿圖輸出](/zh/guides/ftir-raman-spectra-analysis/)
+

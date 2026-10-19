@@ -1,7 +1,8 @@
 ---
 title: 'The Materials Science of Solid-State Batteries: A Three-Way Tradeoff'
+seoTitle: 'Solid-State Battery Electrolytes: Sulfide vs Oxide vs Polymer'
 slug: 'solid-state-battery-materials'
-description: 'Solid-state batteries promise safer, denser energy storage. But sulfide, oxide, and polymer electrolytes each face fundamental materials tradeoffs before mass production.'
+description: 'Solid-state batteries promise safer, denser storage. Compare sulfide, oxide and polymer electrolytes on ionic conductivity, stability and manufacturability.'
 keywords:
   - 'solid-state battery'
   - 'solid electrolyte'
@@ -13,7 +14,7 @@ keywords:
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags:
   - 'Materials Science'
@@ -155,3 +156,10 @@ For automotive OEMs, semi-solid batteries offer a pragmatic path: they can be as
 No single solid electrolyte will win outright. Each of the three families solves a subset of the battery problem—conductivity, stability, or manufacturability—at the expense of the others. The most promising current direction is **composite electrolytes**: combining a sulfide or oxide matrix with a small polymer fraction to improve interfacial contact and processability without sacrificing bulk conductivity.
 
 The semiconductor industry never relied on a single material; it succeeded by learning to manage complexity at scale. Solid-state batteries will likely follow the same path. The eventual winner will not be the material with the highest conductivity—it will be the system that makes the best engineering compromises. In materials science, as in energy storage, perfection is not the goal. The goal is a tradeoff you can live with.
+
+## Related guides
+
+- [The Materials Science of Lithium-Ion Battery Recycling: Mining the Urban Mine](/en/guides/battery-recycling-materials/)
+- [The Most Underestimated Bottleneck in Hydrogen Energy: Materials for Storage](/en/guides/hydrogen-storage-materials/)
+- [How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall](/en/guides/xrd-scherrer-williamson-hall/)
+

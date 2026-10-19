@@ -1,7 +1,8 @@
 ---
 title: '論文格式修正工具：把 Word 碩博士論文格式一次調好'
+updated: 2026-10-20
 slug: 'thesis-formatter-guide'
-description: '一篇論文格式修正工具的實用教學：它解決什麼痛點、適合誰用、怎麼安裝操作，以及它能自動修好哪些格式問題。'
+description: '免費 Word 論文格式修正工具：一次修好頁碼、圖表編號、標題階層、參考文獻與封面格式，附安裝與操作教學，適合碩博士論文。'
 keywords: ['論文格式', 'Word', 'Python 工具', '碩博士', '自動化', 'python-docx']
 author: 'Jerry Hu'
 date: 2026-07-20
@@ -109,6 +110,12 @@ for r in results:
 工具的效益在於快速、可重現，且規則透明。使用者先檢視清單確認，再決定修正範圍，不會發生未經確認即變更內容的情況。其為開源、可離線執行，實驗室內部共用一份規則即能發揮實質效益。
 
 在限制方面，工具係針對特定格式問題進行規則式修正。若原始文件結構嚴重紊亂，例如樣式整組毀損、手動格式與樣式混用、或異常嵌套過深，修正結果可能不盡完善。因此工具本身亦提醒使用者：修正前應備份原檔，並於修正後人工覆核輸出。
+
+## 延伸閱讀
+
+- [為什麼做一張論文級光譜圖要花一晚上？把重複排版交給 Spectra Studio](/zh/guides/publication-spectra-figure-workflow/)
+- [SEM 粒徑分析工具：從 SEM 影像自動算出粒徑分布](/zh/guides/particle-analyzer-guide/)
+- [Spectra Studio 光譜分析繪圖工具：把 XRD / FTIR / Raman / UV-Vis 數據變成可直接投稿的論文圖 — 不需要 Origin，也不需要 Python](/zh/guides/spectra-studio-guide/)
 
 ## 小結
 

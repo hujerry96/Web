@@ -1,0 +1,24 @@
+---
+import { withBase, type Locale } from '../consts';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const zh = locale === 'zh';
+const productPath = `/${locale}/spectra-studio`;
+---
+<aside class="product-invitation" aria-label={zh ? 'Spectra Studio 產品介紹' : 'Explore Spectra Studio'}>
+  <div>
+    <span class="invitation-label">SPECTRA STUDIO · WINDOWS</span>
+    <h2>{zh ? '把這個方法，帶進你的研究流程。' : 'Bring this workflow to your own data.'}</h2>
+    <p>{zh ? '在本機完成光譜整理與期刊繪圖。查看實機影片、分析功能與 Free／Pro 版本，再選擇適合你的工具。' : 'Prepare spectra and style journal figures on your computer. See the product film, analysis features, and Free/Pro editions.'}</p>
+  </div>
+  <a href={withBase(productPath)}>{zh ? '了解功能與免費下載' : 'Explore & download'} <span aria-hidden="true">→</span></a>
+</aside>
+<style>
+  .product-invitation { display: flex; align-items: center; justify-content: space-between; gap: 1.8rem; margin: 2.5rem 0; padding: 1.75rem; border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent); border-radius: 10px; background: var(--color-surface); }
+  .invitation-label { font-size: .62rem; font-weight: 600; letter-spacing: .1em; color: var(--color-accent); }
+  h2 { font-size: 1.15rem; margin: .7rem 0 .5rem; line-height: 1.5; }
+  p { color: var(--color-text-secondary); font-size: .84rem; line-height: 1.8; margin: 0; }
+  a { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; flex-shrink: 0; min-height: 2.75rem; padding: .7rem 1rem; border-radius: 7px; background: var(--color-accent); color: var(--color-on-accent); font-size: .78rem; font-weight: 600; text-align: center; }
+  a:hover { background: var(--color-accent-dim); color: var(--color-on-accent); } a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; }
+  @media (max-width: 760px) { .product-invitation { align-items: start; flex-direction: column; gap: 1.25rem; padding: 1.4rem; } }
+</style>

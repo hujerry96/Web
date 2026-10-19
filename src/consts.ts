@@ -14,14 +14,14 @@ export const SITE = {
   // 依語系提供 SEO 標題/描述，避免英文頁出現中文
   meta: {
     zh: {
-      title: 'Hu Lab',
+      title: 'Hu Lab｜XRD、FTIR、Raman、UV-Vis 光譜分析與論文繪圖工具',
       description:
-        '材料科學筆記與免費分析工具：光譜繪圖與 XRD 分析軟體 Spectra Studio、SEM 粒徑分析、論文格式工具，以及能源材料、半導體等領域的技術指南。',
+        '免費 Windows 光譜分析軟體 Spectra Studio 與實用教學：XRD 峰擬合、晶粒尺寸、FTIR／Raman 疊圖、UV-Vis Tauc 能隙，輸出可投稿的期刊圖，數據不上傳。',
     },
     en: {
-      title: 'Hu Lab',
+      title: 'Hu Lab — XRD & Spectroscopy Analysis Software and Guides',
       description:
-        'Materials science notes and free analysis tools — Spectra Studio for XRD & spectral plotting, SEM particle analysis, thesis formatting, plus technical guides on energy materials and semiconductors.',
+        'Free Windows software and practical guides for XRD, FTIR, Raman and UV-Vis: peak fitting, crystallite size, Tauc band gap and journal-ready figures — data stays local.',
     },
   } as Record<'zh' | 'en', { title: string; description: string }>,
   // 注意：需與 astro.config.mjs 的 site 一致（含 base）；正式站為 hulab.pages.dev，GitHub Pages 為備援（以 ASTRO_SITE 覆寫）
@@ -30,23 +30,20 @@ export const SITE = {
   locale: 'en-US',
   ogLocale: 'en_US',
   twitter: '@jerryhu',
-  email: 'hello@example.com',
+  email: '',
   // 分類結構（locale -> 分類 key -> 顯示名）；中英文各自獨立、中性命名
   categories: {
     zh: {
-      guides: '指南',
-      journal: '手記',
+      guides: '分析教學',
     },
     en: {
-      reviews: 'Reviews',
       guides: 'Guides',
-      journal: 'Journal',
     },
   },
   // 作者/社群資料（最後由站長自行填入；空值時元件隱藏對應入口）
   avatar: '',
   social: {
-    github: '',
+    github: 'https://github.com/hujerry96',
     x: '',
   },
 } as const;

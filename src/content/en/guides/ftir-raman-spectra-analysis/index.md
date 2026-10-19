@@ -1,11 +1,12 @@
 ---
 title: 'How to Process FTIR and Raman Spectra for a Publication Figure'
+seoTitle: 'FTIR & Raman Spectra Processing for Publication Figures'
 slug: 'ftir-raman-spectra-analysis'
-description: 'A practical FTIR and Raman workflow for Windows: load multiple files, correct the baseline, smooth carefully, stack spectra, detect peaks and export a journal-ready figure.'
+description: 'Process FTIR and Raman spectra step by step: load multiple files, correct the baseline, smooth carefully, stack, detect peaks and export a journal figure.'
 keywords: ['FTIR Raman analysis software', 'FTIR plotting software for Windows', 'Raman spectrum plotting software', 'FTIR baseline correction', 'Raman overlay plot', 'spectroscopy publication figure', 'multiple spectra plotting']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['FTIR', 'Raman', 'Spectroscopy', 'Publication Figures']
@@ -129,9 +130,15 @@ Yes. Spectra Studio provides ALS baseline correction with live preview. Use para
 
 The Spectra Studio Free edition supports common `.txt`, `.xy` and `.csv` Raman files, with multi-sample plotting, smoothing, baseline correction, peak detection and PNG/JPG export.
 
+## Related guides
+
+- [How to Overlay FTIR, Raman, and XRD Spectra](/en/guides/multi-sample-ftir-raman-xrd-comparison/)
+- [How to Open XRD, FTIR, Raman, and UV-Vis Files](/en/guides/spectra-data-format-conversion/)
+- [How to Standardize Spectroscopy Figures for a Paper](/en/guides/publication-spectra-figure-workflow/)
+
 ## Final takeaway
 
 A useful FTIR or Raman figure is more than a line plot. It should make sample management, preprocessing and comparison reproducible, while preserving enough information for readers to understand what was done. Spectra Studio combines loading, smoothing, baseline correction, peak detection, journal styling and export in one Windows workflow.
 
 👉 **Start organizing FTIR, Raman, XRD and UV-Vis spectra for free:**
-[Visit the Spectra Studio feature guide](../spectra-studio-guide-en/)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)

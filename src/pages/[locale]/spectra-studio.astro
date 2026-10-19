@@ -1,0 +1,673 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, withBase, type Locale } from '../../consts';
+
+import appScreenshot from '../../assets/spectra-studio/interface.png';
+import peakFitImage from '../../content/en/guides/spectra-studio-guide-en/examples/gaussian-peak-fitting.png';
+import taucImage from '../../content/en/guides/spectra-studio-guide-en/examples/tauc-bandgap.png';
+import phaseImage from '../../content/en/guides/spectra-studio-guide-en/scene_4_style_miller.png';
+import xrdOutput from '../../content/en/guides/spectra-studio-guide-en/examples/xrd-overview.png';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const isZh = locale === 'zh';
+const path = `/${locale}/spectra-studio`;
+const promoVideo = '/videos/spectra-studio-promo-v3.mp4';
+const promoPoster = '/videos/spectra-studio-promo-v3-poster.jpg';
+
+const DOWNLOAD_URL = 'https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-Setup-v2.1.5.exe';
+const PORTABLE_URL = 'https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-v2.1.5-portable.exe';
+const RELEASE_URL = 'https://github.com/hujerry96/Web/releases/tag/v2.1.5';
+const RELEASES_URL = 'https://github.com/hujerry96/Web/releases';
+const BUY_URL = 'https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO';
+const GITHUB_URL = 'https://github.com/hujerry96';
+const ISSUES_URL = 'https://github.com/hujerry96/Web/issues';
+const SETUP_SHA = '3ac49b6a4fa1eeb1174d686d18ac29377b9217777c1e813f526c732432426e1f';
+const guidePath = isZh ? '/zh/guides/spectra-studio-guide' : '/en/guides/spectra-studio-guide-en';
+
+const content = {
+  zh: {
+    metaTitle: '免費 XRD 繪圖與分析軟體 | Spectra Studio',
+    metaDescription: '免費 Windows XRD 繪圖與分析軟體。直接讀取儀器檔、尋峰、分峰擬合、Scherrer 與 Williamson-Hall 分析，輸出投稿用圖表。免 Python、無浮水印、數據不上傳。',
+    version: 'v2.1.5 現已推出',
+    navWorkflow: '工作流程',
+    navResults: '分析功能',
+    navTrust: '安全與信任',
+    navPricing: '版本價格',
+    navDownload: '免費下載',
+    eyebrow: 'SPECTRA STUDIO · 給材料研究者的光譜工具',
+    headlineA: '讓光譜數據，',
+    headlineB: '成為可投稿的圖表。',
+    heroBody: '將數據整理、光譜分析與期刊繪圖，整合在一個 Windows 工作流程中。從原始數據到研究成果，全程在你的電腦上處理。',
+    download: '免費下載 Windows 版',
+    watch: '觀看 60 秒產品影片',
+    heroFine: '免費版永久 $0 · 無帳號 · 無浮水印 · 不上傳實驗數據',
+    screenshotAlt: 'Spectra Studio 實機畫面：AlN XRD 數據與 Nature 期刊樣式設定',
+    frameLabel: '真實程式畫面',
+    frameStatA: 'Windows 10 / 11',
+    frameStatB: '約 120 MB',
+    trustTitle: '專注研究，從本機開始。',
+    trustBody: '無帳號、無浮水印。公開版本與檢查碼，讓每一次下載都有依據。',
+    trustItems: [
+      { label: '公開版本紀錄', detail: 'GitHub Releases' },
+      { label: '安裝檔完整性', detail: 'SHA-256 可驗證' },
+      { label: '研究數據隱私', detail: '100% 本機處理' },
+      { label: '免費版', detail: '無期限、無浮水印' },
+    ],
+    workflowKicker: '三步完成',
+    workflowTitle: '從載入到輸出，一個連貫的流程。',
+    workflowBody: '減少重複整理，將時間留給數據判讀。',
+    workflowSteps: [
+      { number: '01', title: '載入儀器數據', body: '開啟單掃描 .xrdml、雙欄 .uxd、.xy、.txt 與 .csv。壓縮 BRML 請先轉出 XY/TXT。多檔可一起載入、堆疊與比較。' },
+      { number: '02', title: '清理與分析', body: '平滑、ALS 基線、自動尋峰、分峰擬合、晶粒尺寸、相位與 Tauc 能隙都集中在同一套介面。' },
+      { number: '03', title: '匯出論文圖', body: '套用 Nature、ACS 或 Elsevier 樣式；免費版輸出 PNG/JPG，Pro 另提供 PDF、SVG、EPS 與 TIFF。' },
+    ],
+    outputAlt: 'Spectra Studio 匯出的 XRD 論文圖範例',
+    resultsKicker: 'Pro 分析功能',
+    resultsTitle: '讓圖表背後的分析，同樣清楚。',
+    resultsBody: '需要進階分析時再升級。免費版仍可完整處理日常繪圖流程。',
+    features: [
+      { title: '分峰擬合', body: 'Gaussian、Lorentzian 與混合峰型，輸出峰位、FWHM、面積、R² 與殘差。', alt: 'Gaussian 分峰擬合與 R 平方結果圖' },
+      { title: 'Scherrer 與 Williamson-Hall', body: '從峰位與 FWHM 計算晶粒尺寸，並以多峰分析估算微應變與線性擬合品質。', alt: 'XRD 峰寬 FWHM 與晶粒尺寸分析示意圖' },
+      { title: '相位與 Miller 指數', body: '使用參考卡或晶格參數比對峰位，將相位與 hkl 標註直接放進圖上。', alt: 'XRD 相位比對與 Miller 指數分析介面' },
+      { title: 'Tauc 能隙', body: 'UV-Vis 數據一鍵切換直接或間接能隙，支援自動與手動線性區間。', alt: 'Tauc plot 能隙分析介面' },
+    ],
+    demoKicker: '60 秒產品影片',
+    demoTitle: '看看你的下一個研究工作流程。',
+    demoBody: '60 秒認識 Spectra Studio。透過實機操作呈現數據載入、期刊樣式、分峰擬合與匯出流程，搭配英文配音、字幕與動畫轉場。',
+    videoFallback: '瀏覽器無法播放影片，請直接下載影片。',
+    securityKicker: '透明交付',
+    securityTitle: '安心下載，清楚知道軟體如何運作。',
+    securityCards: [
+      { title: '從 GitHub 下載', body: '所有公開版本集中在 GitHub Releases，可檢查版本時間、檔案大小與歷次更新。', action: '查看 v2.1.5' },
+      { title: '可核對 SHA-256', body: '安裝檔提供 SHA-256。下載後可用 Windows PowerShell 的 Get-FileHash 自行核對。', action: '複製檢查碼' },
+      { title: '資料不離開電腦', body: '不需上傳樣品或光譜。免費版不需帳號；Pro 僅在啟用與週期驗證時連線。', action: '閱讀隱私政策' },
+      { title: '作者與支援可追溯', body: '由 Hu Lab 的 Jerry Hu 開發。版本、問題回報與作者頁面都有公開入口。', action: '認識開發者' },
+    ],
+    smartscreenTitle: '關於 Windows SmartScreen',
+    smartscreenBody: '目前安裝檔尚未購買程式碼簽章，因此第一次執行可能出現「Windows 已保護您的電腦」。這是新發行者常見的信譽警告，不代表檔案已被判定有害。我們選擇在頁面上清楚揭露，並提供 GitHub Release 與 SHA-256 讓你自行驗證。',
+    pricingKicker: '簡單定價',
+    pricingTitle: '從 Free 開始，依研究需求升級。',
+    freeName: 'Free',
+    freePrice: '$0',
+    freeTerm: '永久免費',
+    freeBody: '日常清理、比較與期刊圖輸出已經足夠。',
+    freeFeatures: ['全部常見格式載入', '平滑、基線與自動尋峰', '多樣品堆疊與期刊樣式', 'PNG / JPG 最高 300 DPI', '無浮水印、無時間限制'],
+    freeCta: '下載免費版',
+    proName: 'Pro',
+    proPrice: '$79',
+    proTerm: '一次買斷',
+    proBody: '投稿與深度分析工作流程一次解鎖。',
+    proFeatures: ['Gaussian / Lorentzian 分峰擬合', 'Scherrer、Williamson-Hall 與結晶度', 'Tauc 能隙與相位比對', 'Miller 指數與 PDF / SVG / EPS / TIFF', '裝置數依結帳方案、30 天退款保證'],
+    proCta: '購買 Pro 金鑰',
+    noSubscription: '沒有訂閱、沒有功能加購、同一個安裝檔直接解鎖。',
+    formatsTitle: 'XRD、FTIR、Raman、UV-Vis 與 DSC/TGA，一套工具處理。',
+    formats: ['.xrdml', '.brml', '.uxd', '.xy', '.txt', '.csv', '.dat', '.asc', '.xlsx'],
+    faqKicker: '常見問題',
+    faqTitle: '下載前，你可能還想確認這些事。',
+    faqs: [
+      { q: '免費版真的沒有試用期限嗎？', a: '是。免費版沒有倒數、沒有浮水印，也不要求建立帳號。它可完成載入、預處理、尋峰、樣式與 PNG/JPG 匯出。' },
+      { q: '我的實驗數據會上傳嗎？', a: '不會。數據分析與繪圖全部在本機進行。只有 Pro 金鑰啟用與週期驗證需要網路連線。' },
+      { q: '為什麼 Windows 會顯示 SmartScreen？', a: '目前安裝檔尚未使用付費程式碼簽章，所以 Windows 可能對新發行者顯示警告。你可以從 GitHub Release 下載並核對頁面提供的 SHA-256。' },
+      { q: '免費版做的圖可以放進論文嗎？', a: '可以。免費版輸出的圖片無浮水印，也沒有署名要求，可用於論文、簡報與報告。' },
+      { q: '購買 Pro 後需要重新下載嗎？', a: '不用。同一個安裝檔包含 Free 與 Pro。付款後把 Polar 寄來的金鑰貼進程式即可解鎖。' },
+      { q: '目前支援 macOS 或 Linux 嗎？', a: '目前正式版支援 Windows 10 / 11 64 位元。macOS 仍在評估中。' },
+    ],
+    finalKicker: '開始你的下一張研究圖',
+    finalTitle: '讓數據，說出更清楚的故事。',
+    finalBody: '下載免費版，載入你的第一份光譜。需要進階分析時，再解鎖 Pro。',
+    finalDownload: '免費下載 v2.1.5',
+    portable: '下載免安裝版',
+    fullGuide: '閱讀完整使用指南',
+    allReleases: '所有 GitHub 版本',
+    reportIssue: '回報問題',
+    footerNote: 'Spectra Studio by Hu Lab · Jerry Hu',
+    copySuccess: '已複製 SHA-256',
+  },
+  en: {
+    metaTitle: 'Free XRD Plotting Software for Windows | Spectra Studio',
+    metaDescription: 'Free Windows software for XRD plotting and analysis. Open instrument files, detect and fit peaks, run Scherrer and Williamson-Hall analysis, and export paper-ready figures. No Python, no watermark, no data upload.',
+    version: 'v2.1.5 is available now',
+    navWorkflow: 'Workflow',
+    navResults: 'Analysis',
+    navTrust: 'Trust & safety',
+    navPricing: 'Pricing',
+    navDownload: 'Free download',
+    eyebrow: 'SPECTRA STUDIO · BUILT FOR MATERIALS RESEARCH',
+    headlineA: 'From raw spectra.',
+    headlineB: 'To paper-ready figures.',
+    heroBody: 'Bring data preparation, spectral analysis, and journal styling into one Windows workflow. From your first measurement to your next figure, your research stays on your computer.',
+    download: 'Download free for Windows',
+    watch: 'Watch the 60-second product film',
+    heroFine: 'Free forever · No account · No watermark · No experimental data upload',
+    screenshotAlt: 'Actual Spectra Studio interface showing AlN XRD data and Nature journal-style settings',
+    frameLabel: 'Real application screen',
+    frameStatA: 'Windows 10 / 11',
+    frameStatB: 'About 120 MB',
+    trustTitle: 'Your research. Your computer.',
+    trustBody: 'No account, no watermark. Public releases and checksums for a transparent download.',
+    trustItems: [
+      { label: 'Public release history', detail: 'GitHub Releases' },
+      { label: 'Installer integrity', detail: 'SHA-256 provided' },
+      { label: 'Research data privacy', detail: '100% local processing' },
+      { label: 'Free edition', detail: 'No expiry or watermark' },
+    ],
+    workflowKicker: 'Three-step workflow',
+    workflowTitle: 'One workflow. From import to export.',
+    workflowBody: 'Your scientific judgment should not be spent converting files, rebuilding baselines, and redrawing figures.',
+    workflowSteps: [
+      { number: '01', title: 'Load instrument data', body: 'Open single-scan .xrdml and two-column .uxd, .xy, .txt, and .csv files. Export compressed BRML to XY/TXT first. Load, stack, and compare multiple samples together.' },
+      { number: '02', title: 'Clean and analyze', body: 'Smoothing, ALS baseline, peak detection, peak fitting, crystallite size, phase tools, and Tauc bandgap live in one interface.' },
+      { number: '03', title: 'Export the paper figure', body: 'Apply Nature, ACS, or Elsevier styling. Free exports PNG/JPG; Pro adds PDF, SVG, EPS, and TIFF.' },
+    ],
+    outputAlt: 'Paper-ready XRD figure exported from Spectra Studio',
+    resultsKicker: 'Pro analysis',
+    resultsTitle: 'Clear figures. Deeper analysis.',
+    resultsBody: 'Upgrade only when you reach an advanced-analysis bottleneck. The free edition still covers everyday plotting.',
+    features: [
+      { title: 'Peak fitting', body: 'Gaussian, Lorentzian, and mixed profiles with peak position, FWHM, area, R², and residuals.', alt: 'Gaussian peak fitting result with R squared' },
+      { title: 'Scherrer & Williamson-Hall', body: 'Calculate crystallite size from peak width, then estimate microstrain and linear-fit quality across multiple peaks.', alt: 'XRD peak width and crystallite-size analysis example' },
+      { title: 'Phase & Miller indices', body: 'Match peaks with reference cards or lattice parameters and place phase and hkl labels directly on the figure.', alt: 'XRD phase matching and Miller-index interface' },
+      { title: 'Tauc bandgap', body: 'Switch between direct and indirect UV-Vis bandgaps with automatic or manually selected linear regions.', alt: 'Tauc plot bandgap analysis interface' },
+    ],
+    demoKicker: 'THE 60-SECOND PRODUCT FILM',
+    demoTitle: 'Meet your next research workflow.',
+    demoBody: 'Meet Spectra Studio in 60 seconds. See actual workflows for data import, journal styling, peak fitting, and export, with English narration, subtitles, and animated transitions.',
+    videoFallback: 'Your browser cannot play this video. Download the video instead.',
+    securityKicker: 'Transparent delivery',
+    securityTitle: 'A transparent tool for your research.',
+    securityCards: [
+      { title: 'Download from GitHub', body: 'Public versions live in GitHub Releases, where you can inspect dates, file sizes, and the full release history.', action: 'View v2.1.5' },
+      { title: 'Verify the SHA-256', body: 'The installer includes a SHA-256 checksum. Verify it yourself with Get-FileHash in Windows PowerShell.', action: 'Copy checksum' },
+      { title: 'Data stays on your PC', body: 'No spectra or sample data are uploaded. Free needs no account; Pro connects only for activation and periodic validation.', action: 'Read the privacy policy' },
+      { title: 'A traceable author', body: 'Built by Jerry Hu at Hu Lab. Releases, issue reporting, and the author profile all have public links.', action: 'Meet the developer' },
+    ],
+    smartscreenTitle: 'About Windows SmartScreen',
+    smartscreenBody: 'The installer is not code-signed yet, so Windows may show “Windows protected your PC” on first launch. This is a reputation warning commonly shown for new publishers, not a finding that the file is malicious. We disclose it clearly and provide the GitHub Release plus SHA-256 so you can verify the installer yourself.',
+    pricingKicker: 'Simple pricing',
+    pricingTitle: 'Start with Free. Go further with Pro.',
+    freeName: 'Free',
+    freePrice: '$0',
+    freeTerm: 'forever',
+    freeBody: 'Enough for routine cleanup, comparisons, and journal-style figures.',
+    freeFeatures: ['All common file loading', 'Smoothing, baseline, and peak detection', 'Multi-sample stacking and journal styles', 'PNG / JPG up to 300 DPI', 'No watermark or time limit'],
+    freeCta: 'Download Free',
+    proName: 'Pro',
+    proPrice: '$79',
+    proTerm: 'one-time',
+    proBody: 'Unlock submission and deep-analysis workflows in one license.',
+    proFeatures: ['Gaussian / Lorentzian peak fitting', 'Scherrer, Williamson-Hall, and crystallinity', 'Tauc bandgap and phase matching', 'Miller indices plus PDF / SVG / EPS / TIFF', 'Device allowance per checkout plan; 30-day refund guarantee'],
+    proCta: 'Buy a Pro key',
+    noSubscription: 'No subscription, no add-ons, and no second installer.',
+    formatsTitle: 'XRD, FTIR, Raman, UV-Vis, and DSC/TGA in one application.',
+    formats: ['.xrdml', '.brml', '.uxd', '.xy', '.txt', '.csv', '.dat', '.asc', '.xlsx'],
+    faqKicker: 'FAQ',
+    faqTitle: 'What you may want to confirm before downloading.',
+    faqs: [
+      { q: 'Is the Free edition really free with no trial deadline?', a: 'Yes. Free has no countdown, watermark, or account requirement. It covers loading, preprocessing, peak detection, styling, and PNG/JPG export.' },
+      { q: 'Will my experimental data be uploaded?', a: 'No. Analysis and plotting run locally. Only Pro activation and periodic license validation require an internet connection.' },
+      { q: 'Why might Windows show a SmartScreen warning?', a: 'The installer is not using a paid code-signing certificate yet, so Windows may warn about a new publisher. Download from GitHub Releases and compare the supplied SHA-256 if you want to verify the file.' },
+      { q: 'Can I use figures from the Free edition in a paper?', a: 'Yes. Free exports have no watermark and no attribution requirement. You may use them in papers, presentations, and reports.' },
+      { q: 'Do I need another installer after buying Pro?', a: 'No. Free and Pro are in the same installer. Paste the key delivered by Polar into the application to unlock Pro.' },
+      { q: 'Does it support macOS or Linux?', a: 'The current release supports 64-bit Windows 10 and 11. A macOS build is still under evaluation.' },
+    ],
+    finalKicker: 'YOUR NEXT FIGURE STARTS HERE',
+    finalTitle: 'Give your data a clearer story.',
+    finalBody: 'Download Free and load your first spectrum. Unlock Pro when your research needs deeper analysis.',
+    finalDownload: 'Download Free v2.1.5',
+    portable: 'Download portable edition',
+    fullGuide: 'Read the full guide',
+    allReleases: 'All GitHub releases',
+    reportIssue: 'Report an issue',
+    footerNote: 'Spectra Studio by Hu Lab · Jerry Hu',
+    copySuccess: 'SHA-256 copied',
+  },
+} as const;
+
+const c = content[locale];
+const featureImages = [peakFitImage, xrdOutput, phaseImage, taucImage];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: c.faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Spectra Studio',
+  applicationCategory: 'ScientificApplication',
+  applicationSubCategory: 'XRD and spectral analysis software',
+  operatingSystem: 'Windows 10, Windows 11',
+  softwareVersion: '2.1.5',
+  description: c.metaDescription,
+  url: `${SITE.url}${path}`,
+  downloadUrl: DOWNLOAD_URL,
+  screenshot: `${SITE.url}${appScreenshot.src}`,
+  author: { '@type': 'Person', name: SITE.author, url: GITHUB_URL },
+  offers: [
+    { '@type': 'Offer', name: 'Spectra Studio Free', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+    { '@type': 'Offer', name: 'Spectra Studio Pro', price: '79', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: BUY_URL },
+  ],
+};
+---
+
+<BaseLayout
+  title={c.metaTitle}
+  description={c.metaDescription}
+  path={path}
+  image={`${SITE.url}${promoPoster}`}
+  jsonLd={[productSchema, faqSchema]}
+  wide
+>
+  <div class="product-page">
+    <nav class="product-nav" aria-label={isZh ? 'Spectra Studio 頁面導覽' : 'Spectra Studio page navigation'}>
+      <a class="product-brand" href="#top" aria-label="Spectra Studio">
+        <span class="product-mark" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+        <span>Spectra Studio</span>
+      </a>
+      <div class="product-nav__links">
+        <a href="#workflow">{c.navWorkflow}</a>
+        <a href="#analysis">{c.navResults}</a>
+        <a href="#trust">{c.navTrust}</a>
+        <a href="#pricing">{c.navPricing}</a>
+      </div>
+      <a class="product-nav__cta" href={DOWNLOAD_URL}>{c.navDownload}</a>
+    </nav>
+
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <a class="release-pill" href={RELEASE_URL} target="_blank" rel="noopener noreferrer">
+          <span></span>{c.version}
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg>
+        </a>
+        <p class="eyebrow">{c.eyebrow}</p>
+        <h1><span>{c.headlineA}</span><strong>{c.headlineB}</strong></h1>
+        <div class="spectrum-types" aria-label={isZh ? '支援數據類型' : 'Supported data types'}>XRD <span>·</span> FTIR <span>·</span> Raman <span>·</span> UV-Vis <span>·</span> DSC / TGA</div>
+        <p class="hero-body">{c.heroBody}</p>
+        <div class="hero-actions">
+          <a class="button button--primary" href={DOWNLOAD_URL}>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 2v10m0 0l4-4m-4 4L6 8M3 15v2h14v-2"/></svg>
+            {c.download}
+          </a>
+          <a class="button button--secondary" href="#demo">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M7 5.5v9l7-4.5-7-4.5z"/></svg>
+            {c.watch}
+          </a>
+        </div>
+        <p class="hero-fine">{c.heroFine}</p>
+        <a class="edition-link" href="#pricing">{isZh ? '比較 Free 與 Pro' : 'Compare Free and Pro'} <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="app-frame">
+          <div class="app-frame__bar">
+            <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>{c.frameLabel}</span>
+            <span class="app-frame__version">v2.1.5</span>
+          </div>
+          <Image src={appScreenshot} alt={c.screenshotAlt} width={1600} height={960} loading="eager" quality={88} />
+        </div>
+        <div class="visual-chip visual-chip--left">
+          <span class="chip-icon">✓</span>
+          <span><strong>{c.frameStatA}</strong><small>XRD · FTIR · Raman · UV-Vis</small></span>
+        </div>
+        <div class="visual-chip visual-chip--right">
+          <span class="chip-icon">↓</span>
+          <span><strong>{c.frameStatB}</strong><small>{isZh ? '免 Python 執行環境' : 'No Python runtime'}</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip reveal" aria-labelledby="trust-strip-title">
+      <div class="trust-strip__intro">
+        <p class="eyebrow" id="trust-strip-title">{c.trustTitle}</p>
+        <p>{c.trustBody}</p>
+      </div>
+      <div class="trust-strip__grid">
+        {c.trustItems.map((item) => (
+          <div class="trust-item">
+            <span class="trust-check" aria-hidden="true">✓</span>
+            <span><strong>{item.label}</strong><small>{item.detail}</small></span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+
+    <section class="demo-section section reveal" id="demo">
+      <div class="demo-copy">
+        <p class="eyebrow">{c.demoKicker}</p>
+        <h2>{c.demoTitle}</h2>
+        <p>{c.demoBody}</p>
+        <a href={withBase(guidePath)}>{c.fullGuide} →</a>
+      </div>
+      <div class="demo-media">
+        <div class="film-label"><span>SPECTRA STUDIO</span><span>01:00 · 1080p · {isZh ? '英文配音與字幕' : 'English narration & subtitles'}</span></div>
+        <div class="video-frame">
+          <video controls playsinline data-lazy-video preload="none" poster={withBase(promoPoster)} aria-label={c.watch}>
+            <source src={withBase(promoVideo)} type="video/mp4" />
+            <a href={withBase(promoVideo)} download>{c.videoFallback}</a>
+          </video>
+        </div>
+        <p class="video-credit">
+          {isZh ? '配樂：' : 'Music: '}
+          <a href="https://www.scottbuckley.com.au/library/helios/" target="_blank" rel="noopener noreferrer">“Helios” — Scott Buckley</a>
+          · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="workflow-section section" id="workflow">
+      <div class="section-heading reveal">
+        <p class="eyebrow">{c.workflowKicker}</p>
+        <h2>{c.workflowTitle}</h2>
+        <p>{c.workflowBody}</p>
+      </div>
+      <div class="workflow-grid">
+        <div class="workflow-steps">
+          {c.workflowSteps.map((step, index) => (
+            <article class={`workflow-step reveal reveal-delay-${Math.min(index + 1, 4)}`}>
+              <span class="workflow-step__number">{step.number}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <figure class="output-card reveal reveal-delay-2">
+          <div class="output-card__bar">
+            <span>{isZh ? '真實匯出結果' : 'Real exported output'}</span>
+            <span>PNG · 600 DPI</span>
+          </div>
+          <Image src={xrdOutput} alt={c.outputAlt} width={1200} height={1000} loading="lazy" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="analysis-section section" id="analysis">
+      <div class="section-heading reveal">
+        <p class="eyebrow">{c.resultsKicker}</p>
+        <h2>{c.resultsTitle}</h2>
+        <p>{c.resultsBody}</p>
+      </div>
+      <div class="feature-grid">
+        {c.features.map((feature, index) => (
+          <article class={`feature-card reveal reveal-delay-${Math.min((index % 2) + 1, 4)}`}>
+            <div class="feature-card__media">
+              <Image src={featureImages[index]} alt={feature.alt} width={900} height={560} loading="lazy" quality={82} />
+            </div>
+            <div class="feature-card__body">
+              <span class="pro-badge">PRO</span>
+              <span class="feature-number" aria-hidden="true">0{index + 1}</span>
+              <h3>{feature.title}</h3>
+              <p>{feature.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+
+
+    <section class="pricing-section section" id="pricing">
+      <div class="section-heading reveal">
+        <p class="eyebrow">{c.pricingKicker}</p>
+        <h2>{c.pricingTitle}</h2>
+      </div>
+      <div class="pricing-grid">
+        <article class="price-card reveal reveal-delay-1">
+          <div class="price-card__head">
+            <div><span class="plan-label">{c.freeName}</span><p>{c.freeBody}</p></div>
+            <div class="price"><strong>{c.freePrice}</strong><span>{c.freeTerm}</span></div>
+          </div>
+          <ul>
+            {c.freeFeatures.map((feature) => <li><span>✓</span>{feature}</li>)}
+          </ul>
+          <a class="button button--secondary button--full" href={DOWNLOAD_URL}>{c.freeCta}</a>
+        </article>
+        <article class="price-card price-card--featured reveal reveal-delay-2">
+          <div class="recommended">{isZh ? '最完整分析流程' : 'FULL ANALYSIS WORKFLOW'}</div>
+          <div class="price-card__head">
+            <div><span class="plan-label">{c.proName}</span><p>{c.proBody}</p></div>
+            <div class="price"><strong>{c.proPrice}</strong><span>{c.proTerm}</span></div>
+          </div>
+          <ul>
+            {c.proFeatures.map((feature) => <li><span>✓</span>{feature}</li>)}
+          </ul>
+          <a class="button button--primary button--full" href={BUY_URL}>{c.proCta}</a>
+        </article>
+      </div>
+      <p class="pricing-note reveal">{c.noSubscription}</p>
+    </section>
+
+    <section class="security-section section" id="trust">
+      <div class="section-heading reveal">
+        <p class="eyebrow">{c.securityKicker}</p>
+        <h2>{c.securityTitle}</h2>
+      </div>
+      <div class="security-grid">
+        {c.securityCards.map((item, index) => (
+          <article class={`security-card reveal reveal-delay-${Math.min(index + 1, 4)}`}>
+            <span class="security-card__number">0{index + 1}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body}</p>
+            {index === 0 && <a href={RELEASE_URL} target="_blank" rel="noopener noreferrer">{item.action} →</a>}
+            {index === 1 && <button class="text-button copy-checksum" type="button" data-checksum={SETUP_SHA}>{item.action} →</button>}
+            {index === 2 && <a href={withBase('/privacy.md')} target="_blank" rel="noopener noreferrer">{item.action} →</a>}
+            {index === 3 && <a href={withBase(`/${locale}/about`)}>{item.action} →</a>}
+          </article>
+        ))}
+      </div>
+      <details class="smartscreen-note reveal">
+        <summary>{c.smartscreenTitle}<span aria-hidden="true">+</span></summary>
+        <div class="smartscreen-note__body">
+        <div class="smartscreen-note__icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 3v5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3z"/><path d="M12 8v5m0 3h.01"/></svg>
+        </div>
+        <div><p>{c.smartscreenBody}</p></div>
+        </div>
+      </details>
+      <div class="checksum-row reveal" aria-label="SHA-256">
+        <span>SHA-256</span>
+        <code>{SETUP_SHA}</code>
+        <button class="copy-checksum" type="button" data-checksum={SETUP_SHA} aria-label={isZh ? '複製 SHA-256' : 'Copy SHA-256'}>
+          <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="6" width="9" height="9" rx="2"/><path d="M12 6V5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2h1"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <section class="formats-section reveal">
+      <h2>{c.formatsTitle}</h2>
+      <div class="format-list" aria-label={isZh ? '支援格式' : 'Supported formats'}>
+        {c.formats.map((format) => <code>{format}</code>)}
+      </div>
+      <p class="format-note">{isZh ? '支援單掃描 XRDML、雙欄 UXD 與常見文字格式。壓縮 BRML 請先由儀器軟體轉出 XY/TXT。' : 'Supports single-scan XRDML, two-column UXD, and common text formats. For compressed BRML, first export XY/TXT from your instrument software.'}</p>
+    </section>
+
+    <section class="faq-section section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">{c.faqKicker}</p>
+        <h2>{c.faqTitle}</h2>
+      </div>
+      <div class="faq-list reveal reveal-delay-1">
+        {c.faqs.map((faq, index) => (
+          <details open={index === 0}>
+            <summary>{faq.q}<span aria-hidden="true">+</span></summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="final-cta reveal">
+      <div class="final-cta__glow" aria-hidden="true"></div>
+      <p class="eyebrow">{c.finalKicker}</p>
+      <h2>{c.finalTitle}</h2>
+      <p>{c.finalBody}</p>
+      <div class="hero-actions">
+        <a class="button button--primary" href={DOWNLOAD_URL}>{c.finalDownload}</a>
+        <a class="button button--secondary" href={PORTABLE_URL}>{c.portable}</a>
+      </div>
+      <div class="resource-links">
+        <a href={withBase(guidePath)}>{c.fullGuide}</a>
+        <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">{c.allReleases}</a>
+        <a href={ISSUES_URL} target="_blank" rel="noopener noreferrer">{c.reportIssue}</a>
+      </div>
+      <p class="final-cta__author">{c.footerNote}</p>
+    </section>
+  </div>
+
+  <div class="copy-toast" role="status" aria-live="polite">{c.copySuccess}</div>
+</BaseLayout>
+
+<style>
+
+  .product-page { --landing-muted: var(--color-text-secondary); position: relative; padding-bottom: 2rem; }
+  .product-page :global(h1), .product-page :global(h2), .product-page :global(h3), .product-page :global(p) { margin-top: 0; }
+  .product-page :global(h1), .product-page :global(h2), .product-page :global(h3) { font-family: var(--font-body); }
+  .product-page :global(a:focus-visible), .product-page :global(button:focus-visible), .product-page :global(summary:focus-visible) { outline: 3px solid var(--color-accent); outline-offset: 5px; }
+  .product-page :global(section[id]) { scroll-margin-top: 9rem; }
+  .product-nav { position: sticky; top: 4rem; z-index: 35; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4rem; padding: .65rem 0; border-bottom: 1px solid var(--color-border); background: var(--color-surface-overlay); backdrop-filter: blur(20px); }
+  .product-brand { display: flex; align-items: center; gap: .65rem; color: var(--color-text); font-size: 1rem; font-weight: 700; letter-spacing: -.03em; white-space: nowrap; }
+  .product-mark { display: flex; align-items: end; gap: 3px; width: 25px; height: 25px; padding: 3px; }
+  .product-mark i { width: 4px; border-radius: 2px; background: var(--color-accent); }
+  .product-mark i:nth-child(1) { height: 8px; }.product-mark i:nth-child(2) { height: 17px; }.product-mark i:nth-child(3) { height: 12px; }.product-mark i:nth-child(4) { height: 21px; }
+  .product-nav__links { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; margin-right: 1.25rem; }
+  .product-nav__links a { color: var(--color-text-secondary); font-size: .78rem; padding-block: .5rem; }
+  .product-nav__links a:hover, .product-nav__links a[aria-current] { color: var(--color-accent); }
+  .product-nav__cta { display: inline-flex; align-items: center; min-height: 2.4rem; padding: .5rem .95rem; border-radius: 7px; color: var(--color-on-accent); background: var(--color-accent); font-size: .77rem; font-weight: 600; white-space: nowrap; }
+  .product-nav__cta:hover { color: var(--color-on-accent); background: var(--color-accent-dim); }
+  .hero { position: relative; padding: 4.25rem 0 0; text-align: center; isolation: isolate; }
+  .hero-glow { position: absolute; z-index: -1; inset: 28% -2% 0; background: radial-gradient(ellipse at 50% 76%, var(--color-accent-muted), transparent 62%); pointer-events: none; }
+  .hero-copy { max-width: 920px; margin-inline: auto; }
+  .eyebrow { color: var(--color-accent); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 1rem; }
+  .release-pill { display: inline-flex; align-items: center; gap: .55rem; padding: .35rem .7rem; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text-secondary); font-size: .72rem; margin-bottom: 1.8rem; background: var(--color-surface); }
+  .release-pill > span { width: 6px; height: 6px; background: #2cb77b; border-radius: 50%; }
+  .hero h1 { margin: 0 auto 1.4rem; font-size: clamp(2.6rem, 1.7rem + 3.4vw, 4.7rem); font-weight: 650; line-height: 1.18; letter-spacing: -.065em; text-wrap: balance; }
+  .hero h1 span, .hero h1 strong { display: block; }
+  .hero h1 strong { color: var(--color-accent); font-weight: inherit; }
+  .spectrum-types { display: flex; align-items: center; justify-content: center; gap: .7rem; color: var(--color-text-secondary); font-size: .74rem; letter-spacing: .03em; margin-bottom: 1.4rem; }
+  .spectrum-types span { opacity: .5; }
+  .hero-body { max-width: 620px; margin: 0 auto 1.65rem; color: var(--color-text-secondary); line-height: 1.85; font-size: 1.02rem; text-wrap: pretty; }
+  .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; }
+  .button { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 3.1rem; padding: .8rem 1.3rem; border: 1px solid transparent; border-radius: 9px; font-size: .84rem; font-weight: 600; line-height: 1.5; text-align: center; transition: background .2s, border-color .2s, box-shadow .2s, transform .2s; }
+  .button:hover { transform: translateY(-2px); }
+  .button--primary { color: var(--color-on-accent); background: var(--color-accent); box-shadow: 0 5px 15px var(--color-accent-glow); }
+  .button--primary:hover { color: var(--color-on-accent); background: var(--color-accent-dim); }
+  .button--secondary { color: var(--color-text); background: var(--color-surface); border-color: var(--color-border); }
+  .button--secondary:hover { color: var(--color-text); border-color: var(--color-accent); }
+  .button--full { width: 100%; }
+  .hero-fine { color: var(--color-text-secondary); margin: 1rem 0 .45rem; font-size: .72rem; line-height: 1.8; }
+  .edition-link { color: var(--color-text-secondary); font-size: .75rem; text-underline-offset: 4px; }
+  .edition-link:hover { text-decoration: underline; }
+  .hero-visual { position: relative; max-width: 990px; margin: 3.2rem auto 0; padding: 0 0 2.8rem; }
+  .app-frame { overflow: hidden; border-radius: 12px; border: 1px solid #383842; background: #202026; box-shadow: 0 30px 70px -25px rgba(12, 15, 28, .35); }
+  .app-frame__bar { display: flex; align-items: center; justify-content: space-between; padding: .65rem 1rem; border-bottom: 1px solid #383842; color: #bec1ce; font-size: .63rem; letter-spacing: .03em; }
+  .window-dots { display: flex; gap: 5px; }
+  .window-dots span { width: 7px; height: 7px; border-radius: 50%; background: #676773; }
+  .app-frame :global(img) { width: 100%; height: auto; display: block; }
+  .visual-chip { position: absolute; display: flex; align-items: center; gap: .65rem; bottom: 1.4rem; padding: .65rem .9rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 9px; box-shadow: 0 10px 25px rgba(0, 0, 0, .08); text-align: left; }
+  .visual-chip--left { left: 2rem; }.visual-chip--right { right: 2rem; }
+  .chip-icon { color: var(--color-accent); font-size: 1.1rem; }
+  .visual-chip strong, .visual-chip small { display: block; }.visual-chip strong { color: var(--color-text); font-size: .73rem; }.visual-chip small { color: var(--color-text-secondary); font-size: .63rem; }
+  .trust-strip { display: grid; grid-template-columns: 1fr 2fr; gap: 2.5rem; padding: 2rem 0; margin: 1.8rem 0 1rem; border-block: 1px solid var(--color-border); }
+  .trust-strip__intro .eyebrow { color: var(--color-text); font-size: .84rem; letter-spacing: 0; margin: 0 0 .4rem; }
+  .trust-strip__intro > p:last-child { font-size: .77rem; color: var(--color-text-secondary); margin: 0; line-height: 1.75; }
+  .trust-strip__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: center; }
+  .trust-item { display: flex; align-items: start; gap: .4rem; }.trust-check { color: var(--color-accent); font-size: .8rem; }
+  .trust-item strong, .trust-item small { display: block; }.trust-item strong { font-size: .73rem; color: var(--color-text); }.trust-item small { margin-top: .25rem; font-size: .64rem; color: var(--color-text-secondary); }
+  .section { padding-block: clamp(3.5rem, 7vw, 6rem); }
+  .section-heading { max-width: 780px; margin-bottom: 2.75rem; }
+  .section-heading h2, .demo-copy h2, .final-cta h2 { font-size: clamp(1.9rem, 1.1rem + 2vw, 2.9rem); letter-spacing: -.045em; line-height: 1.3; font-weight: 650; text-wrap: balance; margin-bottom: 1rem; }
+  .section-heading > p:not(.eyebrow) { color: var(--color-text-secondary); font-size: .95rem; line-height: 1.85; max-width: 660px; }
+  .demo-section { display: grid; grid-template-columns: .75fr 1.45fr; gap: 3rem; align-items: center; }
+  .demo-copy h2 { font-size: clamp(1.8rem, 1.1rem + 1.6vw, 2.5rem); }
+  .demo-copy > p:not(.eyebrow) { color: var(--color-text-secondary); font-size: .88rem; line-height: 1.85; }
+  .demo-copy > a { font-size: .78rem; font-weight: 600; }
+  .demo-media { min-width: 0; }.film-label { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-bottom: .65rem; color: var(--color-text-secondary); font-size: .6rem; letter-spacing: .07em; }
+  .video-frame { overflow: hidden; background: #080a10; border: 1px solid var(--color-border); border-radius: 12px; box-shadow: 0 20px 40px -18px rgba(0, 0, 0, .3); }
+  .video-frame video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+  .video-credit { color: var(--color-text-secondary); font-size: .63rem; margin-top: .7rem; }.video-credit a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+  .workflow-section { border-top: 1px solid var(--color-border); }.workflow-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 5rem; align-items: center; }
+  .workflow-steps { display: grid; }.workflow-step { display: grid; grid-template-columns: 2.25rem 1fr; gap: 1rem; padding: 1.4rem 0; border-bottom: 1px solid var(--color-border); }.workflow-step:first-child { padding-top: 0; }.workflow-step:last-child { border: 0; }
+  .workflow-step__number { font-size: .72rem; font-family: var(--font-mono); color: var(--color-accent); padding-top: .15rem; }
+  .workflow-step h3 { font-size: 1.06rem; margin-bottom: .5rem; letter-spacing: -.02em; }.workflow-step p { font-size: .84rem; color: var(--color-text-secondary); line-height: 1.85; margin: 0; }
+  .output-card { margin: 0; border: 1px solid var(--color-border); overflow: hidden; background: white; border-radius: 12px; padding: 1rem; }
+  .output-card__bar { display: flex; justify-content: space-between; gap: .5rem; color: #606a7d; font-size: .64rem; padding: .25rem .2rem 1rem; }
+  .output-card :global(img) { display: block; width: 100%; height: auto; }
+  .analysis-section { border-top: 1px solid var(--color-border); }.feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+  .feature-card { border: 1px solid var(--color-border); border-radius: 14px; overflow: hidden; background: var(--color-surface); transition: border-color .2s; }.feature-card:hover { border-color: var(--color-border-hover); }
+  .feature-card__media { aspect-ratio: 16 / 10; padding: 1.2rem; background: #f0f1f4; }.feature-card__media :global(img) { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .feature-card__body { position: relative; padding: 1.6rem; }.pro-badge { display: inline-block; padding: .2rem .45rem; border-radius: 4px; font-size: .58rem; letter-spacing: .08em; color: var(--color-accent); background: var(--color-accent-muted); margin-bottom: .85rem; }
+  .feature-number { float: right; font-family: var(--font-mono); color: var(--color-text-secondary); font-size: .67rem; }
+  .feature-card h3 { font-size: 1.1rem; margin-bottom: .65rem; }.feature-card p { color: var(--color-text-secondary); font-size: .84rem; line-height: 1.85; margin: 0; }
+  .pricing-section { border-top: 1px solid var(--color-border); }.pricing-section .section-heading { text-align: center; margin-inline: auto; }.pricing-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; max-width: 920px; margin-inline: auto; }
+  .price-card { display: flex; flex-direction: column; padding: 2.25rem; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); position: relative; }
+  .price-card--featured { border-color: var(--color-accent); box-shadow: 0 12px 35px -20px var(--color-accent-glow); }.recommended { color: var(--color-accent); font-size: .61rem; letter-spacing: .08em; position: absolute; top: .75rem; right: 1.2rem; }
+  .plan-label { font-size: 1.2rem; font-weight: 650; }.price-card__head p { font-size: .83rem; line-height: 1.75; color: var(--color-text-secondary); margin: .7rem 0 1.4rem; }
+  .price { display: flex; align-items: baseline; gap: .7rem; }.price strong { font-size: 3.1rem; line-height: 1.2; letter-spacing: -.06em; font-weight: 650; }.price span { color: var(--color-text-secondary); font-size: .76rem; }
+  .price-card ul { list-style: none; padding: 1.65rem 0; margin: 1rem 0 0; border-top: 1px solid var(--color-border); flex: 1; display: grid; gap: .9rem; }.price-card li { display: flex; gap: .6rem; font-size: .81rem; }.price-card li > span { color: var(--color-accent); }
+  .pricing-note { text-align: center; color: var(--color-text-secondary); font-size: .75rem; margin-top: 1.5rem; }
+  .security-section { border-top: 1px solid var(--color-border); }.security-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }.security-card { display: flex; flex-direction: column; }
+  .security-card__number { font-family: var(--font-mono); font-size: .66rem; color: var(--color-accent); margin-bottom: 1rem; }.security-card h3 { font-size: .97rem; margin-bottom: .8rem; }.security-card p { color: var(--color-text-secondary); font-size: .8rem; line-height: 1.85; margin-bottom: 1rem; flex: 1; }
+  .security-card a, .text-button { font-size: .76rem; font-weight: 600; color: var(--color-accent); }.text-button { width: fit-content; padding: 0; background: none; border: none; cursor: pointer; font-family: inherit; text-align: left; }
+  .smartscreen-note { margin-top: 2.25rem; border: 1px solid var(--color-border); border-radius: 9px; background: var(--color-surface); }.smartscreen-note summary { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 1.2rem; cursor: pointer; list-style: none; font-size: .8rem; font-weight: 600; }.smartscreen-note summary::-webkit-details-marker { display: none; }.smartscreen-note[open] summary > span { transform: rotate(45deg); }
+  .smartscreen-note__body { display: grid; grid-template-columns: auto 1fr; gap: 1rem; padding: 0 1.2rem 1.2rem; color: var(--color-text-secondary); }.smartscreen-note__body p { font-size: .79rem; line-height: 1.9; margin: 0; }.smartscreen-note__icon { color: var(--color-accent); }
+  .checksum-row { display: flex; align-items: center; gap: 1rem; margin-top: .8rem; padding: .85rem 1.2rem; color: var(--color-text-secondary); font-size: .65rem; }.checksum-row code { word-break: break-all; font-size: .62rem; }.checksum-row button { margin-left: auto; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text-secondary); border-radius: 5px; padding: .4rem; cursor: pointer; display: flex; }
+  .formats-section { padding: 2rem 0 3rem; text-align: center; border-bottom: 1px solid var(--color-border); }.formats-section h2 { font-size: 1.2rem; margin-bottom: 1.4rem; line-height: 1.65; }.format-list { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; }.format-list code { font-size: .71rem; border: 1px solid var(--color-border); border-radius: 6px; padding: .4rem .65rem; background: var(--color-surface); color: var(--color-text-secondary); }.format-note { font-size: .73rem; color: var(--color-text-secondary); margin: 1.2rem auto 0; max-width: 670px; line-height: 1.8; }
+  .faq-section { display: grid; grid-template-columns: .8fr 1.3fr; gap: 4rem; }.faq-section .section-heading h2 { font-size: 2rem; }.faq-list details { border-bottom: 1px solid var(--color-border); }.faq-list summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.25rem 0; font-size: .89rem; font-weight: 600; list-style: none; cursor: pointer; }.faq-list summary::-webkit-details-marker { display: none; }.faq-list summary > span { color: var(--color-accent); font-weight: 400; font-size: 1.2rem; }.faq-list details[open] summary > span { transform: rotate(45deg); }.faq-list p { color: var(--color-text-secondary); font-size: .84rem; line-height: 1.85; margin-bottom: 1.25rem; }
+  .final-cta { position: relative; padding: 4.5rem 2rem; text-align: center; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); overflow: hidden; isolation: isolate; }.final-cta__glow { position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 50% 100%, var(--color-accent-muted), transparent 70%); }.final-cta > p:not(.eyebrow) { color: var(--color-text-secondary); font-size: .9rem; max-width: 620px; margin: 0 auto 1.75rem; line-height: 1.8; }.resource-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0; }.resource-links a { font-size: .73rem; color: var(--color-text-secondary); }.final-cta .final-cta__author { font-size: .67rem !important; margin-bottom: 0 !important; }
+  .copy-toast { position: fixed; bottom: 2rem; left: 50%; transform: translate(-50%, 8px); z-index: 100; padding: .75rem 1.2rem; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); box-shadow: 0 10px 35px rgba(0, 0, 0, .15); color: var(--color-text); font-size: .8rem; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }.copy-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+  @media (max-width: 980px) {
+    .trust-strip { grid-template-columns: 1fr; gap: 1.25rem; }.demo-section { gap: 2rem; grid-template-columns: 1fr 1.4fr; }.workflow-grid { gap: 2.5rem; }.security-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }.faq-section { gap: 2rem; }
+  }
+  @media (max-width: 760px) {
+    .product-nav__links { display: none; }.hero { padding-top: 3rem; }.hero h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); }.hero-body { font-size: .91rem; max-width: 560px; }.hero-visual { margin-top: 2.5rem; }.trust-strip__grid { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }.demo-section, .workflow-grid, .faq-section { grid-template-columns: 1fr; }.demo-section { gap: 1.8rem; }.section-heading { margin-bottom: 2rem; }.feature-grid { gap: 1rem; }.feature-card__body { padding: 1.1rem; }.feature-card__media { padding: .65rem; }.price-card { padding: 1.6rem; }.pricing-grid { gap: 1rem; }.workflow-grid { gap: 2rem; }.faq-section { gap: .25rem; }.final-cta { padding: 3rem 1.2rem; }
+  }
+  @media (max-width: 540px) {
+    .hero { padding-top: 2rem; }.release-pill { margin-bottom: 1.35rem; }.hero .eyebrow { font-size: .6rem; letter-spacing: .08em; }.hero h1 { font-size: 2.25rem; line-height: 1.26; letter-spacing: -.065em; }.spectrum-types { gap: .4rem; font-size: .61rem; }.hero-actions { flex-direction: column; }.hero-actions .button { width: 100%; }.hero-body { line-height: 1.85; }.hero-fine { font-size: .65rem; }.hero-visual { padding-bottom: 0; margin-top: 2rem; }.app-frame { border-radius: 8px; }.app-frame__bar { padding: .5rem; font-size: .53rem; }.visual-chip { display: none; }.trust-strip { margin-top: 2rem; }.trust-item strong { font-size: .74rem; }.trust-item small { font-size: .67rem; }.section { padding-block: 3rem; }.feature-grid, .pricing-grid { grid-template-columns: 1fr; }.feature-card__body { padding: 1.5rem; }.feature-card__media { padding: 1rem; }.section-heading h2, .demo-copy h2, .final-cta h2 { font-size: 1.8rem; line-height: 1.45; }.security-grid { gap: 1.8rem 1rem; }.security-card h3 { font-size: .86rem; }.security-card p { font-size: .76rem; }.checksum-row { align-items: start; gap: .5rem; padding: .85rem 0; }.checksum-row > span { flex-shrink: 0; }.film-label { font-size: .54rem; }.resource-links { gap: .7rem 1.2rem; }.faq-section .section-heading h2 { font-size: 1.8rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .button, .feature-card, .copy-toast { transition: none; }.button:hover { transform: none; } }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.copy-checksum');
+  const toast = document.querySelector<HTMLElement>('.copy-toast');
+  let toastTimer = 0;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const checksum = button.dataset.checksum;
+      if (!checksum) return;
+      try {
+        await navigator.clipboard.writeText(checksum);
+        if (toast) {
+          window.clearTimeout(toastTimer);
+          toast.classList.add('is-visible');
+          toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 1800);
+        }
+      } catch {
+        const selection = window.getSelection();
+        const code = document.querySelector('.checksum-row code');
+        if (selection && code) {
+          const range = document.createRange();
+          range.selectNodeContents(code);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+    });
+  });
+</script>

@@ -5,7 +5,7 @@ description: '想不用 Origin 製作 XRD 論文圖？本文示範從載入、�
 keywords: ['免費 XRD 作圖軟體', '不用 Origin 做 XRD 圖', 'XRD 論文作圖軟體 Windows', 'XRD journal figure software', 'XRD 圖表 300 DPI', 'Origin 替代工具']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['XRD', '數據視覺化', '論文配圖', 'Windows 軟體']
@@ -121,10 +121,16 @@ Spectra Studio 的資料分析在本機執行；Free 版不需要帳戶，樣品
 
 目前主要支援 Windows 10/11 64-bit。若實驗室使用 Windows 儀器電腦，通常可以直接安裝；Mac/Linux 使用者則需要 Windows 虛擬機或其他相容環境。
 
+## 延伸閱讀
+
+- [為什麼做一張論文級光譜圖要花一晚上？把重複排版交給 Spectra Studio](/zh/guides/publication-spectra-figure-workflow/)
+- [FTIR、Raman、XRD 多樣品疊圖怎麼不失控？從「一團線」到可讀的比較圖](/zh/guides/multi-sample-ftir-raman-xrd-comparison/)
+- [XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南](/zh/guides/xrd-peak-fitting/)
+
 ## 結語：把時間留給材料問題，而不是圖表排版
 
 論文圖的重點是清楚呈現材料差異與分析結果，而不是把每個晚上都花在手動調整線寬、圖例與樣品間距。從多檔載入、預處理、峰偵測到期刊樣式與高解析度輸出，Spectra Studio 將常見 XRD 作圖步驟放在同一個介面中，讓你不用先學會 Origin 或建立 Python 環境，也能快速完成第一版投稿圖。
 
 👉 **免費下載並開始製作 XRD 論文圖：**
-[前往 Spectra Studio 官方功能介紹](../spectra-studio-guide/)
+[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio)
 

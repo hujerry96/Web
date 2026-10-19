@@ -1,12 +1,12 @@
 <script>
   const setupGalleryLightboxes = () => {
-    const galleries = document.querySelectorAll('[data-spectra-gallery]');
+    const galleries = document.querySelectorAll<HTMLElement>('[data-spectra-gallery]');
 
     galleries.forEach((gallery) => {
       if (gallery.dataset.lightboxReady) return;
       gallery.dataset.lightboxReady = 'true';
 
-      const items = Array.from(gallery.querySelectorAll('figure'));
+      const items = Array.from(gallery.querySelectorAll<HTMLElement>('figure'));
       if (!items.length) return;
 
       const overlay = document.createElement('div');
@@ -46,7 +46,7 @@
         boxShadow: '0 20px 70px rgba(0, 0, 0, 0.45)',
       });
 
-      const makeButton = (label, text) => {
+      const makeButton = (label: string, text: string) => {
         const button = document.createElement('button');
         button.type = 'button';
         button.setAttribute('aria-label', label);
@@ -97,15 +97,16 @@
       let current = 0;
       let previousOverflow = '';
 
-      const show = (index) => {
+      const show = (index: number) => {
         current = (index + items.length) % items.length;
-        const source = items[current].querySelector('img');
+        const source = items[current].querySelector<HTMLImageElement>('img');
+        if (!source) return;
         image.src = source.currentSrc || source.src;
         image.alt = source.alt;
         counter.textContent = `${current + 1} / ${items.length}`;
       };
 
-      const open = (index) => {
+      const open = (index: number) => {
         show(index);
         previousOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';

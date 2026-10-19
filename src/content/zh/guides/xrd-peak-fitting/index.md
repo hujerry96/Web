@@ -1,11 +1,12 @@
 ---
 title: 'XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南'
+seoTitle: 'XRD 峰擬合教學：Gaussian、Lorentzian 與 FWHM'
 slug: 'xrd-peak-fitting'
 description: '了解 XRD 峰擬合、Gaussian/Lorentzian 峰形、FWHM、R² 與 residuals，並用 Spectra Studio 快速分析重疊峰與輸出論文圖。'
 keywords: ['XRD 峰擬合', 'XRD peak fitting software', 'XRD Gaussian Lorentzian fitting', 'XRD FWHM 怎麼量', 'XRD 重疊峰分析軟體', '峰形擬合', 'XRD 殘差']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['XRD', '峰擬合', '材料科學', '數據分析']
@@ -120,10 +121,17 @@ Free 版可以先完成載入、平滑、基線校正、峰偵測與 PNG/JPG 圖
 
 Spectra Studio 提供 Windows Free 版，基本圖譜處理與峰偵測不需要付費；Pro 版則增加 Gaussian/Lorentzian/mixed 峰擬合與進階分析功能。
 
+## 延伸閱讀
+
+- [XRD 重疊峰怎麼分析？手動讀 FWHM 為什麼讓結果不穩定](/zh/guides/xrd-overlapping-peak-fitting/)
+- [XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學](/zh/guides/xrd-scherrer-williamson-hall/)
+- [不用 Origin 也能做論文級 XRD 圖：Windows 免費軟體完整流程](/zh/guides/xrd-publication-figure-without-origin/)
+- [免費線上 XRD 晶粒尺寸計算器](/zh/tools/crystallite-size-calculator/)
+
 ## 結語
 
 XRD 峰擬合的價值不只是把曲線畫得更平滑，而是讓重疊峰、FWHM、峰面積與擬合品質變成可檢查、可重複的分析結果。只要保留原始資料、合理設定背景與峰形，並同時查看 residuals，峰擬合就能成為從原始 XRD 檔案走向論文數據表的重要一步。
 
 👉 **試用 Spectra Studio：不用 Origin 或 Python，先免費開始整理你的 XRD 圖譜。**
-[查看 Spectra Studio 完整功能](../spectra-studio-guide/)
+[查看 Spectra Studio 完整功能](https://hulab.pages.dev/zh/spectra-studio)
 

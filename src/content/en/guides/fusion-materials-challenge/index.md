@@ -1,7 +1,8 @@
 ---
 title: "The Real Bottleneck in Fusion Energy Isn't Plasma — It's Materials"
+seoTitle: 'Fusion Energy''s Real Bottleneck: Reactor Wall Materials'
 slug: 'fusion-materials-challenge'
-description: 'Fusion reactors need materials that can withstand 150 million degrees and constant neutron bombardment. No known material can do this for long.'
+description: 'Fusion reactor walls face extreme heat and constant neutron bombardment. Why plasma-facing and structural materials, not plasma physics, are the hard part.'
 keywords:
   - 'nuclear fusion'
   - 'tungsten'
@@ -12,7 +13,7 @@ keywords:
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags:
   - 'Materials Science'
@@ -199,6 +200,12 @@ Beyond the current baseline candidates, several advanced materials are being act
 The composite architecture matters: **SiC fibers** (typically Hi-Nicalon Type S or Tyranno SA3, with 10–15 µm diameter) are woven into 2D or 3D preforms, then densified via **chemical vapor infiltration (CVI)**—a slow process that deposits SiC matrix material from vapor-phase precursors, filling the fiber weave layer by layer at temperatures above 1,000°C. A thin interfacial coating (pyrolytic carbon or boron nitride, ~100 nm thick) is applied to each fiber before infiltration; this coating allows the matrix to crack without breaking the fibers, the same deflection-toughening mechanism that makes ceramic-matrix composites fracture-tolerant rather than catastrophically brittle. The resulting composite can operate at temperatures exceeding 1,000°C—nearly double EUROFER's ceiling. Its thermal conductivity, however, is anisotropic and roughly 10–30 W/m·K, well below tungsten's 175 W/m·K, making it a poor divertor candidate but an attractive first-wall and blanket structural material where heat fluxes are lower. If the fiber-coating oxidation problem and tritium barrier integration are solved, SiC₍/SiCₘ could replace RAFM steels as the structural material of choice, raising coolant outlet temperatures and enabling higher thermal efficiency.
 
 Each of these materials faces the same bottleneck: the qualification pipeline. No accelerated development program can fully bypass the requirement for years of neutron exposure, and the fusion materials community is still building the facilities to deliver it.
+
+## Related guides
+
+- [Thermoelectric Materials: Turning Waste Heat into Electricity — Why It Hasn't Taken Off](/en/guides/thermoelectric-materials/)
+- [The Most Underestimated Bottleneck in Hydrogen Energy: Materials for Storage](/en/guides/hydrogen-storage-materials/)
+- [How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall](/en/guides/xrd-scherrer-williamson-hall/)
 
 ## Conclusion
 

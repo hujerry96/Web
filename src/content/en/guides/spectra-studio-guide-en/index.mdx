@@ -1,11 +1,12 @@
 ---
 title: 'Spectra Studio: Turn XRD, FTIR, Raman & UV-Vis Data Into Publication-Ready Figures — Without Origin or Python'
+seoTitle: 'Spectra Studio: Free XRD & Spectroscopy Plotting Software'
 slug: 'spectra-studio-guide-en'
-description: 'Free Windows app that turns raw XRD, FTIR, RAMAN, UV-Vis and DSC/TGA data into journal-ready figures in minutes — no Origin, no Python, no watermark. Multi-format loading, peak fitting with R² and residuals, Scherrer & Williamson-Hall crystallite size, Tauc bandgap, PDF-card phase matching, Miller indices, and vector export (PDF/SVG/EPS/TIFF). Download free; Pro unlocks instantly with a key.'
+description: 'Free Windows software that turns XRD, FTIR, Raman, UV-Vis and DSC/TGA data into journal-ready figures with no Origin, no Python and no watermark. Full guide.'
 keywords: ['XRD', 'FTIR', 'RAMAN', 'UV-Vis', 'DSC', 'spectral analysis', 'plotting tool', 'Origin alternative', 'plot without Python', 'peak fitting', 'crystallite size', 'Scherrer', 'Williamson-Hall', 'crystallinity', 'Tauc bandgap', 'bandgap analysis', 'phase matching', 'Miller indices', 'journal figures', 'Spectra Studio']
 author: 'Jerry Hu'
 date: 2026-08-08
-updated: 2026-08-16
+updated: 2026-10-20
 cover: ./spectra-studio-gui.png
 category: 'guides'
 tags: ['Python', 'XRD', 'Spectroscopy', 'Data Visualization']
@@ -17,6 +18,7 @@ project: true
 
 import { Image } from 'astro:assets';
 import SpectraGalleryLightbox from '../../../../components/SpectraGalleryLightbox.astro';
+import SpectraStickyCTA from '../../../../components/SpectraStickyCTA.astro';
 import gallery01 from './gallery-01.png';
 import gallery02 from './gallery-02.png';
 import gallery03 from './gallery-03.png';
@@ -28,7 +30,9 @@ import gallery08 from './gallery-08.png';
 import gallery09 from './gallery-09.png';
 import gallery10 from './gallery-10.png';
 
-<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
+<SpectraStickyCTA locale="en" />
+
+<div class="spectra-hero" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
 
   <div style={{ fontSize: 'clamp(1.5rem, 1.1rem + 2.2vw, 2.3rem)', fontWeight: 700, lineHeight: 1.18, letterSpacing: '-0.01em', maxWidth: '900px' }}>
     Turn XRD, FTIR, Raman &amp; UV-Vis Data Into Publication-Ready Figures —<br />Without Origin or Python.
@@ -38,12 +42,19 @@ import gallery10 from './gallery-10.png';
     A free Windows app that reads your instrument files, cleans them, fits the peaks and exports journal-style figures. <strong>No watermark. No coding. No subscription.</strong>
   </div>
 
+  <div class="spectra-hero-pro-reason">
+    <strong>Why upgrade?</strong> Pro is a one-time $79 key for peak fitting, reviewer-ready crystallite-size numbers and vector export. No subscription.
+  </div>
+
   <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-    <a href="https://github.com/hujerry96/Web/releases/download/v2.1.4/SpectraStudio-Setup-v2.1.4.exe" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
-      ⬇ Download Free
+    <a href="https://hulab.pages.dev/en/spectra-studio" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
+      Explore & download Free
     </a>
-    <a href="#demo" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-text)', border: '1px solid var(--color-border)', background: 'var(--color-surface)', textDecoration: 'none' }}>
-      ▶ Watch the 30-sec demo
+    <a href="https://hulab.pages.dev/en/spectra-studio#pricing" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-accent)', border: '1px solid var(--color-accent)', background: 'var(--color-surface)', textDecoration: 'none' }}>
+      Compare Free / Pro
+    </a>
+    <a href="https://hulab.pages.dev/en/spectra-studio#demo" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-text)', border: '1px solid var(--color-border)', background: 'var(--color-surface)', textDecoration: 'none' }}>
+      ▶ Watch the 60-second film
     </a>
   </div>
 
@@ -54,6 +65,17 @@ import gallery10 from './gallery-10.png';
     <span>✅ Data stays on your machine</span>
   </div>
 
+</div>
+
+<a id="pain-point"></a>
+
+## The part nobody budgets for
+
+<div class="spectra-pain-point">
+  <p>The science is not the slow part. The handoff is.</p>
+  <p>Stretch the baseline in Excel. Guess the peak width. Screenshot the result into Word. Repeat it for the next sample, then redo it when a reviewer asks for the vector figure.</p>
+  <p>Spectra Studio keeps that routine in one local workflow. Free covers the everyday figure; Pro starts when you need fitted peaks, reviewer numbers or submission-ready vector export.</p>
+  <a href="#pro">See what Pro removes →</a>
 </div>
 
 ### The pipeline, in one line
@@ -128,6 +150,12 @@ Ten finished outputs from the supplied sample folder, arranged as a responsive c
     </div>
     <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>Output 06</figcaption>
   </figure>
+</div>
+
+<details class="spectra-disclosure spectra-gallery-more">
+<summary>View the remaining four outputs</summary>
+
+<div data-spectra-gallery="true" style={{ columns: '3 260px', columnGap: '0.9rem', margin: '1rem 0 1.5rem' }}>
   <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
     <div style={{ position: 'relative', background: '#fff' }}>
       <Image src={gallery07} alt="Real exported figure 07 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
@@ -157,17 +185,32 @@ Ten finished outputs from the supplied sample folder, arranged as a responsive c
     <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>Output 10</figcaption>
   </figure>
 </div>
+</details>
 
 <SpectraGalleryLightbox />
 
-## 🎬 Demo: 30 seconds
+## See the evidence before you decide
+
+The gallery above uses real exports from the supplied sample folder. The live clips below show the four Pro steps, so you can judge the output before buying.
+
+<div class="spectra-proof-strip" aria-label="Evidence available on this page">
+  <div><strong>10</strong><span>real exported figures</span></div>
+  <div><strong>4</strong><span>Pro workflows shown live</span></div>
+  <div><strong>0</strong><span>watermarks or subscriptions</span></div>
+</div>
+
+## 🎬 60-second product film
 
 <a id="demo"></a>
 
-<video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
-  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo.mp4`} type="video/mp4" />
-  Your browser does not support video playback — <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo.mp4`}>download the video</a> instead.
+<video controls playsinline data-lazy-video preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-v3-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
+  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-v3.mp4`} type="video/mp4" />
+  Your browser does not support video playback — <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-v3.mp4`}>download the video</a> instead.
 </video>
+
+<p style={{ fontSize: '0.75rem' }}>Music: <a href="https://www.scottbuckley.com.au/library/helios/">“Helios” by Scott Buckley</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+
+<a id="free"></a>
 
 ## What You Get in the Free Download
 
@@ -182,6 +225,19 @@ The installer is the complete application — **all Free-edition features work i
 
 ![Spectra Studio main window: sample list and tools on the left, live stacked-spectrum preview on the right](./spectra-studio-gui.png)
 
+<div class="spectra-plan-signal">
+  <div>
+    <strong>Free is enough for:</strong>
+    <span>load → smooth → baseline → detect → journal style → PNG/JPG up to 300 DPI</span>
+  </div>
+  <div>
+    <strong>Pro is for the next bottleneck:</strong>
+    <span>Gaussian fitting, Scherrer/Williamson-Hall, Tauc, phase matching and PDF/SVG/EPS/TIFF export</span>
+  </div>
+</div>
+
+<a id="pro"></a>
+
 ## Why Researchers Upgrade to Pro
 
 These are the steps that eat your evenings — and the ones Pro compresses into seconds. Four of them, live:
@@ -189,7 +245,7 @@ These are the steps that eat your evenings — and the ones Pro compresses into 
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.1rem', margin: '1.2rem 0' }}>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-fit.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -199,7 +255,7 @@ These are the steps that eat your evenings — and the ones Pro compresses into 
   </div>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-grain.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -209,7 +265,7 @@ These are the steps that eat your evenings — and the ones Pro compresses into 
   </div>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-miller.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -219,7 +275,7 @@ These are the steps that eat your evenings — and the ones Pro compresses into 
   </div>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-export.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -234,16 +290,10 @@ These are the steps that eat your evenings — and the ones Pro compresses into 
 
 > 💡 **The workflow people actually run**: load → smooth/baseline → auto-detect peaks → fit → Scherrer / Williamson–Hall → Miller-index the phases → export vector. In Origin or a Python script this is an afternoon; in Spectra Studio it's the natural order of the UI.
 
-## 🎬 The Full Feature Tour (55 seconds)
+## Full workflow, if you want the detail
 
-Prefer to watch the whole workflow once, live?
-
-<video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
-  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour.mp4`} type="video/mp4" />
-  Your browser does not support video playback — <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour.mp4`}>download the video</a> instead.
-</video>
-
-## Step by Step: A Journal Figure in 10 Minutes
+<details class="spectra-disclosure">
+<summary>Open the six-step walkthrough</summary>
 
 Here is the full workflow, using "six CO3Ap (carbonate apatite) XRD samples → an ACS-style submission figure" as the example.
 
@@ -283,6 +333,8 @@ Preview before saving, then pick a format and resolution. PNG / JPG go up to 300
 
 ![Export dialog with format and resolution options](./scene_5_export.png)
 
+</details>
+
 ## Crystallite Size (Pro): Grain Size, Crystallinity & Tauc Bandgap
 
 The three quantities reviewers ask for most often — crystallite size, crystallinity and bandgap — are now computed in one click (v2.1), no more manual Excel or Origin work.
@@ -315,7 +367,10 @@ v2.1 adds **UV-Vis spectra** support (wavelength in nm, auto-detected). Load abs
 - Optional film thickness d (µm) converts to absorption coefficient α = 2.303A/d; leave blank to use relative α — **the bandgap value is unaffected**
 - Switch to manual mode to fine-tune the linear region by clicking twice on the plot (1st click = start, 2nd = end), with instant recomputation
 
-## Feature Details
+## Technical reference
+
+<details class="spectra-disclosure">
+<summary>Open supported formats, analysis, styles and export details</summary>
 
 ### Supported Data Formats
 
@@ -360,6 +415,8 @@ Every style remains fine-tunable: fonts, sizes, line widths, tick direction/leng
 | PDF / SVG / EPS | — | ✅ (vector, ideal for submission) |
 | TIFF | — | ✅ (300/600 DPI presets) |
 
+</details>
+
 ## Free vs. Pro
 
 Spectra Studio comes in two editions only: **Free** and **Pro** — both live in the same installer. **Download once and use the free edition immediately**: no time limits, no watermarks. When you are ready, buying a key unlocks Pro in seconds — nothing to re-download.
@@ -381,12 +438,12 @@ Spectra Studio comes in two editions only: **Free** and **Pro** — both live in
 | Vector export: PDF / SVG / EPS / TIFF (≤600 DPI) | — | ✅ |
 | Watermarks / time limits | none | none |
 
-> 🛒 **Get Pro**: [Buy on Polar ($79, one-time)](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO) — pay once, receive the key immediately, and paste it into the app. One license covers all Pro features, all future updates, and works on 2 devices. Not sure? Start free, hit a Pro feature, and decide when it actually matters.
+> 🛒 **Get Pro**: [Buy on Polar ($79, one-time)](https://hulab.pages.dev/en/spectra-studio#pricing) — pay once, receive the key immediately, and paste it into the app. One license covers all Pro features and updates within the licensed major version. The device allowance is shown at checkout. Not sure? Start free, hit a Pro feature, and decide when it actually matters.
 
 ## Installation & Download
 
-- **Setup program** (recommended): [Download SpectraStudio-Setup-v2.1.4.exe (120 MB)](https://github.com/hujerry96/Web/releases/download/v2.1.4/SpectraStudio-Setup-v2.1.4.exe) — double-click to install into the current user's directory (no administrator rights needed), with a Start-menu shortcut and uninstaller.
-- **Portable build**: [Download SpectraStudio-v2.1.4-portable.exe (119 MB)](https://github.com/hujerry96/Web/releases/download/v2.1.4/SpectraStudio-v2.1.4-portable.exe) — double-click to run, no installation.
+- **Setup program** (recommended): [Download SpectraStudio-Setup-v2.1.5.exe (120 MB)](https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-Setup-v2.1.5.exe) — double-click to install into the current user's directory (no administrator rights needed), with a Start-menu shortcut and uninstaller.
+- **Portable build**: [Download SpectraStudio-v2.1.5-portable.exe (120 MB)](https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-v2.1.5-portable.exe) — double-click to run, no installation.
 - **Release page**: [All versions on GitHub](https://github.com/hujerry96/Web/releases) — newest versions always ship there first.
 - **System**: Windows 10 / 11 (64-bit). The installer is about 120 MB; no Python or other runtime is required.
 - **Verify integrity** (optional but recommended): every release page lists the SHA-256 checksum of the installer. In PowerShell:
@@ -436,3 +493,11 @@ Windows first (the vast majority of instrument PCs run Windows). A macOS version
 - [How to calculate crystallite size from XRD (Scherrer & Williamson–Hall, with worked examples)](${import.meta.env.BASE_URL}/en/guides/how-to-calculate-crystallite-size-from-xrd/)
 - [Interactive Scherrer / Williamson–Hall calculator](${import.meta.env.BASE_URL}/en/tools/crystallite-size-calculator/) — enter FWHM, 2θ and K, get D and ε instantly
 - More guides and calculators are added continuously — [all guides](${import.meta.env.BASE_URL}/en/guides/) · [all tools](${import.meta.env.BASE_URL}/en/tools/)
+
+## Related guides
+
+- [How to Fit XRD Peaks: Gaussian, Lorentzian and FWHM Analysis](/en/guides/xrd-peak-fitting/)
+- [How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall](/en/guides/xrd-scherrer-williamson-hall/)
+- [How to Draw a UV-Vis Tauc Plot and Estimate Band Gap](/en/guides/uv-vis-tauc-plot-bandgap/)
+- [How to Process FTIR and Raman Spectra for a Publication Figure](/en/guides/ftir-raman-spectra-analysis/)
+

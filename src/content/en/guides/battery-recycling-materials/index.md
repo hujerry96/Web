@@ -1,12 +1,13 @@
 ---
 title: 'The Materials Science of Lithium-Ion Battery Recycling: Mining the Urban Mine'
+seoTitle: 'Li-ion Battery Recycling: The Materials Science Explained'
 slug: 'battery-recycling-materials'
-description: 'Battery recycling is not optional — 500,000 tons of Li-ion batteries will retire by 2025. But pyrometallurgy, hydrometallurgy, and direct regeneration each face different materials challenges.'
+description: 'Pyrometallurgy, hydrometallurgy and direct regeneration each face different materials challenges. How Li-ion battery recycling works and where it stalls.'
 keywords: ['battery recycling', 'cathode materials', 'LFP', 'NMC', 'hydrometallurgy', 'direct regeneration']
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Battery Recycling', 'Circular Economy']
 locale: 'en'
@@ -177,3 +178,10 @@ Several materials-science innovations on the horizon could fundamentally change 
 ## Outlook
 
 The materials science of battery recycling is not a static problem. Cathode chemistry evolves, recycling economics shift, regulations tighten. The one constant is that the urban mine will not dig itself — and we are burying more lithium in landfills every year.
+
+## Related guides
+
+- [The Materials Science of Solid-State Batteries: A Three-Way Tradeoff](/en/guides/solid-state-battery-materials/)
+- [The Rare Earth Crisis vs Materials Substitution: Permanent Magnets for EV Motors](/en/guides/rare-earth-magnet-alternatives/)
+- [How to Fit XRD Peaks: Gaussian, Lorentzian and FWHM Analysis](/en/guides/xrd-peak-fitting/)
+

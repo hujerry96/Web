@@ -1,6 +1,6 @@
 {
-  "version": "2.1.4",
-  "url": "https://github.com/hujerry96/Web/releases/latest/download/SpectraStudio-Setup-v2.1.4.exe",
-  "notes": "v2.1.4：修正首次啟動同意 EULA 後主視窗未顯示問題；重新打包便攜版與安裝版。",
+  "version": "2.1.5",
+  "url": "https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-Setup-v2.1.5.exe",
+  "notes": "v2.1.5：修正 XML 資料錯位與 XRDML 匯入、授權連線與停用流程，新增購買入口並移除學生方案。壓縮 BRML 請先轉為 XY/TXT。",
   "mandatory": false
 }

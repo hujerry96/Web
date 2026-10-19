@@ -1,11 +1,12 @@
 ---
 title: 'FTIR、Raman 光譜怎麼整理？批次疊圖、基線校正與投稿圖輸出'
+seoTitle: 'FTIR、Raman 光譜處理教學：基線校正、疊圖與投稿圖'
 slug: 'ftir-raman-spectra-analysis'
 description: '整理 FTIR 與 Raman 光譜的實用流程：直接載入、基線校正、平滑、多樣品疊圖、峰偵測、期刊樣式與高解析度輸出。'
 keywords: ['FTIR Raman 光譜分析軟體', 'FTIR 作圖軟體 Windows', 'Raman spectrum plotting software', 'FTIR 基線校正', 'Raman 多組光譜疊圖', '光譜論文作圖']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['FTIR', 'Raman', '光譜學', '論文配圖']
@@ -128,10 +129,16 @@ Windows 10/11 64-bit 安裝程式約 120 MB，不需要 Python 或額外 runtime
 
 Spectra Studio Free 版支援常見 `.txt`、`.xy`、`.csv` Raman 檔案，可進行多樣品疊圖、平滑、基線校正、峰偵測與 PNG/JPG 輸出。
 
+## 延伸閱讀
+
+- [FTIR、Raman、XRD 多樣品疊圖怎麼不失控？從「一團線」到可讀的比較圖](/zh/guides/multi-sample-ftir-raman-xrd-comparison/)
+- [儀器檔案格式太亂怎麼辦？把 XRD、FTIR、Raman、UV-Vis 資料放進同一個工作流程](/zh/guides/spectra-data-format-conversion/)
+- [為什麼做一張論文級光譜圖要花一晚上？把重複排版交給 Spectra Studio](/zh/guides/publication-spectra-figure-workflow/)
+
 ## 結語：把光譜整理變成可重複的流程
 
 FTIR 與 Raman 圖表真正需要的，不只是把資料畫出來，而是能穩定地管理多個樣品、記錄處理步驟、檢查峰形並以一致的格式輸出。Spectra Studio 將載入、smoothing、baseline correction、peak detection、journal styling 與 export 集中在同一個 Windows 工具中，適合想減少手動排版與環境設定時間的研究者。
 
 👉 **免費開始整理 FTIR、Raman、XRD 與 UV-Vis 光譜：**
-[前往 Spectra Studio 官方功能介紹](../spectra-studio-guide/)
+[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio)
 

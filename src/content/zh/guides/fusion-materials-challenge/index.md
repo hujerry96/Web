@@ -12,7 +12,7 @@ keywords:
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags:
   - '材料科學'
@@ -161,6 +161,12 @@ ODS 鋼是傳統 RAFM 鋼（如 EUROFER）的重大升級。透過機械合金�
 **機器學習加速。** 高通量計算和 ML 模型正在用於篩選合金成分和預測輻照損傷演化。但 ML 模型的訓練數據依賴於現有的實驗數據——而融合材料的實驗數據恰好極其稀少。這是一個雞生蛋蛋生雞的問題。
 
 **階梯式認證（Tiered qualification）。** 用 ITER 的實際運行數據（即使只有低劑量）來校準模型，然後用模型預測高劑量行為，而不是等待全部劑量累積完畢。這是目前最務實的方向，但它本質上是用不確定性換時間。
+
+## 延伸閱讀
+
+- [熱電材料：把廢熱變成電，為什麼還不普及？](/zh/guides/thermoelectric-materials/)
+- [氫能的最大瓶頸不是製造，是儲存：材料科學的隱形戰場](/zh/guides/hydrogen-storage-materials/)
+- [XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學](/zh/guides/xrd-scherrer-williamson-hall/)
 
 ## 結論
 

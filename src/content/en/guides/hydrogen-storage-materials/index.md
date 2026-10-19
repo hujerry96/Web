@@ -1,7 +1,8 @@
 ---
 title: 'The Most Underestimated Bottleneck in Hydrogen Energy: Materials for Storage'
+seoTitle: 'Hydrogen Storage Materials: The Overlooked Bottleneck'
 slug: 'hydrogen-storage-materials'
-description: 'Making hydrogen is solved. Storing and moving it is not — and materials science is the bottleneck nobody talks about.'
+description: 'Producing hydrogen is largely solved; storing and moving it is not. Compressed gas, metal hydrides and chemical carriers each hit a different materials limit.'
 keywords:
   - 'hydrogen'
   - 'hydrogen storage'
@@ -12,7 +13,7 @@ keywords:
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags:
   - 'Materials Science'
@@ -173,3 +174,10 @@ The realistic path forward involves matching storage technology to application:
 Hydrogen storage is not a problem that needs one perfect material. It is a problem that needs different materials for different scales, and a recognition that **materials science is the limiting factor** in the hydrogen economy—not electrolysis, not fuel cells, not policy.
 
 *This article is part of the "Energy Materials Bottlenecks" series. The next installment covers the solid–solid interfacial challenge in solid-state batteries.*
+
+## Related guides
+
+- [The Materials Race in Carbon Capture: Amines, MOFs, and Zeolites](/en/guides/carbon-capture-materials/)
+- [The Materials Science of Solid-State Batteries: A Three-Way Tradeoff](/en/guides/solid-state-battery-materials/)
+- [How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall](/en/guides/xrd-scherrer-williamson-hall/)
+

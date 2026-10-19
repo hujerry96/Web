@@ -1,11 +1,12 @@
 ---
 title: 'Spectra Studio 光譜分析繪圖工具：把 XRD / FTIR / Raman / UV-Vis 數據變成可直接投稿的論文圖 — 不需要 Origin，也不需要 Python'
+seoTitle: 'Spectra Studio 教學：免費 XRD／光譜繪圖與分析軟體'
 slug: 'spectra-studio-guide'
-description: '免費的 Windows 光譜繪圖工具：直接讀取 XRD、FTIR、RAMAN、UV-Vis、DSC/TGA 儀器檔，平滑、基線校正、自動尋峰、分峰擬合（含 R² 與殘差）、Scherrer/Williamson-Hall 晶粒尺寸、結晶度、Tauc 能隙、PDF 卡片相位比對與 Miller 指數標註、PDF/SVG/EPS/TIFF 向量匯出。無浮水印、無需 Python、免訂閱；Pro 金鑰立即解鎖。'
+description: '免費 Windows 光譜分析軟體完整教學：直接讀取 XRD、FTIR、Raman、UV-Vis、DSC/TGA 儀器檔，尋峰、分峰擬合、晶粒尺寸與 Tauc 能隙，輸出無浮水印期刊圖。'
 keywords: ['XRD', 'FTIR', 'RAMAN', 'UV-Vis', 'DSC', '光譜分析', '繪圖工具', 'Origin 替代', '不用 Python 畫圖', '分峰擬合', '晶粒尺寸', 'Scherrer', 'Williamson-Hall', '結晶度', 'Tauc 能隙', '能隙分析', '相位比對', 'Miller 指數', '期刊出圖', 'Spectra Studio']
 author: 'Jerry Hu'
 date: 2026-08-08
-updated: 2026-08-16
+updated: 2026-10-20
 cover: ./spectra-studio-gui.png
 category: 'guides'
 tags: ['Python', 'XRD', '光譜', '資料視覺化']
@@ -17,6 +18,7 @@ project: true
 
 import { Image } from 'astro:assets';
 import SpectraGalleryLightbox from '../../../../components/SpectraGalleryLightbox.astro';
+import SpectraStickyCTA from '../../../../components/SpectraStickyCTA.astro';
 import gallery01 from './gallery-01.png';
 import gallery02 from './gallery-02.png';
 import gallery03 from './gallery-03.png';
@@ -28,7 +30,9 @@ import gallery08 from './gallery-08.png';
 import gallery09 from './gallery-09.png';
 import gallery10 from './gallery-10.png';
 
-<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
+<SpectraStickyCTA locale="zh" />
+
+<div class="spectra-hero" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '1.4rem', padding: '2.2rem 1rem 2.6rem', borderRadius: '16px', background: 'linear-gradient(160deg, rgba(91,141,239,0.10), rgba(91,141,239,0.03) 55%, transparent)', border: '1px solid rgba(91,141,239,0.22)' }}>
 
   <div style={{ fontSize: 'clamp(1.5rem, 1.1rem + 2.2vw, 2.3rem)', fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.01em', maxWidth: '900px' }}>
     把 XRD、FTIR、Raman 與 UV-Vis 數據變成可直接投稿的論文圖 —<br />不需要 Origin，也不需要 Python。
@@ -38,12 +42,19 @@ import gallery10 from './gallery-10.png';
     一款免費的 Windows 應用：直接讀取儀器檔、清理數據、擬合峰、匯出期刊樣式圖表。<strong>無浮水印、不用寫程式、免訂閱。</strong>
   </div>
 
+  <div class="spectra-hero-pro-reason">
+    <strong>為什麼升級？</strong> Pro 一次買斷 $79，解鎖分峰擬合、審稿人會問的晶粒尺寸數字與向量匯出，不用訂閱。
+  </div>
+
   <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-    <a href="https://github.com/hujerry96/Web/releases/download/v2.1.4/SpectraStudio-Setup-v2.1.4.exe" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
-      ⬇ 免費下載
+    <a href="https://hulab.pages.dev/zh/spectra-studio" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-dim))', boxShadow: '0 6px 24px var(--color-accent-glow)', textDecoration: 'none' }}>
+      功能介紹與免費下載
     </a>
-    <a href="#demo" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-text)', border: '1px solid var(--color-border)', background: 'var(--color-surface)', textDecoration: 'none' }}>
-      ▶ 看 30 秒示範
+    <a href="https://hulab.pages.dev/zh/spectra-studio#pricing" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-accent)', border: '1px solid var(--color-accent)', background: 'var(--color-surface)', textDecoration: 'none' }}>
+      比較 Free / Pro
+    </a>
+    <a href="https://hulab.pages.dev/zh/spectra-studio#demo" style={{ display: 'inline-block', padding: '0.8rem 1.6rem', borderRadius: '10px', fontWeight: 600, color: 'var(--color-text)', border: '1px solid var(--color-border)', background: 'var(--color-surface)', textDecoration: 'none' }}>
+      ▶ 看 60 秒產品影片
     </a>
   </div>
 
@@ -54,6 +65,17 @@ import gallery10 from './gallery-10.png';
     <span>✅ 數據全程留在本機</span>
   </div>
 
+</div>
+
+<a id="pain-point"></a>
+
+## 最後 10% 的論文圖，為什麼總是吃掉一個晚上？
+
+<div class="spectra-pain-point">
+  <p>真正慢的通常不是研究，而是交稿前的搬運。</p>
+  <p>在 Excel 裡拉平背景、猜峰寬、把截圖貼進 Word；換下一組樣品再重做一次，審稿人要向量檔時還得重新排版。</p>
+  <p>Spectra Studio 把這段日常流程放在同一個本機工具裡。免費版處理常見論文圖；需要分峰擬合、審稿人會問的數字或投稿用向量匯出時，Pro 才接手。</p>
+  <a href="#pro">看看 Pro 替你拿掉什麼 →</a>
 </div>
 
 ### 一條流程，一句話講完
@@ -128,6 +150,12 @@ import gallery10 from './gallery-10.png';
     </div>
     <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 06</figcaption>
   </figure>
+</div>
+
+<details class="spectra-disclosure spectra-gallery-more">
+<summary>查看其餘 4 張成品</summary>
+
+<div data-spectra-gallery="true" style={{ columns: '3 260px', columnGap: '0.9rem', margin: '1rem 0 1.5rem' }}>
   <figure style={{ breakInside: 'avoid', margin: '0 0 0.9rem', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: '#fff', boxShadow: '0 6px 20px rgba(15,23,42,0.08)' }}>
     <div style={{ position: 'relative', background: '#fff' }}>
       <Image src={gallery07} alt="真實匯出成品 07 from Spectra Studio" style={{ width: '100%', height: 'auto', display: 'block' }} />
@@ -157,17 +185,32 @@ import gallery10 from './gallery-10.png';
     <figcaption style={{ padding: '0.5rem 0.7rem', fontSize: '0.78rem', color: 'var(--color-text-secondary)' }}>成品 10</figcaption>
   </figure>
 </div>
+</details>
 
 <SpectraGalleryLightbox />
 
-## 🎬 30 秒示範
+## 先看證據，再決定要不要付費
+
+上面的成品全部來自你提供的 sample folder；下面的實機片段則直接展示 4 個 Pro 步驟，先看清楚輸出再決定。
+
+<div class="spectra-proof-strip" aria-label="本頁可直接確認的證據">
+  <div><strong>10</strong><span>張真實匯出成品</span></div>
+  <div><strong>4</strong><span>段 Pro 實機流程</span></div>
+  <div><strong>0</strong><span>浮水印與訂閱制</span></div>
+</div>
+
+## 🎬 60 秒產品影片
 
 <a id="demo"></a>
 
-<video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
-  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo.mp4`} type="video/mp4" />
-  您的瀏覽器不支援影片播放，可直接<a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo.mp4`}>下載影片</a>。
+<video controls playsinline data-lazy-video preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-v3-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
+  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-v3.mp4`} type="video/mp4" />
+  您的瀏覽器不支援影片播放，可直接<a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-promo-v3.mp4`}>下載影片</a>。
 </video>
+
+<p style={{ fontSize: '0.75rem' }}>配樂：<a href="https://www.scottbuckley.com.au/library/helios/">“Helios” by Scott Buckley</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+
+<a id="free"></a>
 
 ## 免費版就有這些功能
 
@@ -182,6 +225,19 @@ import gallery10 from './gallery-10.png';
 
 ![Spectra Studio 主畫面：左側樣品清單與工具，右側即時預覽堆疊光譜](./spectra-studio-gui.png)
 
+<div class="spectra-plan-signal">
+  <div>
+    <strong>免費版適合：</strong>
+    <span>載入 → 平滑 → 去基線 → 尋峰 → 期刊樣式 → PNG/JPG（最高 300 DPI）</span>
+  </div>
+  <div>
+    <strong>Pro 從下一個瓶頸開始：</strong>
+    <span>分峰擬合、Scherrer/Williamson-Hall、Tauc、相位比對與 PDF/SVG/EPS/TIFF 匯出</span>
+  </div>
+</div>
+
+<a id="pro"></a>
+
 ## 為什麼研究者要升級 Pro
 
 下面這些步驟正是吃掉你晚上的東西——而 Pro 把它們壓縮成幾秒鐘。四支實機操作，直接看：
@@ -189,7 +245,7 @@ import gallery10 from './gallery-10.png';
 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.1rem', margin: '1.2rem 0' }}>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-fit.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -199,7 +255,7 @@ import gallery10 from './gallery-10.png';
   </div>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-grain.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -209,7 +265,7 @@ import gallery10 from './gallery-10.png';
   </div>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-miller.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -219,7 +275,7 @@ import gallery10 from './gallery-10.png';
   </div>
 
   <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', background: 'var(--color-surface)' }}>
-    <video autoPlay muted loop playsInline preload="metadata" style={{ width: '100%', display: 'block', background: '#000' }}>
+    <video controls playsinline data-lazy-video data-autoplay="true" muted loop playsInline preload="none" style={{ width: '100%', display: 'block', background: '#000' }}>
       <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-demo-export.mp4`} type="video/mp4" />
     </video>
     <div style={{ padding: '0.85rem 1rem' }}>
@@ -234,16 +290,10 @@ import gallery10 from './gallery-10.png';
 
 > 💡 **大家實際在跑的流程**：載入 → 平滑/去基線 → 自動尋峰 → 擬合 → Scherrer / Williamson–Hall → Miller 標相 → 向量匯出。在 Origin 或 Python 腳本裡這是半個下午；在 Spectra Studio 裡，這只是 UI 的自然順序。
 
-## 🎬 55 秒功能導覽
+## 完整流程，想深入時再展開
 
-想一次看完整個工作流程？
-
-<video controls preload="none" poster={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour-poster.jpg`} style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--color-border)', background: '#000' }}>
-  <source src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour.mp4`} type="video/mp4" />
-  您的瀏覽器不支援影片播放，可直接<a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/videos/spectra-studio-tour.mp4`}>下載影片</a>。
-</video>
-
-## 一步一步：10 分鐘做一張論文圖
+<details class="spectra-disclosure">
+<summary>展開 6 步驟完整流程</summary>
 
 下面以「六組 CO3Ap（碳酸鈣磷灰石）XRD 樣品 → ACS 期刊樣式投稿圖」為例，走完整個流程。
 
@@ -283,6 +333,8 @@ Nature / ACS / Elsevier 一鍵切換；圖例位置、字型、線寬、刻度�
 
 ![匯出對話框：格式與解析度選項](./scene_5_export.png)
 
+</details>
+
 ## 晶粒大小分析（Pro）：晶粒尺寸、結晶度、Tauc 能隙
 
 審稿人最常要的三個數字——晶粒尺寸、結晶度、能隙——v2.1 起一鍵算完，不再需要手動 Excel 或 Origin。
@@ -315,7 +367,10 @@ v2.1 新增 **UV-Vis 光譜**支援（波長 nm 自動偵測）。載入吸收�
 - 可選膜厚 d（µm）轉換吸收係數 α = 2.303A/d；留空使用相對 α——**能隙值不受影響**
 - 可切換手動模式：在圖上點兩下（第 1 下起點、第 2 下終點）微調線性區，即時重算
 
-## 功能細節
+## 技術參考
+
+<details class="spectra-disclosure">
+<summary>展開支援格式、分析、樣式與匯出細節</summary>
 
 ### 支援的數據格式
 
@@ -360,6 +415,8 @@ v2.1 新增 **UV-Vis 光譜**支援（波長 nm 自動偵測）。載入吸收�
 | PDF / SVG / EPS | — | ✅（向量，投稿首選） |
 | TIFF | — | ✅（300/600 DPI 預設） |
 
+</details>
+
 ## 免費版與 Pro 版
 
 Spectra Studio 只有兩種版本：**免費版**與 **Pro**——兩者都在同一個安裝檔裡。**下載一次，免費版立即可用**：無時間限制、無浮水印。準備好了再買金鑰，幾秒鐘解鎖 Pro，不需要重新下載。
@@ -381,12 +438,12 @@ Spectra Studio 只有兩種版本：**免費版**與 **Pro**——兩者都在�
 | 向量匯出：PDF / SVG / EPS / TIFF（≤600 DPI） | — | ✅ |
 | 浮水印 / 時間限制 | 無 | 無 |
 
-> 🛒 **購買 Pro**：在 [Polar 購買（$79 一次買斷）](https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO)付款後，Polar 立即寄送金鑰（`SS_-XXXX-...`，支援 2 台裝置）；換機、重灌只要再次貼入金鑰即可。一張金鑰涵蓋所有 Pro 功能與未來更新。不確定？先用免費版，真的碰到 Pro 功能再決定。
+> 🛒 **購買 Pro**：在 [Polar 購買（$79 一次買斷）](https://hulab.pages.dev/zh/spectra-studio#pricing)付款後，Polar 立即寄送金鑰（`SS_-XXXX-...`，裝置數依結帳方案）；換機前請先停用舊裝置授權。一張金鑰涵蓋所有 Pro 功能與所屬 major 版本內的更新。不確定？先用免費版，真的碰到 Pro 功能再決定。
 
 ## 安裝與下載
 
-- **安裝程式（建議）**：[下載 SpectraStudio-Setup-v2.1.4.exe（120 MB）](https://github.com/hujerry96/Web/releases/download/v2.1.4/SpectraStudio-Setup-v2.1.4.exe)——雙擊安裝到目前使用者目錄（不需管理員權限），含開始功能表捷徑與解除安裝程式
-- **免安裝版**：[下載 SpectraStudio-v2.1.4-portable.exe（119 MB）](https://github.com/hujerry96/Web/releases/download/v2.1.4/SpectraStudio-v2.1.4-portable.exe)——雙擊直接執行，不需安裝
+- **安裝程式（建議）**：[下載 SpectraStudio-Setup-v2.1.5.exe（120 MB）](https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-Setup-v2.1.5.exe)——雙擊安裝到目前使用者目錄（不需管理員權限），含開始功能表捷徑與解除安裝程式
+- **免安裝版**：[下載 SpectraStudio-v2.1.5-portable.exe（120 MB）](https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-v2.1.5-portable.exe)——雙擊直接執行，不需安裝
 - **Release 頁面**：[GitHub 全部版本](https://github.com/hujerry96/Web/releases)——最新版本永遠先發布在這裡
 - **系統**：Windows 10 / 11（64 位元）。安裝檔約 120 MB，不需要 Python 或任何執行環境
 - **驗證完整性**（建議）：每個 release 頁面都列出安裝檔的 SHA-256 檢查碼。在 PowerShell 執行：
@@ -436,3 +493,11 @@ Origin 的授權模式圍繞「席位」設計，腳本也有學習曲線；Pyth
 - [如何從 XRD 計算晶粒尺寸（Scherrer 與 Williamson–Hall，含範例，英文版）](${import.meta.env.BASE_URL}/en/guides/how-to-calculate-crystallite-size-from-xrd/)
 - [互動式 Scherrer / Williamson–Hall 計算器](${import.meta.env.BASE_URL}/zh/tools/crystallite-size-calculator/)——輸入 FWHM、2θ 與 K，立即得到 D 與 ε
 - 更多指南與工具持續更新——[全部指南](${import.meta.env.BASE_URL}/zh/guides/) · [全部工具](${import.meta.env.BASE_URL}/zh/tools/)
+
+## 延伸閱讀
+
+- [XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南](/zh/guides/xrd-peak-fitting/)
+- [XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學](/zh/guides/xrd-scherrer-williamson-hall/)
+- [UV-Vis Tauc plot 怎麼畫？一鍵計算材料 Band Gap 的完整教學](/zh/guides/uv-vis-tauc-plot-bandgap/)
+- [FTIR、Raman 光譜怎麼整理？批次疊圖、基線校正與投稿圖輸出](/zh/guides/ftir-raman-spectra-analysis/)
+

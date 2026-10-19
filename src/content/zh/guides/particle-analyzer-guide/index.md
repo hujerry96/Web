@@ -1,7 +1,8 @@
 ---
 title: 'SEM 粒徑分析工具：從 SEM 影像自動算出粒徑分布'
+updated: 2026-10-20
 slug: 'particle-analyzer-guide'
-description: '一篇實用的 SEM 粒徑分析工具教學：它解決什麼問題、適合哪些場景、怎麼安裝與操作，以及輸出結果能拿來做什麼。'
+description: '免費 SEM 粒徑分析軟體教學：比例尺校正、Watershed 與 Hough 顆粒偵測，自動輸出粒徑分布、統計與 CSV，適合奈米顆粒與孔洞量測。'
 keywords: ['SEM', '粒徑分析', 'Python 工具', '影像處理', '材料科學', 'Watershed', 'Hough']
 author: 'Jerry Hu'
 date: 2026-07-20
@@ -122,6 +123,12 @@ python particle_analyzer.py *.tif -m watershed --no-interactive -l 1.0
 此工具的效益在於免費、開源、可離線執行，且結果具可重現性；圖形介面與命令列兩種模式皆已完備，對未取得商業軟體授權的使用者尤具價值。
 
 在限制方面，分割結果依賴影像對比品質。若 SEM 影像雜訊偏高，或顆粒與背景的灰階差異過小，量測準確度會受到影響，此時須回頭調整參數或先對影像進行前處理。此外，工具量測對象為二維投影，若須嚴格評估體積分布，仍應輔以其他方法。
+
+## 延伸閱讀
+
+- [XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學](/zh/guides/xrd-scherrer-williamson-hall/)
+- [Spectra Studio 光譜分析繪圖工具：把 XRD / FTIR / Raman / UV-Vis 數據變成可直接投稿的論文圖 — 不需要 Origin，也不需要 Python](/zh/guides/spectra-studio-guide/)
+- [論文格式修正工具：把 Word 碩博士論文格式一次調好](/zh/guides/thesis-formatter-guide/)
 
 ## 小結
 

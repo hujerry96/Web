@@ -1,12 +1,13 @@
 ---
 title: 'Five Bottlenecks Blocking 2D Semiconductors from the Fab'
+seoTitle: '2D Semiconductors (MoS₂, WS₂): 5 Bottlenecks to the Fab'
 slug: '2d-semiconductor-bottlenecks'
-description: 'MoS₂, WS₂ and other 2D semiconductors promise to extend Moore''s Law, but at least five industrialization bottlenecks stand between a lab-scale flake and a wafer-scale product.'
+description: 'MoS₂, WS₂ and other 2D semiconductors could extend Moore''s Law. These five industrialization bottlenecks still separate lab flakes from wafer-scale chips.'
 keywords: ['2D semiconductors', 'MoS₂', 'TMD', 'transition metal dichalcogenides', 'contact resistance', 'CVD', 'semiconductor manufacturing']
 author: 'Jerry Hu'
 date: 2026-07-28
 cover: ./cover.webp
-updated: 2026-07-28
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Semiconductors', '2D Materials']
 locale: 'en'
@@ -109,3 +110,10 @@ Large-area growth and silicon process integration are the core industrialization
 The good news is that progress is accelerating. The crystalline antimony Ohmic contacts reported in 2025 Nature Electronics, the precise p/n-type doping demonstrated in 2024 Nature Communications, and the centimeter-scale uniform WSe₂ film synthesis all show that these bottlenecks are being progressively dismantled.
 
 2D semiconductors will not replace silicon tomorrow. But they are walking a path similar to SiC and GaN, from sporadic lab breakthroughs to repetitive engineering iterations, eventually finding a foothold in a specific application. The only difference is how long that road will take.
+
+## Related guides
+
+- [SiC and GaN: How Wide-Bandgap Semiconductors Are Reshaping EVs and Renewable Energy](/en/guides/wide-bandgap-semiconductors/)
+- [The Materials Science of Data Storage: From HDDs to MRAM, PCM, and Beyond](/en/guides/next-gen-data-storage-materials/)
+- [How to Process FTIR and Raman Spectra for a Publication Figure](/en/guides/ftir-raman-spectra-analysis/)
+

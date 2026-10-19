@@ -1,0 +1,66 @@
+---
+import { DEFAULT_CHART_OPTIONS as defaults } from '../lib/crystallite-chart';
+const { locale } = Astro.props;
+const tr = (zh: string, en: string) => locale === 'zh' ? zh : en;
+const colors = [['color', tr('數據顏色', 'Data color')], ['axisColor', tr('框線／文字', 'Axes / text')], ['background', tr('背景', 'Background')], ['meanColor', tr('平均線', 'Mean line')]] as const;
+const numbers = [
+  { key: 'markerSize', label: tr('點大小（pt）', 'Marker size (pt)'), min: 2, max: 14, step: 0.5 },
+  { key: 'barWidth', label: tr('條寬比例', 'Bar width fraction'), min: 0.1, max: 0.95, step: 0.05 },
+  { key: 'lineWidth', label: tr('線寬（pt）', 'Line width (pt)'), min: 0.25, max: 3, step: 0.05 },
+  { key: 'fontSize', label: tr('字體大小（pt）', 'Font size (pt)'), min: 6, max: 16, step: 0.5 },
+] as const;
+const checks = [
+  ['majorTicks', tr('主刻度', 'Major ticks')], ['minorTicks', tr('次刻度', 'Minor ticks')], ['grid', tr('淡色網格', 'Light grid')],
+  ['meanLine', tr('平均線', 'Mean line')], ['legend', tr('圖例', 'Legend')], ['labels', tr('數據標籤（≤12 峰）', 'Data labels (≤12 peaks)')],
+] as const;
+const bounds = [['xMin', 'X min'], ['xMax', 'X max'], ['xStep', tr('X 刻度間距', 'X tick interval')], ['yMin', 'Y min'], ['yMax', 'Y max'], ['yStep', tr('Y 刻度間距', 'Y tick interval')]] as const;
+---
+<details class="chart-controls" open>
+  <summary>{tr('圖形控制面板', 'Figure controls')}</summary>
+  <form id="wb-plot-controls" novalidate>
+    <fieldset><legend>{tr('圖形與色彩', 'Plot & colors')}</legend>
+      <label for="plot-type">{tr('圖形類型', 'Plot type')}<select id="plot-type" data-plot-field="type"><option value="scatter">{tr('數據點圖 · 2θ', 'Scatter · 2θ')}</option><option value="bar">{tr('條狀圖 · 峰分類', 'Bar · peak categories')}</option></select></label>
+      <div class="control-grid">{colors.map(([key, label]) => <label for={`plot-${key}`}>{label}<input id={`plot-${key}`} data-plot-field={key} type="color" value={defaults[key]} /></label>)}</div>
+      <label for="plot-marker">{tr('數據點形狀', 'Marker shape')}<select id="plot-marker" data-plot-field="marker"><option value="circle">{tr('圓形', 'Circle')}</option><option value="square">{tr('方形', 'Square')}</option><option value="triangle">{tr('三角形', 'Triangle')}</option><option value="diamond">{tr('菱形', 'Diamond')}</option></select></label>
+      <div class="control-grid">{numbers.slice(0, 2).map(f => <label for={`plot-${f.key}`}>{f.label}<input id={`plot-${f.key}`} data-plot-field={f.key} type="number" min={f.min} max={f.max} step={f.step} value={defaults[f.key]} required /></label>)}</div>
+    </fieldset>
+    <fieldset><legend>{tr('座標軸與刻度', 'Axes & ticks')}</legend>
+      <label for="plot-frame">{tr('框線', 'Frame')}<select id="plot-frame" data-plot-field="frame"><option value="box">{tr('完整四邊框', 'All four spines')}</option><option value="axes">{tr('左／下框線', 'Left / bottom')}</option><option value="none">{tr('無框線', 'No spines')}</option></select></label>
+      <label for="plot-lineWidth">{numbers[2].label}<input id="plot-lineWidth" data-plot-field="lineWidth" type="number" min="0.25" max="3" step="0.05" value={defaults.lineWidth} required /></label>
+      <label for="plot-tickDirection">{tr('刻度方向', 'Tick direction')}<select id="plot-tickDirection" data-plot-field="tickDirection"><option value="in">{tr('向內', 'Inward')}</option><option value="out">{tr('向外', 'Outward')}</option><option value="both">{tr('內外', 'Both')}</option></select></label>
+      <div class="checks">{checks.slice(0, 3).map(([key, label]) => <label><input data-plot-field={key} type="checkbox" checked={defaults[key]} />{label}</label>)}</div>
+      <p class="hint">{tr('範圍與間距留白為自動。條狀圖 Y 軸固定從 0 起始，避免視覺誇大。', 'Leave ranges and intervals blank for auto. Bars always start at zero to avoid exaggerating differences.')}</p>
+      <div class="control-grid">{bounds.map(([key, label]) => <label for={`plot-${key}`}>{label}<input id={`plot-${key}`} data-plot-field={key} type="number" step="any" placeholder={tr('自動', 'Auto')} /></label>)}</div>
+    </fieldset>
+    <fieldset><legend>{tr('字體與標示', 'Type & labels')}</legend>
+      <label for="plot-font">{tr('字體', 'Font')}<select id="plot-font" data-plot-field="font"><option value="Arial">Arial</option><option value="Times New Roman">Times New Roman</option><option value="Helvetica">Helvetica</option></select></label>
+      <label for="plot-fontSize">{numbers[3].label}<input id="plot-fontSize" data-plot-field="fontSize" type="number" min="6" max="16" step="0.5" value={defaults.fontSize} required /></label>
+      {([['title', tr('圖形標題', 'Figure title')], ['xLabel', tr('X 軸標籤', 'X axis label')], ['yLabel', tr('Y 軸標籤', 'Y axis label')]] as const).map(([key, label]) => <label for={`plot-${key}`}>{label}<input id={`plot-${key}`} data-plot-field={key} type="text" maxlength="100" placeholder={key === 'title' ? tr('無標題', 'No title') : tr('使用預設標籤', 'Use default label')} /></label>)}
+      <div class="checks">{checks.slice(3).map(([key, label]) => <label><input data-plot-field={key} type="checkbox" checked={defaults[key]} />{label}</label>)}</div>
+    </fieldset>
+    <fieldset><legend>{tr('比例與輸出尺寸', 'Aspect & export size')}</legend>
+      <label for="plot-ratio">{tr('圖形比例（寬：高）', 'Aspect ratio (W : H)')}<select id="plot-ratio"><option value="1.5">3 : 2</option><option value="1.3333333333333333">4 : 3</option><option value="1">1 : 1</option><option value="1.7777777777777777">16 : 9</option><option value="custom">{tr('自訂', 'Custom')}</option></select></label>
+      <div class="control-grid"><label for="plot-widthMm">{tr('寬度（mm）', 'Width (mm)')}<input id="plot-widthMm" data-plot-field="widthMm" type="number" min="90" max="240" step="1" value={defaults.widthMm} required /></label><label for="plot-heightMm">{tr('高度（mm）', 'Height (mm)')}<input id="plot-heightMm" data-plot-field="heightMm" type="number" min="60" max="240" step="1" value={defaults.heightMm} required /></label></div>
+      <label for="plot-pngWidth">{tr('PNG 寬度（px）', 'PNG width (px)')}<select id="plot-pngWidth" data-plot-field="pngWidth"><option value="2048">2048 px</option><option value="4252" selected>4252 px</option><option value="6000">6000 px</option></select></label>
+      <p class="hint">{tr('PNG 最多 2400 萬像素，超過時等比例縮小；SVG 保留向量。', 'PNG is capped at 24 megapixels and proportionally scaled if needed. SVG stays vector.')}</p>
+    </fieldset>
+    <button type="reset">{tr('重設期刊預設', 'Reset journal defaults')}</button>
+  </form>
+</details>
+<style>
+  .chart-controls { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: .8rem 1rem; min-width: 0; }
+  summary { font-size: .85rem; font-weight: 600; cursor: pointer; padding: .3rem 0; }
+  form { margin-top: .6rem; max-height: 40rem; overflow-y: auto; padding-right: .25rem; } fieldset { border: 0; border-top: 1px solid var(--color-border); padding: .9rem 0 .5rem; margin: 0; min-width: 0; }
+  legend { font-size: .75rem; font-weight: 600; padding-right: .5rem; }
+  label { display: block; font-size: .75rem; margin: .45rem 0; }
+  input:not([type='checkbox']), select { display: block; width: 100%; min-width: 0; min-height: 36px; margin-top: .3rem; padding: .4rem .5rem; border: 1px solid var(--color-border-hover); border-radius: 5px; color: var(--color-text); background: var(--color-bg); font: inherit; }
+  input[type='color'] { padding: .25rem; cursor: pointer; } input[type='checkbox'] { width: 16px; height: 16px; accent-color: var(--color-accent); }
+  input:disabled, select:disabled { opacity: .45; }
+  .control-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 .65rem; }
+  .checks { display: grid; gap: .3rem; margin: .6rem 0; } .checks label { display: flex; align-items: center; gap: .5rem; margin: 0; min-height: 28px; }
+  .hint { color: var(--color-text-secondary); font-size: .72rem; line-height: 1.65; }
+  button { width: 100%; min-height: 40px; margin: .6rem 0 .2rem; color: var(--color-text); background: var(--color-surface-raised); border: 1px solid var(--color-border-hover); border-radius: 5px; font: inherit; font-size: .8rem; cursor: pointer; }
+  button:hover { border-color: var(--color-accent); }
+  @media (max-width: 960px) { form { max-height: 28rem; } }
+  :is(button, input, select, summary):focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+</style>

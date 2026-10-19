@@ -5,7 +5,7 @@ description: 'A practical guide to XRD peak fitting with Gaussian, Lorentzian an
 keywords: ['XRD peak fitting', 'XRD peak fitting software', 'Gaussian Lorentzian XRD', 'XRD FWHM analysis', 'overlapping XRD peaks', 'peak profile fitting', 'XRD residuals']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['XRD', 'Peak Fitting', 'Materials Science', 'Data Analysis']
@@ -123,9 +123,16 @@ A single FWHM measured from a strongly overlapping envelope can be misleading. F
 
 Spectra Studio offers a Windows Free edition for basic pattern processing and detection. Pro adds Gaussian, Lorentzian and mixed-profile fitting plus the reported fit diagnostics.
 
+## Related guides
+
+- [Overlapping XRD Peaks: When Manual FWHM Fails](/en/guides/xrd-overlapping-peak-fitting/)
+- [How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall](/en/guides/xrd-scherrer-williamson-hall/)
+- [How to Make a Publication-Ready XRD Figure Without Origin](/en/guides/xrd-publication-figure-without-origin/)
+- [XRD crystallite size calculator (free, online)](/en/tools/crystallite-size-calculator/)
+
 ## Final takeaway
 
 The value of XRD peak fitting is not simply a smoother-looking line. It turns overlapping reflections, FWHM, peak areas and fit quality into results that can be inspected and repeated. Preserve the raw pattern, choose a defensible background and profile, check residuals, and use the fitted widths only within the limits of the model.
 
 👉 **Try Spectra Studio without Origin or Python:**
-[Open the Spectra Studio feature guide](../spectra-studio-guide-en/)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)

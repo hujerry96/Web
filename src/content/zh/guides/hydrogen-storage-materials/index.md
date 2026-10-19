@@ -12,7 +12,7 @@ keywords:
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags:
   - '材料科學'
@@ -153,3 +153,10 @@ LOHC 的操作條件比氨溫和（脫氫溫度約 270–310°C），無毒、�
 **目前沒有一個好答案。但這正是這個領域值得關注的原因——每往前一步，都可能打開一條全新的能源路徑。**
 
 *本文是「能源材料瓶頸」系列的一部分。下一篇將討論固態電池中的固-固界面問題。*
+
+## 延伸閱讀
+
+- [碳捕捉的材料戰爭：胺類、MOF、沸石的競賽](/zh/guides/carbon-capture-materials/)
+- [固態電池的材料科學突破：三大電解質路線的取捨之戰](/zh/guides/solid-state-battery-materials/)
+- [XRD 晶粒尺寸怎麼算？Scherrer 方程與 Williamson–Hall 完整教學](/zh/guides/xrd-scherrer-williamson-hall/)
+

@@ -6,7 +6,7 @@ keywords: ['鈣鈦礦', '太陽能電池', '光伏', '材料科學', '矽-鈣鈦
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['材料科學', '太陽能', '能源']
 locale: 'zh'
@@ -91,3 +91,10 @@ draft: false
 鈣鈦礦領域有一個獨特現象：學術界與產業界的距離異常接近。Oxford PV 本身就是牛津大學物理系教授 Henry Snaith 創立的分拆公司，這種「從實驗室直接走向產線」的模式在半導體或鋰電池領域都很少見。韓國的 UNIST、瑞士的 EPFL、中國的中科院半導體所等研究機構，也在積極透過授權或合資方式與企業對接。這種產學高度融合的生態，正是鈣鈦礦能在短短十五年內從 3.8% 衝到 26% 的結構性原因——基礎研究發現的缺陷鈍化策略，往往幾個月內就被應用在企業的試產線上。
 
 然而這種快節奏也帶來了潛在問題。實驗室中的高效電池多半在嚴控環境中製備與測試，量產環境的溫度、濕度與粉塵控制不可能達到同等程度。學術發表的穩定性數據與業界長期老化測試之間存在落差，而這個落差正是當前鈣鈦礦商業化最需要誠實面對的問題。
+
+## 延伸閱讀
+
+- [UV-Vis Tauc plot 怎麼畫？一鍵計算材料 Band Gap 的完整教學](/zh/guides/uv-vis-tauc-plot-bandgap/)
+- [SiC 與 GaN：寬能隙半導體如何重塑電動車與綠能](/zh/guides/wide-bandgap-semiconductors/)
+- [熱電材料：把廢熱變成電，為什麼還不普及？](/zh/guides/thermoelectric-materials/)
+

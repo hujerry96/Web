@@ -1,11 +1,12 @@
 ---
-title: 'How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall'
+title: 'Scherrer vs Williamson–Hall: Crystallite Size and Strain from XRD'
+seoTitle: 'Scherrer vs Williamson–Hall: XRD Crystallite Size & Strain'
 slug: 'xrd-scherrer-williamson-hall'
-description: 'Learn how to calculate crystallite size from XRD peak broadening with the Scherrer equation and Williamson–Hall analysis, including FWHM conversion and practical software workflow.'
+description: 'Calculate crystallite size from XRD peak broadening with the Scherrer equation, then separate size and microstrain with a Williamson–Hall plot.'
 keywords: ['XRD crystallite size calculation', 'Scherrer equation', 'Williamson–Hall plot', 'XRD FWHM', 'crystallite size software', 'XRD peak broadening', 'microstrain']
 author: 'Jerry Hu'
 date: 2026-08-20
-updated: 2026-08-20
+updated: 2026-10-20
 cover: ./cover.png
 category: 'guides'
 tags: ['XRD', 'Materials Science', 'Crystallite Size', 'Data Analysis']
@@ -139,9 +140,16 @@ Two peaks are the minimum for a line, but more high-quality, well-separated peak
 
 Spectra Studio is a Windows option that combines peak detection, peak fitting, Scherrer calculation and Williamson–Hall analysis in one interface.
 
+## Related guides
+
+- [Scherrer Equation Worked Example: Calculate XRD Crystallite Size Step by Step](/en/guides/how-to-calculate-crystallite-size-from-xrd/)
+- [How to Fit XRD Peaks: Gaussian, Lorentzian and FWHM Analysis](/en/guides/xrd-peak-fitting/)
+- [Overlapping XRD Peaks: When Manual FWHM Fails](/en/guides/xrd-overlapping-peak-fitting/)
+- [XRD crystallite size calculator (free, online)](/en/tools/crystallite-size-calculator/)
+
 ## Final takeaway
 
 The difficult part of XRD crystallite-size analysis is rarely the equation itself. Reliable results depend on trustworthy peak positions and FWHM values, sensible baseline treatment, and an honest discussion of instrumental broadening, microstrain and peak overlap. Use Scherrer for a clear first estimate, and use Williamson–Hall when you need to examine size and strain together.
 
 👉 **Download Spectra Studio and start with the free edition:**
-[See the Spectra Studio feature guide](../spectra-studio-guide-en/)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)

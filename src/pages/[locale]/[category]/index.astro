@@ -2,9 +2,10 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import { getPosts } from '../../../lib/content';
+import { getPosts, postPath } from '../../../lib/content';
+import { groupByTopic } from '../../../lib/topics';
 import { useTranslations } from '../../../i18n/ui';
-import { SITE, type Locale } from '../../../consts';
+import { SITE, withBase, type Locale } from '../../../consts';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -22,20 +23,81 @@ export async function getStaticPaths() {
 const { locale, category } = Astro.params as { locale: Locale; category: string };
 const { posts } = Astro.props as { posts: any[] };
 const t = useTranslations(locale);
+const zh = locale === 'zh';
 const catName = (SITE.categories[locale] as Record<string, string>)[category] ?? category;
 const path = `/${locale}/${category}`;
+const groups = groupByTopic(posts);
+
+const title = zh
+  ? 'XRD、FTIR、Raman、UV-Vis 光譜分析教學'
+  : 'XRD, FTIR, Raman & UV-Vis Analysis Guides';
+const description = zh
+  ? `${posts.length} 篇材料表徵實作教學：XRD 峰擬合與晶粒尺寸、FTIR／Raman 基線校正與疊圖、UV-Vis Tauc 能隙、期刊論文圖與軟體使用指南。`
+  : `${posts.length} practical materials characterization guides: XRD peak fitting and crystallite size, FTIR/Raman baselines and overlays, UV-Vis Tauc band gap, journal figures and software how-tos.`;
+
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: `${SITE.url}${path}`,
+  inLanguage: zh ? 'zh-TW' : 'en-US',
+  hasPart: posts.map((post) => ({ '@type': 'Article', headline: post.data.title, url: `${SITE.url}${postPath(post)}` })),
+};
 ---
-<BaseLayout title={`${catName} | ${SITE.name}`} description={`${catName} — ${SITE.name}`} path={path} wide>
-  <section class="py-8">
+<BaseLayout title={`${title} | ${SITE.name}`} description={description} path={path} jsonLd={[collectionLd]} breadcrumb={[{ name: catName, url: path }]} wide>
+  <section class="hub-hero">
     <Breadcrumb locale={locale} items={[{ name: catName, url: path }]} />
-    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-2 reveal">{catName}</h1>
-    <p class="text-[var(--color-text-secondary)] text-[0.95rem] mb-8 reveal reveal-delay-1">{t('home.postsCount', { n: posts.length })}</p>
-    {posts.length > 0 ? (
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-5 reveal reveal-delay-2">
-        {posts.map((post) => <ArticleCard post={post} locale={locale} />)}
-      </div>
-    ) : (
-      <p class="text-[var(--color-text-secondary)] text-[1.05rem] py-12 text-center reveal">{t('category.empty')}</p>
-    )}
+    <span class="eyebrow">{catName} · {t('home.postsCount', { n: posts.length })}</span>
+    <h1>{title}</h1>
+    <p>{description}</p>
+    <nav class="hub-jump" aria-label={zh ? '主題' : 'Topics'}>
+      {groups.map(({ topic, posts: topicPosts }) => (
+        <a href={`#${topic.id}`}><span>{topic.name[locale]}</span><span class="hub-jump__count">{topicPosts.length}</span></a>
+      ))}
+    </nav>
   </section>
+
+  {posts.length === 0 && <p class="text-[var(--color-text-secondary)] py-12 text-center">{t('category.empty')}</p>}
+
+  {groups.map(({ topic, posts: topicPosts }) => (
+    <section class="hub-group" id={topic.id} aria-labelledby={`${topic.id}-heading`}>
+      <div class="hub-group__head">
+        <span class="eyebrow">{topic.code}</span>
+        <h2 id={`${topic.id}-heading`}>{topic.name[locale]}</h2>
+        <p>{topic.desc[locale]}</p>
+      </div>
+      <div class="hub-grid">
+        {topicPosts.map((post) => <ArticleCard post={post} locale={locale} />)}
+      </div>
+    </section>
+  ))}
+
+  <aside class="hub-cta">
+    <div>
+      <span class="eyebrow">Spectra Studio</span>
+      <h2>{zh ? '把教學裡的流程，直接套用到你的數據' : 'Apply these workflows to your own data'}</h2>
+      <p>{zh ? '免費 Windows 版即可載入儀器檔、平滑、基線校正、尋峰與多樣品疊圖，輸出無浮水印的期刊圖。' : 'The free Windows edition loads instrument files, smooths, corrects baselines, detects peaks and stacks samples — with watermark-free journal figures.'}</p>
+    </div>
+    <a class="btn btn--primary" href={withBase(`/${locale}/spectra-studio`)}>{zh ? '免費下載' : 'Download free'} →</a>
+  </aside>
 </BaseLayout>
+
+<style>
+  .hub-hero { padding: 2.5rem 0 1rem; max-width: 52rem; }
+  .hub-hero h1 { margin: 0.9rem 0 0.8rem; font-size: clamp(1.9rem, 1.1rem + 2.4vw, 2.7rem); }
+  .hub-hero > p { margin: 0 0 1.5rem; font-size: 1.02rem; line-height: 1.75; color: var(--color-text-secondary); }
+  .hub-jump { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .hub-jump a { display: inline-flex; align-items: center; gap: 0.55rem; padding: 0.45rem 0.8rem; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface); color: var(--color-text); font-size: 0.88rem; }
+  .hub-jump a:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .hub-jump__count { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-tertiary); }
+  .hub-group { padding-top: 3rem; scroll-margin-top: 5rem; }
+  .hub-group__head { max-width: 46rem; margin-bottom: 1.25rem; }
+  .hub-group__head h2 { margin: 0.45rem 0 0.4rem; font-size: clamp(1.35rem, 1rem + 1.2vw, 1.7rem); }
+  .hub-group__head p { margin: 0; color: var(--color-text-secondary); line-height: 1.7; }
+  .hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1rem; }
+  .hub-cta { display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 4rem; padding: 1.75rem; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); }
+  .hub-cta h2 { margin: 0.5rem 0 0.4rem; font-size: 1.25rem; }
+  .hub-cta p { margin: 0; color: var(--color-text-secondary); font-size: 0.92rem; line-height: 1.7; max-width: 40rem; }
+  @media (max-width: 720px) { .hub-cta { flex-direction: column; align-items: flex-start; } }
+</style>

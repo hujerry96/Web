@@ -1,12 +1,13 @@
 ---
 title: 'Perovskite Solar Cells: The Material Engineering Behind Record Efficiencies'
+seoTitle: 'Perovskite Solar Cells: Efficiency, Stability and Lead'
 slug: 'perovskite-solar-materials'
-description: 'Perovskite solar cells have leapt from 3.8% to over 26% efficiency in fifteen years — faster than silicon ever did. But stability and lead toxicity remain unsolved.'
+description: 'Perovskite solar cells went from 3.8% to over 26% efficiency in fifteen years. The materials engineering behind the records, and why stability and lead remain open.'
 keywords: ['perovskite', 'solar cell', 'photovoltaic', 'materials science', 'silicon-perovskite tandem']
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Solar Energy', 'Photovoltaics']
 locale: 'en'
@@ -145,3 +146,10 @@ Notably, China has emerged as the largest source of perovskite patents globally,
 ## Outlook
 
 Perovskite solar cells have proven themselves on efficiency. Silicon-perovskite tandems already exceed 33% in the laboratory, surpassing the practical ceiling of single-junction silicon. The open questions — stability at 25-year timescales, lead toxicity at end-of-life, and manufacturing yield at gigawatt scale — are engineering problems with active, well-funded pathways toward resolution. The next decade will determine whether the technology reaches terawatt scale. The pace of investment, patent activity, and academic-industry knowledge transfer suggests the industry is treating it as a matter of when, not if.
+
+## Related guides
+
+- [How to Draw a UV-Vis Tauc Plot and Estimate Band Gap](/en/guides/uv-vis-tauc-plot-bandgap/)
+- [SiC and GaN: How Wide-Bandgap Semiconductors Are Reshaping EVs and Renewable Energy](/en/guides/wide-bandgap-semiconductors/)
+- [Thermoelectric Materials: Turning Waste Heat into Electricity — Why It Hasn't Taken Off](/en/guides/thermoelectric-materials/)
+

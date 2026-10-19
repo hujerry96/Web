@@ -14,6 +14,8 @@ const post = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      // <title> 用的精簡 SEO 標題（省略時沿用 title）
+      seoTitle: z.string().optional(),
       // 省略 slug 時，build 期由檔名自動產生（見 lib/content.ts）
       slug: z.string().optional(),
       description: z.string(),

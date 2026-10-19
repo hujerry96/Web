@@ -21,10 +21,12 @@ const social = SITE.social as Record<string, string>;
     </article>
 
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,260px),1fr))] gap-4 my-8 reveal reveal-delay-2">
-      <a class="contact-card" href={`mailto:${SITE.email}`}>
-        <span class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-[var(--color-accent)]">{t('contact.email')}</span>
-        <span class="text-[var(--color-text)] text-[0.95rem] break-all">{SITE.email}</span>
-      </a>
+      {SITE.email && (
+        <a class="contact-card" href={`mailto:${SITE.email}`}>
+          <span class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-[var(--color-accent)]">{t('contact.email')}</span>
+          <span class="text-[var(--color-text)] text-[0.95rem] break-all">{SITE.email}</span>
+        </a>
+      )}
       {social.github && (
         <a class="contact-card" href={social.github} rel="me">
           <span class="text-[0.7rem] font-medium tracking-[0.12em] uppercase text-[var(--color-accent)]">GitHub</span>

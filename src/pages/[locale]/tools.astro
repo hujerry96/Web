@@ -4,6 +4,8 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import { useTranslations } from '../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../consts';
 import { getTools } from '../../lib/tools';
+import { Image } from 'astro:assets';
+import spectraInterface from '../../assets/spectra-studio/interface.png';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -12,11 +14,12 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const path = `/${locale}/tools`;
 const tools = getTools(locale);
+const heading = locale === 'zh' ? '免費材料分析軟體與線上工具' : 'Free Materials Analysis Software & Tools';
 ---
-<BaseLayout title={`${t('nav.tools')} | ${SITE.name}`} description={t('page.toolsDesc', { name: SITE.name })} path={path}>
+<BaseLayout title={`${heading} | ${SITE.name}`} description={t('page.toolsDesc', { name: SITE.name })} path={path}>
   <section class="py-8 max-w-4xl mx-auto">
     <Breadcrumb locale={locale} items={[{ name: t('nav.tools'), url: path }]} />
-    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-4 reveal">{t('nav.tools')}</h1>
+    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-4 reveal">{heading}</h1>
     <article class="prose mb-8 reveal reveal-delay-1">
       <p>{t('page.toolsDesc')}</p>
     </article>
@@ -24,8 +27,8 @@ const tools = getTools(locale);
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,360px),1fr))] gap-6 reveal reveal-delay-2">
       {tools.map((tool) => (
         <section class="tool-card">
-          <div class="tool-card__header">
-            <span class="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-[var(--color-accent)]">{tool.tag}</span>
+          <div class:list={['tool-card__header', { 'tool-card__header--spectra': tool.featured }]}>
+            {tool.featured ? <a href={withBase(tool.landing!)} aria-label={locale === 'zh' ? '認識 Spectra Studio' : 'Explore Spectra Studio'}><Image src={spectraInterface} alt="Spectra Studio" width={720} height={432} loading="lazy" /></a> : <span class="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-[var(--color-accent)]">{tool.tag}</span>}
           </div>
           <div class="tool-card__body">
             <h2 class="text-[1.25rem] font-display font-semibold m-0 mb-2">{tool.name}</h2>
@@ -38,12 +41,13 @@ const tools = getTools(locale);
                 </li>
               ))}
             </ul>
+            {tool.landing && <a class="tool-product-button" href={withBase(tool.landing)}>{locale === 'zh' ? '探索功能與免費下載' : 'Explore & download free'} <span aria-hidden="true">→</span></a>}
             <div class="flex items-center justify-between border-t border-[var(--color-border-subtle)] pt-4">
               <span class="text-[0.78rem] text-[var(--color-text-tertiary)]">{tool.lang}</span>
-              <span class="flex gap-4 flex-wrap">
+              <span class="flex gap-4 flex-wrap justify-end">
                 <a class="text-[var(--color-accent)] text-[0.85rem] font-medium hover:text-[var(--color-accent-dim)] transition-colors duration-200" href={withBase(tool.guide)}>{locale === 'zh' ? '使用指南' : 'Guide'} →</a>
-                {tool.repo && (
-                  <a class="text-[var(--color-accent)] text-[0.85rem] font-medium hover:text-[var(--color-accent-dim)] transition-colors duration-200" href={tool.repo} target="_blank" rel="noopener">GitHub →</a>
+                {tool.repo && !tool.landing && (
+                  <a class="text-[var(--color-accent)] text-[0.85rem] font-medium hover:text-[var(--color-accent-dim)] transition-colors duration-200" href={tool.repo} target="_blank" rel="noopener noreferrer">GitHub →</a>
                 )}
               </span>
             </div>
@@ -81,9 +85,13 @@ const tools = getTools(locale);
 </BaseLayout>
 
 <style>
+  .tool-card__header--spectra { height: auto !important; aspect-ratio: 5 / 3; overflow: hidden; background: #202026 !important; }
+  .tool-card__header--spectra a, .tool-card__header--spectra :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .tool-product-button { display: flex; align-items: center; justify-content: center; gap: .7rem; border-radius: 7px; min-height: 2.8rem; background: var(--color-accent); color: var(--color-on-accent); font-size: .85rem; font-weight: 600; margin-bottom: 1rem; padding: .7rem; }
+  .tool-product-button:hover { background: var(--color-accent-dim); color: var(--color-on-accent); }
   .tool-card {
     border: 1px solid var(--color-border);
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     background: var(--color-surface);
     transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);

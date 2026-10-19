@@ -6,7 +6,7 @@ keywords: ['稀土', 'NdFeB', '永磁材料', 'MnBi', '鐵氧體', '電動車馬
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['材料科學', '稀土', '電動車', '永磁']
 locale: 'zh'
@@ -111,6 +111,12 @@ Renaissance 等新創公司開發的轴向磁通馬達使用鐵氧體即可達�
 2024–2025 年間多項研究取得進展。氮化鐵（Fe₁₆N₂）薄膜的磁能積理論值超過 100 MGOe，遠高於 NdFeB，但大體積塊材製備仍是巨大挑戰。日本 NIMS 開發的 SmFeN 粉末黏結磁體在 200°C 下磁性能保持率優於 NdFeB，且不使用重稀土。
 
 在奈米複合磁體領域，MnBi/FeCo 雙相奈米線的界面耦合效應被證實可顯著提升磁能積，為下一代永磁材料提供了全新設計路徑。
+
+## 延伸閱讀
+
+- [鋰電池回收的材料科學：從黑粉中提煉城市礦山](/zh/guides/battery-recycling-materials/)
+- [固態電池的材料科學突破：三大電解質路線的取捨之戰](/zh/guides/solid-state-battery-materials/)
+- [XRD 峰擬合怎麼做？Gaussian、Lorentzian 與 FWHM 分析完整指南](/zh/guides/xrd-peak-fitting/)
 
 ## 結論
 

@@ -7,30 +7,34 @@ import LangSwitch from './LangSwitch.astro';
 interface Props { path: string; locale: Locale; }
 const { path, locale } = Astro.props;
 const t = useTranslations(locale);
+const productPath = `/${locale}/spectra-studio`;
 
-const allCats = SITE.categories[locale] as Record<string, string>;
-const catNav = Object.keys(allCats).map((key) => ({ href: `/${locale}/${key}`, key: `nav.${key}` as Parameters<typeof t>[0] }));
+const catNav: { href: string; key: Parameters<typeof t>[0] }[] = [
+  { href: `/${locale}/guides`, key: 'nav.guides' },
+  { href: `/${locale}/tools`, key: 'nav.tools' },
+];
 const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
-  { href: `/${locale}/free-resources`, key: 'nav.free' },
   { href: `/${locale}/about`, key: 'nav.about' },
   { href: `/${locale}/contact`, key: 'nav.contact' },
 ];
 ---
 <header class="site-header" id="site-header">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-5 h-16">
-    <a href={withBase(`/${locale}`)} class="flex items-center gap-2 no-underline group">
-      <span class="font-display font-semibold text-[var(--color-text)] text-lg tracking-tight">{SITE.name}</span>
+    <a href={withBase(`/${locale}`)} class="brand no-underline" aria-label={`${SITE.name} — ${t('nav.home')}`}>
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--color-text)"/><path d="M5 23h4l2.5-4 2.5 7 3-17 3 14 2.5-5H27" fill="none" stroke="url(#brand-spectrum)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="brand-spectrum" x1="0" x2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset=".35" stop-color="#3b82f6"/><stop offset=".6" stop-color="#22c55e"/><stop offset=".8" stop-color="#f97316"/><stop offset="1" stop-color="#ef4444"/></linearGradient></defs></svg>
+      <span class="brand-name">{SITE.name}</span>
+      <span class="brand-sub" aria-hidden="true">{locale === 'zh' ? '材料分析工具' : 'Materials analysis'}</span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-1" aria-label="primary">
+    <nav class="desktop-nav hidden md:flex items-center gap-1" aria-label="primary">
       {catNav.map((item) => (
-        <a href={withBase(item.href)} class="nav-link">{t(item.key)}</a>
+        <a href={withBase(item.href)} class="nav-link" aria-current={path.startsWith(item.href) ? 'page' : undefined}>{t(item.key)}</a>
       ))}
-      <span class="w-px h-4 bg-[var(--color-border)] mx-1"></span>
       {staticLinks.map((item) => (
-        <a href={withBase(item.href)} class="nav-link">{t(item.key)}</a>
+        <a href={withBase(item.href)} class="nav-link" aria-current={path === item.href ? 'page' : undefined}>{t(item.key)}</a>
       ))}
+      <a href={withBase(productPath)} class="nav-cta" aria-current={path === productPath ? 'page' : undefined}>Spectra Studio <span aria-hidden="true">↗</span></a>
     </nav>
 
     <div class="flex items-center gap-2">
@@ -45,7 +49,7 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
       </div>
 
       <!-- Mobile menu button -->
-      <button class="icon-btn md:hidden" id="mobile-menu-btn" aria-label="Menu" aria-expanded="false">
+      <button class="icon-btn menu-button md:hidden" id="mobile-menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 5h12M3 9h12M3 13h12"/></svg>
       </button>
     </div>
@@ -54,6 +58,8 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
   <!-- Mobile nav -->
   <nav class="mobile-nav md:hidden" id="mobile-nav" aria-label="mobile">
     <div class="flex flex-col gap-1 px-5 pb-4">
+      <a href={withBase(productPath)} class="mobile-nav-link product-entry" aria-current={path === productPath ? 'page' : undefined}>Spectra Studio <span aria-hidden="true">↗</span></a>
+      <div class="h-px bg-[var(--color-border-subtle)] my-1"></div>
       {catNav.map((item) => (
         <a href={withBase(item.href)} class="mobile-nav-link">{t(item.key)}</a>
       ))}
@@ -82,12 +88,24 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
 </script>
 
 <style>
+  .nav-link.product-entry, .mobile-nav-link.product-entry { color: var(--color-accent); font-weight: 600; }
+  @media (min-width: 1024px) { .desktop-nav { display: flex !important; } .menu-button, .mobile-nav { display: none !important; } }
+  @media (max-width: 1023px) { .desktop-nav { display: none !important; } .menu-button { display: inline-flex !important; } .mobile-nav.is-open { display: block !important; } }
+  .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--color-text); }
+  .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; letter-spacing: -0.01em; }
+  .brand-sub { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--color-text-tertiary); padding-left: 0.6rem; border-left: 1px solid var(--color-border); }
+  @media (max-width: 520px) { .brand-sub { display: none; } }
+  .nav-link[aria-current='page'] { color: var(--color-text); background: var(--color-accent-muted); }
+  .nav-cta { display: inline-flex; align-items: center; gap: 0.35rem; margin-left: 0.5rem; padding: 0.42rem 0.8rem; border-radius: 6px; background: var(--color-accent); color: var(--color-on-accent); font-size: 0.85rem; font-weight: 600; }
+  .nav-cta:hover { background: var(--color-accent-dim); color: var(--color-on-accent); }
   .site-header {
     position: sticky;
     top: 0;
     z-index: 50;
-    border-bottom: 1px solid var(--color-border-subtle);
-    background: transparent;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-overlay);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     transition: background 300ms var(--ease), border-color 300ms var(--ease), backdrop-filter 300ms var(--ease);
   }
   .site-header.is-scrolled {
@@ -103,6 +121,7 @@ const staticLinks: { href: string; key: Parameters<typeof t>[0] }[] = [
     padding: 0.35rem 0.65rem;
     font-size: 0.875rem;
     font-family: var(--font-body);
+    font-weight: 500;
     color: var(--color-text-secondary);
     text-decoration: none;
     border-radius: 6px;

@@ -1,13 +1,17 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
-import { getPosts, getRelated, parseId, postSlug, readingTime, extractHeadings } from '../../../lib/content';
+import { getPosts, getRelated, getTranslation, parseId, postPath, postSlug, readingTime, extractHeadings, extractFaq } from '../../../lib/content';
+import { faqLd } from '../../../lib/seo';
+import { topicOf } from '../../../lib/topics';
+import { BASE } from '../../../consts';
 import { render } from 'astro:content';
 import { useTranslations } from '../../../i18n/ui';
 import { SITE, type Locale } from '../../../consts';
 import { Image } from 'astro:assets';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Toc from '../../../components/Toc.astro';
+import SpectraProductCTA from '../../../components/SpectraProductCTA.astro';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -26,36 +30,45 @@ const slug = postSlug(post);
 const path = `/${locale}/${category}/${slug}`;
 const related = await getRelated(post);
 const headings = extractHeadings(post.body);
+const showSpectraCTA = category === 'guides' && /Spectra Studio/i.test(post.body ?? '');
+const topic = topicOf(post);
+const translation = await getTranslation(post);
+const alternates = translation
+  ? [{ locale: parseId(translation.id).locale, path: postPath(translation).slice(BASE.length) || '/' }]
+  : [];
+const faq = extractFaq(post.body ?? '');
+const pageJsonLd = faq.length >= 2 ? [faqLd(faq)] : [];
+const baseTitle = post.data.seoTitle ?? post.data.title;
+// 標題過長時不加品牌後綴，避免搜尋結果截斷關鍵字
+const pageTitle = baseTitle.length + SITE.name.length + 3 <= (locale === 'zh' ? 36 : 62) ? `${baseTitle} | ${SITE.name}` : baseTitle;
+const dateFmt = (d: Date) => d.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 const breadcrumb = [
   { name: catName, url: `/${locale}/${category}` },
   { name: post.data.title, url: path },
 ];
 ---
-<BaseLayout title={`${post.data.title} | ${SITE.name}`} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb} wide>
+<BaseLayout title={pageTitle} description={post.data.description} path={path} post={post} breadcrumb={breadcrumb} jsonLd={pageJsonLd} alternates={alternates} wide>
   <article class="py-8 max-w-4xl mx-auto">
     <div class="reveal">
       <Breadcrumb locale={locale} items={breadcrumb} />
 
-      <header class="mb-8">
-        <h1 class="text-[clamp(1.8rem,1rem+3vw,2.8rem)] leading-tight break-words mt-0 mb-5">{post.data.title}</h1>
-        <div class="flex gap-4 flex-wrap text-[0.85rem] text-[var(--color-text-secondary)] mb-2">
-          <span>{t('article.by')} {post.data.author}</span>
-          <span class="opacity-30">·</span>
+      <header class="article-head">
+        <span class="eyebrow">{topic.code}</span>
+        <h1>{post.data.title}</h1>
+        <p class="article-head__lead">{post.data.description}</p>
+        <div class="article-head__meta">
+          <span>{t('article.by')} <a href={`${BASE}/${locale}/about`}>{post.data.author}</a></span>
           <span>{readingTime(post.body, locale)}</span>
-          <span class="opacity-30">·</span>
-          <time datetime={post.data.date.toISOString()}>{t('article.published')} {post.data.date.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
-          {post.data.updated && (
-            <>
-              <span class="opacity-30">·</span>
-              <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {post.data.updated.toLocaleDateString(locale === 'zh' ? 'zh-TW' : 'en-US')}</time>
-            </>
-          )}
+          {post.data.updated && post.data.updated.getTime() !== post.data.date.getTime()
+            ? <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {dateFmt(post.data.updated)}</time>
+            : <time datetime={post.data.date.toISOString()}>{t('article.published')} {dateFmt(post.data.date)}</time>}
+          {translation && <a href={postPath(translation)} hreflang={parseId(translation.id).locale === 'zh' ? 'zh-TW' : 'en-US'}>{locale === 'zh' ? 'Read in English' : '閱讀中文版'}</a>}
         </div>
       </header>
 
       {post.data.cover && (
-        <div class="mb-8 rounded-xl overflow-hidden border border-[var(--color-border-subtle)]">
-          <Image src={post.data.cover} alt={post.data.title} width={1280} height={720} class="w-full aspect-video object-cover" />
+        <div class="mb-8 rounded-lg overflow-hidden border border-[var(--color-border)]">
+          <Image src={post.data.cover} alt={post.data.title} width={1280} height={720} loading="eager" fetchpriority="high" class="w-full aspect-video object-cover" />
         </div>
       )}
     </div>
@@ -65,6 +78,7 @@ const breadcrumb = [
         <article class="prose">
           <Content />
         </article>
+        {showSpectraCTA && <SpectraProductCTA locale={locale} />}
 
         {post.data.tags.length > 0 && (
           <div class="tags">
@@ -80,8 +94,8 @@ const breadcrumb = [
     </div>
 
     {related.length > 0 && (
-      <section class="mt-16 pt-10 border-t border-[var(--color-border-subtle)] reveal">
-        <h2 class="text-center text-[clamp(1.3rem,0.9rem+1.5vw,1.75rem)] font-display font-semibold mb-8">{t('article.related')}</h2>
+      <section class="mt-16 pt-10 border-t border-[var(--color-border)] reveal">
+        <div class="section-head"><div><span class="eyebrow">{topic.code}</span><h2>{t('article.related')}</h2></div></div>
         <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,280px),1fr))] gap-5">
           {related.map((r) => <ArticleCard post={r} locale={locale} />)}
         </div>
@@ -89,3 +103,10 @@ const breadcrumb = [
     )}
   </article>
 </BaseLayout>
+
+<style>
+  .article-head { margin: 0.5rem 0 2rem; }
+  .article-head h1 { margin: 0.8rem 0 0.9rem; font-size: clamp(1.8rem, 1rem + 2.6vw, 2.6rem); line-height: 1.2; overflow-wrap: anywhere; }
+  .article-head__lead { margin: 0 0 1.2rem; max-width: 46rem; font-size: 1.06rem; line-height: 1.7; color: var(--color-text-secondary); }
+  .article-head__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; padding: 0.75rem 0; border-block: 1px solid var(--color-border); font-family: var(--font-mono); font-size: 0.76rem; color: var(--color-text-secondary); }
+</style>

@@ -1,7 +1,9 @@
 ---
 title: 'SEM Particle Analyzer: Turning SEM Images into Real Size Distributions'
+updated: 2026-10-20
+seoTitle: 'SEM Particle Size Analysis: Free Software Guide'
 slug: 'particle-analyzer-guide-en'
-description: 'A practical guide to the SEM Particle Analyzer: what problem it solves, who it is for, how to install and run it, and what you can do with the output.'
+description: 'Measure particle and pore size distributions from SEM images with free software: scale-bar calibration, Watershed and Hough detection, CSV and plot export.'
 keywords: ['SEM', 'particle size analysis', 'Python tool', 'image processing', 'materials science', 'Watershed', 'Hough']
 author: 'Jerry Hu'
 date: 2026-07-20
@@ -126,3 +128,10 @@ On the limits, segmentation quality depends on image contrast. If the SEM image 
 ## Wrap-up
 
 This tool converts SEM particle sizing from tedious manual measurement into a standard pipeline of a few commands or clicks. It does not replace the researcher's judgment about the material, but it returns the time spent on repetitive measurement to more substantive analysis. The source and a built executable are on GitHub, and you are welcome to take and modify them.
+
+## Related guides
+
+- [How to Calculate Crystallite Size from XRD: Scherrer and Williamson–Hall](/en/guides/xrd-scherrer-williamson-hall/)
+- [Spectra Studio: Turn XRD, FTIR, Raman & UV-Vis Data Into Publication-Ready Figures — Without Origin or Python](/en/guides/spectra-studio-guide-en/)
+- [Thesis Format Fixer: Get Your Word Thesis Format Right in One Pass](/en/guides/thesis-formatter-guide-en/)
+

@@ -1,12 +1,13 @@
 ---
 title: 'The Materials Science of Data Storage: From HDDs to MRAM, PCM, and Beyond'
+seoTitle: 'Data Storage Materials: HDD Limits, MRAM, PCM and RRAM'
 slug: 'next-gen-data-storage-materials'
-description: 'Hard drives are approaching the superparamagnetic limit. MRAM, PCM, FeRAM, and RRAM each promise to replace them — but each is stuck on a different materials problem.'
+description: 'Hard drives near the superparamagnetic limit. MRAM, PCM, FeRAM and RRAM each promise to replace them, but each is stuck on a different materials problem.'
 keywords: ['MRAM', 'PCM', 'phase change memory', 'GST', 'FeRAM', 'RRAM', 'data storage']
 author: 'Jerry Hu'
 date: 2026-07-24
 cover: ./cover.webp
-updated: 2026-07-24
+updated: 2026-10-20
 category: 'guides'
 tags: ['Materials Science', 'Data Storage', 'Semiconductor Memory']
 locale: 'en'
@@ -138,3 +139,10 @@ The materials race in emerging memory is not winner-take-all. The more likely ou
 - **RRAM** benefits from materials flexibility, potentially finding its strongest role in specialized computing architectures — neuromorphic circuits and compute-in-memory — where device variability is tolerable or even useful.
 
 All of these technologies share one prerequisite: materials science must first solve the specific problem that blocks each one — the uniformity of the MTJ barrier, the fatigue and thermal stability of GST, the phase control of HfO₂ ferroelectrics, the stochasticity of the conductive filament in RRAM. None of these is a fundamental impossibility. Each will require a decade or more of iterative engineering.
+
+## Related guides
+
+- [Five Bottlenecks Blocking 2D Semiconductors from the Fab](/en/guides/2d-semiconductor-bottlenecks/)
+- [SiC and GaN: How Wide-Bandgap Semiconductors Are Reshaping EVs and Renewable Energy](/en/guides/wide-bandgap-semiconductors/)
+- [How to Fit XRD Peaks: Gaussian, Lorentzian and FWHM Analysis](/en/guides/xrd-peak-fitting/)
+
