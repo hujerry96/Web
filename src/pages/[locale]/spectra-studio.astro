@@ -16,8 +16,8 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const isZh = locale === 'zh';
 const path = `/${locale}/spectra-studio`;
-const promoVideo = '/videos/spectra-studio-promo-v3.mp4';
-const promoPoster = '/videos/spectra-studio-promo-v3-poster.jpg';
+const promoVideo = '/videos/spectra-studio-film-2026.mp4';
+const promoPoster = '/videos/spectra-studio-film-2026-poster.jpg';
 
 const DOWNLOAD_URL = 'https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-Setup-v2.1.5.exe';
 const PORTABLE_URL = 'https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-v2.1.5-portable.exe';
@@ -78,7 +78,7 @@ const content = {
     ],
     demoKicker: '60 秒產品影片',
     demoTitle: '看看你的下一個研究工作流程。',
-    demoBody: '60 秒認識 Spectra Studio。透過實機操作呈現數據載入、期刊樣式、分峰擬合與匯出流程，搭配英文配音、字幕與動畫轉場。',
+    demoBody: '60 秒認識 Spectra Studio。全程實機錄製：載入 FTIR 與 XRD 數據、平滑、多樣品堆疊、Nature 期刊樣式、自動尋峰、晶粒尺寸，到輸出 300 DPI 論文圖。',
     videoFallback: '瀏覽器無法播放影片，請直接下載影片。',
     securityKicker: '透明交付',
     securityTitle: '安心下載，清楚知道軟體如何運作。',
@@ -176,7 +176,7 @@ const content = {
     ],
     demoKicker: 'THE 60-SECOND PRODUCT FILM',
     demoTitle: 'Meet your next research workflow.',
-    demoBody: 'Meet Spectra Studio in 60 seconds. See actual workflows for data import, journal styling, peak fitting, and export, with English narration, subtitles, and animated transitions.',
+    demoBody: 'Meet Spectra Studio in 60 seconds, recorded live in the app: import FTIR and XRD data, smooth, stack samples, apply a Nature journal style, detect peaks, calculate crystallite size, and export a 300 DPI figure.',
     videoFallback: 'Your browser cannot play this video. Download the video instead.',
     securityKicker: 'Transparent delivery',
     securityTitle: 'A transparent tool for your research.',
@@ -353,7 +353,7 @@ const productSchema = {
         <a href={withBase(guidePath)}>{c.fullGuide} →</a>
       </div>
       <div class="demo-media">
-        <div class="film-label"><span>SPECTRA STUDIO</span><span>01:00 · 1080p · {isZh ? '英文配音與字幕' : 'English narration & subtitles'}</span></div>
+        <div class="film-label"><span>SPECTRA STUDIO</span><span>01:00 · 1080p · {isZh ? '實機錄製 · 英文標題' : 'Recorded live · English titles'}</span></div>
         <div class="video-frame">
           <video controls playsinline data-lazy-video preload="none" poster={withBase(promoPoster)} aria-label={c.watch}>
             <source src={withBase(promoVideo)} type="video/mp4" />
