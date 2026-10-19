@@ -99,7 +99,9 @@ const content = {
     freeFeatures: ['全部常見格式載入', '平滑、基線與自動尋峰', '多樣品堆疊與期刊樣式', 'PNG / JPG 最高 300 DPI', '無浮水印、無時間限制'],
     freeCta: '下載免費版',
     proName: 'Pro',
-    proPrice: '$79',
+    proPrice: '$59',
+    proWas: '$79',
+    proSale: '限時特價',
     proTerm: '一次買斷',
     proBody: '投稿與深度分析工作流程一次解鎖。',
     proFeatures: ['Gaussian / Lorentzian 分峰擬合', 'Scherrer、Williamson-Hall 與結晶度', 'Tauc 能隙與相位比對', 'Miller 指數與 PDF / SVG / EPS / TIFF', '裝置數依結帳方案、30 天退款保證'],
@@ -197,7 +199,9 @@ const content = {
     freeFeatures: ['All common file loading', 'Smoothing, baseline, and peak detection', 'Multi-sample stacking and journal styles', 'PNG / JPG up to 300 DPI', 'No watermark or time limit'],
     freeCta: 'Download Free',
     proName: 'Pro',
-    proPrice: '$79',
+    proPrice: '$59',
+    proWas: '$79',
+    proSale: 'Limited-time sale',
     proTerm: 'one-time',
     proBody: 'Unlock submission and deep-analysis workflows in one license.',
     proFeatures: ['Gaussian / Lorentzian peak fitting', 'Scherrer, Williamson-Hall, and crystallinity', 'Tauc bandgap and phase matching', 'Miller indices plus PDF / SVG / EPS / TIFF', 'Device allowance per checkout plan; 30-day refund guarantee'],
@@ -254,7 +258,7 @@ const productSchema = {
   author: { '@type': 'Person', name: SITE.author, url: GITHUB_URL },
   offers: [
     { '@type': 'Offer', name: 'Spectra Studio Free', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-    { '@type': 'Offer', name: 'Spectra Studio Pro', price: '79', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: BUY_URL },
+    { '@type': 'Offer', name: 'Spectra Studio Pro', price: '59', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: BUY_URL },
   ],
 };
 ---
@@ -441,7 +445,8 @@ const productSchema = {
           <div class="recommended">{isZh ? '最完整分析流程' : 'FULL ANALYSIS WORKFLOW'}</div>
           <div class="price-card__head">
             <div><span class="plan-label">{c.proName}</span><p>{c.proBody}</p></div>
-            <div class="price"><strong>{c.proPrice}</strong><span>{c.proTerm}</span></div>
+            <p class="price-sale">{c.proSale}</p>
+            <div class="price"><s class="price-was" aria-label={isZh ? `原價 ${c.proWas}` : `Was ${c.proWas}`}>{c.proWas}</s><strong>{c.proPrice}</strong><span>{c.proTerm}</span></div>
           </div>
           <ul>
             {c.proFeatures.map((feature) => <li><span>✓</span>{feature}</li>)}
@@ -533,6 +538,8 @@ const productSchema = {
 </BaseLayout>
 
 <style>
+  .price-was { margin-right: .5rem; color: var(--color-text-tertiary); font-size: 1.1rem; font-weight: 500; }
+  .price-card .price-sale { align-self: flex-start; display: inline-block; margin: 0 0 .35rem; padding: .15rem .55rem; border-radius: 999px; background: #dc2626; color: #fff; font-size: .7rem; font-weight: 700; letter-spacing: .04em; }
 
   .product-page { --landing-muted: var(--color-text-secondary); position: relative; padding-bottom: 2rem; }
   .product-page :global(h1), .product-page :global(h2), .product-page :global(h3), .product-page :global(p) { margin-top: 0; }
