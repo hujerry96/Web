@@ -4,10 +4,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { SITE, withBase, type Locale } from '../../consts';
 
 import appScreenshot from '../../assets/spectra-studio/interface.png';
-import peakFitImage from '../../content/en/guides/spectra-studio-guide-en/examples/gaussian-peak-fitting.png';
-import taucImage from '../../content/en/guides/spectra-studio-guide-en/examples/tauc-bandgap.png';
-import phaseImage from '../../content/en/guides/spectra-studio-guide-en/scene_4_style_miller.png';
-import xrdOutput from '../../content/en/guides/spectra-studio-guide-en/examples/xrd-overview.png';
+import peakFitImage from '../../assets/spectra-studio/feature-fit.png';
+import taucImage from '../../assets/spectra-studio/feature-tauc.png';
+import phaseImage from '../../assets/spectra-studio/feature-miller.png';
+import sizeImage from '../../assets/spectra-studio/feature-size.png';
+import xrdOutput from '../../assets/spectra-studio/figure-aln.png';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -33,7 +34,7 @@ const content = {
   zh: {
     metaTitle: '免費 XRD 繪圖與分析軟體 | Spectra Studio',
     metaDescription: '免費 Windows XRD 繪圖與分析軟體。直接讀取儀器檔、尋峰、分峰擬合、Scherrer 與 Williamson-Hall 分析，輸出投稿用圖表。免 Python、無浮水印、數據不上傳。',
-    version: 'v2.2.2 現已推出',
+    version: 'v2.2.2 · 全新介面與分析修正',
     navWorkflow: '工作流程',
     navResults: '分析功能',
     navTrust: '安全與信任',
@@ -46,7 +47,7 @@ const content = {
     download: '免費下載 Windows 版',
     watch: '觀看 60 秒產品影片',
     heroFine: '免費版永久 $0 · 無帳號 · 無浮水印 · 不上傳實驗數據',
-    screenshotAlt: 'Spectra Studio 實機畫面：AlN XRD 數據與 Nature 期刊樣式設定',
+    screenshotAlt: 'Spectra Studio v2.2.2 實機畫面：AlN XRD 圖譜自動標定 hkl，右側為分析功能卡片',
     frameLabel: '真實程式畫面',
     frameStatA: 'Windows 10 / 11',
     frameStatB: '約 120 MB',
@@ -62,19 +63,19 @@ const content = {
     workflowTitle: '從載入到輸出，一個連貫的流程。',
     workflowBody: '減少重複整理，將時間留給數據判讀。',
     workflowSteps: [
-      { number: '01', title: '載入儀器數據', body: '開啟單掃描 .xrdml、雙欄 .uxd、.xy、.txt 與 .csv。壓縮 BRML 請先轉出 XY/TXT。多檔可一起載入、堆疊與比較。' },
-      { number: '02', title: '清理與分析', body: '平滑、ALS 基線、自動尋峰、分峰擬合、晶粒尺寸、相位與 Tauc 能隙都集中在同一套介面。' },
-      { number: '03', title: '匯出論文圖', body: '套用 Nature、ACS 或 Elsevier 樣式；免費版輸出 PNG/JPG，Pro 另提供 PDF、SVG、EPS 與 TIFF。' },
+      { number: '01', title: '載入儀器數據', body: '把檔案拖進視窗，或從匯入選單選檔案、資料夾或 PDF# 參考卡。支援 .xrdml、.uxd、.xy、.txt、.csv 等格式，多檔可一起堆疊比較。' },
+      { number: '02', title: '清理與分析', body: '分析分頁以功能卡片呈現：自動尋峰、分峰擬合、晶粒尺寸、Miller 指數與 Tauc 能隙，每項都附一句說明與前置提示。' },
+      { number: '03', title: '匯出論文圖', body: '套用 Nature、ACS 或 Elsevier 樣式，按 Ctrl+E 預覽最終像素、列印尺寸與檔案大小再匯出。免費版 PNG/JPG，Pro 另有 PDF、SVG、EPS、TIFF。' },
     ],
-    outputAlt: 'Spectra Studio 匯出的 XRD 論文圖範例',
+    outputAlt: 'Spectra Studio v2.2.2 實際匯出的 AlN XRD 圖，含自動標定的 hkl',
     resultsKicker: 'Pro 分析功能',
     resultsTitle: '讓圖表背後的分析，同樣清楚。',
     resultsBody: '需要進階分析時再升級。免費版仍可完整處理日常繪圖流程。',
     features: [
-      { title: '分峰擬合', body: 'Gaussian、Lorentzian 與混合峰型，輸出峰位、FWHM、面積、R² 與殘差。', alt: 'Gaussian 分峰擬合與 R 平方結果圖' },
-      { title: 'Scherrer 與 Williamson-Hall', body: '從峰位與 FWHM 計算晶粒尺寸，並以多峰分析估算微應變與線性擬合品質。', alt: 'XRD 峰寬 FWHM 與晶粒尺寸分析示意圖' },
-      { title: '相位與 Miller 指數', body: '使用參考卡或晶格參數比對峰位，將相位與 hkl 標註直接放進圖上。', alt: 'XRD 相位比對與 Miller 指數分析介面' },
-      { title: 'Tauc 能隙', body: 'UV-Vis 數據一鍵切換直接或間接能隙，支援自動與手動線性區間。', alt: 'Tauc plot 能隙分析介面' },
+      { title: '分峰擬合', body: 'Gaussian、Lorentzian 與混合峰型，初始值自動估計，只擬合選定範圍；輸出峰位、FWHM、面積、R² 與殘差。', alt: 'Spectra Studio 分峰擬合對話框：AlN 四峰 Gaussian 擬合，R² = 0.98' },
+      { title: 'Scherrer 與 Williamson-Hall', body: '逐峰計算晶粒尺寸，可勾選排除雜訊峰；多峰 W-H 估算微應變，擬合不穩定時會明確提醒。', alt: 'Spectra Studio 晶粒尺寸對話框：Scherrer 表格與 Williamson-Hall 圖' },
+      { title: '相位與 Miller 指數', body: '自動建議最吻合的材料、套用鑽石與纖鋅礦消光規則，並辨識 Kα2／Kβ 伴峰；hkl 標註直接放上圖。', alt: 'Spectra Studio Miller 指數對話框：自動辨識 AlN 並標定 9 個峰' },
+      { title: 'Tauc 能隙', body: '%T、%R 或吸光度都能直接分析，自動換算吸收量並選出合理的線性區；可切換直接或間接能隙。', alt: 'Spectra Studio Tauc 能隙對話框：吸收邊線性外插 Eg = 1.60 eV' },
     ],
     demoKicker: '60 秒產品影片',
     demoTitle: '看看你的下一個研究工作流程。',
@@ -133,7 +134,7 @@ const content = {
   en: {
     metaTitle: 'Free XRD Plotting Software for Windows | Spectra Studio',
     metaDescription: 'Free Windows software for XRD plotting and analysis. Open instrument files, detect and fit peaks, run Scherrer and Williamson-Hall analysis, and export paper-ready figures. No Python, no watermark, no data upload.',
-    version: 'v2.2.2 is available now',
+    version: 'v2.2.2 · New interface and analysis fixes',
     navWorkflow: 'Workflow',
     navResults: 'Analysis',
     navTrust: 'Trust & safety',
@@ -146,7 +147,7 @@ const content = {
     download: 'Download free for Windows',
     watch: 'Watch the 60-second product film',
     heroFine: 'Free forever · No account · No watermark · No experimental data upload',
-    screenshotAlt: 'Actual Spectra Studio interface showing AlN XRD data and Nature journal-style settings',
+    screenshotAlt: 'Spectra Studio v2.2.2 showing an AlN XRD pattern with automatic hkl labels and the analysis cards',
     frameLabel: 'Real application screen',
     frameStatA: 'Windows 10 / 11',
     frameStatB: 'About 120 MB',
@@ -162,19 +163,19 @@ const content = {
     workflowTitle: 'One workflow. From import to export.',
     workflowBody: 'Your scientific judgment should not be spent converting files, rebuilding baselines, and redrawing figures.',
     workflowSteps: [
-      { number: '01', title: 'Load instrument data', body: 'Open single-scan .xrdml and two-column .uxd, .xy, .txt, and .csv files. Export compressed BRML to XY/TXT first. Load, stack, and compare multiple samples together.' },
-      { number: '02', title: 'Clean and analyze', body: 'Smoothing, ALS baseline, peak detection, peak fitting, crystallite size, phase tools, and Tauc bandgap live in one interface.' },
-      { number: '03', title: 'Export the paper figure', body: 'Apply Nature, ACS, or Elsevier styling. Free exports PNG/JPG; Pro adds PDF, SVG, EPS, and TIFF.' },
+      { number: '01', title: 'Load instrument data', body: 'Drop files into the window or use the import menu for files, folders, or PDF# reference cards. Open .xrdml, .uxd, .xy, .txt, .csv and more, then stack samples to compare.' },
+      { number: '02', title: 'Clean and analyze', body: 'Analysis cards for peak detection, fitting, crystallite size, Miller indices, and Tauc bandgap, each with a one-line explanation and prerequisite hints.' },
+      { number: '03', title: 'Export the paper figure', body: 'Apply Nature, ACS, or Elsevier styling, then press Ctrl+E to preview final pixels, print size, and file size. Free exports PNG/JPG; Pro adds PDF, SVG, EPS, and TIFF.' },
     ],
-    outputAlt: 'Paper-ready XRD figure exported from Spectra Studio',
+    outputAlt: 'AlN XRD figure exported by Spectra Studio v2.2.2 with automatic hkl labels',
     resultsKicker: 'Pro analysis',
     resultsTitle: 'Clear figures. Deeper analysis.',
     resultsBody: 'Upgrade only when you reach an advanced-analysis bottleneck. The free edition still covers everyday plotting.',
     features: [
-      { title: 'Peak fitting', body: 'Gaussian, Lorentzian, and mixed profiles with peak position, FWHM, area, R², and residuals.', alt: 'Gaussian peak fitting result with R squared' },
-      { title: 'Scherrer & Williamson-Hall', body: 'Calculate crystallite size from peak width, then estimate microstrain and linear-fit quality across multiple peaks.', alt: 'XRD peak width and crystallite-size analysis example' },
-      { title: 'Phase & Miller indices', body: 'Match peaks with reference cards or lattice parameters and place phase and hkl labels directly on the figure.', alt: 'XRD phase matching and Miller-index interface' },
-      { title: 'Tauc bandgap', body: 'Switch between direct and indirect UV-Vis bandgaps with automatic or manually selected linear regions.', alt: 'Tauc plot bandgap analysis interface' },
+      { title: 'Peak fitting', body: 'Gaussian, Lorentzian, and mixed profiles with automatic initial guesses, fitted only within your range: position, FWHM, area, R², and residuals.', alt: 'Spectra Studio peak fitting dialog: four-peak Gaussian fit of AlN, R² = 0.98' },
+      { title: 'Scherrer & Williamson-Hall', body: 'Per-peak crystallite size with tick boxes to exclude noisy peaks; multi-peak W-H estimates microstrain and warns when the fit is unstable.', alt: 'Spectra Studio crystallite size dialog with Scherrer table and Williamson-Hall plot' },
+      { title: 'Phase & Miller indices', body: 'Suggests the best-matching material, applies diamond and wurtzite extinction rules, flags Kα2/Kβ satellites, and places hkl labels on the figure.', alt: 'Spectra Studio Miller dialog automatically identifying AlN and indexing nine peaks' },
+      { title: 'Tauc bandgap', body: 'Works with %T, %R, or absorbance: converts to absorption, picks a physical linear region, and switches between direct and indirect gaps.', alt: 'Spectra Studio Tauc dialog: linear extrapolation of the absorption edge, Eg = 1.60 eV' },
     ],
     demoKicker: 'THE 60-SECOND PRODUCT FILM',
     demoTitle: 'Meet your next research workflow.',
@@ -233,7 +234,7 @@ const content = {
 } as const;
 
 const c = content[locale];
-const featureImages = [peakFitImage, xrdOutput, phaseImage, taucImage];
+const featureImages = [peakFitImage, sizeImage, phaseImage, taucImage];
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -320,7 +321,7 @@ const productSchema = {
             <span>{c.frameLabel}</span>
             <span class="app-frame__version">v2.2.2</span>
           </div>
-          <Image src={appScreenshot} alt={c.screenshotAlt} width={1600} height={960} loading="eager" quality={88} />
+          <Image src={appScreenshot} alt={c.screenshotAlt} width={1600} height={900} loading="eager" quality={88} />
         </div>
         <div class="visual-chip visual-chip--left">
           <span class="chip-icon">✓</span>
@@ -393,9 +394,9 @@ const productSchema = {
         <figure class="output-card reveal reveal-delay-2">
           <div class="output-card__bar">
             <span>{isZh ? '真實匯出結果' : 'Real exported output'}</span>
-            <span>PNG · 600 DPI</span>
+            <span>PNG · 300 DPI · v2.2.2</span>
           </div>
-          <Image src={xrdOutput} alt={c.outputAlt} width={1200} height={1000} loading="lazy" />
+          <Image src={xrdOutput} alt={c.outputAlt} width={1200} loading="lazy" />
         </figure>
       </div>
     </section>
@@ -410,7 +411,7 @@ const productSchema = {
         {c.features.map((feature, index) => (
           <article class={`feature-card reveal reveal-delay-${Math.min((index % 2) + 1, 4)}`}>
             <div class="feature-card__media">
-              <Image src={featureImages[index]} alt={feature.alt} width={900} height={560} loading="lazy" quality={82} />
+              <Image src={featureImages[index]} alt={feature.alt} width={1000} loading="lazy" quality={85} />
             </div>
             <div class="feature-card__body">
               <span class="pro-badge">PRO</span>
