@@ -1,6 +1,6 @@
 {
-  "version": "2.1.5",
-  "url": "https://github.com/hujerry96/Web/releases/download/v2.1.5/SpectraStudio-Setup-v2.1.5.exe",
-  "notes": "v2.1.5：修正 XML 資料錯位與 XRDML 匯入、授權連線與停用流程，新增購買入口並移除學生方案。壓縮 BRML 請先轉為 XY/TXT。",
+  "version": "2.2.2",
+  "url": "https://github.com/hujerry96/Web/releases/download/v2.2.2/SpectraStudio-Setup-v2.2.2.exe",
+  "notes": "v2.2.2：修正自動尋峰、分峰擬合、FTIR 基線、Miller 指數與 Tauc 能隙計算；全新介面、品牌圖示與匯出預覽。",
   "mandatory": false
 }
