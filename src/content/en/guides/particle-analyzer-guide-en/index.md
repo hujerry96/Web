@@ -18,7 +18,7 @@ project: true
 
 Quantifying particle size distribution is a frequent and foundational task in materials research and quality control. The typical workflow begins with a scanning electron microscopy (SEM) image, after which the mean diameter, distribution width, and characteristic values such as D10, D50, and D90 must be reported. Manual measurement by hand is time consuming and introduces inter-operator variability in how boundaries are drawn. The SEM Particle Analyzer described here targets this need: it produces reproducible numbers through a consistent, automated pipeline.
 
-![Screenshot: the tool GUI with the parameter panel on the left and a loaded SEM image on the right](./particle-analyzer-gui.png)
+![Screenshot: SEM Particle Analyzer v2.1.0 after a run, with the Watershed segmentation (230 particles, D50 288 nm) top left, the size distribution below, and the controls on the right](./particle-analyzer-gui.png)
 
 ## What the tool does
 
@@ -46,9 +46,15 @@ The tool fixes "how to measure" into a defined procedure. The same image as inpu
 - Coursework and project reports, where students may lack a license for commercial software.
 - Batch processing of many samples: one command analyzes a whole folder, useful when statistical comparison is required.
 
-## Install and setup
+## Download the executable (no Python needed)
 
-The runtime requires Python 3.8 or newer. Install the dependencies:
+The fastest way to start is the Windows executable: [ParticleAnalyzer.exe (about 195 MB)](https://github.com/hujerry96/particle-analyzer/releases/latest/download/ParticleAnalyzer.exe). Double-click to run; no Python or packages to install. Every version and its notes live on [GitHub Releases](https://github.com/hujerry96/particle-analyzer/releases).
+
+The GUI flow is short: press `Ctrl+O` to load an SEM image and the scale bar is detected automatically. If it is found, press `F5` to analyze; if not, press `Ctrl+K` to calibrate by hand. Analysis runs in the background so the window stays responsive, and the status bar shows progress and the result. Press `Ctrl+E` to export, which defaults to the image's folder. Language, display unit, scale length and recent folders are remembered.
+
+## Run from source (optional)
+
+To modify the code or batch-process from the command line, you need Python 3.8 or newer. Install the dependencies:
 
 ```bash
 pip install opencv-python numpy pandas matplotlib scipy scikit-image pillow

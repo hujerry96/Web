@@ -18,7 +18,7 @@ project: true
 
 Bringing a master or PhD thesis into formal compliance is often a heavy and error-prone stage of the writing process. Institutional style guides are typically lengthy and demanding: Roman numerals for the front matter, Arabic for the body; figure numbers as "Figure 1.1" rather than "Figure 1-1"; heading levels, first-line indents, line spacing, and reference cross-references, any one of which can trigger a rejection. The Thesis Format Fixer presented here targets this repetitive, rule-defined work with an automated solution.
 
-![Screenshot: the tool GUI after dropping in a Word file, showing the list of fixable issues](./thesis-formatter-gui.png)
+![Screenshot: Thesis Format Fixer v2.2.0, with file selection on the left, the format template on the right, and the results list below](./thesis-formatter-gui.png)
 
 ## What the tool does
 
@@ -41,9 +41,13 @@ The tool consolidates "check and fix" into a single operation. It scans, present
 - A shared rule set within a lab, so that theses produced by different members stay consistent.
 - Recovering a structurally disordered document to a usable state without rebuilding it from scratch.
 
-## Install and setup
+## Download the executable (no Python needed)
 
-The runtime requires Python 3.8 or newer. Install the dependencies:
+The fastest way to start is the Windows executable: [ThesisFormatter.exe (about 19 MB)](https://github.com/hujerry96/thesis-formatter/releases/latest/download/ThesisFormatter.exe). Double-click to run; no Python or packages to install. Every version and its notes live on [GitHub Releases](https://github.com/hujerry96/thesis-formatter/releases).
+
+## Run from source (optional)
+
+To modify the code or build it into your own workflow, you need Python 3.8 or newer. Install the dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -59,7 +63,11 @@ The most convenient path is the GUI:
 python main.py
 ```
 
-Drag a Word file into the window, or click "Select File". The tool analyzes first and shows the fixable items on screen. Select what to fix, run it, and a `_fixed.docx` is saved alongside.
+It takes three steps: drop the Word file into the window (or onto the path field, or click "Browse…"), check the format template on the right, and press Enter. The tool first checks that the file is a valid .docx, then runs the checks and fixes and saves a copy named `filename_格式修正.docx`. The original is never overwritten.
+
+When it finishes, errors and warnings are listed first, and a summary shows how many errors, warnings, notes and fixes there were. Use "Open File" or "Open Folder" to go straight to the output.
+
+Shortcuts: `Ctrl+O` choose a file, `Enter` or `F5` start, `Ctrl+L` clear results. The last template and folder are remembered for next time.
 
 The top-right of the window switches language (中文 / English), and the choice is remembered, so the next launch opens in the selected language.
 

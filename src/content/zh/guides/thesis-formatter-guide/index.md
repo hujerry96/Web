@@ -17,7 +17,7 @@ project: true
 
 在碩博士論文的產出過程中，格式符合規範往往是一項繁重且易於出錯的環節。各校撰寫規範通常篇幅冗長，要求繁複：前頁採羅馬數字頁碼、本文採阿拉伯數字；圖表編號須為「圖 1.1」而非「圖1-1」；標題階層、首行縮排、行距、參考文獻交叉參照等，任一項不符即可能遭退件。本篇介紹的論文格式修正工具，即針對此一重複性高、規則明確的工作，提供自動化的解決方案。
 
-![示意圖：工具 GUI 主畫面，拖入 Word 檔後顯示可修正的問題清單](./thesis-formatter-gui.png)
+![實機畫面：論文格式修正工具 v2.2.0 主畫面，左側選擇論文檔案、右側選擇格式模板，下方列出檢查與修正結果](./thesis-formatter-gui.png)
 
 ## 工具功能概述
 
@@ -40,9 +40,13 @@ project: true
 - 實驗室內部共用同一份格式規則，使產出論文的格式保持一致。
 - 協助將格式紊亂的文件回復至可用狀態，無須從頭重排。
 
-## 安裝與準備
+## 下載執行檔（不需安裝 Python）
 
-執行環境需 Python 3.8 以上。依賴套件安裝指令如下：
+最快的方式是直接下載 Windows 執行檔：[ThesisFormatter.exe（約 19 MB）](https://github.com/hujerry96/thesis-formatter/releases/latest/download/ThesisFormatter.exe)。雙擊即可執行，不需安裝 Python 或任何套件。所有版本與更新說明都在 [GitHub Releases](https://github.com/hujerry96/thesis-formatter/releases)。
+
+## 從原始碼執行（選用）
+
+若想修改程式或整合進自己的流程，執行環境需 Python 3.8 以上。依賴套件安裝指令如下：
 
 ```bash
 pip install -r requirements.txt
@@ -58,7 +62,11 @@ requirements 中包含 python-docx、lxml、PyYAML；圖形介面所用的 tkint
 python main.py
 ```
 
-將 Word 檔拖入視窗，或點選「選擇檔案」。工具會先執行分析，於畫面列出可修正項目，勾選欲修正者後執行，即另存一份 `_fixed.docx`。
+操作只有三步：把 Word 檔拖進視窗（或拖到路徑欄、按「瀏覽…」），確認右側的格式模板，按 Enter 開始。工具會先檢查檔案是否為有效的 .docx，再完成檢查與修正，另存一份 `檔名_格式修正.docx`，原檔不會被覆蓋。
+
+完成後，結果表會先列出錯誤與警告，上方摘要顯示錯誤、警告、資訊與已修正的數量；按「開啟檔案」或「開啟資料夾」即可直接查看輸出。
+
+常用快捷鍵：`Ctrl+O` 選擇檔案、`Enter` 或 `F5` 開始修正、`Ctrl+L` 清除結果。工具會記住上次使用的格式模板與資料夾，下次開啟不必重選。
 
 介面右上角可切換語言（中文 / English），該選擇會被記錄，下次啟動即為所選語言。
 
