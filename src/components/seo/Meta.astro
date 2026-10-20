@@ -8,14 +8,16 @@ interface Props {
   hreflang: { lang: string; href: string }[];
   published?: string;
   modified?: string;
+  noindex?: boolean;
 }
-const { title, description, canonical, hreflang, published, modified, path } = Astro.props;
+const { title, description, canonical, hreflang, published, modified, path, noindex = false } = Astro.props;
 // RSS 位於 /[locale]/rss.xml，需補 base 前綴
 const locale = path.split('/')[1];
 const rssHref = withBase(locale ? `/${locale}/rss.xml` : '/rss.xml');
 ---
 <title>{title}</title>
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, follow" />}
 <link rel="canonical" href={canonical} />
 {published && <meta property="article:published_time" content={published} />}
 {modified && <meta property="article:modified_time" content={modified} />}

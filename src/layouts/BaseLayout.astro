@@ -23,9 +23,10 @@ interface Props {
   image?: string;
   wide?: boolean;
   alternates?: { locale: 'zh' | 'en'; path: string }[];
+  noindex?: boolean;
 }
 
-const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, jsonLd: extraJsonLd = [], image: customImage, wide = false, alternates = [] } = Astro.props;
+const { title, description, path, post = null, type = post ? 'article' : 'website', breadcrumb, jsonLd: extraJsonLd = [], image: customImage, wide = false, alternates = [], noindex = false } = Astro.props;
 const locale = (path.startsWith('/en') ? 'en' : 'zh') as keyof typeof HREFLANG;
 const t = useTranslations(locale);
 const url = `${SITE.url}${withSlash(path)}`;
@@ -43,7 +44,7 @@ if (/^\/(en|zh)?$/.test(path)) jsonLd.push(...websiteLd(locale));
   <head>
     <meta charset="utf-8" />
     <Meta title={title} description={description} canonical={canonical} path={path} hreflang={hreflang}
-      published={post?.data.date.toISOString()} modified={post?.data.updated?.toISOString()} />
+      published={post?.data.date.toISOString()} modified={post?.data.updated?.toISOString()} noindex={noindex} />
     <OpenGraph title={title} description={description} url={url} image={image} locale={HREFLANG[locale].replace('-', '_')} siteName={SITE.name} type={type} />
     <TwitterCard title={title} description={description} image={image} twitter={SITE.twitter} />
     {jsonLd.length > 0 && <JsonLd data={jsonLd} />}

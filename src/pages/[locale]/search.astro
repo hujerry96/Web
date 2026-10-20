@@ -12,7 +12,7 @@ const t = useTranslations(locale);
 const path = `/${locale}/search`;
 const searchIndexUrl = withBase('/search-index.json');
 ---
-<BaseLayout title={`${t('nav.search')} | ${SITE.name}`} description={t('page.searchDesc', { name: SITE.name })} path={path}>
+<BaseLayout title={`${t('nav.search')} | ${SITE.name}`} description={t('page.searchDesc', { name: SITE.name })} path={path} noindex>
   <section class="py-8 max-w-3xl mx-auto">
     <Breadcrumb locale={locale} items={[{ name: t('nav.search'), url: path }]} />
     <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-6 reveal">{t('nav.search')}</h1>

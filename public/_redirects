@@ -1,3 +1,6 @@
+# 根目錄 → 英文首頁（301，取代原本的 meta refresh）
+/                                                   /en/ 301
+
 # 已移除的非品牌內容 → 301 導向最相關的品牌頁面（Cloudflare Pages）
 /en/reviews                                         /en/guides 301
 /en/reviews/                                        /en/guides 301
