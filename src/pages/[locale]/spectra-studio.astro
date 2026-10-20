@@ -17,24 +17,24 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const isZh = locale === 'zh';
 const path = `/${locale}/spectra-studio`;
-const promoVideo = '/videos/spectra-studio-film-2026.mp4';
-const promoPoster = '/videos/spectra-studio-film-2026-poster.jpg';
+const promoVideo = '/videos/spectra-studio-film-v223.mp4';
+const promoPoster = '/videos/spectra-studio-film-v223-poster.jpg';
 
-const DOWNLOAD_URL = 'https://github.com/hujerry96/Web/releases/download/v2.2.2/SpectraStudio-Setup-v2.2.2.exe';
-const PORTABLE_URL = 'https://github.com/hujerry96/Web/releases/download/v2.2.2/SpectraStudio-v2.2.2-portable.exe';
-const RELEASE_URL = 'https://github.com/hujerry96/Web/releases/tag/v2.2.2';
+const DOWNLOAD_URL = 'https://github.com/hujerry96/Web/releases/download/v2.2.3/SpectraStudio-Setup-v2.2.3.exe';
+const PORTABLE_URL = 'https://github.com/hujerry96/Web/releases/download/v2.2.3/SpectraStudio-v2.2.3-portable.exe';
+const RELEASE_URL = 'https://github.com/hujerry96/Web/releases/tag/v2.2.3';
 const RELEASES_URL = 'https://github.com/hujerry96/Web/releases';
 const BUY_URL = 'https://buy.polar.sh/polar_cl_DBZ8Ma2IljbS2HEgypycUbTTQQq3sVq3OGMvf4EKvmO';
 const GITHUB_URL = 'https://github.com/hujerry96';
 const ISSUES_URL = 'https://github.com/hujerry96/Web/issues';
-const SETUP_SHA = '49529ce789882dfcca06f3b4967e55bf28cfa78e0c1dcf7ab0ec4c9f9104abf1';
+const SETUP_SHA = 'e9d78a215b1be57f9ef993499de63a7dd8500d57df021f0f9ce41f4a39a8af1c';
 const guidePath = isZh ? '/zh/guides/spectra-studio-guide' : '/en/guides/spectra-studio-guide-en';
 
 const content = {
   zh: {
     metaTitle: '免費 XRD 繪圖與分析軟體 | Spectra Studio',
     metaDescription: '免費 Windows XRD 繪圖與分析軟體。直接讀取儀器檔、尋峰、分峰擬合、Scherrer 與 Williamson-Hall 分析，輸出投稿用圖表。免 Python、無浮水印、數據不上傳。',
-    version: 'v2.2.2 · 全新介面與分析修正',
+    version: 'v2.2.3 · Miller 標籤可轉 90°',
     navWorkflow: '工作流程',
     navResults: '分析功能',
     navTrust: '安全與信任',
@@ -79,12 +79,12 @@ const content = {
     ],
     demoKicker: '60 秒產品影片',
     demoTitle: '看看你的下一個研究工作流程。',
-    demoBody: '60 秒認識 Spectra Studio。全程實機錄製：載入 FTIR 與 XRD 數據、平滑、多樣品堆疊、Nature 期刊樣式、自動尋峰、晶粒尺寸，到輸出 300 DPI 論文圖。',
+    demoBody: '60 秒認識 Spectra Studio。全程實機錄製：載入 FTIR 與 XRD 數據、多樣品堆疊、Nature 期刊樣式、自動尋峰、分峰擬合、Miller 指數標定（標籤可轉 90°），到預覽並輸出 300 DPI 論文圖。',
     videoFallback: '瀏覽器無法播放影片，請直接下載影片。',
     securityKicker: '透明交付',
     securityTitle: '安心下載，清楚知道軟體如何運作。',
     securityCards: [
-      { title: '從 GitHub 下載', body: '所有公開版本集中在 GitHub Releases，可檢查版本時間、檔案大小與歷次更新。', action: '查看 v2.2.2' },
+      { title: '從 GitHub 下載', body: '所有公開版本集中在 GitHub Releases，可檢查版本時間、檔案大小與歷次更新。', action: '查看 v2.2.3' },
       { title: '可核對 SHA-256', body: '安裝檔提供 SHA-256。下載後可用 Windows PowerShell 的 Get-FileHash 自行核對。', action: '複製檢查碼' },
       { title: '資料不離開電腦', body: '不需上傳樣品或光譜。免費版不需帳號；Pro 僅在啟用與週期驗證時連線。', action: '閱讀隱私政策' },
       { title: '作者與支援可追溯', body: '由 Hu Lab 的 Jerry Hu 開發。版本、問題回報與作者頁面都有公開入口。', action: '認識開發者' },
@@ -123,7 +123,7 @@ const content = {
     finalKicker: '開始你的下一張研究圖',
     finalTitle: '讓數據，說出更清楚的故事。',
     finalBody: '下載免費版，載入你的第一份光譜。需要進階分析時，再解鎖 Pro。',
-    finalDownload: '免費下載 v2.2.2',
+    finalDownload: '免費下載 v2.2.3',
     portable: '下載免安裝版',
     fullGuide: '閱讀完整使用指南',
     allReleases: '所有 GitHub 版本',
@@ -134,7 +134,7 @@ const content = {
   en: {
     metaTitle: 'Free XRD Plotting Software for Windows | Spectra Studio',
     metaDescription: 'Free Windows software for XRD plotting and analysis. Open instrument files, detect and fit peaks, run Scherrer and Williamson-Hall analysis, and export paper-ready figures. No Python, no watermark, no data upload.',
-    version: 'v2.2.2 · New interface and analysis fixes',
+    version: 'v2.2.3 · Miller labels, now rotatable 90°',
     navWorkflow: 'Workflow',
     navResults: 'Analysis',
     navTrust: 'Trust & safety',
@@ -179,12 +179,12 @@ const content = {
     ],
     demoKicker: 'THE 60-SECOND PRODUCT FILM',
     demoTitle: 'Meet your next research workflow.',
-    demoBody: 'Meet Spectra Studio in 60 seconds, recorded live in the app: import FTIR and XRD data, smooth, stack samples, apply a Nature journal style, detect peaks, calculate crystallite size, and export a 300 DPI figure.',
+    demoBody: 'Meet Spectra Studio in 60 seconds, recorded live in the app: import FTIR and XRD data, stack samples, apply a Nature journal style, detect and fit peaks, index Miller planes with labels level or turned 90°, then preview and export a 300 DPI figure.',
     videoFallback: 'Your browser cannot play this video. Download the video instead.',
     securityKicker: 'Transparent delivery',
     securityTitle: 'A transparent tool for your research.',
     securityCards: [
-      { title: 'Download from GitHub', body: 'Public versions live in GitHub Releases, where you can inspect dates, file sizes, and the full release history.', action: 'View v2.2.2' },
+      { title: 'Download from GitHub', body: 'Public versions live in GitHub Releases, where you can inspect dates, file sizes, and the full release history.', action: 'View v2.2.3' },
       { title: 'Verify the SHA-256', body: 'The installer includes a SHA-256 checksum. Verify it yourself with Get-FileHash in Windows PowerShell.', action: 'Copy checksum' },
       { title: 'Data stays on your PC', body: 'No spectra or sample data are uploaded. Free needs no account; Pro connects only for activation and periodic validation.', action: 'Read the privacy policy' },
       { title: 'A traceable author', body: 'Built by Jerry Hu at Hu Lab. Releases, issue reporting, and the author profile all have public links.', action: 'Meet the developer' },
@@ -223,7 +223,7 @@ const content = {
     finalKicker: 'YOUR NEXT FIGURE STARTS HERE',
     finalTitle: 'Give your data a clearer story.',
     finalBody: 'Download Free and load your first spectrum. Unlock Pro when your research needs deeper analysis.',
-    finalDownload: 'Download Free v2.2.2',
+    finalDownload: 'Download Free v2.2.3',
     portable: 'Download portable edition',
     fullGuide: 'Read the full guide',
     allReleases: 'All GitHub releases',
@@ -251,7 +251,7 @@ const productSchema = {
   applicationCategory: 'ScientificApplication',
   applicationSubCategory: 'XRD and spectral analysis software',
   operatingSystem: 'Windows 10, Windows 11',
-  softwareVersion: '2.2.2',
+  softwareVersion: '2.2.3',
   description: c.metaDescription,
   url: `${SITE.url}${path}`,
   downloadUrl: DOWNLOAD_URL,
@@ -319,7 +319,7 @@ const productSchema = {
           <div class="app-frame__bar">
             <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
             <span>{c.frameLabel}</span>
-            <span class="app-frame__version">v2.2.2</span>
+            <span class="app-frame__version">v2.2.3</span>
           </div>
           <Image src={appScreenshot} alt={c.screenshotAlt} width={1600} height={900} loading="eager" quality={88} />
         </div>

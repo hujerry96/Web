@@ -1,6 +1,6 @@
 {
-  "version": "2.2.2",
-  "url": "https://github.com/hujerry96/Web/releases/download/v2.2.2/SpectraStudio-Setup-v2.2.2.exe",
-  "notes": "v2.2.2：修正自動尋峰、分峰擬合、FTIR 基線、Miller 指數與 Tauc 能隙計算；全新介面、品牌圖示與匯出預覽。",
+  "version": "2.2.3",
+  "url": "https://github.com/hujerry96/Web/releases/download/v2.2.3/SpectraStudio-Setup-v2.2.3.exe",
+  "notes": "v2.2.3：Miller 標籤緊貼峰頂且不再超出圖框，新增標籤旋轉 90° 選項；套用標定改為狀態列提示。",
   "mandatory": false
 }
