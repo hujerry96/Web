@@ -141,4 +141,4 @@ The Spectra Studio Free edition supports common `.txt`, `.xy` and `.csv` Raman f
 A useful FTIR or Raman figure is more than a line plot. It should make sample management, preprocessing and comparison reproducible, while preserving enough information for readers to understand what was done. Spectra Studio combines loading, smoothing, baseline correction, peak detection, journal styling and export in one Windows workflow.
 
 👉 **Start organizing FTIR, Raman, XRD and UV-Vis spectra for free:**
-[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio/)

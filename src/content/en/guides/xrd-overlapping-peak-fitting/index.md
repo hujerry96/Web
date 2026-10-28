@@ -129,4 +129,4 @@ Include, where relevant:
 Manual FWHM fails when the peak envelope no longer represents one isolated reflection. A fit is better only when its assumptions, residuals, stability, and instrumental limitations are examined. If several decompositions explain the data equally well, the honest result is uncertainty—not another decimal place.
 
 👉 **Need a checkable fitting workflow on Windows?**
-[Review Spectra Studio peak fitting and download options](https://hulab.pages.dev/en/spectra-studio)
+[Review Spectra Studio peak fitting and download options](https://hulab.pages.dev/en/spectra-studio/)

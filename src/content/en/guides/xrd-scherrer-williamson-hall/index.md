@@ -152,4 +152,4 @@ Spectra Studio is a Windows option that combines peak detection, peak fitting, S
 The difficult part of XRD crystallite-size analysis is rarely the equation itself. Reliable results depend on trustworthy peak positions and FWHM values, sensible baseline treatment, and an honest discussion of instrumental broadening, microstrain and peak overlap. Use Scherrer for a clear first estimate, and use Williamson–Hall when you need to examine size and strain together.
 
 👉 **Download Spectra Studio and start with the free edition:**
-[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio/)

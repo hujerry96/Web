@@ -133,4 +133,4 @@ The current release targets Windows 10/11 64-bit. macOS and Linux users would ne
 The purpose of a publication figure is to make material differences and analysis results easy to read—not to consume an entire evening in manual formatting. Spectra Studio combines multi-file loading, preprocessing, peak detection, journal styling and high-resolution export in one Windows workflow, so you can make a first clean XRD figure without starting with Origin or Python.
 
 👉 **Download Spectra Studio and start making XRD figures:**
-[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio/)

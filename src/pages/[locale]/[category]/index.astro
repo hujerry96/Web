@@ -6,6 +6,7 @@ import { getPosts, postPath } from '../../../lib/content';
 import { groupByTopic } from '../../../lib/topics';
 import { useTranslations } from '../../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../../consts';
+import { withSlash } from '../../../lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -40,7 +41,7 @@ const collectionLd = {
   '@type': 'CollectionPage',
   name: title,
   description,
-  url: `${SITE.url}${path}`,
+  url: `${SITE.url}${withSlash(path)}`,
   inLanguage: zh ? 'zh-TW' : 'en-US',
   hasPart: posts.map((post) => ({ '@type': 'Article', headline: post.data.title, url: `${SITE.url}${postPath(post)}` })),
 };

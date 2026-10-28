@@ -91,7 +91,7 @@ Once the import is correct:
 
 ## How this page differs from the main product guide
 
-This page answers a narrow search question: how to open and verify common spectroscopy and diffraction files without losing track of the original data. For the full interface, supported analysis tools, pricing, and download options, use the [Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio).
+This page answers a narrow search question: how to open and verify common spectroscopy and diffraction files without losing track of the original data. For the full interface, supported analysis tools, pricing, and download options, use the [Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio/).
 
 ## Related guides
 
@@ -104,4 +104,4 @@ This page answers a narrow search question: how to open and verify common spectr
 A file that opens is not automatically a file that was interpreted correctly. Preserve the original export, verify the physical meaning of both axes, and separate import problems from preprocessing decisions. Once those checks pass, a shared local workspace can remove much of the repetitive conversion and copy-and-paste work.
 
 👉 **Need a Windows tool for the workflow?**
-[Download Spectra Studio Free and review the supported formats](https://hulab.pages.dev/en/spectra-studio)
+[Download Spectra Studio Free and review the supported formats](https://hulab.pages.dev/en/spectra-studio/)

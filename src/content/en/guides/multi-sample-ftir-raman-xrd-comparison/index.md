@@ -130,4 +130,4 @@ State:
 Overlay is for direct comparison; stack and offset are for readability; normalization changes the question the figure can answer. Validate the axes, apply processing consistently, and keep technique-specific quantities in clearly labeled panels.
 
 👉 **Need a faster multi-file plotting workflow?**
-[Download Spectra Studio Free and review supported formats](https://hulab.pages.dev/en/spectra-studio)
+[Download Spectra Studio Free and review supported formats](https://hulab.pages.dev/en/spectra-studio/)

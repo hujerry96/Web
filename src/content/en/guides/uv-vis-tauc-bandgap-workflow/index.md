@@ -134,4 +134,4 @@ Include:
 If Eg changes when you drag the fit window, the software is not necessarily broken—the analysis is exposing a model choice. Test several reasonable ranges, keep the original spectrum visible, and report enough information for another researcher to reproduce the intercept.
 
 👉 **Need automatic and manual Tauc range controls?**
-[Review Spectra Studio Tauc analysis and download options](https://hulab.pages.dev/en/spectra-studio)
+[Review Spectra Studio Tauc analysis and download options](https://hulab.pages.dev/en/spectra-studio/)

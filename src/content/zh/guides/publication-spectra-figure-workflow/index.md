@@ -104,4 +104,4 @@ Free 版可輸出無浮水印 PNG/JPG，最高 300 DPI，適合報告、簡報�
 論文圖的目的，是讓讀者快速看懂樣品差異與分析結果，不是考驗研究者能否手動調整幾十個圖表選項。Spectra Studio 將多檔載入、overlay、stack、前處理、峰偵測、期刊樣式與輸出放在同一個 Windows 工作流程中，讓你把時間留給數據判讀與論文內容。
 
 👉 **先用自己的資料試跑一次：**
-[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
+[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio/)

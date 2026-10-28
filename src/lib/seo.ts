@@ -50,7 +50,8 @@ export function absoluteUrl(src: string): string {
 const publisher = () => ({
   '@type': 'Organization',
   name: SITE.name,
-  url: SITE.url,
+  // 根目錄 / 會 301 到 /en/，結構化資料直接指向首頁避免轉址
+  url: `${SITE.url}/en/`,
   logo: { '@type': 'ImageObject', url: `${SITE.url}/favicon.svg` },
 });
 
@@ -67,7 +68,7 @@ export function articleLd(post: Post, url: string) {
     datePublished: post.data.date.toISOString(),
     dateModified: (post.data.updated ?? post.data.date).toISOString(),
     inLanguage: HREFLANG[locale],
-    author: { '@type': 'Person', name: post.data.author, url: `${SITE.url}/${locale}/about` },
+    author: { '@type': 'Person', name: post.data.author, url: `${SITE.url}/${locale}/about/` },
     publisher: publisher(),
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     keywords: keywords.join(', '),

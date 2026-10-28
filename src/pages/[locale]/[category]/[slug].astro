@@ -7,7 +7,7 @@ import { topicOf } from '../../../lib/topics';
 import { BASE } from '../../../consts';
 import { render } from 'astro:content';
 import { useTranslations } from '../../../i18n/ui';
-import { SITE, type Locale } from '../../../consts';
+import { SITE, withBase, type Locale } from '../../../consts';
 import { Image } from 'astro:assets';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Toc from '../../../components/Toc.astro';
@@ -57,7 +57,7 @@ const breadcrumb = [
         <h1>{post.data.title}</h1>
         <p class="article-head__lead">{post.data.description}</p>
         <div class="article-head__meta">
-          <span>{t('article.by')} <a href={`${BASE}/${locale}/about`}>{post.data.author}</a></span>
+          <span>{t('article.by')} <a href={withBase(`/${locale}/about`)}>{post.data.author}</a></span>
           <span>{readingTime(post.body, locale)}</span>
           {post.data.updated && post.data.updated.getTime() !== post.data.date.getTime()
             ? <time datetime={post.data.updated.toISOString()}>{t('article.updated')} {dateFmt(post.data.updated)}</time>

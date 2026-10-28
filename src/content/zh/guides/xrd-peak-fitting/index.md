@@ -133,5 +133,5 @@ Spectra Studio 提供 Windows Free 版，基本圖譜處理與峰偵測不需要
 XRD 峰擬合的價值不只是把曲線畫得更平滑，而是讓重疊峰、FWHM、峰面積與擬合品質變成可檢查、可重複的分析結果。只要保留原始資料、合理設定背景與峰形，並同時查看 residuals，峰擬合就能成為從原始 XRD 檔案走向論文數據表的重要一步。
 
 👉 **試用 Spectra Studio：不用 Origin 或 Python，先免費開始整理你的 XRD 圖譜。**
-[查看 Spectra Studio 完整功能](https://hulab.pages.dev/zh/spectra-studio)
+[查看 Spectra Studio 完整功能](https://hulab.pages.dev/zh/spectra-studio/)
 

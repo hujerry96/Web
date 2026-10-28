@@ -147,5 +147,5 @@ Spectra Studio Pro 可直接載入 UV-Vis 資料，切換 direct/indirect 模式
 Tauc plot 的價值在於把 UV-Vis 吸收邊轉成可比較的光學能隙估計，但可靠結果來自正確的資料、合理的躍遷模型與透明的線性區選擇。Spectra Studio 可以把 wavelength 轉換、Tauc 變換、線性區與圖上標註集中處理，讓你把時間留給材料判讀，而不是重複搬運欄位與公式。
 
 👉 **用 Spectra Studio 整理 UV-Vis 與 Tauc band gap：**
-[查看官方功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
+[查看官方功能與下載方式](https://hulab.pages.dev/zh/spectra-studio/)
 

@@ -136,4 +136,4 @@ Before submission, place all figures next to one another and ask:
 Publication-quality is not a preset. It is a repeatable specification applied to validated data. Set the rules once, separate preprocessing from styling, and inspect the actual export at final size. That approach saves more time than polishing each figure independently.
 
 👉 **Want to apply the workflow on Windows?**
-[Download Spectra Studio Free or review export options](https://hulab.pages.dev/en/spectra-studio)
+[Download Spectra Studio Free or review export options](https://hulab.pages.dev/en/spectra-studio/)

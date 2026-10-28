@@ -81,9 +81,9 @@ const softwareLd = {
   name: 'Spectra Studio',
   applicationCategory: 'ScientificApplication',
   operatingSystem: 'Windows 10, Windows 11',
-  url: `${SITE.url}/${locale}/spectra-studio`,
+  url: `${SITE.url}/${locale}/spectra-studio/`,
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Organization', name: SITE.name, url: `${SITE.url}/${locale}/` },
 };
 ---
 <BaseLayout title={SITE.meta[locale].title} description={SITE.meta[locale].description} path={path} jsonLd={[softwareLd]} wide>

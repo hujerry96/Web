@@ -105,4 +105,4 @@ Free 版可以先完成多格式載入、多樣品 overlay、stack、normalize�
 多樣品光譜比較的難點，不只是把所有曲線放在同一張圖，而是讓讀者能看懂差異，同時知道你做過哪些前處理。Spectra Studio 將檔案載入、overlay、stack、normalize、baseline、峰偵測與投稿樣式集中在一個 Windows 工作流程中，讓批次資料不必再靠複製貼上維護。
 
 👉 **免費開始整理 FTIR、Raman、XRD 與 UV-Vis：**
-[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
+[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio/)

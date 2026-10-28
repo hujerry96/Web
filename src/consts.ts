@@ -3,10 +3,16 @@
 // 與 astro.config.mjs 的 base 保持一致（鏡像站以 ASTRO_BASE=none 省略前綴）
 export const BASE = process.env.ASTRO_BASE === 'none' ? '' : (process.env.ASTRO_BASE || '/Web');
 
-// 給內部路徑補上 base 前綴（project page = /Web）
+// 給內部路徑補上 base 前綴（project page = /Web）。
+// 頁面路徑（沒有副檔名）一律補上結尾斜線：/en/about → /en/about/。
+// 否則 Cloudflare 會 308 轉址，Google 會把這些站內連結列為「頁面會重新導向」。
+// 檔案路徑（/favicon.svg、/search-index.json）不變；#錨點與 ?查詢字串保留在斜線之後。
 export function withBase(path: string): string {
   if (/^https?:\/\//.test(path)) return path;
-  return (BASE + path).replace(/\/{2,}/g, '/');
+  const [, pathname, suffix = ''] = path.match(/^([^#?]*)(.*)$/) as RegExpMatchArray;
+  let out = (BASE + pathname).replace(/\/{2,}/g, '/');
+  if (!/\.[a-z0-9]+$/i.test(out) && !out.endsWith('/')) out += '/';
+  return out + suffix;
 }
 
 export const SITE = {

@@ -135,4 +135,4 @@ Spectra Studio offers a Windows Free edition for basic pattern processing and de
 The value of XRD peak fitting is not simply a smoother-looking line. It turns overlapping reflections, FWHM, peak areas and fit quality into results that can be inspected and repeated. Preserve the raw pattern, choose a defensible background and profile, check residuals, and use the fitted widths only within the limits of the model.
 
 👉 **Try Spectra Studio without Origin or Python:**
-[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio/)

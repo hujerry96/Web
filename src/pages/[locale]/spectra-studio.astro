@@ -9,6 +9,7 @@ import taucImage from '../../assets/spectra-studio/feature-tauc.png';
 import phaseImage from '../../assets/spectra-studio/feature-miller.png';
 import sizeImage from '../../assets/spectra-studio/feature-size.png';
 import xrdOutput from '../../assets/spectra-studio/figure-aln.png';
+import { withSlash } from '../../lib/seo';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -253,7 +254,7 @@ const productSchema = {
   operatingSystem: 'Windows 10, Windows 11',
   softwareVersion: '2.2.3',
   description: c.metaDescription,
-  url: `${SITE.url}${path}`,
+  url: `${SITE.url}${withSlash(path)}`,
   downloadUrl: DOWNLOAD_URL,
   screenshot: `${SITE.url}${appScreenshot.src}`,
   author: { '@type': 'Person', name: SITE.author, url: GITHUB_URL },

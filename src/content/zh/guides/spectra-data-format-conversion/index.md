@@ -106,4 +106,4 @@ Spectra Studio 的定位不是要求研究者重新學一套程式，而是把�
 研究者需要的是比較晶相、峰位、官能基、吸收邊與樣品差異，而不是在不同檔案格式之間來回搬運欄位。Spectra Studio 將 XRD、FTIR、Raman、UV-Vis 與其他常見熱分析資料的載入、預處理、峰偵測、樣式和輸出集中在 Windows 本機工作流程中，適合想減少轉檔與重複整理的人。
 
 👉 **免費開始整理你的儀器資料：**
-[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
+[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio/)

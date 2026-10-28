@@ -148,4 +148,4 @@ Spectra Studio Pro loads UV-Vis data, switches between direct and indirect modes
 A Tauc plot is useful because it turns an absorption edge into a comparable optical band-gap estimate, but a credible result requires the right data, a defensible transition model and a transparent linear-region choice. Spectra Studio reduces the repeated spreadsheet work so you can spend more time checking the material interpretation.
 
 👉 **Use Spectra Studio for UV-Vis and Tauc band-gap analysis:**
-[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio)
+[Explore Spectra Studio and download Free](https://hulab.pages.dev/en/spectra-studio/)

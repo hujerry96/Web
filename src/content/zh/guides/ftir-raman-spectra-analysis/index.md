@@ -140,5 +140,5 @@ Spectra Studio Free 版支援常見 `.txt`、`.xy`、`.csv` Raman 檔案，可�
 FTIR 與 Raman 圖表真正需要的，不只是把資料畫出來，而是能穩定地管理多個樣品、記錄處理步驟、檢查峰形並以一致的格式輸出。Spectra Studio 將載入、smoothing、baseline correction、peak detection、journal styling 與 export 集中在同一個 Windows 工具中，適合想減少手動排版與環境設定時間的研究者。
 
 👉 **免費開始整理 FTIR、Raman、XRD 與 UV-Vis 光譜：**
-[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio)
+[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio/)
 

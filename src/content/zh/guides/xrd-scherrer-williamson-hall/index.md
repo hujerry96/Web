@@ -148,5 +148,5 @@ Spectra Studio 是 Windows 10/11 64-bit 工具，資料在本機處理，不需�
 XRD 晶粒尺寸計算的難點通常不是把公式輸入計算機，而是取得可信的峰位置與 FWHM，並確認儀器展寬、微應變、基線與峰重疊沒有主導結果。若只是快速估算，Scherrer 方程很實用；若要討論尺寸與應變的差異，則可進一步檢查 Williamson–Hall plot。
 
 👉 **下載 Spectra Studio，免費開始處理 XRD 資料：**
-[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio)
+[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio/)
 

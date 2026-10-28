@@ -115,4 +115,4 @@ Spectra Studio 將載入、平滑、基線、峰偵測、峰擬合與進階 XRD 
 XRD 峰擬合的價值，不是把每條曲線硬拆得更漂亮，而是讓峰位置、FWHM、面積、模型和 residuals 都能被回頭檢查。Spectra Studio 將這段流程集中在 Windows 桌面工具中，幫助你減少手動抄數字與重複量測，把注意力放回晶相、尺寸與應變的科學判讀。
 
 👉 **用自己的 XRD 資料試跑峰分析流程：**
-[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
+[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio/)

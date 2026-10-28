@@ -4,6 +4,7 @@ import Breadcrumb from '../../../components/Breadcrumb.astro';
 import CrystalliteWorkbench from '../../../components/CrystalliteWorkbench.astro';
 import { useTranslations } from '../../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../../consts';
+import { withSlash } from '../../../lib/seo';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -23,7 +24,7 @@ const faqItems = [
   { question: zh ? '多峰結果可以直接取平均嗎？' : 'Should I average the sizes from different peaks?', answer: zh ? '多峰尺寸可用於描述性比較，但簡單平均不一定更準確。不同晶向的相干域尺寸、微應變、峰重疊與擬合方式都可能影響結果。請保留逐峰數據及分析假設。' : 'Multiple peaks support descriptive comparison, but a simple average is not necessarily more accurate. Direction-dependent domain size, microstrain, overlapping peaks and fitting choices can affect each result. Keep individual peak results and analysis assumptions.' },
 ];
 const structuredData = [
-  { '@context': 'https://schema.org', '@type': 'WebApplication', name: t('calc.title'), url: `${SITE.url}${path}`, description, applicationCategory: 'EducationalApplication', operatingSystem: 'All', browserRequirements: 'Requires JavaScript', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, author: { '@type': 'Person', name: SITE.author }, inLanguage: zh ? 'zh-TW' : 'en-US', featureList: ['Multi-peak Scherrer calculation', 'Excel and CSV paste', 'Gaussian and Lorentzian instrument corrections', 'Peak size comparison', 'CSV export and calculation summary'] },
+  { '@context': 'https://schema.org', '@type': 'WebApplication', name: t('calc.title'), url: `${SITE.url}${withSlash(path)}`, description, applicationCategory: 'EducationalApplication', operatingSystem: 'All', browserRequirements: 'Requires JavaScript', isAccessibleForFree: true, offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, author: { '@type': 'Person', name: SITE.author }, inLanguage: zh ? 'zh-TW' : 'en-US', featureList: ['Multi-peak Scherrer calculation', 'Excel and CSV paste', 'Gaussian and Lorentzian instrument corrections', 'Peak size comparison', 'CSV export and calculation summary'] },
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqItems.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
 ];
 ---

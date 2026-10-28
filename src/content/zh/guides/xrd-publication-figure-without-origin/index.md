@@ -132,5 +132,5 @@ Spectra Studio 的資料分析在本機執行；Free 版不需要帳戶，樣品
 論文圖的重點是清楚呈現材料差異與分析結果，而不是把每個晚上都花在手動調整線寬、圖例與樣品間距。從多檔載入、預處理、峰偵測到期刊樣式與高解析度輸出，Spectra Studio 將常見 XRD 作圖步驟放在同一個介面中，讓你不用先學會 Origin 或建立 Python 環境，也能快速完成第一版投稿圖。
 
 👉 **免費下載並開始製作 XRD 論文圖：**
-[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio)
+[前往 Spectra Studio 官方功能介紹](https://hulab.pages.dev/zh/spectra-studio/)
 

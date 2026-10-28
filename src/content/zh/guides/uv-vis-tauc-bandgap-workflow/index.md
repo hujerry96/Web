@@ -119,4 +119,4 @@ Free 版可以先完成資料載入、基本圖譜整理與 PNG/JPG 輸出；Tau
 Tauc plot 的難點不在於公式本身，而在於模型、單位、線性區與資料品質。Spectra Studio 把波長轉換、Tauc 變換、線性區、自動或手動外推與圖表標註集中在同一個 Windows 工具中，讓你少花時間重複搬欄位，多花時間確認結果是否具有材料上的意義。
 
 👉 **用自己的 UV-Vis 資料建立第一張 Tauc plot：**
-[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio)
+[查看 Spectra Studio 功能與下載方式](https://hulab.pages.dev/zh/spectra-studio/)
