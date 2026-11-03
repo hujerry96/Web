@@ -1,12 +1,12 @@
 ---
 // Email 訂閱表單：送到 Kit（Hu Lab website signup 表單）。
 // 用 fetch 送出並在原頁顯示結果；沒有 JavaScript 時改走一般表單送出。
-// fields[source] / fields[lang] 對應 Kit 的自訂欄位，方便之後分眾寄送。
+// fields[source]（product | guide | tools）/ fields[lang] 對應 Kit 的自訂欄位，方便之後分眾寄送。
 import { withBase, type Locale } from '../consts';
 
 interface Props {
   locale: Locale;
-  source: 'product' | 'guide';
+  source: 'product' | 'guide' | 'tools';
 }
 const { locale, source } = Astro.props;
 const zh = locale === 'zh';
@@ -20,6 +20,13 @@ const copy = {
     body: zh
       ? '只在推出新版本或重要修正時寄信，一年幾封，不寄廣告。'
       : 'One email when a new version or an important fix ships. A few a year, no ads.',
+  },
+  tools: {
+    label: zh ? '新工具' : 'NEW TOOLS',
+    title: zh ? '有新的免費工具時通知我' : 'Hear about new free tools',
+    body: zh
+      ? '新的計算器、分析軟體或重要更新推出時寄信，大約每月一封。'
+      : 'An email when a new calculator, analysis app or major update ships, about once a month.',
   },
   guide: {
     label: zh ? '新教學' : 'NEW GUIDES',

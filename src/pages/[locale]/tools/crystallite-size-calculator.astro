@@ -5,6 +5,7 @@ import CrystalliteWorkbench from '../../../components/CrystalliteWorkbench.astro
 import { useTranslations } from '../../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../../consts';
 import { withSlash } from '../../../lib/seo';
+import NewsletterSignup from '../../../components/NewsletterSignup.astro';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -40,6 +41,7 @@ const structuredData = [
       <section aria-labelledby="workflow-heading"><h2 id="workflow-heading">{zh ? '從峰擬合到尺寸估算' : 'From fitted peaks to size estimates'}</h2><ol><li>{zh ? '先處理背景與重疊峰，再取得峰位 2θ 和 FWHM。FWHM 是 2θ 軸上的完整半高寬，不是半寬。' : 'Fit the background and resolve overlapping peaks first. Use the peak position 2θ and full width at half maximum on the 2θ axis, not the half width.'}</li><li>{zh ? '設定量測使用的波長與 K。若有標準樣品的儀器峰寬，再選擇適當的修正模型。' : 'Set the measured wavelength and K. If you have instrument widths from a standard, choose a correction consistent with the line shape.'}</li><li>{zh ? '檢查各峰結果與計算明細。匯出時會保留輸入、設定、逐峰狀態與限制說明。' : 'Inspect individual results and calculation details. Exports retain inputs, settings, per-peak status and limitations.'}</li></ol><a href={withBase('/en/guides/how-to-calculate-crystallite-size-from-xrd')}>{zh ? '閱讀 FWHM 與 Scherrer 計算教學（英文） →' : 'Read the worked FWHM and Scherrer guide →'}</a></section>
       <section aria-labelledby="fitting-heading"><h2 id="fitting-heading">{zh ? '需要分析原始光譜？' : 'Working with raw diffraction patterns?'}</h2><p>{zh ? '這裡使用已量得的峰位與峰寬，不自動找峰或移除微應變。原始光譜的找峰、擬合與進階分析，請使用 Spectra Studio。' : 'This workbench uses measured peak positions and widths. It does not detect peaks or remove microstrain. For raw-pattern peak detection, fitting and advanced analysis, explore Spectra Studio.'}</p><a href={withBase(appPath)}>{t('calc.ctaLink')}</a><p class="reference">{zh ? '方法與限制參考：' : 'Method and limitations: '}<a href="https://journals.iucr.org/j/issues/2004/06/00/ks0213/">IUCr size–strain analysis</a> · <a href="https://pubs.rsc.org/en/content/articlehtml/2011/nr/c0nr00561d">Scherrer interpretation pitfalls</a></p></section>
     </div>
+    <NewsletterSignup locale={locale} source="tools" />
     <section class="faq" aria-labelledby="faq-heading"><h2 id="faq-heading">{t('calc.faqTitle')}</h2>{faqItems.map(item => <details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</section>
   </section>
 </BaseLayout>

@@ -4,6 +4,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import { useTranslations } from '../../i18n/ui';
 import { SITE, withBase, type Locale } from '../../consts';
 import { getTools } from '../../lib/tools';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 import { Image } from 'astro:assets';
 import spectraInterface from '../../assets/spectra-studio/interface.png';
 
@@ -81,6 +82,8 @@ const heading = locale === 'zh' ? '免費材料分析軟體與線上工具' : 'F
         </div>
       </a>
     </div>
+
+    <NewsletterSignup locale={locale} source="tools" />
   </section>
 </BaseLayout>
 
