@@ -1,0 +1,53 @@
+---
+// 訂閱確認完成頁：Kit 的確認信連結點擊後導到 /en/subscribed/（Kit 只能設一個網址，
+// 所以英文頁同時附上中文說明）。noindex，也不放進 sitemap。
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE, withBase, type Locale } from '../../consts';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const zh = locale === 'zh';
+const path = `/${locale}/subscribed`;
+
+const primary = zh
+  ? { title: '訂閱完成', lead: '已確認你的 Email。有新版本或新教學時，我們會寄信給你；每封信底部都可以一鍵退訂。' }
+  : { title: 'You’re subscribed', lead: 'Your email is confirmed. We’ll write when there’s a new release or a new guide, and every email has a one-click unsubscribe link.' };
+const secondary = zh
+  ? 'Your email is confirmed — thanks for subscribing.'
+  : '訂閱完成，已確認你的 Email，感謝訂閱。';
+const links = zh
+  ? [
+      { href: `/${locale}/guides`, label: '瀏覽分析教學' },
+      { href: `/${locale}/spectra-studio`, label: '下載 Spectra Studio' },
+    ]
+  : [
+      { href: `/${locale}/guides`, label: 'Browse the guides' },
+      { href: `/${locale}/spectra-studio`, label: 'Download Spectra Studio' },
+    ];
+---
+<BaseLayout title={`${primary.title} | ${SITE.name}`} description={primary.lead} path={path} noindex>
+  <section class="subscribed">
+    <span class="subscribed__mark" aria-hidden="true">✓</span>
+    <h1>{primary.title}</h1>
+    <p class="subscribed__lead">{primary.lead}</p>
+    <p class="subscribed__alt" lang={zh ? 'en' : 'zh-TW'}>{secondary}</p>
+    <div class="subscribed__links">
+      {links.map((l, i) => <a class={i === 0 ? 'primary' : ''} href={withBase(l.href)}>{l.label}</a>)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .subscribed { max-width: 560px; margin: 0 auto; padding: 5rem 0 4rem; text-align: center; }
+  .subscribed__mark { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 50%; background: var(--color-accent-muted); color: var(--color-accent); font-size: 1.4rem; font-weight: 700; }
+  h1 { margin: 1.25rem 0 .75rem; font-size: clamp(1.8rem, 1.2rem + 2vw, 2.4rem); letter-spacing: -.03em; }
+  .subscribed__lead { color: var(--color-text-secondary); line-height: 1.8; margin: 0 0 .5rem; }
+  .subscribed__alt { color: var(--color-text-tertiary); font-size: .85rem; margin: 0 0 2rem; }
+  .subscribed__links { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; }
+  .subscribed__links a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .6rem 1.1rem; border: 1px solid var(--color-border); border-radius: 7px; color: var(--color-text); font-size: .85rem; font-weight: 600; }
+  .subscribed__links a.primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-on-accent); }
+  .subscribed__links a:hover { border-color: var(--color-border-hover); }
+  .subscribed__links a.primary:hover { background: var(--color-accent-dim); }
+</style>

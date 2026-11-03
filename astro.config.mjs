@@ -87,8 +87,8 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      // 站內搜尋頁是 noindex 的薄內容；根目錄 / 會 301 到 /en/，兩者都不放進 sitemap
-      filter: (page) => !/\/search\/?$/.test(page) && new URL(page).pathname.replace(/^\/Web/, '') !== '/',
+      // 站內搜尋頁與訂閱完成頁是 noindex 的薄內容；根目錄 / 會 301 到 /en/，都不放進 sitemap
+      filter: (page) => !/\/(search|subscribed)\/?$/.test(page) && new URL(page).pathname.replace(/^\/Web/, '') !== '/',
       // GitHub Pages 鏡像（base=/Web）生成的 sitemap 會把 /Web/ 前綴帶進 URL，
       // 指向 CF 站 404 路徑；統一剝掉，讓兩站 sitemap 都指向 CF 主站。
       serialize: (item) => {

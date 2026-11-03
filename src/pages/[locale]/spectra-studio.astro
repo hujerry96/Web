@@ -10,6 +10,7 @@ import phaseImage from '../../assets/spectra-studio/feature-miller.png';
 import sizeImage from '../../assets/spectra-studio/feature-size.png';
 import xrdOutput from '../../assets/spectra-studio/figure-aln.png';
 import { withSlash } from '../../lib/seo';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -517,6 +518,8 @@ const productSchema = {
         ))}
       </div>
     </section>
+
+    <NewsletterSignup locale={locale} source="product" />
 
     <section class="final-cta reveal">
       <div class="final-cta__glow" aria-hidden="true"></div>

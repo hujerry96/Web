@@ -12,6 +12,7 @@ import { Image } from 'astro:assets';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Toc from '../../../components/Toc.astro';
 import SpectraProductCTA from '../../../components/SpectraProductCTA.astro';
+import NewsletterSignup from '../../../components/NewsletterSignup.astro';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -85,6 +86,8 @@ const breadcrumb = [
             {post.data.tags.map((tag: string) => <span class="tag">#{tag}</span>)}
           </div>
         )}
+
+        <NewsletterSignup locale={locale} source="guide" />
 
       </div>
 

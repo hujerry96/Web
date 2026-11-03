@@ -4,6 +4,8 @@
 > Effective date: August 2026
 > v2.1.5 修訂：說明既有線上授權與版本檢查的資料傳輸。
 > v2.1.5 revision: Clarifies existing online licensing and update requests.
+> 2026 年 11 月修訂：新增網站電子報（Email 訂閱）說明。
+> November 2026 revision: Adds the website newsletter (email sign-up).
 
 本政策說明 Spectra Studio（光譜分析繪圖工具）如何處理您的資料。
 簡而言之：**您的數據檔案完全留在您的電腦上；本軟體不收集、不上傳您的數據。**
@@ -35,6 +37,11 @@
 - 正式站託管於 Cloudflare Pages；備援及下載由 GitHub 提供。服務供應商可能
   保留伺服器紀錄（含 IP 位址），請參閱 Cloudflare 與 GitHub 之隱私政策。
 - 我們不使用第三方廣告追蹤器。
+- **電子報（自願訂閱）**：若您在網站填寫 Email 訂閱，我們會收到您的 Email，
+  以及訂閱位置（產品頁或教學文章）與網站語言。名單由電子報服務 Kit（kit.com）
+  代為保存與寄送，並依其隱私政策處理；您需先點擊確認信中的連結才會開始收信。
+  我們只用這份名單寄送 Spectra Studio 新版本通知與新教學，不會出售或分享給他人。
+  每封信都可一鍵退訂，您也可以來信要求刪除。
 
 **購買與付款：**
 
@@ -43,7 +50,8 @@
 
 ### 2. 我們如何使用資訊
 
-我們僅將上述資訊用於：提供軟體更新通知、核發與管理授權、回覆您的支援請求。
+我們僅將上述資訊用於：提供軟體更新通知、核發與管理授權、回覆您的支援請求，
+以及寄送您訂閱的電子報。
 
 ### 3. 資訊分享
 
@@ -100,6 +108,13 @@ Jerry Hu（Hu Lab）
   downloads. Providers may retain server logs including IP addresses; refer to
   the Cloudflare and GitHub privacy policies.
 - We do not use third-party advertising trackers.
+- **Newsletter (opt-in)**: If you subscribe on the website, we receive your email
+  address together with where you signed up (product page or a guide) and the site
+  language. The list is stored and sent by the newsletter service Kit (kit.com)
+  under its own privacy policy, and you only start receiving emails after clicking
+  the link in the confirmation email. We use the list only for Spectra Studio
+  release notes and new guides, and never sell or share it. Every email has a
+  one-click unsubscribe link, and you can ask us to delete your address at any time.
 
 **Purchases and payments:**
 
@@ -111,7 +126,8 @@ Jerry Hu（Hu Lab）
 ### 2. How We Use Information
 
 We use the information above solely to: deliver update notifications, issue and
-manage licenses, and respond to your support requests.
+manage licenses, respond to your support requests, and send the newsletter you
+subscribed to.
 
 ### 3. Information Sharing
 
