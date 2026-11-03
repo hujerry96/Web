@@ -30,6 +30,7 @@ const tools = getTools(locale);
         <a href={withBase(`/${locale}/spectra-studio`)} class="text-[var(--color-accent)] font-medium">Spectra Studio</a>
         {tools.filter((tool) => !tool.featured).map((tool) => <a href={withBase(tool.guide)}>{tool.tag}</a>)}
         <a href={withBase(`/${locale}/tools/crystallite-size-calculator`)}>{zh ? '晶粒尺寸計算器' : 'Crystallite size calculator'}</a>
+        <a href={withBase(`/${locale}/shop`)}>{zh ? '論文工具包（商店）' : 'Research kits (shop)'}</a>
       </nav>
       <nav class="footer-col" aria-label={t('nav.guides')}>
         <span class="footer-label">{t('nav.guides')}</span>

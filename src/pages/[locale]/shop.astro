@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { useTranslations } from '../../i18n/ui';
+import { SITE, type Locale } from '../../consts';
+import { Image } from 'astro:assets';
+import coverFigure from '../../assets/shop/cover_figure_kit.png';
+import coverManuscript from '../../assets/shop/cover_manuscript_kit.png';
+import coverSchematic from '../../assets/shop/cover_schematic_kit.png';
+import coverBone from '../../assets/shop/cover_bone_kit.png';
+import coverMech from '../../assets/shop/cover_mech_studio.png';
+import coverBundle from '../../assets/shop/cover_bundle.png';
+import coverIllustrationBundle from '../../assets/shop/cover_illustration_bundle.png';
+
+export function getStaticPaths() {
+  return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
+}
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const zh = locale === 'zh';
+const path = `/${locale}/shop`;
+const STORE = 'https://jerryhome6.gumroad.com/l';
+
+const heading = zh ? '論文工具包：從數據到投稿' : 'Research Kits: From Raw Data to Submission';
+const intro = zh
+  ? '把論文最花時間的幾件事做成工具包：期刊等級的數據圖、圖形摘要與科學插圖（材料科學、骨科與生醫材料各一套），投稿用的論文寫作模板，以及分析機械測試數據的 Mech Studio 軟體。透過 Gumroad 安全付款，購買後立即下載。商品內容為英文。'
+  : 'Four kits for the most time-consuming parts of a paper: journal-ready data figures, graphical abstracts and scientific illustrations (one set for materials science, one for bone and biomaterials), and the manuscript itself, plus Mech Studio, a desktop app for mechanical test data. Secure checkout through Gumroad, instant download.';
+
+const products = [
+  {
+    slug: 'matsci-figure-kit',
+    cover: coverFigure,
+    tag: 'Python',
+    name: 'MatSci Figure Kit',
+    price: '$14.99+',
+    lab: zh ? '自由定價・立即下載' : 'Pay what you want · instant download',
+    desc: zh
+      ? '10 支可直接修改的 Python 腳本，把儀器原始檔轉成期刊尺寸的圖。'
+      : '10 ready-to-edit Python scripts that turn raw instrument exports into journal-sized figures.',
+    points: zh
+      ? ['XRD（參考線、晶面標註、相標記）、FTIR、Raman、DSC/TMA、粒徑分布', 'Elsevier、ACS、RSC、Wiley 欄寬預設', '一次輸出 PNG、可編輯 SVG、600 dpi TIFF', '附 PDF 使用說明與範例數據']
+      : ['XRD with reference sticks and (hkl) labels, FTIR, Raman, DSC/TMA, particle size', 'Elsevier, ACS, RSC and Wiley column presets', 'PNG, editable SVG and 600-dpi TIFF in one call', 'PDF user guide and demo data included'],
+  },
+  {
+    slug: 'matsci-schematic-kit',
+    cover: coverSchematic,
+    tag: 'SVG + PowerPoint',
+    name: 'MatSci Schematic Kit',
+    price: '$14.99',
+    lab: zh ? '一次買斷・立即下載' : 'One-time purchase · instant download',
+    desc: zh
+      ? '103 個材料科學原創向量圖示，加上 12 種圖形摘要版型，自己做出期刊等級的圖形摘要與示意圖。'
+      : '103 original materials-science vector icons and 12 graphical-abstract layouts for journal-ready schematics.',
+    points: zh
+      ? ['晶體結構、顯微結構、製程、分析儀器、元件、實驗室器材', 'Elsevier、ACS、RSC 與 16:9 尺寸的 PowerPoint 模板', 'SVG 可編輯、PNG 透明背景，風格配色一致', '附 14 頁圖形摘要製作指南']
+      : ['Crystals, microstructures, processes, instruments, devices, lab equipment', 'PowerPoint templates in Elsevier, ACS, RSC and 16:9 sizes', 'Editable SVG and transparent PNG in one consistent style', '14-page graphical-abstract guide included'],
+  },
+  {
+    slug: 'matsci-manuscript-kit',
+    cover: coverManuscript,
+    tag: 'Word + PDF',
+    name: 'Manuscript Template Kit',
+    price: '$7.99+',
+    lab: zh ? '自由定價・立即下載' : 'Pay what you want · instant download',
+    desc: zh
+      ? '每一節都有引導的 Word 論文模板，加上 15 頁寫作指南。'
+      : 'A Word manuscript template with guidance in every section, plus a 15-page writing guide.',
+    points: zh
+      ? ['論文模板、投稿信、審稿回覆範本', '15 種以上儀器的實驗方法現成句型', '20 個圖說公式與常用句型庫', '投稿與修稿檢查表']
+      : ['Manuscript, cover letter and reviewer-response templates', 'Experimental sentences for 15+ techniques', '20 caption formulas and a phrase bank', 'Submission and revision checklists'],
+  },
+  {
+    slug: 'bone-biomaterials-illustration-kit',
+    cover: coverBone,
+    tag: 'SVG + PowerPoint',
+    name: 'Bone & Biomaterials Illustration Kit',
+    price: '$14.99+',
+    lab: zh ? '自由定價・立即下載' : 'Pay what you want · instant download',
+    desc: zh
+      ? '110 個骨組織工程與生醫材料原創圖示，加上 10 種圖形摘要版型，用柔和漸層風格做出骨研究的論文圖與圖形摘要。'
+      : '110 original illustrations for bone tissue engineering and biomaterials, plus 10 graphical-abstract layouts in a soft-gradient style.',
+    points: zh
+      ? ['骨組織、骨元、成骨與蝕骨細胞、RANKL–RANK–OPG、骨折癒合', '骨移植材料、支架、牙科與髖關節植入物、動物與實驗模型', 'Elsevier、ACS、RSC 與 16:9 尺寸的 PowerPoint 模板', 'SVG 可編輯、PNG 透明背景，附 14 頁指南與科學參考頁']
+      : ['Bone anatomy, osteon, osteoblasts and osteoclasts, RANKL–RANK–OPG, fracture healing', 'Bone grafts, scaffolds, dental and hip implants, animal and experiment models', 'PowerPoint templates in Elsevier, ACS, RSC and 16:9 sizes', 'Editable SVG and transparent PNG, 14-page guide with science reference pages'],
+  },
+  {
+    slug: 'mech-studio',
+    cover: coverMech,
+    tag: zh ? 'Windows 軟體' : 'Windows app',
+    name: 'Mech Studio',
+    price: zh ? '免費' : 'Free',
+    lab: zh ? 'Pro 金鑰：個人／學術 $49' : 'Pro key: personal / academic $49',
+    cta: zh ? '免費下載' : 'Download free',
+    desc: zh
+      ? '機械測試數據分析軟體：讀取試驗機匯出檔，批次算出機械性質、統計、期刊圖與 PDF 測試報告。數據不上傳，適合研究室使用。'
+      : 'Mechanical test data analyzer: reads testing-machine exports and calculates properties, statistics, journal figures and PDF test reports in batches. Data stays on your PC.',
+    points: zh
+      ? ['讀取任何試驗機匯出的 CSV、TXT、Excel', '拉伸、壓縮、三點彎曲、搭接剪切：E、Rp0.2、ReH/ReL、最大強度、伸長率、韌性', '平均 ± SD、95% 信賴區間與期刊尺寸圖；免費版每個專案分析 3 個試片', 'Pro 解鎖無限試片、PDF 報告、Weibull 與規格判定']
+      : ['Reads CSV, TXT and Excel exports from any testing machine', 'Tensile, compression, 3-point flexure, lap shear: E, Rp0.2, ReH/ReL, UTS, elongation, toughness', 'Mean ± SD, 95% CI and journal-sized figures; Free mode analyses 3 specimens per project', 'Pro adds unlimited specimens, PDF reports, Weibull and spec limits'],
+    extra: [
+      { label: zh ? '買個人／學術版金鑰 $49' : 'Personal / academic key, $49', slug: 'mech-studio-personal' },
+    ],
+  },
+];
+const bundles = [
+  {
+    slug: 'paper-ready-bundle',
+    cover: coverBundle,
+    tag: zh ? '最划算' : 'Best value',
+    name: 'Paper-Ready Bundle',
+    price: '$29.99+',
+    was: '$37.97',
+    desc: zh ? '三個工具包一起買，比分開買的最低價合計便宜約 $8，三者之後的更新都免費。' : 'All three kits together for about $8 less than their combined minimum prices, with free updates to all three.',
+  },
+  {
+    slug: 'illustration-bundle',
+    cover: coverIllustrationBundle,
+    tag: zh ? '插圖組合' : 'Illustration bundle',
+    name: 'Illustration Bundle',
+    price: '$28.95',
+    was: '$29.98',
+    desc: zh
+      ? 'MatSci Schematic Kit 加上 Bone & Biomaterials Illustration Kit，兩套插圖一起買，比分開買的最低價合計便宜約 $1，兩者之後的更新都免費。'
+      : 'MatSci Schematic Kit plus Bone & Biomaterials Illustration Kit for about $1 less than their combined minimum prices, with free updates to both.',
+  },
+];
+---
+<BaseLayout title={`${heading} | ${SITE.name}`} description={intro} path={path}>
+  <section class="py-8 max-w-5xl mx-auto">
+    <Breadcrumb locale={locale} items={[{ name: t('nav.shop'), url: path }]} />
+    <h1 class="text-[clamp(2rem,1rem+3vw,2.8rem)] font-display font-semibold mb-4 reveal">{heading}</h1>
+    <p class="text-[var(--color-text-secondary)] max-w-[72ch] leading-relaxed mb-10 reveal reveal-delay-1">{intro}</p>
+
+    <div class="grid gap-6 reveal reveal-delay-2">
+      {products.map((p) => (
+        <article class="shop-card shop-card--row">
+          <a class="shop-card__media" href={`${STORE}/${p.slug}`} target="_blank" rel="noopener">
+            <Image src={p.cover} alt={p.name} width={960} height={540} loading="lazy" />
+          </a>
+          <div class="shop-card__body">
+            <span class="shop-tag">{p.tag}</span>
+            <h2 class="text-[1.3rem] font-display font-semibold m-0 mb-2">{p.name}</h2>
+            <p class="text-[var(--color-text-secondary)] m-0 mb-4 leading-relaxed">{p.desc}</p>
+            <ul class="list-none p-0 m-0 mb-6 grid gap-1.5">
+              {p.points.map((pt) => (
+                <li class="relative pl-5 text-[0.9rem]"><span class="absolute left-0 text-[var(--color-accent)]">→</span>{pt}</li>
+              ))}
+            </ul>
+            <div class="shop-buy">
+              <div>
+                <span class="shop-price">{p.price}</span>
+                <span class="shop-lab">{p.lab}</span>
+              </div>
+              <a class="shop-button" href={`${STORE}/${p.slug}`} target="_blank" rel="noopener">{p.cta ?? (zh ? '購買' : 'Buy')} <span aria-hidden="true">→</span></a>
+            </div>
+            {p.extra && (
+              <p class="text-[0.85rem] m-0 mt-3">
+                {p.extra.map((x, i) => (
+                  <>{i > 0 && ' · '}<a class="underline" href={`${STORE}/${x.slug}`} target="_blank" rel="noopener">{x.label}</a></>
+                ))}
+              </p>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="grid gap-6 mt-6 reveal reveal-delay-3">
+      {bundles.map((b) => (
+        <article class="shop-bundle">
+          <a class="shop-bundle__media" href={`${STORE}/${b.slug}`} target="_blank" rel="noopener">
+            <Image src={b.cover} alt={b.name} width={960} height={540} loading="lazy" />
+          </a>
+          <div class="shop-card__body">
+            <span class="shop-tag">{b.tag}</span>
+            <h2 class="text-[1.3rem] font-display font-semibold m-0 mb-2">{b.name}</h2>
+            <p class="text-[var(--color-text-secondary)] m-0 mb-6 leading-relaxed">{b.desc}</p>
+            <div class="shop-buy">
+              <div>
+                <span class="shop-price">{b.price}</span>
+                <s class="shop-lab">{b.was}</s>
+              </div>
+              <a class="shop-button" href={`${STORE}/${b.slug}`} target="_blank" rel="noopener">{zh ? '購買組合' : 'Get the bundle'} <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="text-[0.82rem] text-[var(--color-text-tertiary)] mt-8 leading-relaxed">
+      {zh
+        ? '付款由 Gumroad 處理，支援信用卡與 PayPal。購買後 30 天內不滿意可申請退款。'
+        : 'Payments are handled by Gumroad (cards and PayPal). 30-day refund if it is not useful.'}
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .shop-card, .shop-bundle {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 280ms var(--ease), box-shadow 280ms var(--ease), transform 280ms var(--ease);
+  }
+  .shop-card:hover, .shop-bundle:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px -6px var(--color-accent-glow), 0 2px 8px rgba(0,0,0,0.12);
+  }
+  .shop-card__media, .shop-bundle__media { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #0f2440; }
+  .shop-card__media :global(img), .shop-bundle__media :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 550ms var(--ease); }
+  .shop-card:hover :global(img), .shop-bundle:hover :global(img) { transform: scale(1.03); }
+  .shop-card__body { padding: 1.4rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+  .shop-tag { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
+  .shop-buy { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--color-border-subtle); padding-top: 1rem; }
+  .shop-price { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-right: 0.6rem; }
+  .shop-lab { font-size: 0.8rem; color: var(--color-text-tertiary); }
+  .shop-button { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 7px; min-height: 2.6rem; padding: 0.6rem 1.2rem; background: var(--color-accent); color: var(--color-on-accent); font-size: 0.88rem; font-weight: 600; }
+  .shop-button:hover { background: var(--color-accent-dim); color: var(--color-on-accent); }
+  @media (min-width: 768px) {
+    .shop-card--row { display: grid; grid-template-columns: 1.1fr 1fr; }
+    .shop-card--row .shop-card__media { align-self: center; }
+  }
+  @media (min-width: 768px) {
+    .shop-bundle { display: grid; grid-template-columns: 1.1fr 1fr; }
+    .shop-bundle__media { align-self: center; }
+  }
+</style>

@@ -43,6 +43,7 @@ const latestPost = (locale) =>
 const PAGE_SOURCES = {
   'spectra-studio/': 'src/pages/[locale]/spectra-studio.astro',
   'tools/': 'src/pages/[locale]/tools.astro',
+  'shop/': 'src/pages/[locale]/shop.astro',
   'tools/crystallite-size-calculator/': 'src/pages/[locale]/tools/crystallite-size-calculator.astro',
   'about/': 'src/pages/[locale]/about.astro',
   'contact/': 'src/pages/[locale]/contact.astro',
