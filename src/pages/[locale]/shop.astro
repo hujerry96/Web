@@ -11,6 +11,8 @@ import coverBone from '../../assets/shop/cover_bone_kit.png';
 import coverMech from '../../assets/shop/cover_mech_studio.png';
 import coverBundle from '../../assets/shop/cover_bundle.png';
 import coverIllustrationBundle from '../../assets/shop/cover_illustration_bundle.png';
+import coverComposition from '../../assets/shop/cover_composition_calculator.png';
+import coverSkill from '../../assets/shop/cover_research_writing_skill.png';
 
 export function getStaticPaths() {
   return (['zh', 'en'] as Locale[]).map((locale) => ({ params: { locale } }));
@@ -23,8 +25,8 @@ const STORE = 'https://jerryhome6.gumroad.com/l';
 
 const heading = zh ? '論文工具包：從數據到投稿' : 'Research Kits: From Raw Data to Submission';
 const intro = zh
-  ? '把論文最花時間的幾件事做成工具包：期刊等級的數據圖、圖形摘要與科學插圖（材料科學、骨科與生醫材料各一套），投稿用的論文寫作模板，以及分析機械測試數據的 Mech Studio 軟體。透過 Gumroad 安全付款，購買後立即下載。商品內容為英文。'
-  : 'Four kits for the most time-consuming parts of a paper: journal-ready data figures, graphical abstracts and scientific illustrations (one set for materials science, one for bone and biomaterials), and the manuscript itself, plus Mech Studio, a desktop app for mechanical test data. Secure checkout through Gumroad, instant download.';
+  ? '把論文最花時間的幾件事做成工具包：期刊等級的數據圖、圖形摘要與科學插圖（材料科學、骨科與生醫材料各一套），投稿用的論文寫作模板、計算配方秤重的 Excel 模板、免費的 Claude 論文寫作 skill，以及分析機械測試數據的 Mech Studio 軟體。透過 Gumroad 安全付款，購買後立即下載。商品內容為英文。'
+  : 'Kits for the most time-consuming parts of a paper: journal-ready data figures, graphical abstracts and scientific illustrations (one set for materials science, one for bone and biomaterials), and the manuscript itself, plus an Excel template for batch compositions, a free Claude skill for research writing, and Mech Studio, a desktop app for mechanical test data. Secure checkout through Gumroad, instant download.';
 
 const products = [
   {
@@ -100,6 +102,35 @@ const products = [
     extra: [
       { label: zh ? '買個人／學術版金鑰 $49' : 'Personal / academic key, $49', slug: 'mech-studio-personal' },
     ],
+  },
+  {
+    slug: 'composition-batch-calculator',
+    cover: coverComposition,
+    tag: 'Excel',
+    name: 'Composition & Batch Calculator',
+    price: '$4.99',
+    lab: zh ? '一次買斷・立即下載' : 'One-time purchase · instant download',
+    desc: zh
+      ? '配方計算 Excel 模板：wt%、mol%、at% 互換，算出經純度修正的秤重量，比對實際秤重與目標，並在同一頁記錄實驗。'
+      : 'An Excel template that converts wt%, mol% and at%, gives purity-corrected masses to weigh, compares what you actually weighed with the target, and logs each batch.',
+    points: zh
+      ? ['一個批次一頁：最多 12 種成分，可用 wt%、mol%、克數或莫耳數輸入', '秤重檢核：輸入實際秤重，顯示偏差、實際組成與是否在容許範圍內', '各元素 at% 與 wt%；內建 110 種常用化合物，可自行新增', '純公式、無巨集，附 3 個計算範例與實驗紀錄表']
+      : ['One page per batch: up to 12 components in wt%, mol%, grams or moles', 'Weigh-out check: actual masses, deviations, actual composition and a tolerance flag', 'Element at% and wt%; library of 110 common compounds, add your own', 'Plain formulas, no macros; 3 worked examples and an experiment log'],
+  },
+  {
+    slug: 'research-writing-skill',
+    cover: coverSkill,
+    tag: 'Claude skill',
+    name: 'Research Writing & Figure Skill',
+    price: zh ? '免費' : 'Free',
+    lab: zh ? '免費下載・Claude Code 可用' : 'Free download · works with Claude Code',
+    cta: zh ? '免費下載' : 'Download free',
+    desc: zh
+      ? '給 Claude 用的論文寫作 skill：期刊論文、計畫書、學位論文都有對應流程，主張與證據對應，不編造數據與文獻，還能依你自己的文章調整語氣。'
+      : 'A Claude skill for papers, grant proposals and theses that ties every claim to evidence, refuses invented data or references, and can learn your own voice.',
+    points: zh
+      ? ['期刊論文、研究計畫、學位論文章節與進度報告的寫作流程', '期刊等級的 XRD、FTIR／Raman、誤差棒長條圖 Python 繪圖腳本', 'DOI 檢查：逐一到 Crossref 查證，擋下編造的參考文獻', '分析你自己的文章，約 15 分鐘把語氣調成你的風格']
+      : ['Workflows for journal papers, grant proposals, thesis chapters and reports', 'Publication-grade Python figures: XRD, FTIR/Raman, bar charts with error bars', 'DOI checker against Crossref so made-up references never reach reviewers', 'Measures your own papers to tune the voice in about 15 minutes'],
   },
 ];
 const bundles = [
